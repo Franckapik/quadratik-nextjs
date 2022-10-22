@@ -1,7 +1,47 @@
 body {
-    font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
-      'Arial', sans-serif;
-    padding: 20px 20px 60px;
-    max-width: 680px;
+    width: 100vw;
     margin: 0 auto;
+    height: 100vh;
   }
+
+  a {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .menu {
+    z-index: 1000;
+    height: 100vh;
+    background-color: white;
+    border-right: 3px solid black;
+    text-align: center;
+  }
+  .main {
+    height: 100vh;
+    background-color: white;
+  }
+
+  .burger {
+  margin-top: 2vw;
+  }
+
+  .waves {
+    width: 130vw;
+    top: 12%;
+    position: relative;
+    left: -28%;
+    opacity: 0.8;
+    shape-rendering:auto;
+    image-rendering: optimizeQuality;
+  }
+
+  .logo_main {
+    position: absolute;
+    width: 20vw;
+    top : 10%;
+    right: 25%;
+  }
+
+  svg path:hover {
+    stroke: red;
+}
