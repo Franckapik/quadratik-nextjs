@@ -4,8 +4,11 @@ import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import { Product3D } from "../../components/Product3D";
+import Preview3D from "../../components/Preview3D";
+
 const attributes = axios.create({
-  baseURL: "https://shop.quadratik.fr/api/index.php/products/attributes?",
+  baseURL: "https://shop.quadratik.fr/api/index.php/products/attributes",
   headers: {
     Accept: "application/json",
     DOLAPIKEY: "4BWD37pVYZ9quAL6m9zrzB2U96al4vdE",
@@ -26,6 +29,7 @@ function Quadralab() {
         </Col>
         <Col sm={11} className="main">
           <Quadralab_Comp />
+          <Product3D />
         </Col>
       </Row>
     </Container>
@@ -34,15 +38,6 @@ function Quadralab() {
 
 const Values = ({ valueId }) => {
   const [values, setValues] = useState([]);
-
-  const attributes = axios.create({
-    baseURL: "https://shop.quadratik.fr/api/index.php/products/attributes",
-    headers: {
-      Accept: "application/json",
-      DOLAPIKEY: "4BWD37pVYZ9quAL6m9zrzB2U96al4vdE",
-    },
-  });
-
   useEffect(() => {
     attributes.get("/" + valueId + "/values").then((response) => {
       setValues(response.data);
@@ -68,7 +63,6 @@ const Quadralab_Comp = () => {
         setPosts(response.data);
       });
   }, []);
-
 
   return (
     posts &&

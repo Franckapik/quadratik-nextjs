@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../quadratik-next"
+		},
+		{
+			"path": "../quadratik-express"
 		}
 	],
 	"settings": {}
