@@ -72,7 +72,7 @@ svg path:hover {
 }
 
 .canvas_container {
-  position: relative;
+  position: absolute;
   height: 65vh;
   margin-left: 15%;
   margin-top: 10% !important;

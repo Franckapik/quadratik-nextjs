@@ -1,22 +1,58 @@
-import React, { useEffect, useState } from "react";
 import {
-  Button,
-  Card,
-  Col,
-  ListGroup,
-  ListGroupItem,
-  Row,
-  Form,
-  Table,
+  CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title,
+  Tooltip
+} from 'chart.js';
+import { queryTypes, useQueryState } from "next-usequerystate";
+import React, { useState } from "react";
+import {
+  Button, Col, Row
 } from "react-bootstrap";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Shop3D from "../../components/Shop3D";
-import { useQueryState, queryTypes } from "next-usequerystate";
-import Layout from "../../layouts/Layout";
+import { Line } from 'react-chartjs-2';
 import Select_Options from "../../components/product/SelectOptions";
+import Layout from "../../layouts/Layout";
+import dataCsv from '../../public/performances/CSV/D2N7P15W50.csv';
+import Shop3D from '../../components/Shop3D'
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+console.log(dataCsv);
+  
+
+
+const labels = dataCsv.map((a,i) => (a["Frequency [Hz]"]));
+const difCoef = dataCsv.map((a,i) => (parseFloat(a["Diffusion Coefficient"].replace(/,/g, '.'))));
+const scatCoef = dataCsv.map((a,i) => (parseFloat(a["Scattering Coefficient"].replace(/,/g, '.'))));
+
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'Diffusion',
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'rgb(255, 99, 132)',
+    data: difCoef,
+  },
+ {
+    label: 'Scattering',
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'blue',
+    data: scatCoef,
+  },
+
+
+]
+};
+
 
 const Product = ({ p_selected }) => {
   const [width, setWidth] = useQueryState(
@@ -82,8 +118,10 @@ const Product = ({ p_selected }) => {
         <Col sm={7} className="preview_col">
         
           <Row className="preview_row">
+          <Line  data={data} />
+
             <div className="canvas_container">
-              <Shop3D
+               <Shop3D
                 style={{ position: "absolute" }}
                 width={width}
                 length={length}
@@ -99,7 +137,7 @@ const Product = ({ p_selected }) => {
                 setCwidth={setCwidth}
                 thickness={thickness}
                 setThickness={setThickness}
-              ></Shop3D>
+              ></Shop3D> 
             </div>
           </Row>
         </Col>
