@@ -11,16 +11,38 @@ import {
   Table,
 } from "react-bootstrap";
 import Preview3D from "./Preview3D";
+import { useQueryState, queryTypes } from "next-usequerystate";
 
 export const Product3D = ({ p_selected }) => {
-  const [width, setWidth] = useState(50);
-  const [length, setLength] = useState(50);
-  const [depth, setDepth] = useState(10);
-  const [prime, setPrime] = useState(7);
-  const [ratio, setRatio] = useToggle();
-  const [invert, setInvert] = useToggle();
-  const [vert, setVert] = useState(0);
-  const [hor, setHor] = useState(0);
+  const [width, setWidth] = useQueryState(
+    "width",
+    queryTypes.integer.withDefault(50)
+  );
+  const [length, setLength] = useQueryState(
+    "length",
+    queryTypes.integer.withDefault(50)
+  );
+  const [depth, setDepth] = useQueryState(
+    "depth",
+    queryTypes.integer.withDefault(10)
+  );
+  const [prime, setPrime] = useQueryState(
+    "prime",
+    queryTypes.integer.withDefault(7)
+  );
+  const [ratio, setRatio] = useQueryState(
+    "ratio",
+    queryTypes.boolean.withDefault(false)
+  );
+  const [invert, setInvert] = useQueryState(
+    "invert",
+    queryTypes.integer.withDefault(true)
+  );
+  const [vert, setVert] = useQueryState(
+    "vert",
+    queryTypes.integer.withDefault(0)
+  );
+  const [hor, setHor] = useQueryState("hor", queryTypes.integer.withDefault(0));
   const [amax, setAmax] = useState(4);
   const [cwidth, setCwidth] = useState(31);
   const [thickness, setThickness] = useState(0.3);
@@ -200,14 +222,14 @@ export const Product3D = ({ p_selected }) => {
             id="ratio"
             name="rationame"
             label="Ratio/Hauteur"
-            onClick={setRatio}
+            onClick={() => setRatio(!ratio)}
           />
           <Form.Control
             type="switch"
             id="inv"
             name="invname"
             label="Inverser"
-            onClick={setInvert}
+            onClick={() => setInvert(!invert)}
           />
         </Card>
         <Row>

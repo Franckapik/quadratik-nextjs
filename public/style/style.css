@@ -1,47 +1,136 @@
+@font-face {
+  font-family: "futura-light";
+  src: url("../fonts/futura-light.ttf");
+  src: url("../fonts/futura-light.eot");
+  src: url("../fonts/futura-light.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/futura-light.woff") format("woff");
+
+}
+@font-face { /* logo quadratik */
+  font-family: "alcubierre";
+  src: url("../fonts/Alcubierre.ttf");
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 body {
-    width: 100vw;
-    margin: 0 auto;
-    height: 100vh;
-  }
+  background-color: rgb(255, 255, 255);
+  color: #02021a;
+  font-family: "Raleway", sans-serif !important;
+  /* line-height: 1.2em;
+letter-spacing: 0.2em; */
+  column-span: all;
+  width: 100vw;
+  margin: 0 auto;
+  height: 100vh;
+  font-weight: 300 !important;
+  line-height : 1.8em!important;
+  letter-spacing : 0.05em;
+}
 
-  a {
-    cursor: pointer;
-    text-decoration: none;
-  }
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
 
-  .menu {
-    z-index: 1000;
-    height: 100vh;
-    background-color: white;
-    border-right: 3px solid black;
-    text-align: center;
-  }
-  .main {
-    height: 100vh;
-    background-color: white;
-  }
+.menu {
+  z-index: 1000;
+  height: 100vh;
+  background-color: white;
+  border-right: 3px solid black;
+  text-align: center;
+}
+.main {
+  height: 100vh;
+  background-color: white;
+}
 
-  .burger {
+.burger {
   margin-top: 2vw;
-  }
+}
 
-  .waves {
-    width: 130vw;
-    top: 12%;
-    position: relative;
-    left: -28%;
-    opacity: 0.8;
-    shape-rendering:auto;
-    image-rendering: optimizeQuality;
-  }
+.waves {
+  width: 130vw;
+  top: 12%;
+  position: relative;
+  left: -28%;
+  opacity: 0.8;
+  shape-rendering: auto;
+  image-rendering: optimizeQuality;
+}
 
-  .logo_main {
-    position: absolute;
-    width: 20vw;
-    top : 10%;
-    right: 25%;
-  }
+.logo_main {
+  position: absolute;
+  width: 20vw;
+  top: 10%;
+  right: 25%;
+}
 
-  svg path:hover {
-    stroke: red;
+svg path:hover {
+  stroke: red;
+}
+
+.canvas_container {
+  position: relative;
+  height: 65vh;
+  margin-left: 15%;
+  margin-top: 10% !important;
+}
+.attributes_col {
+  background-color: #f2f2f2;
+  margin-right: 2vw;
+  height: 100vh;
+  padding-top: 12vh;
+}
+.preview_col {
+  position: relative;
+  padding-top: 12vh;
+}
+.preview_row {
+  height: 55vh;
+  background-color: #f2f2f2;
+}
+
+.shop_menu {
+  position: absolute;
+  display: block;
+  top: 2vh;
+  left: 8vw;
+  font-weight : 600;
+  font-size : 1.5em;
+}
+
+.horizontal {
+  font-weight : 500;
+  margin-top : 5em;
+display: block;
+  transform: rotate(-90deg);
+
+}
+
+
+.navbar .navbar-nav .nav-link {
+  position: relative;
+}
+.navbar .navbar-nav .nav-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color:#9fb07c;
+  width: 0%;
+  content: "";
+  height: 2px;
+}
+.navbar .navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+.navbar .navbar-nav .nav-link.active::after {
+  width: 100%;
+}
+
+.navbar .navbar-nav .nav-link::after {
+  transition: all 0.5s;
 }

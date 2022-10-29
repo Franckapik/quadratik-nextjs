@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../quadratik-express"
+		},
+		{
+			"path": "../qualyn"
 		}
 	],
 	"settings": {}

@@ -5,34 +5,15 @@ import Image from "next/image";
 import * as React from "react";
 import SvgComponent from "../components/Waves";
 import Link from "next/link";
+import Layout from '../layouts/Layout';
 
-function HomePage() {
-  return (
-    <Container fluid>
-      <Row>
-        <Col sm={1}>
-          <Row>
-            <Col sm={8} className="menu">
-              <i className="fal fa-light fa-bars fa-2x burger"></i>
-            </Col>
-            <Col sm={4} className="main"></Col>
-          </Row>
-        </Col>
-        <Col sm={11} className="main">
-          <Home_Main />
-        </Col>
-      </Row>
-    </Container>
-  );
-}
-
-const Home_Main = () => (
-  <>
+const Home = () => (
+  <Layout>
     <SvgComponent className="waves" />
     <Link href={"/quadralab/quadralab"}>
       <img className="logo_main" src="/logo.png" />
     </Link>
-  </>
+  </Layout>
 );
 
-export default HomePage;
+export default Home;
