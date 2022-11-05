@@ -8,9 +8,9 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import { queryTypes, useQueryState } from "next-usequerystate";
+import { queryTypes, useQueryStates, useQueryState } from "next-usequerystate";
 import React, { useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row, Table } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -59,80 +59,77 @@ const data = {
   ],
 };
 
+const DiffusorOffset = ({ product, setProduct }) => (
+  <Table style={{ textAlign: "center" }} className="table-borderless table-sm">
+    <tbody>
+      <tr>
+        <td></td>
+        <td onClick={() => setProduct({ VERT: product.VERT - 1 })}>
+          <i className="fas fa-arrow-up p-0"></i>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td onClick={() => setProduct({ HOR: product.HOR + 1 })}>
+          <i className="fas fa-arrow-left"></i>
+        </td>
+        <td>
+          {product.VERT} / {product.HOR}
+        </td>
+
+        <td onClick={() => setProduct({ HOR: product.HOR - 1 })}>
+          <i className="fas fa-arrow-right"></i>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td onClick={() => setProduct({ VERT: product.VERT + 1 })}>
+          <i className="fas fa-arrow-down"></i>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </Table>
+);
+
 const Product = ({ p_selected }) => {
-  const initialProduct = {
-    price: 0,
-    attributes: {
-      taille: 0,
-      matiere: "mdf",
+  const [display, setDisplay] = useState("model");
+  /*   const [product, setProduct] = useState(initialProduct);
+   */
+  const [product, setProduct] = useQueryStates(
+    {
+      DEPTH: queryTypes.integer.withDefault(10),
+      WIDTH: queryTypes.integer.withDefault(50),
+      LENGTH: queryTypes.integer.withDefault(1),
+      THICK: queryTypes.integer.withDefault(5),
+      PRIME: queryTypes.integer.withDefault(7),
+      MOTIF: queryTypes.string.withDefault("motif1"),
+      INVERT: queryTypes.boolean.withDefault(false),
+      VERT: queryTypes.integer.withDefault(-3),
+      HOR: queryTypes.integer.withDefault(-3),
     },
-  };
+    {
+      history: "push",
+    }
+  );
 
-
-  const [display, setDisplay] = useState("plot");
-  const [product, setProduct] = useState(initialProduct);
-
-  const [width, setWidth] = useQueryState("width", queryTypes.integer.withDefault(50));
-  const [length, setLength] = useQueryState("length", queryTypes.integer.withDefault(50));
-  const [depth, setDepth] = useQueryState("depth", queryTypes.integer.withDefault(10));
-  const [prime, setPrime] = useQueryState("prime", queryTypes.integer.withDefault(7));
   const [ratio, setRatio] = useQueryState("ratio", queryTypes.boolean.withDefault(false));
-  const [invert, setInvert] = useQueryState("invert", queryTypes.integer.withDefault(false));
-  const [vert, setVert] = useQueryState("vert", queryTypes.integer.withDefault(-3));
-  const [hor, setHor] = useQueryState("hor", queryTypes.integer.withDefault(-3));
+
   const [amax, setAmax] = useState(4);
   const [cwidth, setCwidth] = useState(31);
-  const [thickness, setThickness] = useState(3);
 
-  const fmin = Math.round((((344 / 2 / depth / 10) * amax) / prime) * 1000);
+  const fmin = Math.round((((344 / 2 / product.DEPTH / 10) * amax) / product.PRIME) * 1000);
   const fmax = Math.round(344 / 2 / (cwidth / 100));
-
-  /*   useEffect(() => {
-    setWidth(p_selected.width);
-    setLength(p_selected.length);
-    setDepth(p_selected.depth);
-    setPrime(p_selected.prime_nb);
-    setThickness(p_selected.thickness);
-  }, [p_selected]); */
 
   return (
     <>
       <Layout>
         <Row>
           <Col sm={4} className="attributes_col">
-            <Form.Group className="mb-3" controlId="media_category_id_id">
-              <Form.Label>Categorie</Form.Label>
-              <Controller
-                control={control}
-                rules={{
-                  required: "Ce champ est manquant",
-                }}
-                name="media_category_id"
-                defaultValue={1}
-                render={({ field: { onChange, value, ref } }) => (
-                  <Form.Select
-                    onChange={onChange}
-                    value={value}
-                    ref={ref}
-                    isInvalid={errors.media_category_id}
-                    aria-label="Default select example"
-                  >
-                    {db_category.map((a, i) => (
-                      <option key={"categ" + i} value={a.category_id}>
-                        {a.category_name}
-                      </option>
-                    ))}
-                  </Form.Select>
-                )}
-              />
-              <Form.Control.Feedback type="invalid">
-                {errors.media_category_id?.message}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Select_Options setWidth={setWidth}></Select_Options>
+            <Select_Options setProduct={setProduct} product={product}></Select_Options>
             Prix
             <div className="d-grid gap-2 m-3 mt-5">
-              <Button variant="outline-primary m-2" size="lg">
+              <Button variant="outline-primary m-2" size="lg" type="submit">
                 Ajouter au panier
               </Button>{" "}
               <Button variant="outline-secondary m-2" size="lg">
@@ -141,7 +138,8 @@ const Product = ({ p_selected }) => {
             </div>
           </Col>
           <Col sm={7} className="preview_col">
-            <ul style={{}}>
+            <ul>
+              {" "}
               <li onClick={() => setDisplay("model")}>Model</li>
               <li onClick={() => setDisplay("coefDif")}>Coef</li>
               <li onClick={() => setDisplay("plot")}>Plot</li>
@@ -155,25 +153,50 @@ const Product = ({ p_selected }) => {
                 />
               ) : null}
               {display === "model" ? (
-                <div className="canvas_container">
-                  <Shop3D
-                    style={{ position: "absolute" }}
-                    width={width}
-                    length={length}
-                    prime={prime}
-                    depth={depth}
-                    ratio={ratio}
-                    hor={hor}
-                    vert={vert}
-                    invert={invert}
-                    amax={amax}
-                    setAmax={setAmax}
-                    cwidth={cwidth}
-                    setCwidth={setCwidth}
-                    thickness={thickness}
-                    setThickness={setThickness}
-                  ></Shop3D>
-                </div>
+                <>
+                  <Col sm={2}>
+                    <ul>
+                      <li onClick={() => setProduct({ MOTIF: "motif0" })}>Motif0</li>
+                      <li onClick={() => setProduct({ MOTIF: "motif1" })}>Motif1</li>
+                      <li onClick={() => setProduct({ MOTIF: "motif2" })}>Motif2</li>
+                      <li onClick={() => setProduct({ INVERT: !product.INVERT })}>Invert</li>
+                      <li
+                        onClick={() => {
+                          switch (product.PRIME) {
+                            case 7:
+                              setProduct({ HOR: -3, VERT: -3 });
+                              break;
+                            case 11:
+                              setProduct({ HOR: 6, VERT: -5 });
+                              break;
+                            case 13:
+                              setProduct({ HOR: -6, VERT: -6 });
+                              break;
+
+                            default:
+                              break;
+                          }
+                        }}
+                      >
+                        Optimiser
+                      </li>
+                    </ul>
+                    <DiffusorOffset product={product} setProduct={setProduct}></DiffusorOffset>
+                  </Col>
+                  <Col>
+                    <div className="canvas_container">
+                      <Shop3D
+                        style={{ position: "absolute" }}
+                        product={product}
+                        ratio={ratio}
+                        amax={amax}
+                        setAmax={setAmax}
+                        cwidth={cwidth}
+                        setCwidth={setCwidth}
+                      ></Shop3D>
+                    </div>
+                  </Col>
+                </>
               ) : null}
             </Row>
           </Col>

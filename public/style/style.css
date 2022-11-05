@@ -72,7 +72,6 @@ svg path:hover {
 }
 
 .canvas_container {
-  position: absolute;
   height: 65vh;
   margin-left: 15%;
   margin-top: 10% !important;
@@ -109,7 +108,6 @@ display: block;
 
 }
 
-
 .navbar .navbar-nav .nav-link {
   position: relative;
 }
@@ -133,4 +131,9 @@ display: block;
 
 .navbar .navbar-nav .nav-link::after {
   transition: all 0.5s;
+}
+
+.overlay3D {
+  position : relative,
+
 }

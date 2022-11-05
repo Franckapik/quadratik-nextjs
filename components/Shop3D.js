@@ -11,31 +11,32 @@ import Part from './parts3D/Part';
 
 
 const Shop3D = ({
-  p_selected,
-  width,
-  length,
-  prime,
-  depth,
-  ratio,
-  hor,
-  vert,
-  invert,
+  product,
   amax,
   setAmax,
   cwidth,
   setCwidth,
-  thickness,
-}) => {
-  const e = thickness / 10; //epaisseur
-  const p = prime; //type (type du diffuseur) Prime number (p)
-  const w = width; //largeur
-  const l = length; //largeur
 
-  const d = depth; //profondeur
+}) => {
+  const c = cwidth; //largeur cellule
+  const e = product.THICK / 10; //epaisseur
+  const p = product.PRIME; //type (type du diffuseur) Prime number (p)
+  const w = product.WIDTH; //largeur
+  const l = product.PRIME * product.LENGTH * (c + e) + e//largeur
+  const d = product.DEPTH; //profondeur
+  const hor = product.HOR; //decalage horizontal
+  const vert = product.VERT;  //decalage vertical
+  const invert = product.INVERT;  //decalage vertical
+
+  console.log(product);
+
+
   setCwidth((w - (p + 1) * e) / p);
 
-  const c = cwidth; //largeur cellule
-  const n = Math.floor(w / c) * Math.floor(l / c); // nb de cellules
+
+  console.log(c);
+
+  const n = product.PRIME * product.PRIME * product.LENGTH // nb de cellules
 
   const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
 
@@ -43,6 +44,7 @@ const Shop3D = ({
     .fill("")
     .map((a, i) => {
       const n = i % p;
+      console.log(n);
       const m = Math.floor(i / p);
       const an = (Math.pow(n, 2) + Math.pow(m, 2)) % p;
       return an;
@@ -122,6 +124,7 @@ const Shop3D = ({
                     position={[x, z, y === d ? y - e : y + e]}
                     rotation={[0, 0, 0]}
                     index={i}
+                    motif={product.MOTIF}
                   />
 
                 </>
