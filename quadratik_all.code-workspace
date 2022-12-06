@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../quadratik-next"
+		},
+		{
+			"path": "../quadratik-express"
+		},
+		{
+			"path": "../qualyn"
+		}
+	],
+	"settings": {}
+}
