@@ -12,7 +12,6 @@ import Shop3D from '../../components/Shop3D';
 import { usePrice } from "../../hooks/usePrice";
 import Layout from "../../layouts/Layout";
 
-
 const Product = () => {
   const [display, setDisplay] = useState("model");
   const [nomenclature, setNomenclature] = useState("nomenclature");
@@ -45,42 +44,7 @@ const Product = () => {
     }
   );
 
-  const [produit, setProduit] = useState({});
-
   const attributesAdvanced = ["H", "V", "I", "C"];
-
-/*   const calculateBase = (prices) => 
-    prices.reduce((tot, i) => {
-       if (i.attribute_ref === "N" || i.attribute_ref === "P") {
-         tot *= i.value_3D;
-         return parseInt(tot);
-       } else {
-         return parseInt(tot);
-       }
-     }, 1);   
-     
-      
-   
-     const calculatePrice = (prices, prixBase) =>
-       prices.reduce((total, item) => {
-         if (item.notInPrice) {
-           return total;
-         } else {
-           switch (item.operation) {
-             case "multiplication":
-               total += (item.price_value - 1) * prixBase;
-               break;
-   
-             case "addition":
-               total += item.price_value * prixBase;
-               break;
-   
-             default:
-               console.log("Strategie de calcul de prix non repertoriée");
-           }
-           return total;
-         }
-       }, prixBase); */
 
   const [basePrice, totalPrice] = usePrice(productSelected)
 
@@ -117,21 +81,12 @@ const Product = () => {
     }
   }, [valuesSelected]);
 
-/*   useEffect(()=> { //generation du prix
-if (productSelected) {
-  const priceBase = calculateBase(productSelected);
-    const productPrice = calculatePrice(productSelected, priceBase)
-    setPrice(productPrice)
-}
-  }, [productSelected]) */
-
   useEffect(()=> { //generation de l'object 3D
 if (productSelected) {
    const product3D = productSelected.reduce((a,i) => ({...a, [i.attribute_ref] : i.value_3D}), {})
    set3DProduct(product3D)
 }
   }, [productSelected])
-
 
   useEffect(() => { //get all attributes
     attributesFetch.get("?sortfield=t.ref&sortorder=ASC&limit=100").then((response) => {
@@ -192,8 +147,6 @@ if (productSelected) {
       simple: properties.ref + "-" + product3D.N + product3D.P + (product3D.L == "2" ? "L" : ""),
     });
   }, [product3D, properties, setNomenclature]);
-
- 
 
   useEffect(() => {
     productsFetch.get("/" + product3D.PRODUCTID + "?includeparentid=true").then((response) => {
