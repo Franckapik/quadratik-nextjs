@@ -9,12 +9,12 @@ import { attributesFetch, productsFetch } from "../../components/dolibarrApi/fet
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import Select_Options from "../../components/product/SelectOptions";
 import Shop3D from '../../components/Shop3D';
+import { useNomenclature } from "../../hooks/useNomenclature";
 import { usePrice } from "../../hooks/usePrice";
 import Layout from "../../layouts/Layout";
 
 const Product = () => {
   const [display, setDisplay] = useState("model");
-  const [nomenclature, setNomenclature] = useState("nomenclature");
   const [properties, setProperties] = useState([]);
   const [price, setPrice] = useState(false);
   const [attributes, setAttributes] = useState([]);
@@ -47,6 +47,7 @@ const Product = () => {
   const attributesAdvanced = ["H", "V", "I", "C"];
 
   const [basePrice, totalPrice] = usePrice(productSelected)
+  const nomenclature = useNomenclature(product3D, properties)
 
   useEffect(() => {
     console.log("SELECTED", valuesSelected);
@@ -119,34 +120,7 @@ if (productSelected) {
       .catch((error) => console.log(error));
   }, [attributes]);
 
-  useEffect(() => { //generate nomenclature
-    setNomenclature({
-      structurel:
-        product3D.D + "N" + product3D.N + "W" + product3D.W + "L" + product3D.L + "P" + product3D.P + "E" + product3D.E + product3D.M,
-      complet:
-        product3D.D +
-        "N" +
-        product3D.N +
-        "W" +
-        product3D.W +
-        "L" +
-        product3D.L +
-        "P" +
-        product3D.P +
-        "E" +
-        product3D.E +
-        product3D.M +
-        "C" +
-        product3D.C +
-        "I" +
-        product3D.I +
-        "H" +
-        product3D.H +
-        "V" +
-        product3D.V,
-      simple: properties.ref + "-" + product3D.N + product3D.P + (product3D.L == "2" ? "L" : ""),
-    });
-  }, [product3D, properties, setNomenclature]);
+ 
 
   useEffect(() => {
     productsFetch.get("/" + product3D.PRODUCTID + "?includeparentid=true").then((response) => {
