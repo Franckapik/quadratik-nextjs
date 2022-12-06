@@ -1,110 +1,31 @@
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip,
-} from "chart.js";
-import { queryTypes, useQueryStates, useQueryState } from "next-usequerystate";
-import React, { useState, useEffect } from "react";
-import { Button, Col, Row, Table, Card } from "react-bootstrap";
+import { queryTypes, useQueryState, useQueryStates } from "next-usequerystate";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Line } from "react-chartjs-2";
+import { DiffusorOffset } from "../../components/DiffusorOffset";
+import { attributesFetch, productsFetch } from "../../components/dolibarrApi/fetch";
+import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import Select_Options from "../../components/product/SelectOptions";
+import Shop3D from '../../components/Shop3D';
+import { usePrice } from "../../hooks/usePrice";
 import Layout from "../../layouts/Layout";
-import dataCsv from "../../public/performances/CSV/D2N7P15W50.csv";
-import Shop3D from "../../components/Shop3D";
-import axios from "axios";
 
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
-
-const options = {
-  //no points on line
-  elements: {
-    point: {
-      borderWidth: 0,
-      radius: 0,
-      backgroundColor: "rgba(0,0,0,0)",
-    },
-  },
-};
-
-const labels = dataCsv.map((a, i) => a["Frequency [Hz]"]);
-const difCoef = dataCsv.map((a, i) => parseFloat(a["Diffusion Coefficient"].replace(/,/g, ".")));
-const scatCoef = dataCsv.map((a, i) => parseFloat(a["Scattering Coefficient"].replace(/,/g, ".")));
-
-const data = {
-  labels: labels,
-  datasets: [
-    {
-      label: "Diffusion",
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgb(255, 99, 132)",
-      data: difCoef,
-      tension: 0.2,
-    },
-    {
-      label: "Scattering",
-      backgroundColor: "blue",
-      borderColor: "blue",
-      data: scatCoef,
-      tension: 0.2,
-    },
-  ],
-};
-
-const DiffusorOffset = ({ product, setProduct }) => (
-  <Table style={{ textAlign: "center" }} className="table-borderless table-sm">
-    <tbody>
-      <tr>
-        <td></td>
-        <td onClick={() => setProduct({ V: product.V - 1 })}>
-          <i className="fas fa-arrow-up p-0"></i>
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td onClick={() => setProduct({ H: product.H + 1 })}>
-          <i className="fas fa-arrow-left"></i>
-        </td>
-        <td>
-          {product.V} / {product.H}
-        </td>
-
-        <td onClick={() => setProduct({ H: product.H - 1 })}>
-          <i className="fas fa-arrow-right"></i>
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td onClick={() => setProduct({ V: product.V + 1 })}>
-          <i className="fas fa-arrow-down"></i>
-        </td>
-        <td></td>
-      </tr>
-    </tbody>
-  </Table>
-);
-
-const Product = ({ p_selected }) => {
+const Product = () => {
   const [display, setDisplay] = useState("model");
   const [nomenclature, setNomenclature] = useState("nomenclature");
-  const [parentID, setParentID] = useState(false);
-  /*   const [product, setProduct] = useState(initialProduct);
-   */
-
   const [properties, setProperties] = useState([]);
-  const [parentProperties, setParentProperties] = useState([]);
   const [price, setPrice] = useState(false);
+  const [attributes, setAttributes] = useState([]);
+  const [values, setValues] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [valuesSelected, setValuesSelected] = useState({});
+  const [productSelected,setProductSelected] = useState(false);
+  const isInitialMount = useRef(true);
 
-  const [product, setProduct] = useQueryStates(
+  const [product3D, set3DProduct] = useQueryStates(
     {
       PRODUCTID: queryTypes.integer.withDefault(8),
       P: queryTypes.integer.withDefault(10),
@@ -124,48 +45,168 @@ const Product = ({ p_selected }) => {
     }
   );
 
-  useEffect(() => {
-    setNomenclature({
-      structurel: product.D + "N" + product.N + "W" + product.W + "L" + product.L + "P" + product.P + "E" + product.E + product.M,
-      complet: product.D + "N" + product.N + "W" + product.W + "L" + product.L + "P" + product.P + "E" + product.E + product.M + "C" + product.C + "I" + product.I + "H" + product.H + "V" + product.V,
-      simple : properties.ref + "-" + product.N + product.P + (product.L == "2" ? "L" : "")
-    })
-  }, [product, properties, setNomenclature])
+  const [produit, setProduit] = useState({});
 
-  const getProduct = axios.create({
-    baseURL: "https://shop.quadratik.fr/api/index.php/products",
-    headers: {
-      Accept: "application/json",
-      DOLAPIKEY: "4BWD37pVYZ9quAL6m9zrzB2U96al4vdE",
-    },
-  });
+  const attributesAdvanced = ["H", "V", "I", "C"];
+
+/*   const calculateBase = (prices) => 
+    prices.reduce((tot, i) => {
+       if (i.attribute_ref === "N" || i.attribute_ref === "P") {
+         tot *= i.value_3D;
+         return parseInt(tot);
+       } else {
+         return parseInt(tot);
+       }
+     }, 1);   
+     
+      
+   
+     const calculatePrice = (prices, prixBase) =>
+       prices.reduce((total, item) => {
+         if (item.notInPrice) {
+           return total;
+         } else {
+           switch (item.operation) {
+             case "multiplication":
+               total += (item.price_value - 1) * prixBase;
+               break;
+   
+             case "addition":
+               total += item.price_value * prixBase;
+               break;
+   
+             default:
+               console.log("Strategie de calcul de prix non repertoriée");
+           }
+           return total;
+         }
+       }, prixBase); */
+
+  const [basePrice, totalPrice] = usePrice(productSelected)
 
   useEffect(() => {
-    getProduct.get("/" + product.PRODUCTID + "?includeparentid=true").then((response) => {
-      setProperties(response.data);
-      setParentID(properties.fk_product_parent)
+    console.log("SELECTED", valuesSelected);
+    console.log("VALUES", values);
+    console.log("ATTRIBUTES", attributes);
+    console.log("PRODUCTSELECTED", productSelected);
+    console.log("PRODUCT3D", product3D);
+  }, [valuesSelected, productSelected, product3D]);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      const ids = Object.values(valuesSelected);
+      const selection = values.filter((a) => ids.includes(a.id));
+      const productPrices = selection.map((a) => {
+        const attributeParent = attributes.filter((b) => a.fk_product_attribute === b.id)[0];
+        const obj = {};
+        const arr = a.value.split(",");
+        obj["ref"] = a.ref;
+        obj["id"] = a.id;
+        obj["attribute_ref"] = attributeParent.ref;
+        obj["attribute_id"] = attributeParent.id;
+        obj["notInPrice"] = attributeParent.ref === "P" || attributeParent.ref === "N";
+        obj["operation"] = arr[3];
+        obj["price_value"] = arr[2];
+        obj["value_3D"] = arr[0];
+        return obj;
+      });
+
+      setProductSelected(productPrices);
+    }
+  }, [valuesSelected]);
+
+/*   useEffect(()=> { //generation du prix
+if (productSelected) {
+  const priceBase = calculateBase(productSelected);
+    const productPrice = calculatePrice(productSelected, priceBase)
+    setPrice(productPrice)
+}
+  }, [productSelected]) */
+
+  useEffect(()=> { //generation de l'object 3D
+if (productSelected) {
+   const product3D = productSelected.reduce((a,i) => ({...a, [i.attribute_ref] : i.value_3D}), {})
+   set3DProduct(product3D)
+}
+  }, [productSelected])
+
+
+  useEffect(() => { //get all attributes
+    attributesFetch.get("?sortfield=t.ref&sortorder=ASC&limit=100").then((response) => {
+      setAttributes(response.data);
     });
-  }, [product.PRODUCTID, setProperties]);
+  }, []);
+
+  useEffect(() => { //gets all values from attributes
+    Promise.all(
+      attributes.map((a) => {
+        if (!attributesAdvanced.includes(a.ref)) {
+          return attributesFetch
+            .get("/" + a.id + "/values")
+            .then((response) => {
+              return response.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      })
+    )
+      .then((valuesData) => {
+        const filteredValues = valuesData.filter((item) => item).flat(); //no undefined and same level
+        if (filteredValues.length > 0) {
+          setValues(filteredValues);
+          setLoading(false);
+        }
+      })
+      .catch((error) => console.log(error));
+  }, [attributes]);
+
+  useEffect(() => { //generate nomenclature
+    setNomenclature({
+      structurel:
+        product3D.D + "N" + product3D.N + "W" + product3D.W + "L" + product3D.L + "P" + product3D.P + "E" + product3D.E + product3D.M,
+      complet:
+        product3D.D +
+        "N" +
+        product3D.N +
+        "W" +
+        product3D.W +
+        "L" +
+        product3D.L +
+        "P" +
+        product3D.P +
+        "E" +
+        product3D.E +
+        product3D.M +
+        "C" +
+        product3D.C +
+        "I" +
+        product3D.I +
+        "H" +
+        product3D.H +
+        "V" +
+        product3D.V,
+      simple: properties.ref + "-" + product3D.N + product3D.P + (product3D.L == "2" ? "L" : ""),
+    });
+  }, [product3D, properties, setNomenclature]);
 
  
+
   useEffect(() => {
-    if (parentID) {
-      console.log("ici"+ response.data)
-
-      getProduct.get("/" + parentID).then((response) => {
-        console.log("ici"+ response.data)
-        setParentProperties(response.data)
-      });
-    }
-
-  }, [parentID, setParentProperties]);
+    productsFetch.get("/" + product3D.PRODUCTID + "?includeparentid=true").then((response) => {
+      setProperties(response.data);
+    });
+  }, [product3D.PRODUCTID, setProperties]);
 
   const [ratio, setRatio] = useQueryState("ratio", queryTypes.boolean.withDefault(false));
 
   const [amax, setAmax] = useState(4);
   const [cwidth, setCwidth] = useState(31);
 
-  const fmin = Math.round((((344 / 2 / product.P / 10) * amax) / product.N) * 1000);
+  const fmin = Math.round((((344 / 2 / product3D.P / 10) * amax) / product3D.N) * 1000);
   const fmax = Math.round(344 / 2 / (cwidth / 100));
 
   return (
@@ -173,9 +214,19 @@ const Product = ({ p_selected }) => {
       <Layout>
         <Row>
           <Col sm={4} className="attributes_col">
-            {price}
-            <Select_Options setProduct={setProduct} product={product} setPrice={setPrice} price={price}></Select_Options>
-            Prix {Math.round(price) + " €"}
+            {!loading && (
+              <Select_Options
+                setValuesSelected={setValuesSelected}
+                set3DProduct={set3DProduct}
+                product3D={product3D}
+                setPrice={setPrice}
+                price={price}
+                attributesAdvanced={attributesAdvanced}
+                attributes={attributes}
+                values={values}
+              ></Select_Options>
+            )}{" "}
+            Prix {Math.round(totalPrice) + " €"}
             <div className="d-grid gap-2 m-3 mt-5">
               <Button variant="outline-primary m-2" size="lg" type="submit">
                 Ajouter au panier
@@ -193,7 +244,7 @@ const Product = ({ p_selected }) => {
               <li onClick={() => setDisplay("plot")}>Plot</li>
             </ul>
             <Row className="preview_row">
-              {display === "coefDif" ? <Line options={options} data={data} /> : null}
+              {display === "coefDif" ? <PerformanceCharts /> : null}
               {display === "plot" ? (
                 <img
                   src={"/performances/Spatial/D2N7P5W50.png"}
@@ -204,21 +255,21 @@ const Product = ({ p_selected }) => {
                 <>
                   <Col sm={2}>
                     <ul>
-                      <li onClick={() => setProduct({ C: "motif0" })}>Motif0</li>
-                      <li onClick={() => setProduct({ C: "motif1" })}>Motif1</li>
-                      <li onClick={() => setProduct({ C: "motif2" })}>Motif2</li>
-                      <li onClick={() => setProduct({ I: !product.I })}>Invert</li>
+                      <li onClick={() => set3DProduct({ C: "motif0" })}>Motif0</li>
+                      <li onClick={() => set3DProduct({ C: "motif1" })}>Motif1</li>
+                      <li onClick={() => set3DProduct({ C: "motif2" })}>Motif2</li>
+                      <li onClick={() => set3DProduct({ I: !product3D.I })}>Invert</li>
                       <li
                         onClick={() => {
-                          switch (product.N) {
+                          switch (product3D.N) {
                             case 7:
-                              setProduct({ H: -3, V: -3 });
+                              set3DProduct({ H: -3, V: -3 });
                               break;
                             case 11:
-                              setProduct({ H: 6, V: -5 });
+                              set3DProduct({ H: 6, V: -5 });
                               break;
                             case 13:
-                              setProduct({ H: -6, V: -6 });
+                              set3DProduct({ H: -6, V: -6 });
                               break;
 
                             default:
@@ -229,26 +280,28 @@ const Product = ({ p_selected }) => {
                         Optimiser
                       </li>
                     </ul>
-                    <DiffusorOffset product={product} setProduct={setProduct}></DiffusorOffset>
+                    <DiffusorOffset product3D={product3D} set3DProduct={set3DProduct}></DiffusorOffset>
                   </Col>
                   <Col>
                     <div className="canvas_container">
                       <Shop3D
                         style={{ position: "absolute" }}
-                        product={product}
+                        product3D={product3D}
                         ratio={ratio}
                         amax={amax}
                         setAmax={setAmax}
                         cwidth={cwidth}
                         setCwidth={setCwidth}
-                      ></Shop3D>
+                      ></Shop3D> 
                     </div>
                   </Col>
                 </>
               ) : null}
             </Row>
             <Row>
-              <li>{fmin} Hz -{fmax} Hz</li>
+              <li>
+                {fmin} Hz -{fmax} Hz
+              </li>
               <li>Taille de cellule : {Math.round(cwidth * 10)} mm</li>
               <li>{nomenclature.structurel}</li>
               <li>{nomenclature.simple}</li>

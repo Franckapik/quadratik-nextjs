@@ -1,40 +1,26 @@
-import {
-  AccumulativeShadows, OrbitControls, RandomizedLight
-} from "@react-three/drei";
+import { AccumulativeShadows, OrbitControls, RandomizedLight } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { BrightnessContrast, EffectComposer, SSAO, ToneMapping } from "@react-three/postprocessing";
-import { BlendFunction } from 'postprocessing';
+import { BlendFunction } from "postprocessing";
 import React from "react";
-import Cell from './parts3D/Cell';
+import Cell from "./parts3D/Cell";
 import { Lights } from "./parts3D/Lights";
-import Part from './parts3D/Part';
+import Part from "./parts3D/Part";
 
-
-const Shop3D = ({
-  product,
-  amax,
-  setAmax,
-  cwidth,
-  setCwidth,
-
-}) => {
+const Shop3D = ({ product3D, amax, setAmax, cwidth, setCwidth }) => {
   const c = cwidth; //largeur cellule
-  const e = product.E / 10; //epaisseur
-  const p = product.N; //type (type du diffuseur) Prime number (p)
-  const w = product.W; //largeur
-  const l = product.N * product.L * (c + e) + e//largeur
-  const d = product.P; //profondeur
-  const hor = product.H; //decalage horizontal
-  const vert = product.V;  //decalage vertical
-  const invert = product.I;  //decalage vertical
-
-
+  const e = product3D.E / 10; //epaisseur
+  const p = product3D.N; //type (type du diffuseur) Prime number (p)
+  const w = product3D.W; //largeur
+  const l = product3D.N * product3D.L * (c + e) + e; //largeur
+  const d = product3D.P; //profondeur
+  const hor = product3D.H; //decalage horizontal
+  const vert = product3D.V; //decalage vertical
+  const invert = product3D.I; //decalage vertical
 
   setCwidth((w - (p + 1) * e) / p);
 
-
-
-  const n = product.N * product.N * product.L // nb de cellules
+  const n = product3D.N * product3D.N * product3D.L; // nb de cellules
 
   const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
 
@@ -49,14 +35,19 @@ const Shop3D = ({
   setAmax(Math.max(...a));
   const start = [-w / 2, -l / 2, d / 2];
 
-
-
   return (
     <>
-      <Canvas linear flat shadows dpr={[1, 2]} camera={{ position: [10, 15, 10], zoom: 4, }}>
-        <AccumulativeShadows temporal frames={100} colorBlend={0} alphaTest={0.9} opacity={2} scale={10} position={[0, -d / 10, 0]}>
+      <Canvas linear flat shadows dpr={[1, 2]} camera={{ position: [10, 15, 10], zoom: 4 }}>
+        <AccumulativeShadows
+          temporal
+          frames={100}
+          colorBlend={0}
+          alphaTest={0.9}
+          opacity={2}
+          scale={10}
+          position={[0, -d / 10, 0]}
+        >
           <RandomizedLight amount={8} radius={50} ambient={0.9} intensity={1} position={[0, 30, 0]} bias={0.001} />
-
         </AccumulativeShadows>
         <Lights />
         <OrbitControls
@@ -70,40 +61,33 @@ const Shop3D = ({
           zoomSpeed={0.8}
         />
 
-        <group scale={0.1} rotation={[Math.PI / 2, 0, 0]} >
+        <group scale={0.1} rotation={[Math.PI / 2, 0, 0]}>
           {Array(p + 1) //peignes longs
             .fill("")
             .map((a, i) => (
-              <Part
-                args={[e, l - e, d]}
-                position={[start[0] + (c + e) * i, 0, start[2]]}
-                rotation={[0, 0, 0]}
-              />
+              <Part args={[e, l - e, d]} position={[start[0] + (c + e) * i, 0, start[2]]} rotation={[0, 0, 0]} />
             ))}
           {Array(n2) //peignes courts
             .fill("")
             .map((a, i) => {
-
               if (i === 0 || i === n2 - 1) {
                 return (
                   <Part
                     args={[w - e, e, d]}
                     position={[0, start[1] + e + (c + e) * i, start[2]]}
                     rotation={[0, 0, 0]}
-                  />)
+                  />
+                );
               } else {
-                return (<Part
-                  args={[w - 2 * e, e, d]}
-                  position={[0, start[1] + e + (c + e) * i, start[2]]}
-                  rotation={[0, 0, 0]}
-                />)
+                return (
+                  <Part
+                    args={[w - 2 * e, e, d]}
+                    position={[0, start[1] + e + (c + e) * i, start[2]]}
+                    rotation={[0, 0, 0]}
+                  />
+                );
               }
-            }
-
-            )
-          }
-
-
+            })}
           {Array(n) //cellules
             .fill("")
             .map((a, i) => {
@@ -121,9 +105,8 @@ const Shop3D = ({
                     position={[x, z, y === d ? y - e : y + e]}
                     rotation={[0, 0, 0]}
                     index={i}
-                    motif={product.C}
+                    motif={product3D.C}
                   />
-
                 </>
               );
             })}{" "}
@@ -131,7 +114,8 @@ const Shop3D = ({
         <EffectComposer>
           <BrightnessContrast
             brightness={0} // brightness. min: -1, max: 1
-            contrast={0.2} />
+            contrast={0.2}
+          />
           <SSAO />
           <ToneMapping
             blendFunction={BlendFunction.NORMAL} // blend mode
@@ -142,7 +126,6 @@ const Shop3D = ({
             averageLuminance={1.0} // average luminance
             adaptationRate={1.0} // luminance adaptation rate
           />
-
         </EffectComposer>
       </Canvas>
     </>
