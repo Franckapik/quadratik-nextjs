@@ -5,107 +5,107 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { DiffusorOffset } from "../../components/DiffusorOffset";
-import { attributesFetch, productsFetch } from "../../components/dolibarrApi/fetch";
+import { attributesAllFetch, attributesFetchById, productFetchById } from "../../components/dolibarrApi/fetch";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import Select_Options from "../../components/product/SelectOptions";
-import Shop3D from '../../components/Shop3D';
+import Shop3D from "../../components/Shop3D";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { usePrice } from "../../hooks/usePrice";
 import Layout from "../../layouts/Layout";
 
 const Product = () => {
   const [display, setDisplay] = useState("model");
-  const [properties, setProperties] = useState([]);
-  const [price, setPrice] = useState(false);
+  const [error, setError] = useState(false);
   const [attributes, setAttributes] = useState([]);
-  const [values, setValues] = useState([]);
+  const [values, setValues] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [valuesSelected, setValuesSelected] = useState({});
-  const [productSelected,setProductSelected] = useState(false);
-  const isInitialMount = useRef(true);
 
-  const [product3D, set3DProduct] = useQueryStates(
+  const [valuesSelected, setValuesSelected] = useQueryStates(
     {
-      PRODUCTID: queryTypes.integer.withDefault(8),
-      P: queryTypes.integer.withDefault(10),
-      W: queryTypes.integer.withDefault(50),
-      L: queryTypes.integer.withDefault(1),
-      E: queryTypes.integer.withDefault(5),
-      N: queryTypes.integer.withDefault(7),
-      C: queryTypes.string.withDefault("motif1"),
+      PID: queryTypes.string.withDefault(8),
+      P: queryTypes.string.withDefault(11),
+      W: queryTypes.string.withDefault(25),
+      L: queryTypes.string.withDefault(28),
+      E: queryTypes.string.withDefault(22),
+      N: queryTypes.integer.withDefault(14),
+      C: queryTypes.integer.withDefault(0),
       I: queryTypes.boolean.withDefault(false),
       V: queryTypes.integer.withDefault(-3),
       H: queryTypes.integer.withDefault(-3),
-      D: queryTypes.string.withDefault("D2"),
-      M: queryTypes.string.withDefault("MP"),
+      D: queryTypes.string.withDefault(36),
+      M: queryTypes.string.withDefault(38),
     },
     {
       history: "push",
     }
   );
+  const [productParent, setProductParent] = useState(false);
 
-  const attributesAdvanced = ["H", "V", "I", "C"];
+  const [product, setProduct] = useState(false);
+  const [p3d, setProduct3D] = useState(false);
 
-  const [basePrice, totalPrice] = usePrice(productSelected)
-  const nomenclature = useNomenclature(product3D, properties)
+  const notInForm = ["H", "V", "I", "C", "PID"];
 
+  const [basePrice, totalPrice] = usePrice(product, productParent);
+  const nomenclature = useNomenclature(p3d, productParent);
+  const [ratio, setRatio] = useQueryState("ratio", queryTypes.boolean.withDefault(false));
+
+  const [amax, setAmax] = useState(4);
+  const [cwidth, setCwidth] = useState(4);
+
+  const fmin = Math.round((((344 / 2 / p3d.P / 10) * amax) / p3d.N) * 1000);
+  const fmax = Math.round(344 / 2 / (cwidth / 100));
+
+  const makeProductSelected = (newValues) => {
+    const ids = Object.values(newValues).toString();
+
+    const product = Object.entries(newValues).reduce((acc, [key, val] = item, index) => {
+      const v = values.filter((a) => a.id == val);
+       if (notInForm.includes(key)) {
+        return { ...acc, [key]: val };
+      } else {
+        const attribute_value =  v[0].value.split(",");
+        return { ...acc, [key]: {
+          ...v[0], 
+          ["value3D"] : attribute_value[0], 
+          ["operation"] : attribute_value[3],
+          ["attribute_price"] : attribute_value[2]
+        } };
+      } 
+
+      return acc;
+    }, {});
+    
+    product.PID = newValues.PID;
+    return product;
+  };
+
+  //get all attributes
   useEffect(() => {
-    console.log("SELECTED", valuesSelected);
-    console.log("VALUES", values);
-    console.log("ATTRIBUTES", attributes);
-    console.log("PRODUCTSELECTED", productSelected);
-    console.log("PRODUCT3D", product3D);
-  }, [valuesSelected, productSelected, product3D]);
-
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      const ids = Object.values(valuesSelected);
-      const selection = values.filter((a) => ids.includes(a.id));
-      const productPrices = selection.map((a) => {
-        const attributeParent = attributes.filter((b) => a.fk_product_attribute === b.id)[0];
-        const obj = {};
-        const arr = a.value.split(",");
-        obj["ref"] = a.ref;
-        obj["id"] = a.id;
-        obj["attribute_ref"] = attributeParent.ref;
-        obj["attribute_id"] = attributeParent.id;
-        obj["notInPrice"] = attributeParent.ref === "P" || attributeParent.ref === "N";
-        obj["operation"] = arr[3];
-        obj["price_value"] = arr[2];
-        obj["value_3D"] = arr[0];
-        return obj;
+    attributesAllFetch()
+      .get()
+      .then((response) => {
+        setAttributes(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
       });
-
-      setProductSelected(productPrices);
-    }
-  }, [valuesSelected]);
-
-  useEffect(()=> { //generation de l'object 3D
-if (productSelected) {
-   const product3D = productSelected.reduce((a,i) => ({...a, [i.attribute_ref] : i.value_3D}), {})
-   set3DProduct(product3D)
-}
-  }, [productSelected])
-
-  useEffect(() => { //get all attributes
-    attributesFetch.get("?sortfield=t.ref&sortorder=ASC&limit=100").then((response) => {
-      setAttributes(response.data);
-    });
   }, []);
 
-  useEffect(() => { //gets all values from attributes
+  //gets all values from attributes
+  useEffect(() => {
     Promise.all(
       attributes.map((a) => {
-        if (!attributesAdvanced.includes(a.ref)) {
-          return attributesFetch
-            .get("/" + a.id + "/values")
+        if (!notInForm.includes(a.ref)) {
+          return attributesFetchById(a.id)
+            .get("")
             .then((response) => {
               return response.data;
             })
             .catch((error) => {
               console.log(error);
+              setError(error);
             });
         }
       })
@@ -117,125 +117,52 @@ if (productSelected) {
           setLoading(false);
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setError(error);
+        console.log(error);
+      });
   }, [attributes]);
 
- 
-
+  //maker a product from initialValues or new valuesSelected
   useEffect(() => {
-    productsFetch.get("/" + product3D.PRODUCTID + "?includeparentid=true").then((response) => {
-      setProperties(response.data);
-    });
-  }, [product3D.PRODUCTID, setProperties]);
+    if (valuesSelected && values) {
+      const product = makeProductSelected(valuesSelected);
+      setProduct(product);
+    }
+  }, [valuesSelected, values]);
 
-  const [ratio, setRatio] = useQueryState("ratio", queryTypes.boolean.withDefault(false));
+  //make a 3D product for nomenclature and 3D model
+  useEffect(() => {
+    if (product) {
+      const p3d = Object.entries(product).reduce((acc, [key, val] = entry) => {
+        if (typeof val === "object") {
+          return { ...acc, [key]: val.value3D };
+        } else {
+          return { ...acc, [key]: val };
+        }
+        return acc
+      }, {});
+    console.log(p3d)
+    console.log(product)
+    setProduct3D(p3d);
+    }
+  }, [product]);
 
-  const [amax, setAmax] = useState(4);
-  const [cwidth, setCwidth] = useState(31);
-
-  const fmin = Math.round((((344 / 2 / product3D.P / 10) * amax) / product3D.N) * 1000);
-  const fmax = Math.round(344 / 2 / (cwidth / 100));
+  //looking for the  parent of the product for prices and nomenclature
+  useEffect(() => {
+    productFetchById(valuesSelected.PID)
+      .get()
+      .then((response) => {
+        setProductParent(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
+  }, [valuesSelected]);
 
   return (
     <>
-      <Layout>
-        <Row>
-          <Col sm={4} className="attributes_col">
-            {!loading && (
-              <Select_Options
-                setValuesSelected={setValuesSelected}
-                set3DProduct={set3DProduct}
-                product3D={product3D}
-                setPrice={setPrice}
-                price={price}
-                attributesAdvanced={attributesAdvanced}
-                attributes={attributes}
-                values={values}
-              ></Select_Options>
-            )}{" "}
-            Prix {Math.round(totalPrice) + " €"}
-            <div className="d-grid gap-2 m-3 mt-5">
-              <Button variant="outline-primary m-2" size="lg" type="submit">
-                Ajouter au panier
-              </Button>{" "}
-              <Button variant="outline-secondary m-2" size="lg">
-                Configurer
-              </Button>{" "}
-            </div>
-          </Col>
-          <Col sm={7} className="preview_col">
-            <ul>
-              {" "}
-              <li onClick={() => setDisplay("model")}>Model</li>
-              <li onClick={() => setDisplay("coefDif")}>Coef</li>
-              <li onClick={() => setDisplay("plot")}>Plot</li>
-            </ul>
-            <Row className="preview_row">
-              {display === "coefDif" ? <PerformanceCharts /> : null}
-              {display === "plot" ? (
-                <img
-                  src={"/performances/Spatial/D2N7P5W50.png"}
-                  style={{ height: "100%", width: "auto", margin: "auto" }}
-                />
-              ) : null}
-              {display === "model" ? (
-                <>
-                  <Col sm={2}>
-                    <ul>
-                      <li onClick={() => set3DProduct({ C: "motif0" })}>Motif0</li>
-                      <li onClick={() => set3DProduct({ C: "motif1" })}>Motif1</li>
-                      <li onClick={() => set3DProduct({ C: "motif2" })}>Motif2</li>
-                      <li onClick={() => set3DProduct({ I: !product3D.I })}>Invert</li>
-                      <li
-                        onClick={() => {
-                          switch (product3D.N) {
-                            case 7:
-                              set3DProduct({ H: -3, V: -3 });
-                              break;
-                            case 11:
-                              set3DProduct({ H: 6, V: -5 });
-                              break;
-                            case 13:
-                              set3DProduct({ H: -6, V: -6 });
-                              break;
-
-                            default:
-                              break;
-                          }
-                        }}
-                      >
-                        Optimiser
-                      </li>
-                    </ul>
-                    <DiffusorOffset product3D={product3D} set3DProduct={set3DProduct}></DiffusorOffset>
-                  </Col>
-                  <Col>
-                    <div className="canvas_container">
-                      <Shop3D
-                        style={{ position: "absolute" }}
-                        product3D={product3D}
-                        ratio={ratio}
-                        amax={amax}
-                        setAmax={setAmax}
-                        cwidth={cwidth}
-                        setCwidth={setCwidth}
-                      ></Shop3D> 
-                    </div>
-                  </Col>
-                </>
-              ) : null}
-            </Row>
-            <Row>
-              <li>
-                {fmin} Hz -{fmax} Hz
-              </li>
-              <li>Taille de cellule : {Math.round(cwidth * 10)} mm</li>
-              <li>{nomenclature.structurel}</li>
-              <li>{nomenclature.simple}</li>
-            </Row>
-          </Col>
-        </Row>
-      </Layout>
       <div className="shop_menu">
         {" "}
         <Navbar expand="lg">
@@ -251,6 +178,109 @@ if (productSelected) {
           </Container>
         </Navbar>
       </div>
+      <Layout>
+        <Row>
+          {!error ? (
+            <>
+              <Col sm={4} className="attributes_col">
+                {!loading ? (
+                  <Select_Options
+                    setValuesSelected={setValuesSelected}
+                    notInForm={notInForm}
+                    attributes={attributes}
+                    values={values}
+                    product={product}
+                    prices={[basePrice, totalPrice]}
+                    valuesSelected={valuesSelected}
+                    nomenclature={nomenclature}
+                  ></Select_Options>
+                ) : (
+                  "Chargement des options du produit"
+                )}
+                {totalPrice && "Prix: " + totalPrice + " €"}
+              </Col>
+              <Col sm={7} className="preview_col">
+                <ul>
+                  {" "}
+                  <li onClick={() => setDisplay("model")}>Model</li>
+                  <li onClick={() => setDisplay("coefDif")}>Coef</li>
+                  <li onClick={() => setDisplay("plot")}>Plot</li>
+                </ul>
+                <Row className="preview_row">
+                  {display === "coefDif" ? <PerformanceCharts /> : null}
+                  {display === "plot" ? (
+                    <img
+                      src={"/performances/Spatial/D2N7P5W50.png"}
+                      style={{ height: "100%", width: "auto", margin: "auto" }}
+                    />
+                  ) : null}
+                  {display === "model" ? (
+                    <>
+                      <Col sm={2}>
+                        <ul>
+                          <li onClick={() => setProduct((prevProduct) => ( {...prevProduct, C: 0} ))}>Motif0</li>
+                          <li onClick={() => setProduct((prevProduct) => ( {...prevProduct, C: 1} ))}>Motif1</li>
+                          <li onClick={() => setProduct((prevProduct) => ( {...prevProduct, C: 2} ))}>Motif2</li>
+                          <li onClick={() => setProduct((prevProduct) => ( {...prevProduct, I: !prevProduct.I } ))}>Invert</li>
+                          <li
+                            onClick={() => {
+                              console.log(p3d.N)
+                              switch (p3d.N) {
+                                case "7":
+                                  setProduct((prevProduct) => ( {...prevProduct, H: -3, V : -3 } ))
+                                  break;
+                                case "11":
+                                  setProduct((prevProduct) => ( {...prevProduct, H: 6, V : -5 } ))
+                                  break;
+                                case "13":
+                                  setProduct((prevProduct) => ( {...prevProduct, H: -6, V : -6 } ))
+                                  break;
+
+                                default:
+                                  break;
+                              }
+                            }}
+                          >
+                            Optimiser
+                          </li>
+                        </ul>
+                        {p3d && <DiffusorOffset p3d={p3d} setProduct={setProduct}></DiffusorOffset>}
+                      </Col>
+                      <Col>
+                        <div className="canvas_container">
+                         {p3d && Object.keys(p3d).length ? (
+                            <Shop3D
+                              style={{ position: "absolute" }}
+                              p3d = {p3d}
+                              ratio={ratio}
+                              amax={amax}
+                              setAmax={setAmax}
+                              cwidth={cwidth}
+                              setCwidth={setCwidth}
+                            ></Shop3D>
+                          ) : (
+                            "Chargemement modèle"
+                          )}  
+                        </div>
+                      </Col>
+                    </>
+                  ) : null}
+                </Row>
+                <Row>
+                  <li>
+                    {fmin} Hz -{fmax} Hz
+                  </li>
+                  <li>Taille de cellule : {Math.round(cwidth * 10)} mm</li>
+                  <li>{nomenclature.structurel}</li>
+                  <li>{nomenclature.simple}</li>
+                </Row>
+              </Col>
+            </>
+          ) : (
+            "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
+          )}
+        </Row>
+      </Layout>
     </>
   );
 };

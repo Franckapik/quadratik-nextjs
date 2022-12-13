@@ -21,17 +21,17 @@ const Cell = (props) => {
       rotation={props.rotation}
     >
       <boxGeometry args={props.args} /> {/*x z y */}
-      {props.motif === "motif0" ? <meshStandardMaterial
+      {props.motif === 0 ? <meshStandardMaterial
         map={colorMap}
         normalMap={normalMap}
         roughnessMap={roughnessMap}
       /> : null}
-      {props.motif === "motif1" ? <meshStandardMaterial
+      {props.motif === 1 ? <meshStandardMaterial
         map={motif1.includes(props.index) ? wengeMap : colorMap}
         normalMap={normalMap}
         roughnessMap={roughnessMap}
       /> : null}
-      {props.motif === "motif2" ? <meshStandardMaterial
+      {props.motif === 2 ? <meshStandardMaterial
         map={props.index%2 ==0 ? wengeMap : colorMap}
         normalMap={normalMap}
         roughnessMap={roughnessMap}

@@ -1,36 +1,36 @@
 import { useEffect, useState } from "react";
 
-export const useNomenclature = (product3D, properties) => {
+export const useNomenclature = (p3d, productParent) => {
   const [nomenclature, setNomenclature] = useState(false);
-
   useEffect(() => { //generate nomenclature
+
     setNomenclature({
       structurel:
-        product3D.D + "N" + product3D.N + "W" + product3D.W + "L" + product3D.L + "P" + product3D.P + "E" + product3D.E + product3D.M,
+        p3d.D + "N" + p3d.N + "W" + p3d.W + "L" + p3d.L + "P" + p3d.P + "E" + p3d.E + p3d.M,
       complet:
-        product3D.D +
+        p3d.D +
         "N" +
-        product3D.N +
+        p3d.N +
         "W" +
-        product3D.W +
+        p3d.W +
         "L" +
-        product3D.L +
+        p3d.L +
         "P" +
-        product3D.P +
+        p3d.P +
         "E" +
-        product3D.E +
-        product3D.M +
+        p3d.E +
+        p3d.M +
         "C" +
-        product3D.C +
+        p3d.C +
         "I" +
-        product3D.I +
+        p3d.I +
         "H" +
-        product3D.H +
+        p3d.H +
         "V" +
-        product3D.V,
-      simple: properties.ref + "-" + product3D.N + product3D.P + (product3D.L == "2" ? "L" : ""),
+        p3d.V,
+      simple: productParent.ref + "-" + p3d.N + p3d.P + (p3d.L == "2" ? "L" : ""),
     });
-  }, [product3D, properties]);
+  }, [p3d, productParent]);
 
   return nomenclature;
 

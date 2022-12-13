@@ -1,19 +1,26 @@
 import axios from "axios";
 
 
-const attributesFetch = axios.create({
-    baseURL: "https://shop.quadratik.fr/api/index.php/products/attributes",
+const attributesFetchById = (id) => axios.create({
+    baseURL: `https://shop.quadratik.fr/api/index.php/products/attributes/${id}/values`,
     headers: {
       Accept: "application/json",
-      DOLAPIKEY: "4BWD37pVYZ9quAL6m9zrzB2U96al4vdE",
+      DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
   });
-  const productsFetch = axios.create({
-    baseURL: "https://shop.quadratik.fr/api/index.php/products",
+const attributesAllFetch = () => axios.create({
+    baseURL: `https://shop.quadratik.fr/api/index.php/products/attributes?sortfield=t.ref&sortorder=ASC&limit=100`,
     headers: {
       Accept: "application/json",
-      DOLAPIKEY: "4BWD37pVYZ9quAL6m9zrzB2U96al4vdE",
+      DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
+    },
+  });
+  const productFetchById = (id) => axios.create({
+    baseURL: `https://shop.quadratik.fr/api/index.php/products/${id}?includeparentid=true`,
+    headers: {
+      Accept: "application/json",
+      DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
   });
 
-  export {attributesFetch, productsFetch}
+  export {attributesAllFetch, productFetchById, attributesFetchById}

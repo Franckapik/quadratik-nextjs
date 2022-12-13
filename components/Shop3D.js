@@ -7,20 +7,21 @@ import Cell from "./parts3D/Cell";
 import { Lights } from "./parts3D/Lights";
 import Part from "./parts3D/Part";
 
-const Shop3D = ({ product3D, amax, setAmax, cwidth, setCwidth }) => {
+const Shop3D = ({ p3d, amax, setAmax, cwidth, setCwidth }) => {
+
   const c = cwidth; //largeur cellule
-  const e = product3D.E / 10; //epaisseur
-  const p = product3D.N; //type (type du diffuseur) Prime number (p)
-  const w = product3D.W; //largeur
-  const l = product3D.N * product3D.L * (c + e) + e; //largeur
-  const d = product3D.P; //profondeur
-  const hor = product3D.H; //decalage horizontal
-  const vert = product3D.V; //decalage vertical
-  const invert = product3D.I; //decalage vertical
+  const e = p3d.E / 10; //epaisseur
+  const p = parseInt(p3d.N); //type (type du diffuseur) Prime number (p)
+  const w =50; //largeur
+  const l = p3d.N * p3d.L * (c + e) + e; //longueur
+  const d = p3d.P; //profondeur
+  const hor = p3d.H; //decalage horizontal
+  const vert = p3d.V; //decalage vertical
+  const invert = p3d.I; //decalage vertical
 
   setCwidth((w - (p + 1) * e) / p);
 
-  const n = product3D.N * product3D.N * product3D.L; // nb de cellules
+  const n = p3d.N * p3d.N * p3d.L; // nb de cellules
 
   const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
 
@@ -34,6 +35,9 @@ const Shop3D = ({ product3D, amax, setAmax, cwidth, setCwidth }) => {
     });
   setAmax(Math.max(...a));
   const start = [-w / 2, -l / 2, d / 2];
+
+  console.log(hor, vert, invert)
+
 
   return (
     <>
@@ -105,7 +109,7 @@ const Shop3D = ({ product3D, amax, setAmax, cwidth, setCwidth }) => {
                     position={[x, z, y === d ? y - e : y + e]}
                     rotation={[0, 0, 0]}
                     index={i}
-                    motif={product3D.C}
+                    motif={p3d.C}
                   />
                 </>
               );
