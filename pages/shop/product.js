@@ -23,6 +23,7 @@ const Product = () => {
   const [valuesSelected, setValuesSelected] = useQueryStates(
     {
       PID: queryTypes.string.withDefault(8),
+      TAG : queryTypes.string.withDefault("Diffuseur"),
       P: queryTypes.string.withDefault(11),
       W: queryTypes.string.withDefault(25),
       L: queryTypes.string.withDefault(28),
@@ -44,11 +45,11 @@ const Product = () => {
   const [product, setProduct] = useState(false);
   const [p3d, setProduct3D] = useState(false);
 
-  const notInForm = ["H", "V", "I", "C", "PID"];
+  const notInForm = ["H", "V", "I", "C", "PID", "TAG"];
 
   const [basePrice, totalPrice] = usePrice(product, productParent);
   const nomenclature = useNomenclature(p3d, productParent);
-  const [ratio, setRatio] = useQueryState("ratio", queryTypes.boolean.withDefault(false));
+  const [ratio, setRatio] = useState(false);
 
   const [amax, setAmax] = useState(4);
   const [cwidth, setCwidth] = useState(4);
@@ -57,9 +58,7 @@ const Product = () => {
   const fmax = Math.round(344 / 2 / (cwidth / 100));
 
   const makeProductSelected = (newValues) => {
-    const ids = Object.values(newValues).toString();
-
-    const product = Object.entries(newValues).reduce((acc, [key, val] = item, index) => {
+    const product = Object.entries(newValues).reduce((acc, [key, val] = item) => {
       const v = values.filter((a) => a.id == val);
        if (notInForm.includes(key)) {
         return { ...acc, [key]: val };
@@ -72,8 +71,6 @@ const Product = () => {
           ["attribute_price"] : attribute_value[2]
         } };
       } 
-
-      return acc;
     }, {});
     
     product.PID = newValues.PID;
@@ -142,8 +139,6 @@ const Product = () => {
         }
         return acc
       }, {});
-    console.log(p3d)
-    console.log(product)
     setProduct3D(p3d);
     }
   }, [product]);
@@ -169,7 +164,7 @@ const Product = () => {
           <Container>
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link href="#home">Diffuseurs</Nav.Link>
+                <Nav.Link href="?TAG=Diffuseurs">Diffuseurs</Nav.Link>
                 <Nav.Link href="#link">Absorbeurs</Nav.Link>
                 <Nav.Link href="#link">Reflecteurs</Nav.Link>
                 <Nav.Link href="#link">Accessoires</Nav.Link>
