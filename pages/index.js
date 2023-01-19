@@ -1,10 +1,6 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 import SvgComponent from "../components/Waves";
-import Link from "next/link";
 import Layout from '../layouts/Layout';
 
 const Home = () => (
