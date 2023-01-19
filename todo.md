@@ -2,9 +2,16 @@
 
 ==> TODO
 
+
+=> products/models
+* Mettre des attributs en fontion du tag
+* Changer les noms en fonction du modele parent defaut en fonction du tag (list product by tag and take the first one)
+
 => products/models 3d
-* faire le d1
-* faire l'absorbeur
+* retrouver cwidth amax différemment dans product
+* travailler la lumiere sur les modeles doubles (dont l'absorbeur)
+* texture absorbeur a ajouter
+
 
 => product/css
   *integration des différentes options au dessus du canvas
@@ -39,3 +46,4 @@
 
   => products/models 3d
 * faire le d1
+* faire l'absorbeur

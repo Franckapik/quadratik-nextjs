@@ -23,7 +23,7 @@ const Product = () => {
   const [valuesSelected, setValuesSelected] = useQueryStates(
     {
       PID: queryTypes.string.withDefault(8),
-      TAG : queryTypes.string.withDefault("Diffuseur"),
+      TAG : queryTypes.string.withDefault("Diffuseurs"),
       P: queryTypes.string.withDefault(11),
       W: queryTypes.string.withDefault(25),
       L: queryTypes.string.withDefault(28),
@@ -51,6 +51,7 @@ const Product = () => {
   const nomenclature = useNomenclature(p3d, productParent);
   const [ratio, setRatio] = useState(false);
 
+  // retrouver ces variables différemment en utilisant un global state ou bien un hook ?
   const [amax, setAmax] = useState(4);
   const [cwidth, setCwidth] = useState(4);
 
@@ -133,7 +134,12 @@ const Product = () => {
     if (product) {
       const p3d = Object.entries(product).reduce((acc, [key, val] = entry) => {
         if (typeof val === "object") {
-          return { ...acc, [key]: val.value3D };
+          if (isNaN(val.value3D)) {
+            return { ...acc, [key]: val.value3D };
+
+          } else {
+            return { ...acc, [key]: parseInt(val.value3D) };
+          }
         } else {
           return { ...acc, [key]: val };
         }
@@ -165,7 +171,7 @@ const Product = () => {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <Nav.Link href="?TAG=Diffuseurs">Diffuseurs</Nav.Link>
-                <Nav.Link href="#link">Absorbeurs</Nav.Link>
+                <Nav.Link href="?TAG=Absorbeurs">Absorbeurs</Nav.Link>
                 <Nav.Link href="#link">Reflecteurs</Nav.Link>
                 <Nav.Link href="#link">Accessoires</Nav.Link>
               </Nav>
