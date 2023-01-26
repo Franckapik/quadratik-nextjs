@@ -5,7 +5,8 @@ const Main = () => {
   const { scrollYProgress } = useScroll();
 
   const [springs, api] = useSpring(() => ({
-    from: { opacity: 0 },
+    from : {transform : 'rotate(0deg)'},
+    to : {transform : 'rotate(45deg)'}
   }));
 
   const handleClick = () => {
@@ -35,7 +36,7 @@ const Main = () => {
       </animated.div>
       <div style={{ background: "red", height: "100vh" }}>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
-          <animated.div style={{ width: "33vw", height: "33vw", background: "blue", transform: scrollYProgress.to(val => `rotateY(${val*10}rad)`), position:"sticky", top :"20px" }}></animated.div>
+          <animated.div style={{ width: "33vw", height: "33vw", background: "blue", position:"sticky", top :"20px",...springs }}></animated.div>
         </div>
       </div>
       <div style={{ background: "blue", height: "100vh" }}></div>
