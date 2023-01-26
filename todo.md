@@ -2,6 +2,8 @@
 
 ==> TODO
 
+==> home
+pb d'antialiasing sur google. trouver une autre image.
 
 => products/models
 * Mettre des attributs en fontion du tag

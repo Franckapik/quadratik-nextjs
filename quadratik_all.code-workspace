@@ -2,16 +2,23 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../quadratik-next"
-		},
-		{
-			"path": "../quadratik-express"
-		},
-		{
-			"path": "../qualyn"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"sqltools.connections": [
+			{
+				"mysqlOptions": {
+					"authProtocol": "default"
+				},
+				"previewLimit": 50,
+				"server": "51.75.203.136",
+				"port": 3306,
+				"driver": "MariaDB",
+				"name": "Dolibarr DB",
+				"database": "dolibarr",
+				"username": "fanch",
+				"password": "fanch/44"
+			}
+		]
+	}
 }
