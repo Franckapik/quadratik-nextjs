@@ -104,3 +104,6 @@ dist
 .tern-port
 
 raw/
+
+# no png at the beginning 
+*.png
