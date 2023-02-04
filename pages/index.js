@@ -29,13 +29,14 @@ const Home = () => (
       </Col>
     </Row>
     <Row id="s1" className="justify-content-end m-0 ">
-      <Col md={5} className='m-2'>
+        <div className="presentation_produit"><img src="./diffuseur.png" alt="diffuseur background" /></div>
+      <Col md={4} className='d-flex flex-column justify-content-around m-2'>
         <Row className="text-end">
           <h2>Diffuseurs acoustiques</h2>Le diffuseur Woodik améliore l’acoustique par sa structure irrégulière calculée
           sur une gamme de fréquences
           <p className="text-uppercase pt-2">Fabrication artisanale française</p>
         </Row>
-        <Row className="text-left m-4">
+        <Row className="text-end">
           {" "}
           <ListGroup>
             <ListGroup.Item>rééquilibre les ondes sonores</ListGroup.Item>
@@ -44,7 +45,7 @@ const Home = () => (
             <ListGroup.Item>les productions sont aérées et précises</ListGroup.Item>
           </ListGroup>
         </Row>
-        <Row className="text-uppercase text-center"><p>Commande en ligne </p><Button>entrer dans l'atelier</Button></Row>
+        <Row className="text-uppercase text-center justify-content-center"><p>Commande en ligne </p><Button variant="primary" size="lg" className="button_home">Entrer dans l'atelier</Button></Row>
       </Col> 
       <Col md={1}></Col>
     </Row>
