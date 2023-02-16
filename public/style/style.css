@@ -71,8 +71,61 @@
     font-size: 1.2vw;
 }
 
-#s0, #s1 {
+#s0, #s1, #s2, #s3, #s4, #s5 {
     height : 100vh;
+}
+
+#s2 img {
+  width: 80vw;
+  margin: auto;
+}
+
+.s3_bg_content {
+  padding-top: 10%;
+  max-height: 100vh;
+  max-width: 170vh;
+}
+
+.s3_guide_text {
+  font-size: 0.9vw;
+  text-align: justify;
+}
+
+.s3_guide_text .row {
+  align-items: center;
+  padding-top: 1.5vw;
+  line-height: 1.5vw;
+}
+.s3_guide_text img {
+  height : 5vw;
+}
+
+.cards {
+  position: relative;
+  height: 30vh;
+  text-align: center;
+ 
+}
+
+.cards img {
+margin: auto;
+width: 150px;
+
+}
+
+
+.s3_bg_indus_frame {
+  position: absolute;
+z-index: -1000;
+width: 100vw;
+max-height: 100vh;
+
+}
+
+.dif_diy img {
+  width: 70%;
+  margin: auto;
+  padding-top: 12vh;
 }
 
 
@@ -100,9 +153,47 @@
 .presentation_produit {
   position: absolute;
   z-index: -1;
-  width: 100%;
+  width:100vw!important;
 }
 
 .button_home {
   width: 70%!important;
+}
+
+.marquee_diy {
+  font-size: 2vw ;
+  font-family: "Alcubierre", sans-serif !important;
+  text-transform: uppercase;
+  height: 15vh;
+  border-top: #D0C3B4 solid 5px;
+  border-bottom: #D0C3B4 solid 5px;
+}
+
+.logo_marquee {
+  margin: auto;
+  width: 3vw;
+}
+
+.contact_row {
+  height: 50vh;
+}
+
+.left_creme {
+  border-left: solid thin #D0C3B4;
+}
+.bottom_creme {
+  border-bottom: solid thin #D0C3B4;
+}
+
+.logo_orientation {
+  height : 40vh
+}
+
+.ekleo_logo {
+  width : 50%!important;
+  margin: auto;
+}
+
+.social i {
+  font-size: 2vw;
 }
