@@ -35,12 +35,23 @@
     text-decoration: none;
   }
 
+  h2 {
+    text-transform: uppercase;
+    font-family: "alcubierre";
+    letter-spacing: 5px;
+  }
+
+  .burger {
+    z-index: 1000;
+    position: fixed;
+  }
+
 .cadre_logo {
     aspect-ratio : 4 / 3.5;
     position: relative;
     top: 15vh;
     margin: auto;
-    font-size:calc(5px + 1vw);
+    font-size:calc(6px + 0.7vw);
     color: #FFFFFF;
 }
 
@@ -68,11 +79,28 @@
     position: absolute;
     top: 4vh;
     text-align: right;
-    font-size: 1.2vw;
+    font-size: 1vw;
 }
 
-#s0, #s1, #s2, #s3, #s4, #s5 {
+#s0, #s1, #s2, #s2_pro #s3, #s4, #s5 {
     height : 100vh;
+/*     border-bottom: solid thin #FFFFFF;
+ */}
+
+
+.s1_text_presentation {
+  padding-top: 5vw;
+  height: 40vh;
+}
+
+.s1_list {
+  height: 30vh;
+}
+
+.s1_list .list-group {
+  --bs-list-group-bg:  none;
+  --bs-list-group-color: none;
+  --bs-list-group-border-width: none;
 }
 
 #s2 img {
@@ -80,8 +108,25 @@
   margin: auto;
 }
 
+#s2_pro h2 {
+  margin-top : 25vh;
+  font-size: 3.5vw ;
+}
+
+.s2_vertical_square {
+  height: 100vh;
+}
+
+.s2_pro_text {
+  text-transform : uppercase;
+  font-size: 2vw;
+  line-height : 5vw;
+}
+
+.s2_pro_shape {
+  width: 80%;
+}
 .s3_bg_content {
-  padding-top: 10%;
   max-height: 100vh;
   max-width: 170vh;
 }
@@ -131,11 +176,12 @@ max-height: 100vh;
 
 .btn-primary {
   font-family: "Alcubierre", sans-serif !important;
-  color:white!important;
-  background-color: transparent!important;
+  color:#332D2A!important;
+  background-color: #F1F1F1!important;
   border-color: white!important;
   letter-spacing: 4px!important;
   text-transform: uppercase;
+  border-radius: 5px!important;
 }
 
 .btn-secondary {
