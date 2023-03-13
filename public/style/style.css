@@ -55,15 +55,52 @@
     color: #FFFFFF;
 }
 
+.brand_name {
+  font-family: alcubierre;
+  font-size : 2.5vw;
+  font-weight : 500;
+  letter-spacing : 1.5rem;
+  color : #D0C3B4;
+  line-height : 3rem;
+  position: relative;
+  top : -5vh;
+  left : 0.7vw;
+}
+
+.brand_subtitle {
+ font-size : 1vw;
+ position : relative;
+ top : -2vh;
+}
+
+.logo_cadre svg{
+  aspect-ratio : 4 / 3.5;
+  width: 45vw;
+}
+.logo_cadre {
+position: absolute;
+}
+
+
+.logo_row svg {
+  display: block;
+  margin: 0 auto;
+  width: 20vw
+}
+
 .cadre_home_droit {
     height: 60vh;
     position: relative;
     top: 80vh;
     border-right: #332D2A!important;
+    right : -200px;
+    position : relative;
 }
 .cadre_home_gauche {
     height: 40vh;
     border-left: #332D2A!important;
+    left : -200px;
+    position : relative;
 
 }
 
@@ -72,7 +109,7 @@
 }
 
 .logo {
-    width: 80%!important;
+    width: 100%!important;
 }
 
 .header {
@@ -82,15 +119,25 @@
     font-size: 1vw;
 }
 
-#s0, #s1, #s2, #s2_pro #s3, #s4, #s5 {
+#s0, #s1, #s2, #s2_pro, #s2_hstudio, #s2_studio,  #s3, #s4, #s5, #s1_square, #s1_dif, #s1_abs {
     height : 100vh;
 /*     border-bottom: solid thin #FFFFFF;
  */}
 
+ .square {
+height: 40vw;
+border-left: #332D2A!important;
+font-family: alcubierre;
+font-weight: 600;
+letter-spacing: 0.2rem;
+/* transform: rotate(-45deg);
+ *//* background-color: #F1F1F1;
+opacity: 0.1; */
+ }
 
 .s1_text_presentation {
   padding-top: 5vw;
-  height: 40vh;
+  height: 25vh;
 }
 
 .s1_list {
@@ -103,7 +150,7 @@
   --bs-list-group-border-width: none;
 }
 
-#s2 img {
+#s2_hstudio img, #s2_studio img {
   width: 80vw;
   margin: auto;
 }
@@ -127,6 +174,7 @@
   width: 80%;
 }
 .s3_bg_content {
+  padding-top: 20vh;
   max-height: 100vh;
   max-width: 170vh;
 }
@@ -182,6 +230,7 @@ max-height: 100vh;
   letter-spacing: 4px!important;
   text-transform: uppercase;
   border-radius: 5px!important;
+  padding: 0.8vw!important;
 }
 
 .btn-secondary {
@@ -202,8 +251,14 @@ max-height: 100vh;
   width:100vw!important;
 }
 
+.button_subtitle {
+  font-size: small;
+  letter-spacing: 4px!important;
+
+}
+
 .button_home {
-  width: 70%!important;
+  width: 100%!important;
 }
 
 .marquee_diy {
@@ -242,4 +297,12 @@ max-height: 100vh;
 
 .social i {
   font-size: 2vw;
+}
+
+.h-10 {
+  height : 5vh;
+}
+
+.h-20 {
+  height : 10vh;
 }

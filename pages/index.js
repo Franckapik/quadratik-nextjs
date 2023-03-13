@@ -8,56 +8,165 @@ import { useEffect, useRef, useState } from "react";
 import { useSpring, animated, useScroll } from "@react-spring/web";
 import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
 
-const S0 = () => (
-  <Row id="s0" className="justify-content-between m-0">
-    <Row className="header d-none d-md-flex justify-content-end text-uppercase m-0 p-0">
-      <Col md={1}>Boutique</Col>
-      <Col md={1}>Contact</Col>
-      <Col md={1} className="d-none d-md-flex"></Col>
-    </Row>
-    <Col xs={1} className="d-none d-md-block border_creme cadre_home_gauche"></Col>
-    <Col
-      xs={10}
-      sm={8}
-      md={5}
-      className="d-flex flex-wrap border_creme justify-content-center align-content-center cadre_logo "
-    >
-      <Row className="justify-content-center">
-        <img src="./logo_blanc.svg" className="pb-2 logo" />
-      </Row>
-      <Row className="text-nowrap pt-3">ACOUSTIQUE & ARTISANAT</Row>
-    </Col>
-    <Col xs={1} className="d-none d-md-block border_creme cadre_home_droit"></Col>
-  </Row>
-);
+import LazyLoad from 'react-lazy-load';
 
-const S1 = () => {
+import dynamic from "next/dynamic";
+const Anime = dynamic(() => import("react-anime"), { ssr: false });
+
+const S0 = () => {
+  const [loaded, setLoading] = useState(false);
+
   return (
-    <Row id="s1"       className="justify-content-end m-0 "
-    >
-      <Col md={5} className="d-flex flex-column pe-4">
-        <Row className="text-end s1_text_presentation">
-          <h2>Diffuseurs acoustiques</h2>
+    <Row id="s0" className="justify-content-between m-0">
+      {loaded ? (
+        <Row className="header d-none d-md-flex justify-content-end text-uppercase m-0 p-0">
+          <Col md={1}>Boutique</Col>
+          <Col md={1}>Contact</Col>
+          <Col md={1} className="d-none d-md-flex"></Col>
+        </Row>
+      ) : null}
+      <Col xs={1} className="d-none d-md-block m-0 p-0 ">
+        {" "}
+        {loaded ? (
+          <Anime easing="easeOutQuint" duration={2000} direction="alternate" loop={false} translateX="+=200px">
+            <div className="border_creme cadre_home_gauche"></div>
+          </Anime>
+        ) : null}
+      </Col>
+      <Col xs={10} sm={8} md={5} className="d-flex flex-wrap justify-content-center align-items-center">
+        <Row className="logo_cadre">
+          {loaded ? (
+            <svg xmlns="http://www.w3.org/2000/svg" stroke="#D0C3B4" stroke-width="2">
+              <Anime
+                easing="easeOutQuad"
+                loop={false}
+                svg
+                opacity={[0, 1]}
+                duration={2000}
+                component="g"
+                complete={() => console.log("complete")}
+                direction="alternate"
+                strokeDashoffset={(el) => {
+                  var pathLength = "0";
+                  for (var key in el.children) {
+                    let child = el.children[key];
+                    if (child.getTotalLength) {
+                      pathLength = child.getTotalLength().toString();
+                      el.setAttribute("stroke-dasharray", pathLength);
+                    }
+                  }
+                  return [pathLength, 0];
+                }}
+              >
+                <rect x="0" y="0" fill="none" width="100%" height="100%" />{" "}
+              </Anime>
+            </svg>
+          ) : null}
+        </Row>
+        <Col className="logo_row d-flex flex-column justify-content-center align-items-center text-center">
+          <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+            <g transform="" fill="none" stroke="#D0C3B4" stroke-width="1" stroke-linecap="square">
+              <Anime
+                easing="easeOutQuad"
+                loop={false}
+                svg
+                component="g"
+                complete={() => setLoading(true)}
+                delay={(el, index) => index * 80}
+                direction="alternate"
+                strokeDashoffset={(el) => {
+                  var pathLength = "0";
+                  for (var key in el.children) {
+                    let child = el.children[key];
+                    if (child.getTotalLength) {
+                      pathLength = child.getTotalLength().toString();
+                      el.setAttribute("stroke-dasharray", pathLength);
+                    }
+                  }
+                  return [pathLength, 0];
+                }}
+              >
+                {" "}
+                <rect width="27.1" height="27.078" ry="0" x="65.876" y="65.858" />
+                <rect width="27.1" height="27.078" x="107.02" y="65.858" ry="0" />
+                <rect width="27.1" height="27.078" x="107.024" y="107.064" ry="0" />
+                <rect width="27.1" height="27.078" x="65.88" y="107.064" ry="0" />
+                <rect width="27.1" height="27.078" x="-34.124" y="107.28" ry="0" transform="rotate(-45)" />
+                <rect width="27.1" height="27.078" x="7.021" y="107.28" ry="0" transform="rotate(-45)" />
+                <rect width="27.1" height="27.078" x="7.024" y="148.485" ry="0" transform="rotate(-45)" />
+                <rect width="27.1" height="27.078" x="-34.12" y="148.485" ry="0" transform="rotate(-45)" />{" "}
+              </Anime>
+            </g>
+          </svg>
+          <p className="text-nowrap text-uppercase brand_name m-0">Quadratik</p>
+          <p className="text-nowrap m-0 brand_subtitle ">ACOUSTIQUE & ARTISANAT</p>
+        </Col>
+      </Col>
+      <Col xs={1} className="d-none d-md-block p-0">
+        {loaded ? (
+          <Anime easing="easeOutQuint" duration={2000} direction="alternate" loop={false} translateX="-=200px">
+            <div className="border_creme cadre_home_droit"></div>
+          </Anime>
+        ) : null}
+      </Col>
+    </Row>
+  );
+};
+
+const S1 = ({ vh, scroll }) => {
+  return (
+    <Row id="s1" className="justify-content-end m-0 ">
+      <Col md={4} className="d-flex flex-column">
+        <Row className="text-center s1_text_presentation">
+          <h2>Solutions acoustiques</h2>
           <p>
             Le diffuseur Woodik améliore l’acoustique par sa structure irrégulière calculée sur une gamme de fréquences
           </p>
-          <p className="text-uppercase pt-2">Fabrication artisanale française</p>
         </Row>
-        <Row className="text-end s1_list align-items-center">
-          {" "}
+
+        <Row className="text-center align-items-center ">
+          <Col style={{ transitionDuration: "1s", opacity: scroll > 1.5 * vh ? 0.2 : 1 }} className="">
+            Diffusion
+            <p>
+              <img src="./physic_dif.svg"></img>
+            </p>
+          </Col>
+          <Col style={{ transitionDuration: "1s", opacity: scroll < 1.5 * vh ? 0.2 : 1 }} className="">
+            Absorption
+            <p>
+              <img src="./physic_abs.svg"></img>
+            </p>
+          </Col>
+        </Row>
+        <Row className="s1_list align-items-center text-center">
           <ListGroup>
             <ListGroup.Item>rééquilibre les ondes sonores</ListGroup.Item>
             <ListGroup.Item>supprime les effets indésirables</ListGroup.Item>
             <ListGroup.Item>le son entoure vos oreilles</ListGroup.Item>
             <ListGroup.Item>les productions sont aérées et précises</ListGroup.Item>
-          </ListGroup>
+          </ListGroup>{" "}
         </Row>
-        <Row className="text-uppercase text-end justify-content-end mt-5">
-          <p>Commande en ligne </p>
-          <Button variant="primary" size="lg" className="button_home">
-            Entrer dans l'atelier
-          </Button>
+        <Row className="text-uppercase text-center justify-content-center mt-4">
+          <p className="m-0 pb-2 button_subtitle">Commande en ligne </p>
+          <Col md={8}>
+            {" "}
+            <Button variant="primary" className="button_home">
+              Entrer dans l'atelier
+            </Button>
+          </Col>
         </Row>
+      </Col>
+      <Col md={2}></Col>
+    </Row>
+  );
+};
+
+const S1_SQUARE = () => {
+  return (
+    <Row id="s1_square" className="justify-content-start align-items-center m-0 ">
+      <Col md={5} className="border_creme square text-end pt-3">
+        {" "}
+        Le diffuseur Woodik-7
       </Col>
       <Col md={1}></Col>
     </Row>
@@ -69,7 +178,7 @@ const S1_DIF = () => {
 
   return (
     <Row
-      id="s1"
+      id="s1_dif"
       className="justify-content-end m-0 "
       style={{
         backgroundImage: `url(${bg_s1})`,
@@ -77,17 +186,14 @@ const S1_DIF = () => {
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
       }}
-    >
-     
-    </Row>
+    ></Row>
   );
 };
 const S1_ABS = () => {
   const bg_s2 = "./absorbeur.png";
-
   return (
     <Row
-      id="s1"
+      id="s1_abs"
       className="justify-content-end m-0 "
       style={{
         backgroundImage: `url(${bg_s2})`,
@@ -95,36 +201,71 @@ const S1_ABS = () => {
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
       }}
-    >
-     
-    </Row>
+    ></Row>
   );
 };
+
+const S2_PRO = () => (
+  <Row id="s2_pro">
+    <Col md={2} className="text-end p-0">
+      <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
+    </Col>
+    <Col md={1}></Col>
+    <Col md={3} className="text-start">
+      <h2>Professionnel</h2>
+      <p className="s2_pro_text mt-5">Quelles que soient les dimensions de votre espace</p>
+    </Col>
+    <Col md={6} className="d-flex align-items-center justify-content-end">
+
+    
+<LazyLoad>
+<svg width="843" height="671" viewBox="0 0 843 671" fill="none" xmlns="http://www.w3.org/2000/svg" className="s2_pro_shape m-4">
+    <Anime
+                easing="easeOutQuad"
+                loop={false}
+                svg
+                component="g"
+               /*  complete={() => setLoading(true)} */
+                delay={(el, index) => index * 80}
+                direction="alternate"
+                strokeDashoffset={(el) => {
+                  var pathLength = "0";
+                  for (var key in el.children) {
+                    let child = el.children[key];
+                    if (child.getTotalLength) {
+                      pathLength = child.getTotalLength().toString();
+                      el.setAttribute("stroke-dasharray", pathLength);
+                    }
+                  }
+                  return [pathLength, 0];
+                }}
+              >
+<path d="M841 304.95L47.731 1L1 506.424L291.428 670L841 304.95Z" stroke="#D0C3B4"/>
+</Anime>
+</svg>
+    </LazyLoad>
+    </Col>
+  </Row>
+);
+
 const S2_HSTUDIO = () => (
-  <Row id="s2_hstudio" className="">
-    <div className="d-flex justify-content-evenly mt-4">
-      <span>Home studio</span>
-      <span>Salle de répétition</span>
-      <span>Salle des fêtes</span>
-      <span>VOUS</span>
-      <span>Studio d'enregistrement</span>
-      <span>Home cinéma</span>
-      <span>Collectivité</span>
-    </div>
-    <img src="./studio1.svg" alt="image de studio d'enregistrement de musique" />
+  <Row id="s2_hstudio" className="justify-content-start">
+    <Row className="d-flex text-center text-uppercase p-5">
+      <Col>Home studio</Col>
+      <Col>Salle de répétition</Col>
+      <Col>Salle des fêtes</Col>
+      <Col>VOUS</Col>
+      <Col>Studio d'enregistrement</Col>
+      <Col>Home cinéma</Col>
+      <Col>Collectivité</Col>
+    </Row>
+    <Row>
+      <img src="./studio1.svg" alt="image de studio d'enregistrement de musique" />
+    </Row>
   </Row>
 );
 const S2_STUDIO = () => (
   <Row id="s2_studio" className="">
-    <div className="d-flex justify-content-evenly mt-4">
-      <span>Home studio</span>
-      <span>Salle de répétition</span>
-      <span>Salle des fêtes</span>
-      <span>VOUS</span>
-      <span>Studio d'enregistrement</span>
-      <span>Home cinéma</span>
-      <span>Collectivité</span>
-    </div>
     <img src="./studio2.svg" alt="image de studio d'enregistrement de musique" />
   </Row>
 );
@@ -135,11 +276,14 @@ const S5 = () => (
         <img src="./bg_s3.svg" className="s3_bg_indus_frame" />
         <Row className="s3_bg_content">
           <Col xl={6} className="">
-            <Row className="text-uppercase text-center justify-content-center">
-              <p>Sur-mesure en ligne </p>
-              <Button variant="primary" size="lg" className="button_home">
-                Dessiner un diffuseur
-              </Button>
+            <Row className="text-uppercase text-center justify-content-center mt-4">
+              <p className="m-0 pb-2 button_subtitle">Sur-mesure en ligne </p>
+              <Col md={8}>
+                {" "}
+                <Button variant="primary" className="button_home">
+                  Dessiner un diffuseur
+                </Button>
+              </Col>
             </Row>
             <Row className="dif_diy">
               <img src="./dif_diy.svg" alt="Image d'un diffuseur en construction" />
@@ -176,8 +320,7 @@ const S5 = () => (
               </Col>
               <Col xl={10}>
                 Plus le nombre de cellules est élevé, plus le nombre de rebonds est important et plus le phénomène de
-                diffusion est effectif.import {useState} from 'react'; import {useState} from 'react'; import {useState}{" "}
-                from 'react';
+                diffusion est effectif.
               </Col>{" "}
             </Row>
           </Col>
@@ -256,71 +399,75 @@ const S7 = () => (
         <i className="fab fa-twitter-square"></i>
       </Col>
     </Row>
-  </Row>
-);
-const S2_PRO = () => (
-  <Row id="s2_pro">
-    <Col md={2} className="text-end">
-      <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
-    </Col>
-    <Col md={1}></Col>
-    <Col md={3} className="text-start">
-      <h2>Professionnel</h2>
-      <p className="s2_pro_text mt-5">Quel que soit les dimensions de votre espace</p>
-    </Col>
-    <Col md={6} className="d-flex align-items-center justify-content-end">
-      <img src="./pro_shape.svg" alt="Ligne verticale" className="s2_pro_shape m-4" />
-    </Col>
+    <Row className="text-center">
+      <p>
+        Entreprise Quadratik.fr - SIRET 83529797900014 - 835 297 979 R.C.S RENNES - rue d’Aubigné 35440 Feins - France{" "}
+      </p>
+    </Row>
+    <Row className="text-center justify-content-evenly align-items-end ">
+      <Col className="border_creme border-bottom-0 h-10" md={2}>
+        Mentions légales
+      </Col>
+      <Col className="border_creme border-bottom-0 h-20" md={2}>
+        Quadratik.fr © 2023
+      </Col>{" "}
+      {/* lien vers les techno/infos utilisées pour le site */}
+      <Col className="border_creme border-bottom-0 h-10" md={2}>
+        Conditions Générales de Vente
+      </Col>
+    </Row>
   </Row>
 );
 
 const Burger = () => {
   const [isOpen, setOpen] = useState(false);
   return (
-    <animated.div
-      className="p-4 burger"
-    >
+    <Col md={1} className="d-flex burger justify-content-center pt-5">
       <Hamburger toggled={isOpen} toggle={setOpen} color="#FFFFFF" />
-    </animated.div>
+    </Col>
   );
 };
 
 const Home = () => {
+  const [scroll, setScroll] = useState(0);
+  const [vh, setVh] = useState(0);
+  const parallax = useRef(null);
 
-  const [scroll, setScroll] = useState(0)
-  const [vh, setVh] = useState(0)
-  const parallax = useRef(null)
+  useEffect(() => {
+    const getScroll = (e) => {
+      setScroll(e.target.scrollTop);
+    };
+    setVh(parallax.current.space - 20);
+    console.log(parallax.current);
+    const container = parallax.current.container.current;
+    container.addEventListener("scroll", getScroll);
 
-useEffect(() => {
-  const getScroll = (e) => {
-    setScroll(e.target.scrollTop)
-  }
-  setVh(parallax.current.space);
-  console.log(parallax.current);
-  const container = parallax.current.container.current
-  container.addEventListener('scroll', getScroll)
+    return () => {
+      container.removeEventListener("scroll", getScroll);
+    };
+  }, []);
 
-  return () => {
-    container.removeEventListener('scroll', getScroll)
-  }
-}, [])
- 
-  return ( 
+  return (
     <div>
       {scroll > vh ? <Burger></Burger> : null}
-      <Parallax pages={10} ref={parallax}>
+      <Parallax pages={9} ref={parallax}>
         <ParallaxLayer offset={0} speed={0}>
           <S0 />
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0} sticky={{ start: 1, end: 2 }}>
-          <S1 />
+          <S1 vh={vh} scroll={scroll} />
         </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={0}>
+        <ParallaxLayer offset={1} speed={0.2}>
+          <S1_SQUARE />
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={1} speed={0.5}>
           <S1_DIF />
         </ParallaxLayer>
-
-
-        <ParallaxLayer offset={2} speed={0}>
+        <ParallaxLayer offset={2} speed={0.2}>
+          <S1_SQUARE />
+        </ParallaxLayer>
+        <ParallaxLayer offset={2} speed={0.5}>
           <S1_ABS />
         </ParallaxLayer>
 
