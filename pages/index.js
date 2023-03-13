@@ -1,12 +1,10 @@
-import { Button, Row } from "react-bootstrap";
-import { Col } from "react-bootstrap";
-import ListGroup from "react-bootstrap/ListGroup";
-import Marquee from "react-fast-marquee";
 import { Turn as Hamburger } from "hamburger-react";
 import { useEffect, useRef, useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import ListGroup from "react-bootstrap/ListGroup";
+import Marquee from "react-fast-marquee";
 
-import { useSpring, animated, useScroll } from "@react-spring/web";
-import { Parallax, ParallaxLayer, IParallax } from "@react-spring/parallax";
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 import LazyLoad from 'react-lazy-load';
 
@@ -218,7 +216,7 @@ const S2_PRO = () => (
     <Col md={6} className="d-flex align-items-center justify-content-end">
 
     
-<LazyLoad>
+
 <svg width="843" height="671" viewBox="0 0 843 671" fill="none" xmlns="http://www.w3.org/2000/svg" className="s2_pro_shape m-4">
     <Anime
                 easing="easeOutQuad"
@@ -243,7 +241,7 @@ const S2_PRO = () => (
 <path d="M841 304.95L47.731 1L1 506.424L291.428 670L841 304.95Z" stroke="#D0C3B4"/>
 </Anime>
 </svg>
-    </LazyLoad>
+
     </Col>
   </Row>
 );
@@ -265,7 +263,7 @@ const S2_HSTUDIO = () => (
   </Row>
 );
 const S2_STUDIO = () => (
-  <Row id="s2_studio" className="">
+  <Row id="s2_studio">
     <img src="./studio2.svg" alt="image de studio d'enregistrement de musique" />
   </Row>
 );
@@ -460,7 +458,6 @@ const Home = () => {
         <ParallaxLayer offset={1} speed={0.2}>
           <S1_SQUARE />
         </ParallaxLayer>
-
         <ParallaxLayer offset={1} speed={0.5}>
           <S1_DIF />
         </ParallaxLayer>
@@ -471,15 +468,17 @@ const Home = () => {
           <S1_ABS />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={3} speed={0}>
+        <ParallaxLayer offset={3} speed={0} sticky={{ start: 3, end: 5 }}>
+        <LazyLoad  threshold={0.95}>
           <S2_PRO />
+          </LazyLoad>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={4} speed={0}>
+        <ParallaxLayer offset={4} speed={0.2} sticky={{ start: 4, end: 5 }}>
           <S2_HSTUDIO />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={5} speed={0}>
+        <ParallaxLayer offset={5} speed={0.8} sticky={{ start: 5, end: 5 }}>
           <S2_STUDIO />
         </ParallaxLayer>
 

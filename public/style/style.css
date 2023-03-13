@@ -124,6 +124,20 @@ position: absolute;
 /*     border-bottom: solid thin #FFFFFF;
  */}
 
+ #s2_hstudio {
+  background-color: #332D2A;
+  z-index: 2;
+ }
+
+ #s2_studio {
+  background-color: #332D2A;
+  z-index: 3;
+ }
+
+ #s3 {
+  z-index: 4;
+ }
+
  .square {
 height: 40vw;
 border-left: #332D2A!important;
@@ -305,4 +319,13 @@ max-height: 100vh;
 
 .h-20 {
   height : 10vh;
+}
+
+.LazyLoad {
+  opacity: 0;
+  transition: all 2s ease-in-out;
+}
+
+.is-visible {
+  opacity: 1;
 }
