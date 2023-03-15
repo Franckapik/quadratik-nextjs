@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import ListGroup from "react-bootstrap/ListGroup";
 import Marquee from "react-fast-marquee";
+import useScrollSnap from "react-use-scroll-snap";
 
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
@@ -114,7 +115,8 @@ const S0 = () => {
 const S1 = ({ vh, scroll }) => {
   return (
     <Row id="s1" className="justify-content-end m-0 ">
-      <Col md={4} className="d-flex flex-column">
+      <Col md={5}></Col>
+      <Col md={5} className="d-flex flex-column p-4 m-auto ">
         <Row className="text-center s1_text_presentation">
           <h2>Solutions acoustiques</h2>
           <p>
@@ -154,7 +156,7 @@ const S1 = ({ vh, scroll }) => {
           </Col>
         </Row>
       </Col>
-      <Col md={2}></Col>
+      <Col md={1}></Col>
     </Row>
   );
 };
@@ -206,36 +208,37 @@ const S1_ABS = () => {
 const S2_PRO = () => (
   <Row id="s2_pro" className="p-0 m-0">
     <Col md={2} className="text-end p-0 dark_bg">
-      <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
-    </Col>
-    <Col md={10} className="d-flex flex-column justify-content-start ">
-      <Row className="d-flex  text-center text-uppercase dark_bg pt-5">
-        <Col>Home studio</Col>
-        <Col>Salle de répétition</Col>
-        <Col>Salle des fêtes</Col>
-        <Col>Enregistrement</Col>
-        <Col>Home cinéma</Col>
-        <Col>Collectivités</Col>
-      </Row>
-      <Row className="dark_bg text-center p-5"><span>Professionnel</span>
-      <span className="s2_pro_text">Quelles que soient les dimensions de votre espace</span></Row>
-      <Row className="justify-content-start">
-        <Col md={2} className="dark_bg">        </Col>
-        <Col md={8} className="d-flex align-items-center m-0 p-0 ">
-          <div className="svg-container">
-            <svg version="1.1" viewBox="0 0 840 700" preserveAspectRatio="none" className="svg-content">
-              <mask id="myMask">
-                <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                {/*       <path d="M841 304.95L47.731 1L1 506.424L291.428 670L841 304.95Z" fill="black" transform="scale(0.5) "/>
-                 */}
-                <polygon points="60 10, 840 200,330 650, 0 450" fill="black" />
-              </mask>
-              <g>
-                <rect x="0" y="0" width="100%" height="100%" fill="#332D2A" mask="url(#myMask)" />
-                <polygon points="0 0, 400 35, 200 250, 50 200" stroke="#D0C3B4" fill="none" stroke-width="0.5" />              </g>
-            </svg>
-          </div>{" "}
+      <Row className="p-0 m-0">
+        <Col md={8} className="p-0 m-0">
+        <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
         </Col>
+        <Col md={4} className="p-0 m-0 d-flex flex-colmun justify-content-end">
+          <Row className="d-flex justify-content-between text-uppercase text-center list_pro">
+            <Col>Home studio</Col>
+            <Col>Salle de répétition</Col>
+            <Col>Salle des fêtes</Col>
+            <Col>Enregistrement</Col>
+            <Col>Home cinéma</Col>
+            <Col>Collectivités</Col>
+          </Row>
+        </Col>
+      </Row>
+    </Col>
+
+    <Col md={10} className="d-flex flex-column justify-content-start ">
+      <Row className="dark_bg  p-5 text-uppercase">
+        <div className="text-center">
+          <span>Révelez votre</span>
+          <h2>Professionnalisme</h2>
+          <span className="sub2">quelles que soient les dimensions de votre espace</span>
+        </div>
+        {/*       <span className="s2_pro_text">Quelles que soient les dimensions de votre espace</span> */}
+      </Row>
+      <Row className="justify-content-start">
+        <Col md={2} className="dark_bg">
+          {" "}
+        </Col>
+        <Col md={8} className="d-flex align-items-center m-0 p-0 "></Col>
         <Col md={2} className="dark_bg"></Col>
       </Row>
     </Col>
@@ -268,24 +271,39 @@ const S2_PRO = () => (
 
 const S2_HSTUDIO = () => (
   <Row id="s2_hstudio" className="justify-content-start">
-    <Row>
-      <img src="./studio1.svg" alt="image de studio d'enregistrement de musique" />
-    </Row>
+    <Col md={2}></Col>
+    <Col md={10} className="d-flex flex-column">
+      <Row className="justify-content-center align-items-center h-100">
+        <Col md={8} className="d-flex flex-column  p-0 justify-content-end align-items-center">
+          <img src="./studio1.svg" alt="image de studio d'enregistrement de musique" />
+        </Col>
+      </Row>
+    </Col>
   </Row>
 );
 const S2_STUDIO = () => (
   <Row id="s2_studio">
-    <img src="./studio2.svg" alt="image de studio d'enregistrement de musique" />
+    <Col md={2}></Col>
+    <Col md={10} className="d-flex flex-column">
+      <Row className="justify-content-center align-items-center h-100">
+        <Col md={8} className="d-flex flex-column  p-0 justify-content-end align-items-center">
+          <img src="./studio2.svg" alt="image de studio d'enregistrement de musique" />
+        </Col>
+      </Row>
+    </Col>{" "}
   </Row>
 );
 const S2_IMG = () => (
   <Row id="s2_img">
-    <Col md={2}>
-    </Col>
-    <Col md={10} className="d-flex flex-column">
-    <Row className="justify-content-center">
-        <Col md={8} className="d-flex flex-column studio_picture p-0 justify-content-end align-items-center">
-        <img src="./studio_picture1.png" alt="Photgraphie des produits quadratik.fr dans le studio DiscoCasino de Rennes" />
+    <Col md={2}></Col>
+    <Col md={10} className="d-flex flex-column ">
+      <Row className="justify-content-center align-items-center h-100">
+        <Col md={8} className="d-flex flex-column p-0 justify-content-center align-items-center">
+          <img
+            className="border_creme"
+            src="./studio_picture1.png"
+            alt="Photgraphie des produits quadratik.fr dans le studio DiscoCasino de Rennes"
+          />
         </Col>
       </Row>
     </Col>
@@ -293,7 +311,15 @@ const S2_IMG = () => (
 );
 const S5 = () => (
   <Row id="s3" className="d-flex m-0">
-    <div className="d-none d-xxl-flex m-0 p-0 justify-content-center">
+     <Anime easing="easeOutBounce"
+         duration={1000}
+         direction="alternate"
+         loop={false}
+         delay={(el, index) => index * 240}
+         rotate={[10,0]}
+         scale={[0.5, 1]}> <div className="d-none d-xxl-flex m-0 p-0 justify-content-center">
+   
+
       <Col className="s3_bg d-flex justify-content-center ">
         <img src="./bg_s3.svg" className="s3_bg_indus_frame" />
         <Row className="s3_bg_content">
@@ -347,8 +373,9 @@ const S5 = () => (
             </Row>
           </Col>
         </Row>
-      </Col>
-    </div>
+      </Col> </div>
+      </Anime>
+   
   </Row>
 );
 const S6 = () => (
@@ -470,9 +497,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="scroller">
       {scroll > vh ? <Burger></Burger> : null}
-      <Parallax pages={9.3} ref={parallax}>
+      <Parallax pages={8.8} ref={parallax}>
         <ParallaxLayer offset={0} speed={0}>
           <S0 />
         </ParallaxLayer>
@@ -492,31 +519,30 @@ const Home = () => {
           <S1_ABS />
         </ParallaxLayer>
 
-
-        <ParallaxLayer offset={3} speed={0.8} sticky={{ start: 3, end: 5.3 }} >
-            <S2_IMG />
-        </ParallaxLayer>
-        <ParallaxLayer offset={3} speed={0} sticky={{ start: 3, end: 5.3 }} className="zi_up">
-            <S2_PRO />
+        <ParallaxLayer offset={3} speed={0} sticky={{ start: 3, end: 4.7 }}>
+          <S2_PRO />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={4.3} speed={0} sticky={{ start: 4.3, end: 5.3 }}>
+        <ParallaxLayer offset={3.2} speed={0}>
           <S2_HSTUDIO />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={5.3} speed={0} sticky={{ start: 5.3, end: 5.3 }}>
+        <ParallaxLayer offset={4} speed={0}>
           <S2_STUDIO />
         </ParallaxLayer>
+        <ParallaxLayer offset={4.8} speed={0}>
+          <S2_IMG />
+        </ParallaxLayer>
 
-        <ParallaxLayer offset={6.3} speed={0} className="zi_up2">
+        <ParallaxLayer offset={5.8} speed={0}>
           <S5 />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={7.3} speed={0}>
+        <ParallaxLayer offset={6.8} speed={0}>
           <S6 />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={8.3} speed={0}>
+        <ParallaxLayer offset={7.8} speed={0}>
           <S7 />
         </ParallaxLayer>
       </Parallax>

@@ -2,6 +2,10 @@
 
 ==> TODO
 
+==> react-anime : 
+https://github.com/plus1tv/react-anime/blob/HEAD/documentation.md
+
+
 ==> home
 pb d'antialiasing sur google. trouver une autre image.
 
