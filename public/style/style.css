@@ -119,24 +119,64 @@ position: absolute;
     font-size: 1vw;
 }
 
-#s0, #s1, #s2, #s2_pro, #s2_hstudio, #s2_studio,  #s3, #s4, #s5, #s1_square, #s1_dif, #s1_abs {
+#s0, #s1, #s2, #s2_pro, #s2_hstudio, #s2_studio, #s2_img,  #s3, #s4, #s5, #s1_square, #s1_dif, #s1_abs {
     height : 100vh;
 /*     border-bottom: solid thin #FFFFFF;
  */}
 
+ .svg-container { 
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	vertical-align: middle; 
+	overflow: hidden; 
+}
+
+.svg-content { 
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#s2_img img {
+width : 100%;
+padding-bottom : 5%;
+}
+
+#s2_pro {
+  opacity : 1;
+}
+
+ #s2_pro svg {
+  display: inline-block;
+  height: auto;
+  width: 100%;
+  z-index: -1;
+ }
+.dark_bg {
+  background-color : #332D2A;
+}
+
+.studio_picture {
+  height : 100vh;
+}
+
  #s2_hstudio {
-  background-color: #332D2A;
-  z-index: 2;
+  background-color :  red
  }
 
  #s2_studio {
-  background-color: #332D2A;
-  z-index: 3;
+  background-color : blue;
  }
 
- #s3 {
-  z-index: 4;
+
+ .zi_up {
+  z-index : 1000!important;
  }
+
+
 
  .square {
 height: 40vw;
@@ -165,13 +205,13 @@ opacity: 0.1; */
 }
 
 #s2_hstudio img, #s2_studio img {
-  width: 80vw;
-  margin: auto;
+  width: 50vw;
+  position: absolute;
+  right : 10vw;
 }
 
-#s2_pro h2 {
-  margin-top : 25vh;
-  font-size: 3.5vw ;
+.s2_pro {
+  background-color : "red";
 }
 
 .s2_vertical_square {
@@ -180,13 +220,10 @@ opacity: 0.1; */
 
 .s2_pro_text {
   text-transform : uppercase;
-  font-size: 2vw;
-  line-height : 5vw;
+  font-size: 1vw;
+  line-height : 1vw;
 }
 
-.s2_pro_shape {
-  width: 80%;
-}
 .s3_bg_content {
   padding-top: 20vh;
   max-height: 100vh;

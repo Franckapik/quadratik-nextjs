@@ -6,7 +6,7 @@ import Marquee from "react-fast-marquee";
 
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
-import LazyLoad from 'react-lazy-load';
+import LazyLoad from "react-lazy-load";
 
 import dynamic from "next/dynamic";
 const Anime = dynamic(() => import("react-anime"), { ssr: false });
@@ -204,26 +204,48 @@ const S1_ABS = () => {
 };
 
 const S2_PRO = () => (
-  <Row id="s2_pro">
-    <Col md={2} className="text-end p-0">
+  <Row id="s2_pro" className="p-0 m-0">
+    <Col md={2} className="text-end p-0 dark_bg">
       <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
     </Col>
-    <Col md={1}></Col>
-    <Col md={3} className="text-start">
-      <h2>Professionnel</h2>
-      <p className="s2_pro_text mt-5">Quelles que soient les dimensions de votre espace</p>
+    <Col md={10} className="d-flex flex-column justify-content-start ">
+      <Row className="d-flex  text-center text-uppercase dark_bg pt-5">
+        <Col>Home studio</Col>
+        <Col>Salle de répétition</Col>
+        <Col>Salle des fêtes</Col>
+        <Col>Enregistrement</Col>
+        <Col>Home cinéma</Col>
+        <Col>Collectivités</Col>
+      </Row>
+      <Row className="dark_bg text-center p-5"><span>Professionnel</span>
+      <span className="s2_pro_text">Quelles que soient les dimensions de votre espace</span></Row>
+      <Row className="justify-content-start">
+        <Col md={2} className="dark_bg">        </Col>
+        <Col md={8} className="d-flex align-items-center m-0 p-0 ">
+          <div className="svg-container">
+            <svg version="1.1" viewBox="0 0 840 700" preserveAspectRatio="none" className="svg-content">
+              <mask id="myMask">
+                <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                {/*       <path d="M841 304.95L47.731 1L1 506.424L291.428 670L841 304.95Z" fill="black" transform="scale(0.5) "/>
+                 */}
+                <polygon points="60 10, 840 200,330 650, 0 450" fill="black" />
+              </mask>
+              <g>
+                <rect x="0" y="0" width="100%" height="100%" fill="#332D2A" mask="url(#myMask)" />
+                <polygon points="0 0, 400 35, 200 250, 50 200" stroke="#D0C3B4" fill="none" stroke-width="0.5" />              </g>
+            </svg>
+          </div>{" "}
+        </Col>
+        <Col md={2} className="dark_bg"></Col>
+      </Row>
     </Col>
-    <Col md={6} className="d-flex align-items-center justify-content-end">
 
-    
-
-<svg width="843" height="671" viewBox="0 0 843 671" fill="none" xmlns="http://www.w3.org/2000/svg" className="s2_pro_shape m-4">
+    {/* <svg width="843" height="671" viewBox="0 0 843 671" fill="none" xmlns="http://www.w3.org/2000/svg" className="s2_pro_shape m-4">
     <Anime
                 easing="easeOutQuad"
                 loop={false}
                 svg
                 component="g"
-               /*  complete={() => setLoading(true)} */
                 delay={(el, index) => index * 80}
                 direction="alternate"
                 strokeDashoffset={(el) => {
@@ -240,23 +262,12 @@ const S2_PRO = () => (
               >
 <path d="M841 304.95L47.731 1L1 506.424L291.428 670L841 304.95Z" stroke="#D0C3B4"/>
 </Anime>
-</svg>
-
-    </Col>
+</svg> */}
   </Row>
 );
 
 const S2_HSTUDIO = () => (
   <Row id="s2_hstudio" className="justify-content-start">
-    <Row className="d-flex text-center text-uppercase p-5">
-      <Col>Home studio</Col>
-      <Col>Salle de répétition</Col>
-      <Col>Salle des fêtes</Col>
-      <Col>VOUS</Col>
-      <Col>Studio d'enregistrement</Col>
-      <Col>Home cinéma</Col>
-      <Col>Collectivité</Col>
-    </Row>
     <Row>
       <img src="./studio1.svg" alt="image de studio d'enregistrement de musique" />
     </Row>
@@ -265,6 +276,19 @@ const S2_HSTUDIO = () => (
 const S2_STUDIO = () => (
   <Row id="s2_studio">
     <img src="./studio2.svg" alt="image de studio d'enregistrement de musique" />
+  </Row>
+);
+const S2_IMG = () => (
+  <Row id="s2_img">
+    <Col md={2}>
+    </Col>
+    <Col md={10} className="d-flex flex-column">
+    <Row className="justify-content-center">
+        <Col md={8} className="d-flex flex-column studio_picture p-0 justify-content-end align-items-center">
+        <img src="./studio_picture1.png" alt="Photgraphie des produits quadratik.fr dans le studio DiscoCasino de Rennes" />
+        </Col>
+      </Row>
+    </Col>
   </Row>
 );
 const S5 = () => (
@@ -448,7 +472,7 @@ const Home = () => {
   return (
     <div>
       {scroll > vh ? <Burger></Burger> : null}
-      <Parallax pages={9} ref={parallax}>
+      <Parallax pages={9.3} ref={parallax}>
         <ParallaxLayer offset={0} speed={0}>
           <S0 />
         </ParallaxLayer>
@@ -468,29 +492,31 @@ const Home = () => {
           <S1_ABS />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={3} speed={0} sticky={{ start: 3, end: 5 }}>
-        <LazyLoad  threshold={0.95}>
-          <S2_PRO />
-          </LazyLoad>
+
+        <ParallaxLayer offset={3} speed={0.8} sticky={{ start: 3, end: 5.3 }} >
+            <S2_IMG />
+        </ParallaxLayer>
+        <ParallaxLayer offset={3} speed={0} sticky={{ start: 3, end: 5.3 }} className="zi_up">
+            <S2_PRO />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={4} speed={0.2} sticky={{ start: 4, end: 5 }}>
+        <ParallaxLayer offset={4.3} speed={0} sticky={{ start: 4.3, end: 5.3 }}>
           <S2_HSTUDIO />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={5} speed={0.8} sticky={{ start: 5, end: 5 }}>
+        <ParallaxLayer offset={5.3} speed={0} sticky={{ start: 5.3, end: 5.3 }}>
           <S2_STUDIO />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={6} speed={0}>
+        <ParallaxLayer offset={6.3} speed={0} className="zi_up2">
           <S5 />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={7} speed={0}>
+        <ParallaxLayer offset={7.3} speed={0}>
           <S6 />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={8} speed={0}>
+        <ParallaxLayer offset={8.3} speed={0}>
           <S7 />
         </ParallaxLayer>
       </Parallax>
