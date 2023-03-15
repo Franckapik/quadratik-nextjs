@@ -28,8 +28,9 @@
     line-height : 1.8em!important;
     letter-spacing : 0.1em;
     overflow-x: hidden;
+    scroll-snap-type: y mandatory;
   }
-  
+
   a {
     cursor: pointer;
     text-decoration: none;
@@ -159,24 +160,13 @@ padding-bottom : 5%;
   background-color : #332D2A;
 }
 
-.studio_picture {
-  height : 100vh;
-}
-
- #s2_hstudio {
-  background-color :  red
- }
-
- #s2_studio {
-  background-color : blue;
- }
-
-
  .zi_up {
   z-index : 1000!important;
  }
 
-
+.snapy {
+    scroll-snap-type: y mandatory;
+}
 
  .square {
 height: 40vw;
@@ -205,14 +195,22 @@ opacity: 0.1; */
 }
 
 #s2_hstudio img, #s2_studio img {
-  width: 50vw;
-  position: absolute;
-  right : 10vw;
+width: 50vw;
+margin: auto;
 }
 
-.s2_pro {
-  background-color : "red";
-}
+#s2_img img {
+  opacity: 0.8;
+  filter: saturate(90%);
+  filter: contrast(90%);
+  filter: sepia(30%);
+  padding : 2vw;
+/*   filter: brightness(1.1);
+ */}
+
+ .bg-red {
+  background-color: red;
+ }
 
 .s2_vertical_square {
   height: 100vh;
@@ -223,6 +221,38 @@ opacity: 0.1; */
   font-size: 1vw;
   line-height : 1vw;
 }
+
+.cadre_pro {
+  position : absolute;
+  right : 10vw;
+  aspect-ratio : 4 / 3.5;
+  width: 30vw!important;
+}
+
+.list_pro {
+  width : 100%;
+  height : 100%;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transform-origin: center center;
+  font-size : 0.8vw;
+}
+
+
+
+#s2_pro h2 {
+  font-family:'futura-light';
+  font-weight : 100;
+  font-size: 2vw;
+  padding-top : 1vw;
+  letter-spacing : 1vw!important;
+/*   position : relative;
+  bottom : -20vh;
+ */}
+
+ .sub2 {
+  font-size : 1.25vw;
+ }
 
 .s3_bg_content {
   padding-top: 20vh;
@@ -258,12 +288,13 @@ width: 150px;
 }
 
 
-.s3_bg_indus_frame {
-  position: absolute;
-z-index: -1000;
-width: 100vw;
-max-height: 100vh;
 
+
+.s3_bg_indus_frame {
+position: absolute;
+z-index: -1000;
+width: 90vw;
+max-height: 100vh;
 }
 
 .dif_diy img {
