@@ -210,7 +210,7 @@ const S2_PRO = () => (
     <Col md={2} className="text-end p-0 dark_bg">
       <Row className="p-0 m-0">
         <Col md={8} className="p-0 m-0">
-        <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
+          <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
         </Col>
         <Col md={4} className="p-0 m-0 d-flex flex-colmun justify-content-end">
           <Row className="d-flex justify-content-between text-uppercase text-center list_pro">
@@ -310,73 +310,61 @@ const S2_IMG = () => (
   </Row>
 );
 const S5 = () => (
-  <Row id="s3" className="d-flex m-0">
-     <Anime easing="easeOutBounce"
-         duration={1000}
-         direction="alternate"
-         loop={false}
-         delay={(el, index) => index * 240}
-         rotate={[10,0]}
-         scale={[0.5, 1]}> <div className="d-none d-xxl-flex m-0 p-0 justify-content-center">
-   
-
-      <Col className="s3_bg d-flex justify-content-center ">
-        <img src="./bg_s3.svg" className="s3_bg_indus_frame" />
-        <Row className="s3_bg_content">
-          <Col xl={6} className="">
-            <Row className="text-uppercase text-center justify-content-center mt-4">
-              <p className="m-0 pb-2 button_subtitle">Sur-mesure en ligne </p>
-              <Col md={8}>
-                {" "}
+  <LazyLoad threshold={0.2}>
+    <Row id="s3" className="m-0 d-flex align-items-center justify-content-center">
+      <Col md={10} className="d-flex flex_column s3_bg p-0 m-0 border_creme">
+        <Row className="s3_bg_content w-100 justify-content-center align-items-center p-4">
+          <Col xl={5} className="d-flex flex-column h-100">
+              <Row className="m-0 pt-5 button_subtitle text-center"><p>Sur-mesure en ligne</p></Row>
+             <Row className="pb-5">
                 <Button variant="primary" className="button_home">
                   Dessiner un diffuseur
                 </Button>
-              </Col>
-            </Row>
-            <Row className="dif_diy">
-              <img src="./dif_diy.svg" alt="Image d'un diffuseur en construction" />
-            </Row>
+              </Row>
+              <Row className="pt-5"><img src="./dif_diy.svg" alt="Image d'un diffuseur en construction" /></Row>
+
+            
+          
           </Col>
-          <Col xl={5} className="s3_guide_text">
-            <Row>
-              <Col xl={2} className="text-center">
-                <img src="./s3_guide_i1.png"></img>
-              </Col>
-              <Col xl={10}>
-                Une onde sonore qui arrive sur un diffuseur entre en contact avec des cellules de différentes
-                profondeurs, induisant des rebonds dans de multiples directions.
-              </Col>{" "}
-            </Row>
-            <Row>
-              <Col xl={2} className="text-center">
-                <img src="./s3_guide_i2.png"></img>
-              </Col>
-              <Col xl={10}>
-                Plus la profondeur de ces cellules est importante, plus le diffuseur sera efficace avec les basses
-                fréquences.
-              </Col>{" "}
-            </Row>
-            <Row>
-              <Col xl={2} className="text-center">
-                <img src="./s3_guide_i3.png"></img>
-              </Col>
-              <Col xl={10}>Plus les cellules sont étroites, plus le diffuseur sera efficace dans les aigus.</Col>{" "}
-            </Row>
-            <Row>
-              <Col xl={2} className="text-center">
-                <img src="./s3_guide_i4.png"></img>
-              </Col>
-              <Col xl={10}>
-                Plus le nombre de cellules est élevé, plus le nombre de rebonds est important et plus le phénomène de
-                diffusion est effectif.
-              </Col>{" "}
-            </Row>
+          <Col xl={6} className="s3_guide_text">
+              <Row>
+                <Col xl={2} className="text-center">
+                  <img src="./s3_guide_i1.png"></img>
+                </Col>
+                <Col xl={10}>
+                  Une onde sonore qui arrive sur un diffuseur entre en contact avec des cellules de différentes
+                  profondeurs, induisant des rebonds dans de multiples directions.
+                </Col>{" "}
+              </Row>
+              <Row>
+                <Col xl={2} className="text-center">
+                  <img src="./s3_guide_i2.png"></img>
+                </Col>
+                <Col xl={10}>
+                  Plus la profondeur de ces cellules est importante, plus le diffuseur sera efficace avec les basses
+                  fréquences.
+                </Col>{" "}
+              </Row>
+              <Row>
+                <Col xl={2} className="text-center">
+                  <img src="./s3_guide_i3.png"></img>
+                </Col>
+                <Col xl={10}>Plus les cellules sont étroites, plus le diffuseur sera efficace dans les aigus.</Col>{" "}
+              </Row>
+              <Row>
+                <Col xl={2} className="text-center">
+                  <img src="./s3_guide_i4.png"></img>
+                </Col>
+                <Col xl={10}>
+                  Plus le nombre de cellules est élevé, plus le nombre de rebonds est important et plus le phénomène de
+                  diffusion est effectif.
+                </Col>{" "}
+              </Row> 
           </Col>
         </Row>
-      </Col> </div>
-      </Anime>
-   
-  </Row>
+      </Col>
+    </Row>
+  </LazyLoad>
 );
 const S6 = () => (
   <Row id="s4">
@@ -534,7 +522,7 @@ const Home = () => {
           <S2_IMG />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={5.8} speed={0}>
+        <ParallaxLayer offset={5.8} speed={0} sticky={{ start: 5.8, end: 6.8 }}>
           <S5 />
         </ParallaxLayer>
 
