@@ -258,7 +258,7 @@ margin: auto;
  .s3_bg {
   width: 100%;
   height: 80vh;
-  background : url("../bg_s3.svg");
+  background : url("../Indus.svg");
   background-position: center;
   background-size: cover;
   background-repeat : no-repeat;
@@ -270,12 +270,16 @@ margin: auto;
 
 }
 
+.s3_guide_row {
+  padding-top: 18%
+}
+
 .s3_guide_text {
   font-size: 0.9vw;
   text-align: justify;
 }
 
-.s3_guide_text .row {
+.s3_guide_text {
   align-items: center;
   padding-top: 1.5vw;
   line-height: 1.5vw;
@@ -359,6 +363,7 @@ max-height: 100vh;
   height: 15vh;
   border-top: #D0C3B4 solid 5px;
   border-bottom: #D0C3B4 solid 5px;
+  letter-spacing : 0.6vw
 }
 
 .logo_marquee {
@@ -388,6 +393,10 @@ max-height: 100vh;
 
 .social i {
   font-size: 2vw;
+}
+
+.bg_light {
+  background-color : #3d3634;
 }
 
 .h-10 {

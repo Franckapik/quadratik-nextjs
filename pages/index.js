@@ -10,10 +10,81 @@ import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import LazyLoad from "react-lazy-load";
 
 import dynamic from "next/dynamic";
+import { useSpring, animated, config } from "@react-spring/web";
 const Anime = dynamic(() => import("react-anime"), { ssr: false });
 
+function useAnimatedPath({ toggle, delay }) {
+  const [length, setLength] = useState(null);
+  const animatedStyle = useSpring({
+    strokeDashoffset: toggle ? 0 : length,
+    strokeDasharray: length,
+    delay,
+    config: config.slow
+  });
+
+  return {
+    style: animatedStyle,
+    ref: (ref) => {
+      if (ref) {
+        setLength(ref.getTotalLength());
+      }
+    }
+  };
+}
+
+function Checkmark({ toggle }) {
+  const animatedProps = useAnimatedPath({ toggle, delay: 1500 });
+
+  return (
+    <>
+    <animated.rect width="27.1" height="27.078" ry="0" x="65.876" y="65.858" stroke={"white"} {...animatedProps} />
+    <animated.rect width="27.1" height="27.078" ry="0" x="65.876" y="65.858" {...animatedProps} />
+                <animated.rect width="27.1" height="27.078" x="107.02" y="65.858" ry="0" stroke={"white"} {...animatedProps} />
+                <animated.rect width="27.1" height="27.078" x="107.024" y="107.064" ry="0" stroke={"white"} {...animatedProps} />
+                <animated.rect width="27.1" height="27.078" x="65.88" y="107.064" ry="0" stroke={"white"} {...animatedProps} />
+                <animated.rect width="27.1" height="27.078" x="-34.124" y="107.28" ry="0" transform="rotate(-45)" stroke={"white"} {...animatedProps} />
+                <animated.rect width="27.1" height="27.078" x="7.021" y="107.28" ry="0" transform="rotate(-45)" stroke={"white"} {...animatedProps} />
+                <animated.rect width="27.1" height="27.078" x="7.024" y="148.485" ry="0" transform="rotate(-45)" stroke={"white"} {...animatedProps} />
+                <animated.rect width="27.1" height="27.078" x="-34.12" y="148.485" ry="0" transform="rotate(-45)" stroke={"white"} {...animatedProps} />{" "}
+</>
+  );
+}
+
 const S0 = () => {
+
+  const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    setToggle(true);
+  }, []);
+
+  
   const [loaded, setLoading] = useState(false);
+
+  const [goRight, apiGoRight] = useSpring(() => ({
+    from: { x: 0 },
+  }))
+  const [goLeft, apiGoLeft] = useSpring(() => ({
+    from: { x: 0 },
+  }))
+
+  useEffect(() => {
+    if(loaded) {
+
+apiGoRight.start({
+  from: { x: 0 },
+  to: { x: 200 },
+})
+
+apiGoLeft.start({
+  from: { x: 0 },
+  to: { x: -200 },
+})
+
+
+    }
+
+  }, [loaded])
 
   return (
     <Row id="s0" className="justify-content-between m-0">
@@ -26,11 +97,13 @@ const S0 = () => {
       ) : null}
       <Col xs={1} className="d-none d-md-block m-0 p-0 ">
         {" "}
-        {loaded ? (
+{/*         {loaded ? (
           <Anime easing="easeOutQuint" duration={2000} direction="alternate" loop={false} translateX="+=200px">
-            <div className="border_creme cadre_home_gauche"></div>
-          </Anime>
-        ) : null}
+             <animated.div style={springs} className="border_creme cadre_home_gauche bg-red"></animated.div>
+           </Anime>
+         ) : null} */}
+                      {loaded ? <animated.div style={goRight} className="border_creme cadre_home_gauche"></animated.div> : null}
+
       </Col>
       <Col xs={10} sm={8} md={5} className="d-flex flex-wrap justify-content-center align-items-center">
         <Row className="logo_cadre">
@@ -63,7 +136,16 @@ const S0 = () => {
           ) : null}
         </Row>
         <Col className="logo_row d-flex flex-column justify-content-center align-items-center text-center">
-          <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="286"
+        height="334"
+        fill="none"
+        viewBox="0 0 286 334"
+      >
+        <Checkmark toggle={toggle} />
+      </svg>
+          {/* <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
             <g transform="" fill="none" stroke="#D0C3B4" stroke-width="1" stroke-linecap="square">
               <Anime
                 easing="easeOutQuad"
@@ -96,17 +178,13 @@ const S0 = () => {
                 <rect width="27.1" height="27.078" x="-34.12" y="148.485" ry="0" transform="rotate(-45)" />{" "}
               </Anime>
             </g>
-          </svg>
+          </svg> */}
           <p className="text-nowrap text-uppercase brand_name m-0">Quadratik</p>
           <p className="text-nowrap m-0 brand_subtitle ">ACOUSTIQUE & ARTISANAT</p>
         </Col>
       </Col>
       <Col xs={1} className="d-none d-md-block p-0">
-        {loaded ? (
-          <Anime easing="easeOutQuint" duration={2000} direction="alternate" loop={false} translateX="-=200px">
-            <div className="border_creme cadre_home_droit"></div>
-          </Anime>
-        ) : null}
+      {loaded ? <animated.div style={goLeft} className="border_creme cadre_home_droit "></animated.div> : null}
       </Col>
     </Row>
   );
@@ -182,7 +260,7 @@ const S1_DIF = () => {
       className="justify-content-end m-0 "
       style={{
         backgroundImage: `url(${bg_s1})`,
-        backgroundPosition: "left",
+        backgroundPosition: "goRight",
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
       }}
@@ -197,7 +275,7 @@ const S1_ABS = () => {
       className="justify-content-end m-0 "
       style={{
         backgroundImage: `url(${bg_s2})`,
-        backgroundPosition: "left",
+        backgroundPosition: "goRight",
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
       }}
@@ -314,52 +392,60 @@ const S5 = () => (
     <Row id="s3" className="m-0 d-flex align-items-center justify-content-center">
       <Col md={10} className="d-flex flex_column s3_bg p-0 m-0 border_creme">
         <Row className="s3_bg_content w-100 justify-content-center align-items-center p-4">
-          <Col xl={5} className="d-flex flex-column h-100">
-              <Row className="m-0 pt-5 button_subtitle text-center"><p>Sur-mesure en ligne</p></Row>
-             <Row className="pb-5">
-                <Button variant="primary" className="button_home">
+          <Col xl={6} className="d-flex flex-column h-100 ">
+             <Row className="pt-5 ">
+                <Button variant="primary" className="button_home w-50 m-auto">
                   Dessiner un diffuseur
                 </Button>
               </Row>
-              <Row className="pt-5"><img src="./dif_diy.svg" alt="Image d'un diffuseur en construction" /></Row>
+              <Row className="pt-5"></Row>
 
             
           
           </Col>
-          <Col xl={6} className="s3_guide_text">
-              <Row>
+          <Col xl={6} className="s3_guide_text d-flex flex-column h-100 p-5 ">
+            <Row className="s3_guide_row">Comment fonctionne un diffuseur ? </Row>
+              <Row className="justify-content-evenly pt-4 w-100">
                 <Col xl={2} className="text-center">
                   <img src="./s3_guide_i1.png"></img>
                 </Col>
-                <Col xl={10}>
+               {/*  <Col xl={10}>
                   Une onde sonore qui arrive sur un diffuseur entre en contact avec des cellules de différentes
                   profondeurs, induisant des rebonds dans de multiples directions.
                 </Col>{" "}
-              </Row>
-              <Row>
+              </Row> 
+              <Row>*/}
                 <Col xl={2} className="text-center">
-                  <img src="./s3_guide_i2.png"></img>
+                  <img className="" src="./s3_guide_i2.png"></img>
                 </Col>
-                <Col xl={10}>
+               {/*  <Col xl={10}>
                   Plus la profondeur de ces cellules est importante, plus le diffuseur sera efficace avec les basses
                   fréquences.
                 </Col>{" "}
-              </Row>
-              <Row>
+              </Row> 
+              <Row>*/}
                 <Col xl={2} className="text-center">
                   <img src="./s3_guide_i3.png"></img>
                 </Col>
-                <Col xl={10}>Plus les cellules sont étroites, plus le diffuseur sera efficace dans les aigus.</Col>{" "}
+               {/*  <Col xl={10}>Plus les cellules sont étroites, plus le diffuseur sera efficace dans les aigus.</Col>{" "}
               </Row>
-              <Row>
+              <Row> */}
                 <Col xl={2} className="text-center">
                   <img src="./s3_guide_i4.png"></img>
                 </Col>
-                <Col xl={10}>
+               {/*  <Col xl={10}>
                   Plus le nombre de cellules est élevé, plus le nombre de rebonds est important et plus le phénomène de
-                  diffusion est effectif.
-                </Col>{" "}
+                  diffusion est effectif.import { useSpring } from '@react-spring/web';
+
+                </Col>{" "} */}
               </Row> 
+              <Row className="pt-5">
+    
+              <Col xl={10} className="m-auto">
+                  Une onde sonore qui arrive sur un diffuseur entre en contact avec des cellules de différentes
+                  profondeurs, induisant des rebonds dans de multiples directions.
+                </Col>
+              </Row>
           </Col>
         </Row>
       </Col>
@@ -368,11 +454,11 @@ const S5 = () => (
 );
 const S6 = () => (
   <Row id="s4">
-    <Marquee pauseOnHover gradient={false} className="marquee_diy mt-5">
+    <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy mt-5">
       <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>{" "}
       <img src="./logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
     </Marquee>
-    <Col md={6}>Merci pour votre confiance</Col>
+    <Col md={6}>Merci pour votre confiance. Quadratik.fr joue cartes sur table avec ces 3 valeurs</Col>
     <Col md={5} className="d-flex border_creme cards align-items-center p-4  ">
       <Col md={4}>
         <img src="./carte_savoir.png" alt="image de la valeur savoir faire" />{" "}
@@ -389,7 +475,7 @@ const S6 = () => (
 );
 const S7 = () => (
   <Row id="s5">
-    <Marquee pauseOnHover gradient={false} className="marquee_diy ">
+    <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy ">
       <span className="p-5">Actualites musicales</span>{" "}
       <img src="./logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />{" "}
       <span className="p-5">Mai verra la sortie de Skippy chez Kaona</span>{" "}
@@ -397,8 +483,8 @@ const S7 = () => (
     </Marquee>
 
     <Row className="contact_row border_creme m-0 p-0">
-      <Col sm={1} className="left_creme d-flex align-items-center justify-content-center"></Col>
-      <Col sm={4} className="left_creme d-flex flex-column align-items-center justify-content-center">
+      <Col sm={1} className="goRight_creme d-flex align-items-center justify-content-center"></Col>
+      <Col sm={4} className="goRight_creme d-flex flex-column align-items-center justify-content-center">
         <p>Besoin d'être orienté dans votre projet ?</p>
         <img
           src="logo_orientation.svg"
@@ -406,7 +492,7 @@ const S7 = () => (
           className="logo_orientation"
         />
       </Col>
-      <Col sm={3} className="left_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
+      <Col sm={3} className="goRight_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
         <Row className="bottom_creme w-100 h-100 ">
           <p className="m-auto text-center text-uppercase">Recevoir des bonnes ondes</p>
         </Row>
@@ -414,11 +500,11 @@ const S7 = () => (
           <p className="m-auto text-center">atelier@quadratik.fr</p>
         </Row>
       </Col>
-      <Col sm={3} className="left_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
-        <Row className="bottom_creme w-100 h-100 ">
+      <Col sm={3} className="goRight_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
+        <Row className="bottom_creme bg_light w-100 h-100 ">
           {" "}
           <p className="m-auto text-center text-uppercase">Contact direct avec l'artisan</p>{" "}
-          <p className="m-auto text-center">06.31.92.74.81</p>{" "}
+          <p className="m-auto text-center">06.31.92.74.81</p>
           <p className="m-auto text-center text-uppercase">Discussions sans engagements</p>
         </Row>
         <Row className="w-100 h-100">
@@ -431,7 +517,7 @@ const S7 = () => (
           <p className="m-auto text-center text-uppercase">Devis en ligne </p>
         </Row>
       </Col>
-      <Col sm={1} className="left_creme d-flex flex-column align-items-center justify-content-evenly p-0 m-0 social">
+      <Col sm={1} className="goRight_creme d-flex flex-column align-items-center justify-content-evenly p-0 m-0 social">
         <i className="fab fa-facebook-square" size="6x"></i>
         <i className="fab fa-twitter-square"></i>
       </Col>
@@ -487,7 +573,7 @@ const Home = () => {
   return (
     <div className="scroller">
       {scroll > vh ? <Burger></Burger> : null}
-      <Parallax pages={8.8} ref={parallax}>
+      <Parallax pages={9.8} ref={parallax}>
         <ParallaxLayer offset={0} speed={0}>
           <S0 />
         </ParallaxLayer>
@@ -526,11 +612,11 @@ const Home = () => {
           <S5 />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={6.8} speed={0}>
+        <ParallaxLayer offset={7.8} speed={0}>
           <S6 />
         </ParallaxLayer>
 
-        <ParallaxLayer offset={7.8} speed={0}>
+        <ParallaxLayer offset={8.8} speed={0}>
           <S7 />
         </ParallaxLayer>
       </Parallax>
