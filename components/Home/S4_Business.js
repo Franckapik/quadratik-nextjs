@@ -21,7 +21,7 @@ const from = (_i) => ({ x: 0, rot: 0, scale: 1.5, y: -1000 });
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (r, s) => `perspective(1500px) rotateX(30deg) rotateY(${r / 10}deg) rotateZ(${r}deg) scale(${s})`;
 
-const Deck = ({setCardGone}) =>  {
+const Deck = () =>  {
   // The set flags all the cards that are flicked out
   const [gone] = useState(() => new Set()); 
   
@@ -44,7 +44,6 @@ const Deck = ({setCardGone}) =>  {
     if (!down && trigger) {
       
       gone.add(index)
-      setCardGone(gone)
 
     }; 
     api.start((i) => {
@@ -88,10 +87,7 @@ const Deck = ({setCardGone}) =>  {
   );
 }
 
-  const [CardGone, setCardGone] = useState(() => new Set());
-  console.log(CardGone);
-
-  return (
+return (
     <Row id="s4_business">
       <Row>
         <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy mt-5">
@@ -106,12 +102,12 @@ const Deck = ({setCardGone}) =>  {
             <Col md={6}>
               <div className={"cards_container"}>
                 <img src="./card_table.svg" alt="Table des valeurs de l'entreprise Quadratik.fr" className="card_table" />
-                <Deck setCardGone={setCardGone} />
+                <Deck  />
               </div>
             </Col>
             <Col md={5} className="values_text text-left ps-5">
               <Row className="values_header text-uppercase text-creme">
-                <p className="ps-1 mt-0 m-1 values_subtitles1">Depuis 5 ans {CardGone.has(1) ? "oui" : "non"}</p>
+                <p className="ps-1 mt-0 m-1 values_subtitles1">Depuis 5 ans</p>
                 <p className="p-0 m-1 values_subtitles2">Quadratik</p>
                 <p className="ps-1 m-1 values_subtitles3">joue cartes sur table !</p>
               </Row>

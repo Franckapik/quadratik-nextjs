@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Burger } from "./Burger";
-import { S5_Contact } from "./S5_Contact";
-import { S4_Business } from "./S4_Business";
-import { S3_DIY } from "./S3_DIY";
-import { S2_RealPreview } from "./S2_RealPreview";
-import { S2_ProStudio } from "./S2_ProStudio";
-import { S2_HomeStudio } from "./S2_HomeStudio";
-import { S2_Customers } from "./S2_Customers";
-import { S1_Abs } from "./S1_Abs";
-import { S1_Dif } from "./S1_Dif";
-import { S1_Square } from "./S1_Square";
-import { S1_Product } from "./S1_Product";
-import { S0_Landing } from "./S0_Landing";
+import { S5_Contact } from "../components/Home/S5_Contact";
+import { S4_Business } from "../components/Home/S4_Business";
+import { S3_DIY } from "../components/Home/S3_DIY";
+import { S2_RealPreview } from "../components/Home/S2_RealPreview";
+import { S2_ProStudio } from "../components/Home/S2_ProStudio";
+import { S2_HomeStudio } from "../components/Home/S2_HomeStudio";
+import { S2_Customers } from "../components/Home/S2_Customers";
+import { S1_Abs } from "../components/Home/S1_Abs";
+import { S1_Dif } from "../components/Home/S1_Dif";
+import { S1_Square } from "../components/Home/S1_Square";
+import { S1_Product } from "../components/Home/S1_Product";
+import { S0_Landing } from "../components/Home/S0_Landing";
 
 
 const Home = () => {
