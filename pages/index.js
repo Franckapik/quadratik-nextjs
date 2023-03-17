@@ -3,23 +3,107 @@ import { useEffect, useRef, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import ListGroup from "react-bootstrap/ListGroup";
 import Marquee from "react-fast-marquee";
-import useScrollSnap from "react-use-scroll-snap";
 
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 import LazyLoad from "react-lazy-load";
+import { useSpring, useSprings, animated, config, easings, to as interpolate } from "@react-spring/web";
 
-import dynamic from "next/dynamic";
-import { useSpring, animated, config } from "@react-spring/web";
-const Anime = dynamic(() => import("react-anime"), { ssr: false });
+import { useDrag } from "react-use-gesture";
 
-function useAnimatedPath({ toggle, delay }) {
+const cards = ["./carte_savoirfaire.jpg", "./carte_ecoresponsable.jpg", "./carte_ecoute.jpg"];
+
+// Initials values of cards props.  These two are just helpers, they conserve spring data, values that are later being interpolated into css
+const to = (i) => ({
+  x: 0,
+  y: i * -4,
+  scale: 1,
+  rot: -10 + Math.random() * 20,
+  delay: i * 100,
+});
+const from = (_i) => ({ x: 0, rot: 0, scale: 1.5, y: -1000 });
+// This is being used down there in the view, it interpolates rotation and scale into a css transform
+const trans = (r, s) => `perspective(1500px) rotateX(30deg) rotateY(${r / 10}deg) rotateZ(${r}deg) scale(${s})`;
+
+const Deck = ({setCardGone}) =>  {
+  // The set flags all the cards that are flicked out
+  const [gone] = useState(() => new Set()); 
+  
+  // Create a bunch of springs using the helpers above
+  const [props, api] = useSprings(cards.length, (i) => ({
+    ...to(i),
+    from: from(i),
+  })); 
+
+  
+
+  // Create a gesture, we're interested in down-state, delta (current-pos - click-pos), direction and velocity
+  const bind = useDrag(({ args: [index], down, movement: [mx], direction: [xDir], velocity }) => {
+// If you flick hard enough it should trigger the card to fly out
+    const trigger = velocity > 0.2; 
+// Direction should either point left or right
+    const dir = xDir < 0 ? -1 : 1; 
+
+// If button/finger's up and trigger velocity is reached, we flag the card ready to fly out
+    if (!down && trigger) {
+      
+      gone.add(index)
+      setCardGone(gone)
+
+    }; 
+    api.start((i) => {
+      if (index !== i) return; // We're only interested in changing spring-data for the current spring
+      const isGone = gone.has(index);
+      const x = isGone ? (200 + window.innerWidth) * dir : down ? mx : 0; // When a card is gone it flys out left or right, otherwise goes back to zero
+      const rot = mx / 100 + (isGone ? dir * 10 * velocity : 0); // How much the card tilts, flicking it harder makes it rotate faster
+      const scale = down ? 1.1 : 1; // Active cards lift up a bit
+      return {
+        x,
+        rot,
+        scale,
+        delay: undefined,
+        config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 },
+      };
+    });
+    //refill deck when no more cards
+    if (!down && gone.size === cards.length)
+      setTimeout(() => {
+        gone.clear();
+        api.start((i) => to(i));
+
+      }, 600);
+  });
+  // Now we're just mapping the animated values to our view, that's it. Btw, this component only renders once. :-)
+  return (
+    <>
+      {props.map(({ x, y, rot, scale }, i) => (
+        <animated.div className={"deck"} key={i} style={{ x, y }}>
+          {/* This is the card itself, we're binding our gesture to it (and inject its index so we know which is which) */}
+          <animated.div
+            {...bind(i)}
+            style={{
+              transform: interpolate([rot, scale], trans),
+              backgroundImage: `url(${cards[i]})`,
+            }}
+          />
+        </animated.div>
+      ))}
+    </>
+  );
+}
+
+const useAnimatedPath = ({ toggle, delay, onRest, duration }) => {
   const [length, setLength] = useState(null);
   const animatedStyle = useSpring({
     strokeDashoffset: toggle ? 0 : length,
     strokeDasharray: length,
     delay,
-    config: config.slow
+    onRest: onRest,
+    config: {
+      easing: easings.easeInOutCubic,
+      duration: duration,
+      ...config.slow,
+    },
   });
 
   return {
@@ -28,63 +112,102 @@ function useAnimatedPath({ toggle, delay }) {
       if (ref) {
         setLength(ref.getTotalLength());
       }
-    }
+    },
   };
-}
+};
 
-function Checkmark({ toggle }) {
-  const animatedProps = useAnimatedPath({ toggle, delay: 1500 });
+const AnimatedLogo = ({ toggle }) => {
+  const animatedProps = useAnimatedPath({ toggle, delay: 0, duration: 1000 });
 
   return (
     <>
-    <animated.rect width="27.1" height="27.078" ry="0" x="65.876" y="65.858" stroke={"white"} {...animatedProps} />
-    <animated.rect width="27.1" height="27.078" ry="0" x="65.876" y="65.858" {...animatedProps} />
-                <animated.rect width="27.1" height="27.078" x="107.02" y="65.858" ry="0" stroke={"white"} {...animatedProps} />
-                <animated.rect width="27.1" height="27.078" x="107.024" y="107.064" ry="0" stroke={"white"} {...animatedProps} />
-                <animated.rect width="27.1" height="27.078" x="65.88" y="107.064" ry="0" stroke={"white"} {...animatedProps} />
-                <animated.rect width="27.1" height="27.078" x="-34.124" y="107.28" ry="0" transform="rotate(-45)" stroke={"white"} {...animatedProps} />
-                <animated.rect width="27.1" height="27.078" x="7.021" y="107.28" ry="0" transform="rotate(-45)" stroke={"white"} {...animatedProps} />
-                <animated.rect width="27.1" height="27.078" x="7.024" y="148.485" ry="0" transform="rotate(-45)" stroke={"white"} {...animatedProps} />
-                <animated.rect width="27.1" height="27.078" x="-34.12" y="148.485" ry="0" transform="rotate(-45)" stroke={"white"} {...animatedProps} />{" "}
-</>
+      <animated.rect width="27.1" height="27.078" ry="0" x="65.876" y="65.858" {...animatedProps} />
+      <animated.rect width="27.1" height="27.078" ry="0" x="65.876" y="65.858" {...animatedProps} />
+      <animated.rect width="27.1" height="27.078" x="107.02" y="65.858" ry="0" {...animatedProps} />
+      <animated.rect width="27.1" height="27.078" x="107.024" y="107.064" ry="0" {...animatedProps} />
+      <animated.rect width="27.1" height="27.078" x="65.88" y="107.064" ry="0" {...animatedProps} />
+    </>
   );
-}
+};
+const AnimatedLogo2 = ({ toggle, setLoading }) => {
+  const animatedProps = useAnimatedPath({ toggle, delay: 800, onRest: () => setLoading(true), duration: 1000 });
+
+  return (
+    <>
+      <animated.rect
+        width="27.1"
+        height="27.078"
+        x="-34.124"
+        y="107.28"
+        ry="0"
+        transform="rotate(-45)"
+        {...animatedProps}
+      />
+      <animated.rect
+        width="27.1"
+        height="27.078"
+        x="7.021"
+        y="107.28"
+        ry="0"
+        transform="rotate(-45)"
+        {...animatedProps}
+      />
+      <animated.rect
+        width="27.1"
+        height="27.078"
+        x="7.024"
+        y="148.485"
+        ry="0"
+        transform="rotate(-45)"
+        {...animatedProps}
+      />
+      <animated.rect
+        width="27.1"
+        height="27.078"
+        x="-34.12"
+        y="148.485"
+        ry="0"
+        transform="rotate(-45)"
+        {...animatedProps}
+      />{" "}
+    </>
+  );
+};
+const AnimatedSquare = ({ toggle }) => {
+  const animatedProps = useAnimatedPath({ toggle, delay: 0, duration: 3000 });
+
+  return <animated.rect x="0" y="0" fill="none" width="100%" height="100%" {...animatedProps} />;
+};
 
 const S0 = () => {
-
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     setToggle(true);
   }, []);
 
-  
   const [loaded, setLoading] = useState(false);
 
   const [goRight, apiGoRight] = useSpring(() => ({
     from: { x: 0 },
-  }))
+  }));
   const [goLeft, apiGoLeft] = useSpring(() => ({
     from: { x: 0 },
-  }))
+  }));
 
   useEffect(() => {
-    if(loaded) {
+    if (loaded) {
+      apiGoRight.start({
+        from: { x: 0 },
+        to: { x: 200 },
+      });
 
-apiGoRight.start({
-  from: { x: 0 },
-  to: { x: 200 },
-})
-
-apiGoLeft.start({
-  from: { x: 0 },
-  to: { x: -200 },
-})
-
-
+      apiGoLeft.start({
+        from: { x: 0 },
+        to: { x: -200 },
+      });
     }
-
-  }, [loaded])
+  }, [loaded]);
 
   return (
     <Row id="s0" className="justify-content-between m-0">
@@ -97,94 +220,27 @@ apiGoLeft.start({
       ) : null}
       <Col xs={1} className="d-none d-md-block m-0 p-0 ">
         {" "}
-{/*         {loaded ? (
-          <Anime easing="easeOutQuint" duration={2000} direction="alternate" loop={false} translateX="+=200px">
-             <animated.div style={springs} className="border_creme cadre_home_gauche bg-red"></animated.div>
-           </Anime>
-         ) : null} */}
-                      {loaded ? <animated.div style={goRight} className="border_creme cadre_home_gauche"></animated.div> : null}
-
+        {loaded ? <animated.div style={goRight} className="border_creme cadre_home_gauche"></animated.div> : null}
       </Col>
       <Col xs={10} sm={8} md={5} className="d-flex flex-wrap justify-content-center align-items-center">
-        <Row className="logo_cadre">
-          {loaded ? (
-            <svg xmlns="http://www.w3.org/2000/svg" stroke="#D0C3B4" stroke-width="2">
-              <Anime
-                easing="easeOutQuad"
-                loop={false}
-                svg
-                opacity={[0, 1]}
-                duration={2000}
-                component="g"
-                complete={() => console.log("complete")}
-                direction="alternate"
-                strokeDashoffset={(el) => {
-                  var pathLength = "0";
-                  for (var key in el.children) {
-                    let child = el.children[key];
-                    if (child.getTotalLength) {
-                      pathLength = child.getTotalLength().toString();
-                      el.setAttribute("stroke-dasharray", pathLength);
-                    }
-                  }
-                  return [pathLength, 0];
-                }}
-              >
-                <rect x="0" y="0" fill="none" width="100%" height="100%" />{" "}
-              </Anime>
-            </svg>
-          ) : null}
+        <Row className="logo_cadre ">
+          <svg xmlns="http://www.w3.org/2000/svg" stroke="#D0C3B4" stroke-width="2">
+            <AnimatedSquare toggle={loaded} />
+          </svg>
         </Row>
         <Col className="logo_row d-flex flex-column justify-content-center align-items-center text-center">
-        <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="286"
-        height="334"
-        fill="none"
-        viewBox="0 0 286 334"
-      >
-        <Checkmark toggle={toggle} />
-      </svg>
-          {/* <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+          <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
             <g transform="" fill="none" stroke="#D0C3B4" stroke-width="1" stroke-linecap="square">
-              <Anime
-                easing="easeOutQuad"
-                loop={false}
-                svg
-                component="g"
-                complete={() => setLoading(true)}
-                delay={(el, index) => index * 80}
-                direction="alternate"
-                strokeDashoffset={(el) => {
-                  var pathLength = "0";
-                  for (var key in el.children) {
-                    let child = el.children[key];
-                    if (child.getTotalLength) {
-                      pathLength = child.getTotalLength().toString();
-                      el.setAttribute("stroke-dasharray", pathLength);
-                    }
-                  }
-                  return [pathLength, 0];
-                }}
-              >
-                {" "}
-                <rect width="27.1" height="27.078" ry="0" x="65.876" y="65.858" />
-                <rect width="27.1" height="27.078" x="107.02" y="65.858" ry="0" />
-                <rect width="27.1" height="27.078" x="107.024" y="107.064" ry="0" />
-                <rect width="27.1" height="27.078" x="65.88" y="107.064" ry="0" />
-                <rect width="27.1" height="27.078" x="-34.124" y="107.28" ry="0" transform="rotate(-45)" />
-                <rect width="27.1" height="27.078" x="7.021" y="107.28" ry="0" transform="rotate(-45)" />
-                <rect width="27.1" height="27.078" x="7.024" y="148.485" ry="0" transform="rotate(-45)" />
-                <rect width="27.1" height="27.078" x="-34.12" y="148.485" ry="0" transform="rotate(-45)" />{" "}
-              </Anime>
+              <AnimatedLogo toggle={toggle} />
+              <AnimatedLogo2 toggle={toggle} setLoading={setLoading} />
             </g>
-          </svg> */}
+          </svg>
           <p className="text-nowrap text-uppercase brand_name m-0">Quadratik</p>
           <p className="text-nowrap m-0 brand_subtitle ">ACOUSTIQUE & ARTISANAT</p>
         </Col>
       </Col>
       <Col xs={1} className="d-none d-md-block p-0">
-      {loaded ? <animated.div style={goLeft} className="border_creme cadre_home_droit "></animated.div> : null}
+        {loaded ? <animated.div style={goLeft} className="border_creme cadre_home_droit "></animated.div> : null}
       </Col>
     </Row>
   );
@@ -387,29 +443,51 @@ const S2_IMG = () => (
     </Col>
   </Row>
 );
-const S5 = () => (
-  <LazyLoad threshold={0.2}>
-    <Row id="s3" className="m-0 d-flex align-items-center justify-content-center">
-      <Col md={10} className="d-flex flex_column s3_bg p-0 m-0 border_creme">
-        <Row className="s3_bg_content w-100 justify-content-center align-items-center p-4">
-          <Col xl={6} className="d-flex flex-column h-100 ">
-             <Row className="pt-5 ">
+const S5 = () => {
+  {
+    /*const [flipped, set] = useState(false)
+  const { transform, opacity } = useSpring({
+    opacity: flipped ? 1 : 0,
+    transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
+    config: { mass: 5, tension: 500, friction: 80 },
+  })
+
+    <div className={container} onClick={() => set(state => !state)}>
+      <a.div
+        className={"bg-red"}
+        style={{ opacity: opacity.to(o => 1 - o), transform }}
+      />
+       <a.div
+        className={`${c} ${front}`}
+        style={{
+          opacity,
+          transform,
+          rotateX: '180deg',
+        }} 
+      />
+      </div>*/
+  }
+
+  return (
+    <LazyLoad threshold={0.2}>
+      <Row id="s3" className="m-0 d-flex align-items-center justify-content-center">
+        <Col md={10} className="d-flex flex_column s3_bg p-0 m-0 border_creme">
+          <Row className="s3_bg_content w-100 justify-content-center align-items-center p-4">
+            <Col xl={6} className="d-flex flex-column h-100 ">
+              <Row className="pt-5 ">
                 <Button variant="primary" className="button_home w-50 m-auto">
                   Dessiner un diffuseur
                 </Button>
               </Row>
               <Row className="pt-5"></Row>
-
-            
-          
-          </Col>
-          <Col xl={6} className="s3_guide_text d-flex flex-column h-100 p-5 ">
-            <Row className="s3_guide_row">Comment fonctionne un diffuseur ? </Row>
+            </Col>
+            <Col xl={6} className="s3_guide_text d-flex flex-column h-100 p-5 ">
+              <Row className="s3_guide_row">Comment fonctionne un diffuseur ? </Row>
               <Row className="justify-content-evenly pt-4 w-100">
                 <Col xl={2} className="text-center">
                   <img src="./s3_guide_i1.png"></img>
                 </Col>
-               {/*  <Col xl={10}>
+                {/*  <Col xl={10}>
                   Une onde sonore qui arrive sur un diffuseur entre en contact avec des cellules de différentes
                   profondeurs, induisant des rebonds dans de multiples directions.
                 </Col>{" "}
@@ -418,7 +496,7 @@ const S5 = () => (
                 <Col xl={2} className="text-center">
                   <img className="" src="./s3_guide_i2.png"></img>
                 </Col>
-               {/*  <Col xl={10}>
+                {/*  <Col xl={10}>
                   Plus la profondeur de ces cellules est importante, plus le diffuseur sera efficace avec les basses
                   fréquences.
                 </Col>{" "}
@@ -427,52 +505,96 @@ const S5 = () => (
                 <Col xl={2} className="text-center">
                   <img src="./s3_guide_i3.png"></img>
                 </Col>
-               {/*  <Col xl={10}>Plus les cellules sont étroites, plus le diffuseur sera efficace dans les aigus.</Col>{" "}
+                {/*  <Col xl={10}>Plus les cellules sont étroites, plus le diffuseur sera efficace dans les aigus.</Col>{" "}
               </Row>
               <Row> */}
                 <Col xl={2} className="text-center">
                   <img src="./s3_guide_i4.png"></img>
                 </Col>
-               {/*  <Col xl={10}>
+                {/*  <Col xl={10}>
                   Plus le nombre de cellules est élevé, plus le nombre de rebonds est important et plus le phénomène de
                   diffusion est effectif.import { useSpring } from '@react-spring/web';
 
                 </Col>{" "} */}
-              </Row> 
+              </Row>
               <Row className="pt-5">
-    
-              <Col xl={10} className="m-auto">
+                <Col xl={10} className="m-auto">
                   Une onde sonore qui arrive sur un diffuseur entre en contact avec des cellules de différentes
                   profondeurs, induisant des rebonds dans de multiples directions.
                 </Col>
               </Row>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </LazyLoad>
+  );
+};
+
+const S6 = () => {
+
+  const [CardGone, setCardGone] = useState(() => new Set());
+  console.log(CardGone) 
+
+  return(
+  <Row id="s4">
+    <Row>
+      <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy mt-5">
+        <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>{" "}
+        <img src="./logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
+      </Marquee>
+    </Row>
+    <Row className="row_business_values">
+      <Col md={8} className="d-flex flex-column justify-content-center">
+        <Row>
+          <Col md={1}></Col>
+          <Col md={6}>
+            <div className={"cards_container"}>
+              <img src="./card_table.svg" alt="Table des valeurs de l'entreprise Quadratik.fr" className="card_table" />
+              <Deck setCardGone={setCardGone} />
+            </div>
+          </Col>
+          <Col md={5} className="values_text text-left ps-5">
+            <Row className="values_header text-uppercase text-creme">
+              <p className="ps-1 mt-0 m-1 values_subtitles1">Depuis 5 ans {CardGone.has(1) ? "oui" : "non"}</p>
+              <p className="p-0 m-1 values_subtitles2">Quadratik</p>
+              <p className="ps-1 m-1 values_subtitles3">joue cartes sur table !</p>
+            </Row>
+            <div className="pt-4">
+              <Row className="align-items-center p-4 ps-0">
+                <img src="./icones/interlocuteur.svg" className="me-4" /> Un seul interlocuteur
+              </Row>
+              <Row className="align-items-center p-4 ps-0">
+                <img src="./icones/enceinte.svg" className="me-4" /> La passion du son
+              </Row>
+              <Row className="align-items-center p-4 ps-0">
+                <img src="./icones/singularite.svg" className="me-4" /> Chaque projet est unique
+              </Row>
+            </div>
           </Col>
         </Row>
       </Col>
+
+      <Col md={4} className="d-flex flex-column justify-content-center">
+        <Row>
+        <Col md={2}></Col>
+        <Col md={9} className="values_presentation">
+        <hr  />
+        <p className = "m-5">
+          Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.
+          Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme
+          assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait
+          que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en
+          soit modifié. Il a été popularisé dans les .
+         </p> <hr  />
+        </Col>
+        </Row>
+      </Col>
     </Row>
-  </LazyLoad>
-);
-const S6 = () => (
-  <Row id="s4">
-    <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy mt-5">
-      <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>{" "}
-      <img src="./logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
-    </Marquee>
-    <Col md={6}>Merci pour votre confiance. Quadratik.fr joue cartes sur table avec ces 3 valeurs</Col>
-    <Col md={5} className="d-flex border_creme cards align-items-center p-4  ">
-      <Col md={4}>
-        <img src="./carte_savoir.png" alt="image de la valeur savoir faire" />{" "}
-      </Col>
-      <Col md={4}>
-        <img src="./carte_ecoute.png" alt="image de la valeur savoir faire" />{" "}
-      </Col>
-      <Col md={4}>
-        <img src="./carte_eco.png" alt="image de la valeur savoir faire" />{" "}
-      </Col>
-    </Col>
-    <Col md={1}></Col>
   </Row>
-);
+  )
+};
+
 const S7 = () => (
   <Row id="s5">
     <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy ">
@@ -483,8 +605,8 @@ const S7 = () => (
     </Marquee>
 
     <Row className="contact_row border_creme m-0 p-0">
-      <Col sm={1} className="goRight_creme d-flex align-items-center justify-content-center"></Col>
-      <Col sm={4} className="goRight_creme d-flex flex-column align-items-center justify-content-center">
+      <Col sm={1} className="right_creme d-flex align-items-center justify-content-center"></Col>
+      <Col sm={4} className="right_creme d-flex flex-column align-items-center justify-content-center">
         <p>Besoin d'être orienté dans votre projet ?</p>
         <img
           src="logo_orientation.svg"
@@ -492,7 +614,7 @@ const S7 = () => (
           className="logo_orientation"
         />
       </Col>
-      <Col sm={3} className="goRight_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
+      <Col sm={3} className="right_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
         <Row className="bottom_creme w-100 h-100 ">
           <p className="m-auto text-center text-uppercase">Recevoir des bonnes ondes</p>
         </Row>
@@ -500,7 +622,7 @@ const S7 = () => (
           <p className="m-auto text-center">atelier@quadratik.fr</p>
         </Row>
       </Col>
-      <Col sm={3} className="goRight_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
+      <Col sm={3} className="right_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
         <Row className="bottom_creme bg_light w-100 h-100 ">
           {" "}
           <p className="m-auto text-center text-uppercase">Contact direct avec l'artisan</p>{" "}
@@ -517,7 +639,7 @@ const S7 = () => (
           <p className="m-auto text-center text-uppercase">Devis en ligne </p>
         </Row>
       </Col>
-      <Col sm={1} className="goRight_creme d-flex flex-column align-items-center justify-content-evenly p-0 m-0 social">
+      <Col sm={1} className="right_creme d-flex flex-column align-items-center justify-content-evenly p-0 m-0 social">
         <i className="fab fa-facebook-square" size="6x"></i>
         <i className="fab fa-twitter-square"></i>
       </Col>

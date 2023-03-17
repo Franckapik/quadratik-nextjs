@@ -141,6 +141,68 @@ position: absolute;
 	left: 0;
 }
 
+.text-creme {
+  color : #D0C3B4;
+}
+
+.values_header {
+  letter-spacing : 0.3vw;
+}
+
+.values_text img {
+  width : 18%!important;
+}
+
+.values_subtitles1 {
+  font-size: 1vw;
+}
+.values_subtitles2 {
+  font-size: 2.8vw;
+}
+.values_subtitles3 {
+  font-size: 1vw;
+}
+
+.card_table {
+  width: 100%;
+/*   rotate: -1.5deg;
+ */
+}
+
+.cards_container {
+  background: none;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+.deck {
+  position: absolute;
+  width: 332px;
+  height: 200px;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+.deck > div {
+  background-color: white;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 45vh;
+  max-width: 150px;
+  height: 85vh;
+  max-height: 285px;
+  will-change: transform;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px -10px #332D2A;
+}
+
+
 #s2_img img {
 width : 100%;
 padding-bottom : 5%;
@@ -371,12 +433,28 @@ max-height: 100vh;
   width: 3vw;
 }
 
+.row_business_values {
+  height:80%;
+  rotate : -1.5deg;
+}
+
 .contact_row {
   height: 50vh;
 }
 
+.values_presentation {
+  text-align : right;
+}
+
+.values_presentation hr {
+  width : 80%;
+margin : auto}
+
 .left_creme {
   border-left: solid thin #D0C3B4;
+}
+.right_creme {
+  border-right: solid thin #D0C3B4;
 }
 .bottom_creme {
   border-bottom: solid thin #D0C3B4;
