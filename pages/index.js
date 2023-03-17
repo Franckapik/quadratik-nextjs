@@ -179,7 +179,7 @@ const AnimatedSquare = ({ toggle }) => {
   return <animated.rect x="0" y="0" fill="none" width="100%" height="100%" {...animatedProps} />;
 };
 
-const S0 = () => {
+const S0_Landing = () => {
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
@@ -210,7 +210,7 @@ const S0 = () => {
   }, [loaded]);
 
   return (
-    <Row id="s0" className="justify-content-between m-0">
+    <Row id="s0_landing" className="justify-content-between m-0">
       {loaded ? (
         <Row className="header d-none d-md-flex justify-content-end text-uppercase m-0 p-0">
           <Col md={1}>Boutique</Col>
@@ -246,12 +246,12 @@ const S0 = () => {
   );
 };
 
-const S1 = ({ vh, scroll }) => {
+const S1_Product = ({ vh, scroll }) => {
   return (
-    <Row id="s1" className="justify-content-end m-0 ">
+    <Row id="s1_product_product" className="justify-content-end m-0 ">
       <Col md={5}></Col>
       <Col md={5} className="d-flex flex-column p-4 m-auto ">
-        <Row className="text-center s1_text_presentation">
+        <Row className="text-center s1_product_text_presentation">
           <h2>Solutions acoustiques</h2>
           <p>
             Le diffuseur Woodik améliore l’acoustique par sa structure irrégulière calculée sur une gamme de fréquences
@@ -272,7 +272,7 @@ const S1 = ({ vh, scroll }) => {
             </p>
           </Col>
         </Row>
-        <Row className="s1_list align-items-center text-center">
+        <Row className="s1_product_list align-items-center text-center">
           <ListGroup>
             <ListGroup.Item>rééquilibre les ondes sonores</ListGroup.Item>
             <ListGroup.Item>supprime les effets indésirables</ListGroup.Item>
@@ -295,10 +295,10 @@ const S1 = ({ vh, scroll }) => {
   );
 };
 
-const S1_SQUARE = () => {
+const S1_Square = () => {
   return (
     <Row id="s1_square" className="justify-content-start align-items-center m-0 ">
-      <Col md={5} className="border_creme square text-end pt-3">
+      <Col md={5} className="border_creme s1_square text-end pt-3">
         {" "}
         Le diffuseur Woodik-7
       </Col>
@@ -307,12 +307,12 @@ const S1_SQUARE = () => {
   );
 };
 
-const S1_DIF = () => {
+const S1_Dif = () => {
   const bg_s1 = "./diffuseur4.png";
 
   return (
     <Row
-      id="s1_dif"
+      id="s1_product_dif"
       className="justify-content-end m-0 "
       style={{
         backgroundImage: `url(${bg_s1})`,
@@ -323,11 +323,11 @@ const S1_DIF = () => {
     ></Row>
   );
 };
-const S1_ABS = () => {
+const S1_Abs = () => {
   const bg_s2 = "./absorbeur.png";
   return (
     <Row
-      id="s1_abs"
+      id="s1_product_abs"
       className="justify-content-end m-0 "
       style={{
         backgroundImage: `url(${bg_s2})`,
@@ -339,8 +339,8 @@ const S1_ABS = () => {
   );
 };
 
-const S2_PRO = () => (
-  <Row id="s2_pro" className="p-0 m-0">
+const S2_Customers = () => (
+  <Row id="s2_customers" className="p-0 m-0">
     <Col md={2} className="text-end p-0 dark_bg">
       <Row className="p-0 m-0">
         <Col md={8} className="p-0 m-0">
@@ -366,7 +366,6 @@ const S2_PRO = () => (
           <h2>Professionnalisme</h2>
           <span className="sub2">quelles que soient les dimensions de votre espace</span>
         </div>
-        {/*       <span className="s2_pro_text">Quelles que soient les dimensions de votre espace</span> */}
       </Row>
       <Row className="justify-content-start">
         <Col md={2} className="dark_bg">
@@ -376,35 +375,11 @@ const S2_PRO = () => (
         <Col md={2} className="dark_bg"></Col>
       </Row>
     </Col>
-
-    {/* <svg width="843" height="671" viewBox="0 0 843 671" fill="none" xmlns="http://www.w3.org/2000/svg" className="s2_pro_shape m-4">
-    <Anime
-                easing="easeOutQuad"
-                loop={false}
-                svg
-                component="g"
-                delay={(el, index) => index * 80}
-                direction="alternate"
-                strokeDashoffset={(el) => {
-                  var pathLength = "0";
-                  for (var key in el.children) {
-                    let child = el.children[key];
-                    if (child.getTotalLength) {
-                      pathLength = child.getTotalLength().toString();
-                      el.setAttribute("stroke-dasharray", pathLength);
-                    }
-                  }
-                  return [pathLength, 0];
-                }}
-              >
-<path d="M841 304.95L47.731 1L1 506.424L291.428 670L841 304.95Z" stroke="#D0C3B4"/>
-</Anime>
-</svg> */}
   </Row>
 );
 
-const S2_HSTUDIO = () => (
-  <Row id="s2_hstudio" className="justify-content-start">
+const S2_HomeStudio = () => (
+  <Row id="s2_homeStudio" className="justify-content-start">
     <Col md={2}></Col>
     <Col md={10} className="d-flex flex-column">
       <Row className="justify-content-center align-items-center h-100">
@@ -415,8 +390,8 @@ const S2_HSTUDIO = () => (
     </Col>
   </Row>
 );
-const S2_STUDIO = () => (
-  <Row id="s2_studio">
+const S2_ProStudio = () => (
+  <Row id="s2_proStudio">
     <Col md={2}></Col>
     <Col md={10} className="d-flex flex-column">
       <Row className="justify-content-center align-items-center h-100">
@@ -427,8 +402,8 @@ const S2_STUDIO = () => (
     </Col>{" "}
   </Row>
 );
-const S2_IMG = () => (
-  <Row id="s2_img">
+const S2_RealPreview = () => (
+  <Row id="s2_realPreview">
     <Col md={2}></Col>
     <Col md={10} className="d-flex flex-column ">
       <Row className="justify-content-center align-items-center h-100">
@@ -443,7 +418,7 @@ const S2_IMG = () => (
     </Col>
   </Row>
 );
-const S5 = () => {
+const S3_DIY = () => {
   {
     /*const [flipped, set] = useState(false)
   const { transform, opacity } = useSpring({
@@ -470,9 +445,9 @@ const S5 = () => {
 
   return (
     <LazyLoad threshold={0.2}>
-      <Row id="s3" className="m-0 d-flex align-items-center justify-content-center">
-        <Col md={10} className="d-flex flex_column s3_bg p-0 m-0 border_creme">
-          <Row className="s3_bg_content w-100 justify-content-center align-items-center p-4">
+      <Row id="s3_diy" className="m-0 d-flex align-items-center justify-content-center">
+        <Col md={10} className="d-flex flex_column s3_diy_bg p-0 m-0 border_creme">
+          <Row className="s3_diy_bg_content w-100 justify-content-center align-items-center p-4">
             <Col xl={6} className="d-flex flex-column h-100 ">
               <Row className="pt-5 ">
                 <Button variant="primary" className="button_home w-50 m-auto">
@@ -481,8 +456,8 @@ const S5 = () => {
               </Row>
               <Row className="pt-5"></Row>
             </Col>
-            <Col xl={6} className="s3_guide_text d-flex flex-column h-100 p-5 ">
-              <Row className="s3_guide_row">Comment fonctionne un diffuseur ? </Row>
+            <Col xl={6} className="s3_diy_guide_text d-flex flex-column h-100 p-5 ">
+              <Row className="s3_diy_guide_row">Comment fonctionne un diffuseur ? </Row>
               <Row className="justify-content-evenly pt-4 w-100">
                 <Col xl={2} className="text-center">
                   <img src="./s3_guide_i1.png"></img>
@@ -531,13 +506,13 @@ const S5 = () => {
   );
 };
 
-const S6 = () => {
+const S4_Business = () => {
 
   const [CardGone, setCardGone] = useState(() => new Set());
   console.log(CardGone) 
 
   return(
-  <Row id="s4">
+  <Row id="s4_business">
     <Row>
       <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy mt-5">
         <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>{" "}
@@ -595,8 +570,8 @@ const S6 = () => {
   )
 };
 
-const S7 = () => (
-  <Row id="s5">
+const S5_Contact = () => (
+  <Row id="s5_contact">
     <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy ">
       <span className="p-5">Actualites musicales</span>{" "}
       <img src="./logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />{" "}
@@ -697,49 +672,43 @@ const Home = () => {
       {scroll > vh ? <Burger></Burger> : null}
       <Parallax pages={9.8} ref={parallax}>
         <ParallaxLayer offset={0} speed={0}>
-          <S0 />
+          <S0_Landing />
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0} sticky={{ start: 1, end: 2 }}>
-          <S1 vh={vh} scroll={scroll} />
+          <S1_Product vh={vh} scroll={scroll} />
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0.2}>
-          <S1_SQUARE />
+          <S1_Square />
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0.5}>
-          <S1_DIF />
+          <S1_Dif />
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={0.2}>
-          <S1_SQUARE />
+          <S1_Square />
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={0.5}>
-          <S1_ABS />
+          <S1_Abs />
         </ParallaxLayer>
-
         <ParallaxLayer offset={3} speed={0} sticky={{ start: 3, end: 4.7 }}>
-          <S2_PRO />
+          <S2_Customers />
         </ParallaxLayer>
-
         <ParallaxLayer offset={3.2} speed={0}>
-          <S2_HSTUDIO />
+          <S2_HomeStudio />
         </ParallaxLayer>
-
         <ParallaxLayer offset={4} speed={0}>
-          <S2_STUDIO />
+          <S2_ProStudio />
         </ParallaxLayer>
         <ParallaxLayer offset={4.8} speed={0}>
-          <S2_IMG />
+          <S2_RealPreview />
         </ParallaxLayer>
-
         <ParallaxLayer offset={5.8} speed={0} sticky={{ start: 5.8, end: 6.8 }}>
-          <S5 />
+          <S3_DIY />
         </ParallaxLayer>
-
         <ParallaxLayer offset={7.8} speed={0}>
-          <S6 />
+          <S4_Business />
         </ParallaxLayer>
-
         <ParallaxLayer offset={8.8} speed={0}>
-          <S7 />
+          <S5_Contact />
         </ParallaxLayer>
       </Parallax>
     </div>
