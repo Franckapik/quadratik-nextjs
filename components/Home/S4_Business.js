@@ -5,8 +5,6 @@ import { useDrag } from 'react-use-gesture';
 import { useSprings, animated, to as interpolate } from "@react-spring/web";
 
 
-export const S4_Business = () => {
-
 const cards = ["./carte_savoirfaire.jpg", "./carte_ecoresponsable.jpg", "./carte_ecoute.jpg"];
 
 // Initials values of cards props.  These two are just helpers, they conserve spring data, values that are later being interpolated into css
@@ -86,6 +84,10 @@ const Deck = () =>  {
     </>
   );
 }
+
+
+
+export const S4_Business = () => {
 
 return (
     <Row id="s4_business">
