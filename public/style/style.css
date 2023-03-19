@@ -36,6 +36,11 @@
     text-decoration: none;
   }
 
+  .cursor {
+        cursor: pointer;
+
+  }
+
   h2 {
     text-transform: uppercase;
     font-family: "alcubierre";
@@ -445,6 +450,15 @@ max-height: 100vh;
 .values_presentation {
   text-align : right;
 }
+
+.values_text_title {
+font-size: smaller;
+background-color: #413b394d;
+letter-spacing: 0.2vw;
+border-radius: 3px;
+}
+
+
 
 .values_presentation hr {
   width : 80%;

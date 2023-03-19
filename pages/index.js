@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <div>
       {scroll > vh ? <Burger></Burger> : null}
-      <Parallax pages={9.8} ref={parallax}>
+      <Parallax pages={8.8} ref={parallax}>
         <ParallaxLayer offset={0} speed={0}>
           <S0_Landing />
         </ParallaxLayer>
@@ -67,13 +67,13 @@ const Home = () => {
         <ParallaxLayer offset={4.8} speed={0}>
           <S2_RealPreview />
         </ParallaxLayer>
-        <ParallaxLayer offset={5.8} speed={0} sticky={{ start: 5.8, end: 6.8 }}>
+        <ParallaxLayer offset={5.8} speed={0} /* sticky={{ start: 5.8, end: 6.4 }} */>
           <S3_DIY />
         </ParallaxLayer>
-        <ParallaxLayer offset={7.8} speed={0}>
+        <ParallaxLayer offset={6.8} speed={0}>
           <S4_Business />
         </ParallaxLayer>
-        <ParallaxLayer offset={8.8} speed={0}>
+        <ParallaxLayer offset={7.8} speed={0}>
           <S5_Contact />
         </ParallaxLayer>
       </Parallax>
