@@ -21,18 +21,19 @@ export const S2_Customers = () => (
     </Col>
 
     <Col md={10} className="d-flex flex-column justify-content-start ">
-      <Row className="dark_bg  p-5 text-uppercase">
-        <div className="text-center">
+      <Row className="dark_bg  text-uppercase ">
+      <Col md={2} className=""></Col>
+        <Col md={8} >        <div className="text-center border_creme w-100 p-5">
           <span>Révelez votre</span>
           <h2>Professionnalisme</h2>
           <span className="sub2">quelles que soient les dimensions de votre espace</span>
-        </div>
+        </div></Col>
+        <Col md={2} className=""></Col>
+
       </Row>
       <Row className="justify-content-start">
-        <Col md={2} className="">
-          {" "}
-        </Col>
-        <Col md={8} className="d-flex align-items-center m-0 p-0 "></Col>
+        <Col md={2} className=""></Col>
+        <Col md={8} ></Col>
         <Col md={2} className=""></Col>
       </Row>
     </Col>

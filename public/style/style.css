@@ -275,13 +275,11 @@ h2 {
 
 .s1_square {
   height: 40vw;
-  border-left: #332d2a !important;
-  font-family: alcubierre;
+/*   border-left: #332d2a !important;
+ */  font-family: alcubierre;
   font-weight: 600;
   letter-spacing: 0.2rem;
-  /* transform: rotate(-45deg);
- */ /* background-color: #F1F1F1;
-opacity: 0.1; */
+
 }
 
 .s1_product_text_presentation {
