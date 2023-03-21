@@ -1,8 +1,34 @@
+import { useSpring, animated, useInView } from "@react-spring/web";
+import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
 
-export const S5_Contact = () => (
-  <Row id="s5_contact">
+export const S5_Contact = () => {
+
+  const [flipped, set] = useState(false)
+  const { transform, opacity } = useSpring({
+    opacity: flipped ? 1 : 0,
+    transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
+    config: { mass: 5, tension: 500, friction: 80 },
+  })
+
+  const [ref, springs] = useInView(
+    () => ({
+    from: {
+      opacity: 0,
+      transform : `perspective(300px) rotateX(180deg)`,
+      config: { mass: 5, tension: 500, friction: 80 },
+    },
+    to: {
+      opacity: 1,
+      transform : `perspective(300px) rotateX(0deg)`
+    },
+    delay : 3000
+  }));
+
+  return (
+
+    <Row id="s5_contact">
     <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy ">
       <span className="p-5">Actualites musicales</span>{" "}
       <img src="./logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />{" "}
@@ -12,7 +38,7 @@ export const S5_Contact = () => (
 
     <Row className="contact_row border_creme m-0 p-0">
       <Col sm={1} className="right_creme d-flex align-items-center justify-content-center"></Col>
-      <Col sm={4} className="right_creme d-flex flex-column align-items-center justify-content-center">
+      <Col sm={4} className="right_creme d-flex flex-column align-items-center justify-content-center" >
         <p>Besoin d'être orienté dans votre projet ?</p>
         <img
           src="logo_orientation.svg"
@@ -28,11 +54,11 @@ export const S5_Contact = () => (
         </Row>
       </Col>
       <Col sm={3} className="right_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
-        <Row className="bottom_creme bg_light w-100 h-100 ">
-          {" "}
+        <Row className="bottom_creme w-100 h-100">
+        <animated.div ref={ref} style={springs} className="d-flex flex-column animatedcontainer border_creme  bg_light align-items-center justify-content-center p-0 m-0">
           <p className="m-auto text-center text-uppercase">Contact direct avec l'artisan</p>{" "}
           <p className="m-auto text-center">06.31.92.74.81</p>
-          <p className="m-auto text-center text-uppercase">Discussions sans engagements</p>
+          <p className="m-auto text-center text-uppercase">Discussions sans engagements</p></animated.div>
         </Row>
         <Row className="w-100 h-100">
           <p className="m-auto text-center text-uppercase">Etude acoustique avec notre partenaire </p>
@@ -66,4 +92,5 @@ export const S5_Contact = () => (
       </Col>
     </Row>
   </Row>
-);
+  )
+};

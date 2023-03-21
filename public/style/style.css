@@ -1,161 +1,202 @@
 @font-face {
-    font-family: "futura-light";
-    src: url("../fonts/futura-light.ttf");
-    src: url("../fonts/futura-light.eot");
-    src: url("../fonts/futura-light.eot?#iefix") format("embedded-opentype"),
-      url("../fonts/futura-light.woff") format("woff");
-  
-  }
-  @font-face { /* logo quadratik */
-    font-family: "alcubierre";
-    src: url("../fonts/Alcubierre.ttf");
-  }
-  
-  
-  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
-  
-  body {
-    background-color: #332D2A!important;
-    color: #FFFFFF!important;
-    font-family: "futura-light", sans-serif !important;
-    /* line-height: 1.2em;
+  font-family: "futura-light";
+  src: url("../fonts/futura-light.ttf");
+  src: url("../fonts/futura-light.eot");
+  src: url("../fonts/futura-light.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/futura-light.woff") format("woff");
+}
+@font-face {
+  /* logo quadratik */
+  font-family: "alcubierre";
+  src: url("../fonts/Alcubierre.ttf");
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+body {
+  background-color: #332d2a !important;
+  color: #ffffff !important;
+  font-family: "futura-light", sans-serif !important;
+  /* line-height: 1.2em;
   letter-spacing: 0.2em; */
-    column-span: all;
-    width: 100vw;
-    margin: 0 auto;
-    height: 100vh!important;
-    font-weight: 300 !important;
-    line-height : 1.8em!important;
-    letter-spacing : 0.1em;
-    overflow-x: hidden;
-    scroll-snap-type: y mandatory;
-  }
+  column-span: all;
+  width: 100vw;
+  margin: 0 auto;
+  height: 100vh !important;
+  font-weight: 300 !important;
+  line-height: 1.8em !important;
+  letter-spacing: 0.1em;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+}
 
-  a {
-    cursor: pointer;
-    text-decoration: none;
-  }
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
 
-  .cursor {
-        cursor: pointer;
+.cursor {
+  cursor: pointer;
+}
 
-  }
+h2 {
+  text-transform: uppercase;
+  font-family: "alcubierre";
+  letter-spacing: 5px;
+}
 
-  h2 {
-    text-transform: uppercase;
-    font-family: "alcubierre";
-    letter-spacing: 5px;
-  }
+.burger {
+  z-index: 1000;
+  position: fixed;
+}
 
-  .burger {
-    z-index: 1000;
-    position: fixed;
-  }
+.trait {
+  width: 100%;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  height: 15vh;
+  border: 1px solid white;
+  line-height: 0.1em;
+}
+
+.animatedcontainer {
+  z-index: -1;
+  will-change: transform, opacity;
+}
+
+.page_index {
+  text-transform: uppercase;
+  font-family: "alcubierre";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1vw !important;
+  height: 100%;
+  position: absolute;
+  margin: auto;
+  left: 3vw;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transform-origin: center center;
+  font-size: 0.8vw;
+  letter-spacing: 0.25vw;
+}
 
 .cadre_logo {
-    aspect-ratio : 4 / 3.5;
-    position: relative;
-    top: 15vh;
-    margin: auto;
-    font-size:calc(6px + 0.7vw);
-    color: #FFFFFF;
+  aspect-ratio: 4 / 3.5;
+  position: relative;
+  top: 15vh;
+  margin: auto;
+  font-size: calc(6px + 0.7vw);
+  color: #ffffff;
 }
 
 .brand_name {
   font-family: alcubierre;
-  font-size : 2.5vw;
-  font-weight : 500;
-  letter-spacing : 1.5rem;
-  color : #D0C3B4;
-  line-height : 3rem;
+  font-size: 2.5vw;
+  font-weight: 500;
+  letter-spacing: 1.5rem;
+  color: #d0c3b4;
+  line-height: 3rem;
   position: relative;
-  top : -5vh;
-  left : 0.7vw;
+  top: -5vh;
+  left: 0.7vw;
 }
 
 .brand_subtitle {
- font-size : 1vw;
- position : relative;
- top : -2vh;
+  font-size: 1vw;
+  position: relative;
+  top: -2vh;
 }
 
-.logo_cadre svg{
-  aspect-ratio : 4 / 3.5;
+.logo_cadre svg {
+  aspect-ratio: 4 / 3.5;
   width: 45vw;
 }
 .logo_cadre {
-position: absolute;
+  position: absolute;
 }
-
 
 .logo_row svg {
   display: block;
   margin: 0 auto;
-  width: 20vw
+  width: 20vw;
 }
 
 .cadre_home_droit {
-    height: 60vh;
-    position: relative;
-    top: 80vh;
-    border-right: #332D2A!important;
-    right : -200px;
-    position : relative;
+  height: 60vh;
+  position: relative;
+  top: 80vh;
+  border-right: #332d2a !important;
+  right: -200px;
+  position: relative;
 }
 .cadre_home_gauche {
-    height: 40vh;
-    border-left: #332D2A!important;
-    left : -200px;
-    position : relative;
-
+  height: 40vh;
+  border-left: #332d2a !important;
+  left: -200px;
+  position: relative;
 }
 
 .border_creme {
-    border: solid thin #D0C3B4;
+  border: solid thin #d0c3b4;
 }
 
 .logo {
-    width: 100%!important;
+  width: 100% !important;
 }
 
 .header {
-    position: absolute;
-    top: 4vh;
-    text-align: right;
-    font-size: 1vw;
+  position: absolute;
+  top: 4vh;
+  text-align: right;
+  font-size: 1vw;
 }
 
-#s0_landing, #s1_product, #s2, #s2_customers, #s2_homeStudio, #s2_proStudio, #s2_realPreview,  #s3_diy, #s4_business, #s5_contact, #s1_square, #s1_product_dif, #s1_product_abs {
-    height : 100vh;
-/*     border-bottom: solid thin #FFFFFF;
- */}
-
- .svg-container { 
-	display: inline-block;
-	position: relative;
-	width: 100%;
-	height: 100vh;
-	vertical-align: middle; 
-	overflow: hidden; 
+#s0_landing,
+#s1_product,
+#s2,
+#s2_customers,
+#s2_homeStudio,
+#s2_proStudio,
+#s2_realPreview,
+#s3_diy,
+#s4_business,
+#s5_contact,
+#s1_square,
+#s1_product_dif,
+#s1_product_abs {
+  height: 100vh;
+  /*     border-bottom: solid thin #FFFFFF;
+ */
 }
 
-.svg-content { 
-	display: inline-block;
-	position: absolute;
-	top: 0;
-	left: 0;
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.svg-content {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .text-creme {
-  color : #D0C3B4;
+  color: #d0c3b4;
 }
 
 .values_header {
-  letter-spacing : 0.3vw;
+  letter-spacing: 0.3vw;
 }
 
 .values_text img {
-  width : 18%!important;
+  width: 18% !important;
 }
 
 .values_subtitles1 {
@@ -170,8 +211,6 @@ position: absolute;
 
 .card_table {
   width: 100%;
-/*   rotate: -1.5deg;
- */
 }
 
 .cards_container {
@@ -204,47 +243,46 @@ position: absolute;
   max-height: 285px;
   will-change: transform;
   border-radius: 10px;
-  box-shadow: 0 10px 10px -10px #332D2A;
+  box-shadow: 0 10px 10px -10px #332d2a;
 }
 
-
 #s2_realPreview img {
-width : 100%;
-padding-bottom : 5%;
+  width: 100%;
+  padding-bottom: 5%;
 }
 
 #s2_customers {
-  opacity : 1;
+  opacity: 1;
 }
 
- #s2_customers svg {
+#s2_customers svg {
   display: inline-block;
   height: auto;
   width: 100%;
   z-index: -1;
- }
+}
 .dark_bg {
-  background-color : #332D2A;
+  background-color: #332d2a;
 }
 
- .zi_up {
-  z-index : 1000!important;
- }
+.zi_up {
+  z-index: 1000 !important;
+}
 
 .snapy {
-    scroll-snap-type: y mandatory;
+  scroll-snap-type: y mandatory;
 }
 
- .s1_square {
-height: 40vw;
-border-left: #332D2A!important;
-font-family: alcubierre;
-font-weight: 600;
-letter-spacing: 0.2rem;
-/* transform: rotate(-45deg);
- *//* background-color: #F1F1F1;
+.s1_square {
+  height: 40vw;
+  border-left: #332d2a !important;
+  font-family: alcubierre;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  /* transform: rotate(-45deg);
+ */ /* background-color: #F1F1F1;
 opacity: 0.1; */
- }
+}
 
 .s1_product_text_presentation {
   padding-top: 5vw;
@@ -256,14 +294,15 @@ opacity: 0.1; */
 }
 
 .s1_product_list .list-group {
-  --bs-list-group-bg:  none;
+  --bs-list-group-bg: none;
   --bs-list-group-color: none;
   --bs-list-group-border-width: none;
 }
 
-#s2_homeStudio img, #s2_proStudio img {
-width: 50vw;
-margin: auto;
+#s2_homeStudio img,
+#s2_proStudio img {
+  width: 50vw;
+  margin: auto;
 }
 
 #s2_realPreview img {
@@ -271,74 +310,71 @@ margin: auto;
   filter: saturate(90%);
   filter: contrast(90%);
   filter: sepia(30%);
-  padding : 2vw;
-/*   filter: brightness(1.1);
- */}
+  padding: 2vw;
+  /*   filter: brightness(1.1);
+ */
+}
 
- .bg-red {
+.bg-red {
   background-color: red;
- }
+}
 
 .s2_vertical_square {
   height: 100vh;
 }
 
 .s2_customers_text {
-  text-transform : uppercase;
+  text-transform: uppercase;
   font-size: 1vw;
-  line-height : 1vw;
+  line-height: 1vw;
 }
 
 .cadre_pro {
-  position : absolute;
-  right : 10vw;
-  aspect-ratio : 4 / 3.5;
-  width: 30vw!important;
+  position: absolute;
+  right: 10vw;
+  aspect-ratio: 4 / 3.5;
+  width: 30vw !important;
 }
 
 .list_pro {
-  width : 100%;
-  height : 100%;
+  width: 100%;
+  height: 100%;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   transform-origin: center center;
-  font-size : 0.8vw;
+  font-size: 0.8vw;
 }
 
-
-
 #s2_customers h2 {
-  font-family:'futura-light';
-  font-weight : 100;
+  font-family: "futura-light";
+  font-weight: 100;
   font-size: 2vw;
-  padding-top : 1vw;
-  letter-spacing : 1vw!important;
-/*   position : relative;
+  padding-top: 1vw;
+  letter-spacing: 1vw !important;
+  /*   position : relative;
   bottom : -20vh;
- */}
+ */
+}
 
- .sub2 {
-  font-size : 1.25vw;
- }
+.sub2 {
+  font-size: 1.25vw;
+}
 
-
- .s3_diy_bg {
+.s3_diy_bg {
   width: 100%;
   height: 80vh;
-  background : url("../Indus.svg");
+  background: url("../Indus.svg");
   background-position: center;
   background-size: cover;
-  background-repeat : no-repeat;
-
- }
+  background-repeat: no-repeat;
+}
 
 .s3_diy_bg_content {
   padding-top: 5vh;
-
 }
 
 .s3_diy_guide_row {
-  padding-top: 18%
+  padding-top: 18%;
 }
 
 .s3_diy_guide_text {
@@ -352,30 +388,25 @@ margin: auto;
   line-height: 1.5vw;
 }
 .s3_diy_guide_text img {
-  height : 5vw;
+  height: 5vw;
 }
 
 .cards {
   position: relative;
   height: 30vh;
   text-align: center;
- 
 }
 
 .cards img {
-margin: auto;
-width: 150px;
-
+  margin: auto;
+  width: 150px;
 }
 
-
-
-
 .s3_diy_bg_indus_frame {
-position: absolute;
-z-index: -1000;
-width: 90%;
-max-height: 100vh;
+  position: absolute;
+  z-index: -1000;
+  width: 90%;
+  max-height: 100vh;
 }
 
 .dif_diy img {
@@ -383,54 +414,51 @@ max-height: 100vh;
   margin: auto;
 }
 
-
 .btn-primary {
   font-family: "Alcubierre", sans-serif !important;
-  color:#332D2A!important;
-  background-color: #F1F1F1!important;
-  border-color: white!important;
-  letter-spacing: 4px!important;
+  color: #332d2a !important;
+  background-color: #f1f1f1 !important;
+  border-color: white !important;
+  letter-spacing: 4px !important;
   text-transform: uppercase;
-  border-radius: 5px!important;
-  padding: 0.8vw!important;
+  border-radius: 5px !important;
+  padding: 0.8vw !important;
 }
 
 .btn-secondary {
   font-family: "Alcubierre", sans-serif !important;
-  font-size: 2.8vw!important;
-  color:black!important;
-  background-color: transparent!important;
-  border-color: black!important;
-  letter-spacing: 0.5vw!important;
+  font-size: 2.8vw !important;
+  color: black !important;
+  background-color: transparent !important;
+  border-color: black !important;
+  letter-spacing: 0.5vw !important;
   white-space: nowrap;
   text-transform: uppercase;
-
 }
 
 .presentation_produit {
   position: absolute;
   z-index: -1;
-  width:100vw!important;
+  width: 100vw !important;
 }
 
 .button_subtitle {
   font-size: small;
-  letter-spacing: 4px!important;
-
+  letter-spacing: 4px !important;
 }
 
 .button_home {
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .marquee_diy {
-  font-size: 2vw ;
+  font-size: 2vw;
   font-family: "Alcubierre", sans-serif !important;
   text-transform: uppercase;
   height: 15vh;
-  border-top: #D0C3B4 solid 5px;
-  border-bottom: #D0C3B4 solid 5px;
-  letter-spacing : 0.6vw
+  border-top: #d0c3b4 solid 5px;
+  border-bottom: #d0c3b4 solid 5px;
+  letter-spacing: 0.6vw;
 }
 
 .logo_marquee {
@@ -439,8 +467,8 @@ max-height: 100vh;
 }
 
 .row_business_values {
-  height:80%;
-  rotate : -1.5deg;
+  height: 80%;
+  rotate: -1.5deg;
 }
 
 .contact_row {
@@ -448,38 +476,37 @@ max-height: 100vh;
 }
 
 .values_presentation {
-  text-align : right;
+  text-align: right;
 }
 
 .values_text_title {
-font-size: smaller;
-background-color: #413b394d;
-letter-spacing: 0.2vw;
-border-radius: 3px;
+  font-size: smaller;
+  background-color: #413b394d;
+  letter-spacing: 0.2vw;
+  border-radius: 3px;
 }
-
-
 
 .values_presentation hr {
-  width : 80%;
-margin : auto}
+  width: 80%;
+  margin: auto;
+}
 
 .left_creme {
-  border-left: solid thin #D0C3B4;
+  border-left: solid thin #d0c3b4;
 }
 .right_creme {
-  border-right: solid thin #D0C3B4;
+  border-right: solid thin #d0c3b4;
 }
 .bottom_creme {
-  border-bottom: solid thin #D0C3B4;
+  border-bottom: solid thin #d0c3b4;
 }
 
 .logo_orientation {
-  height : 40vh
+  height: 40vh;
 }
 
 .ekleo_logo {
-  width : 50%!important;
+  width: 50% !important;
   margin: auto;
 }
 
@@ -488,15 +515,15 @@ margin : auto}
 }
 
 .bg_light {
-  background-color : #3d3634;
+  background-color: #3d3634;
 }
 
 .h-10 {
-  height : 5vh;
+  height: 5vh;
 }
 
 .h-20 {
-  height : 10vh;
+  height: 10vh;
 }
 
 .LazyLoad {

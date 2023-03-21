@@ -125,7 +125,7 @@ export const S4_Business = () => {
               <img src="./icones/hache.svg" className="me-4" /> Travail du bois à la main
             </Row>
             <Row className="align-items-center p-4 ps-0">
-              <img src="./icones/controle.svg" className="me-4" /> Contrôle intégral du produit
+              <img src="./icones/controle.svg" className="me-4" /> Contrôle intégral à l'envoi
             </Row>
             <Row className="align-items-center p-4 ps-0">
               <img src="./icones/finition.svg" className="me-4" /> Finition à la demande
@@ -193,7 +193,7 @@ export const S4_Business = () => {
       <Row className="row_business_values">
         <Col md={8} className="d-flex flex-column justify-content-center">
           <Row>
-            <Col md={1}></Col>
+            <Col md={2}></Col>
             <Col md={6}>
               <div className={"cards_container"}>
                 <img
@@ -204,7 +204,7 @@ export const S4_Business = () => {
                {inView ?  <Deck setVisibleCard={setVisibleCard} /> : null}
               </div>
             </Col>
-            <Col md={5}  className="values_text text-left ps-5 ">
+            <Col md={4}  className="values_text text-left ps-5 ">
               <Row className="values_header text-uppercase text-creme">
                 <p className="ps-1 mt-0 m-1 values_subtitles1">Depuis 5 ans</p>
                 <p className="p-0 m-1 values_subtitles2">Quadratik</p>
@@ -217,11 +217,13 @@ export const S4_Business = () => {
 
         <Col md={4} className="d-flex flex-column justify-content-center">
           <Row>
-            <Col md={2}></Col>
+            <Col md={1}></Col>
             <Col md={9} className="values_presentation">
               {switchText(visibleCard)}
               <p ref={ref}></p>
             </Col>
+            <Col md={2}></Col>
+
           </Row>
         </Col>
       </Row>

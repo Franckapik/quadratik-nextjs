@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 
 export const S2_Customers = () => (
   <Row id="s2_customers" className="p-0 m-0">
-    <Col md={2} className="text-end p-0 dark_bg">
+    <Col md={2} className="text-end p-0 ">
       <Row className="p-0 m-0">
         <Col md={8} className="p-0 m-0">
           <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
@@ -29,11 +29,11 @@ export const S2_Customers = () => (
         </div>
       </Row>
       <Row className="justify-content-start">
-        <Col md={2} className="dark_bg">
+        <Col md={2} className="">
           {" "}
         </Col>
         <Col md={8} className="d-flex align-items-center m-0 p-0 "></Col>
-        <Col md={2} className="dark_bg"></Col>
+        <Col md={2} className=""></Col>
       </Row>
     </Col>
   </Row>

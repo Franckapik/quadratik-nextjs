@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import { Burger } from "./Burger";
+import { Burger } from "../components/Burger";
 import { S5_Contact } from "../components/Home/S5_Contact";
 import { S4_Business } from "../components/Home/S4_Business";
 import { S3_DIY } from "../components/Home/S3_DIY";
@@ -13,7 +13,7 @@ import { S1_Dif } from "../components/Home/S1_Dif";
 import { S1_Square } from "../components/Home/S1_Square";
 import { S1_Product } from "../components/Home/S1_Product";
 import { S0_Landing } from "../components/Home/S0_Landing";
-
+import { IndexPage } from "../components/Home/IndexPage";
 
 const Home = () => {
   const [scroll, setScroll] = useState(0);
@@ -36,6 +36,7 @@ const Home = () => {
   return (
     <div>
       {scroll > vh ? <Burger></Burger> : null}
+      {scroll > vh ? <IndexPage scroll={scroll}></IndexPage> : null}
       <Parallax pages={8.8} ref={parallax}>
         <ParallaxLayer offset={0} speed={0}>
           <S0_Landing />
