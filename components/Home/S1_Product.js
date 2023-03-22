@@ -4,8 +4,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 export const S1_Product = ({ vh, scroll }) => {
   return (
     <Row id="s1_product_product" className="justify-content-end m-0 ">
-      <Col md={4}></Col>
-      <Col md={7} className="d-flex flex-column p-4 m-auto ">
+      <Col md={6}></Col>
+      <Col md={5} className="d-flex flex-column p-4 m-auto ">
         <Row className="text-center s1_product_text_presentation">
           <h2>Solutions acoustiques</h2>
           <p>

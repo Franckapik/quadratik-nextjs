@@ -42,12 +42,12 @@ const Home = () => {
           <S0_Landing />
         </ParallaxLayer>
         <ParallaxLayer offset={1} speed={0} sticky={{ start: 1, end: 2 }}>
-          <S1_Product vh={vh} scroll={scroll} />
+          <S1_Product vh={vh} scroll={scroll}  />
         </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={0.2}>
+        <ParallaxLayer offset={1} speed={0.2} sticky={{ start: 1, end: 2 }}>
           <S1_Square />
         </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={0.5}>
+        <ParallaxLayer offset={1} speed={0.5} sticky={{ start: 1, end: 2 }}>
           <S1_Dif />
         </ParallaxLayer>
         <ParallaxLayer offset={2} speed={0.2}>
@@ -56,15 +56,15 @@ const Home = () => {
         <ParallaxLayer offset={2} speed={0.5}>
           <S1_Abs />
         </ParallaxLayer>
-        <ParallaxLayer offset={3} speed={0} sticky={{ start: 3, end: 4.7 }}>
+{/*         <ParallaxLayer offset={3} speed={0} sticky={{ start: 3, end: 4.7 }}>
           <S2_Customers />
+        </ParallaxLayer> */}
+        <ParallaxLayer offset={3.2} speed={0} sticky={{ start: 3, end: 4.7 }}>
+          <S2_HomeStudio scroll={scroll} />
         </ParallaxLayer>
-        <ParallaxLayer offset={3.2} speed={0}>
-          <S2_HomeStudio />
-        </ParallaxLayer>
-        <ParallaxLayer offset={4} speed={0}>
+{/*         <ParallaxLayer offset={4} speed={0}>
           <S2_ProStudio />
-        </ParallaxLayer>
+        </ParallaxLayer> */}
         <ParallaxLayer offset={4.8} speed={0}>
           <S2_RealPreview />
         </ParallaxLayer>
