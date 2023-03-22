@@ -261,8 +261,14 @@ h2 {
   width: 100%;
   z-index: -1;
 }
+
+#s1_product h2 {
+  text-align: right;
+  font-size: 1.2vw;
+}
 .dark_bg {
   background-color: #332d2a;
+
 }
 
 .zi_up {
@@ -279,7 +285,12 @@ h2 {
  */  font-family: alcubierre;
   font-weight: 600;
   letter-spacing: 0.2rem;
-
+  background: url("../difrender10w.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  outline: thin solid #d0c3b434;
+  outline-offset: 10px;
 }
 
 .s1_product_text_presentation {
@@ -289,6 +300,23 @@ h2 {
 
 .s1_product_list {
   height: 30vh;
+}
+
+.s1_product_name {
+  width: 50%;
+  aspect-ratio : 4/4;
+}
+
+.s1_product_physic {
+  position: relative;
+  left: -25%;
+  top: -15%;
+  width: 30%;
+  aspect-ratio : 4/4;
+}
+
+.s1_product_physic img {
+  width: 90%;
 }
 
 .s1_product_list .list-group {
@@ -311,6 +339,10 @@ h2 {
   padding: 2vw;
   /*   filter: brightness(1.1);
  */
+}
+
+.s2_col_canvas{
+  height: 70%;
 }
 
 .bg-red {
@@ -443,6 +475,14 @@ h2 {
 .button_subtitle {
   font-size: small;
   letter-spacing: 4px !important;
+}
+
+.s1_product_sub_blue {
+  color : #B4BFD0;
+}
+
+.s1_product_sub_red {
+color: #E07E7E;
 }
 
 .button_home {
