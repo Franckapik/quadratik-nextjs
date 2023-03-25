@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Burger } from "../components/Burger";
-import { S5_Contact } from "../components/Home/S5_Contact";
-import { S4_Business } from "../components/Home/S4_Business";
-import { S3_DIY } from "../components/Home/S3_DIY";
-import { S2_RealPreview } from "../components/Home/S2_RealPreview";
-import { S2_ProStudio } from "../components/Home/S2_ProStudio";
-import { S2_HomeStudio } from "../components/Home/S2_HomeStudio";
-import { S2_Customers } from "../components/Home/S2_Customers";
-import { S1_Abs } from "../components/Home/S1_Abs";
-import { S1_Dif } from "../components/Home/S1_Dif";
-import { S1_Square } from "../components/Home/S1_Square";
-import { S1_Product } from "../components/Home/S1_Product";
-import { S0_Landing } from "../components/Home/S0_Landing";
-import { IndexPage } from "../components/Home/IndexPage";
+import { S5_Contact } from "../components/home/S5_Contact";
+import { S4_Business } from "../components/home/S4_Business";
+import { S3_DIY } from "../components/home/S3_DIY";
+import { S2_RealPreview } from "../components/home/S2_RealPreview";
+import { S2_ProStudio } from "../components/home/S2_ProStudio";
+import { S2_HomeStudio } from "../components/home/S2_HomeStudio";
+import { S2_Customers } from "../components/home/S2_Customers";
+import { S1_Abs } from "../components/home/S1_Abs";
+import { S1_Dif } from "../components/home/S1_Dif";
+import { S1_Square } from "../components/home/S1_Square";
+import { S1_Product } from "../components/home/S1_Product";
+import { S0_Landing } from "../components/home/S0_Landing";
+import { IndexPage } from "../components/home/IndexPage";
 
 const Home = () => {
   const [scroll, setScroll] = useState(0);
