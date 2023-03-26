@@ -19,9 +19,9 @@ export const LoadCamera = ({ url }) => {
               makeDefault={true}
               far={obj.far}
               near={obj.near}
-              fov={50} //obj.fov
+              fov={40} //obj.fov
               position={objWorldPos}
-         /*      rotation={[-Math.PI / 2, 0, 0]} */
+              rotation={[obj.rotation.x, obj.rotation.y, obj.rotation.z]} 
             />
             );
           }
