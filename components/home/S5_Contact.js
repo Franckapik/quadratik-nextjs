@@ -41,7 +41,7 @@ export const S5_Contact = () => {
       <Col sm={4} className="right_creme d-flex flex-column align-items-center justify-content-center" >
         <p>Besoin d'être orienté dans votre projet ?</p>
         <img
-          src="logo_orientation.svg"
+          src="/logo/logo_orientation.svg"
           alt="Image illustrant un choix à réaliser à partir du logo de Quadratik.fr"
           className="logo_orientation" />
       </Col>
@@ -63,7 +63,7 @@ export const S5_Contact = () => {
         <Row className="w-100 h-100">
           <p className="m-auto text-center text-uppercase">Etude acoustique avec notre partenaire </p>
           <img
-            src="./ekleo_logo.png"
+            src="./logo/ekleo_logo.png"
             className="ekleo_logo"
             alt="Logo du partenaire principal de Quadratik.fr pour les etudes acoustiques" />
           <p className="m-auto text-center text-uppercase">Devis en ligne </p>

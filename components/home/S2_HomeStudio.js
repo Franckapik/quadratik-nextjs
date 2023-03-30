@@ -152,7 +152,6 @@ export const S2_HomeStudio = ({ scroll }) => {
           </RotateScroll>
 
           <ambientLight intensity={0.15} />
-          <Environment preset="warehouse" />
         </Canvas>
       </Col>
     </Row>
