@@ -134,7 +134,7 @@ export const S0_Landing = () => {
       </div>
       <div className="d-flex flex-wrap justify-content-center align-items-center">
         <div className="s0_animated_square text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" stroke="#D0C3B4" stroke-width="0.5" className="s0_svg_square">
+          <svg xmlns="http://www.w3.org/2000/svg" stroke="#D0C3B4" stroke-width="1" className="s0_svg_square">
             <AnimatedSquare toggle={loaded} />
           </svg>
           <div className="s0_logo bg-red">

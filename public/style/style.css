@@ -136,13 +136,15 @@ height: 100%;
 .s0_cadre_home_gauche {
   height: 40vh;
   border-left: #332d2a !important;
+  border-top: #332d2a !important;
   left: -200px;
   position: absolute;
   width: 10%;
 }
 
 .border_creme {
-  border: solid thin #d0c3b4;
+  opacity: 0.8;
+  border: solid 1px #d0c3b4;
 }
 
 
