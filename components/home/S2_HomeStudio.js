@@ -1,4 +1,5 @@
-import { Environment, Html, OrbitControls, ScrollControls, Stats } from "@react-three/drei";
+import { animated, easings, useSpring } from "@react-spring/web";
+import { Stats } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
@@ -6,24 +7,20 @@ import { MathUtils } from "three";
 import { LoadCamera } from "../threejs/loadCamera";
 import { LoadLight } from "../threejs/loadLight";
 import { LoadMesh } from "../threejs/loadMesh";
-import { animated, easings, useInView, useSpring } from "@react-spring/web";
 
-const RotateScroll = ({ children, scroll, setRotation }) => {
+const RotateScroll = ({ children, scroll, setRotation, vh }) => {
   const scene = useRef();
-  const scrollMax = 5200;
-  const scrollMin = 4000;
+  const scrollMax = vh * 5.8;
+  const scrollMin = vh * 4.5;
   const currentScroll = scroll - scrollMin;
 
   useFrame(() => {
     if (scroll > scrollMin && scroll < scrollMax) {
-      //2700 to 4400
       scene.current.rotation.y = MathUtils.lerp(
         scene.current.rotation.y,
         currentScroll * ((Math.PI * 1.7) / (scrollMax - scrollMin)),
         0.1
       );
-      /*       scene.current.rotation.y = currentScroll * ((Math.PI * 2) / (scrollMax - scrollMin));
-       */
     }
   });
 
@@ -38,11 +35,10 @@ const RotateScroll = ({ children, scroll, setRotation }) => {
   );
 };
 
-export const S2_HomeStudio = ({ scroll }) => {
+export const S2_HomeStudio = ({ scroll, vh }) => {
   const [rotation, setRotation] = useState(0);
   const options = {
     threshold: 0.25,
-    // half of item height
   };
 
   const [vertical, apiVertical] = useSpring(() => ({
@@ -59,7 +55,7 @@ export const S2_HomeStudio = ({ scroll }) => {
   }));
 
   useEffect(() => {
-    if (scroll > 3500) {
+    if (scroll > vh * 4) {
       api.start({
         x: 2000,
       });
@@ -77,7 +73,7 @@ export const S2_HomeStudio = ({ scroll }) => {
       });
     }
 
-    if (scroll > 5400) {
+    if (scroll > vh * 6) {
       apiVertical.start({
         x: -300,
       });
@@ -137,7 +133,7 @@ export const S2_HomeStudio = ({ scroll }) => {
           </div>
           <div>
             <Button variant="primary" className="s2_studio_button">
-            <i className="fad fa-projector"></i>Découvrir les réalisations
+              <i className="fad fa-projector"></i>Découvrir les réalisations
             </Button>
           </div>
         </animated.div>
@@ -146,7 +142,7 @@ export const S2_HomeStudio = ({ scroll }) => {
           <Stats showPanel={0} className="stats" />
           {/*         <OrbitControls /> */}
           <LoadCamera url={"/glb/scene_customers.glb"} />
-          <RotateScroll scroll={scroll} setRotation={setRotation}>
+          <RotateScroll scroll={scroll} vh={vh} setRotation={setRotation}>
             <LoadMesh url={"/glb/scene_customers.glb"} />
             <LoadLight url={"/glb/scene_customers.glb"} />
           </RotateScroll>
@@ -157,42 +153,3 @@ export const S2_HomeStudio = ({ scroll }) => {
     </Row>
   );
 };
-/* 
-<Row id="s2_customers" className="p-0 m-0">
-<Col md={2} className="text-end p-0 ">
-  <Row className="p-0 m-0">
-    <Col md={8} className="p-0 m-0">
-      <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
-    </Col>
-    <Col md={4} className="p-0 m-0 d-flex flex-colmun justify-content-end">
-      <Row className="d-flex justify-content-between text-uppercase text-center list_pro">
-        <Col>Home studio</Col>
-        <Col>Salle de répétition</Col>
-        <Col>Salle des fêtes</Col>
-        <Col>Enregistrement</Col>
-        <Col>Home cinéma</Col>
-        <Col>Collectivités</Col>
-      </Row>
-    </Col>
-  </Row>
-</Col>
-
-<Col md={10} className="d-flex flex-column justify-content-start ">
-  <Row className="dark_bg  text-uppercase ">
-  <Col md={2} className=""></Col>
-    <Col md={8} >        <div className="text-center border_creme w-100 p-5">
-      <span>Révelez votre</span>
-      <h2>Professionnalisme</h2>
-      <span className="sub2">quelles que soient les dimensions de votre espace</span>
-    </div></Col>
-    <Col md={2} className=""></Col>
-
-  </Row>
-  <Row className="justify-content-start">
-    <Col md={2} className=""></Col>
-    <Col md={8} ></Col>
-    <Col md={2} className=""></Col>
-  </Row>
-</Col>
-</Row>
- */
