@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 export function Model(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(
-    "/customers_coloriage_reduction.glb"
+    "/glb/scene_customers.glb"
   );
   const { ref, mixer, names, actions, clips } = useAnimations(animations)
   useEffect(() => {

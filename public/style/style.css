@@ -197,6 +197,7 @@ h2 {
 
 .values_text img {
   width: 18% !important;
+  color: #8EA65F;
 }
 
 .values_subtitles1 {
@@ -282,16 +283,22 @@ h2 {
 .s1_square {
   height: 40vw;
 /*   border-left: #332d2a !important;
- */  font-family: alcubierre;
-  font-weight: 600;
-  letter-spacing: 0.2rem;
-  background: url("../difrender10w.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  outline: thin solid #d0c3b434;
+ */ 
   outline-offset: 10px;
 }
+
+.image-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.image-hover:hover {
+  opacity: 1;
+}
+
+
 
 .s1_product_text_presentation {
   padding-top: 5vw;
@@ -307,12 +314,39 @@ h2 {
   aspect-ratio : 4/4;
 }
 
+.s1_product_name h2 {
+letter-spacing: 0.5vw;
+}
+
+.s1_product_name span {
+font-size: 0.8vw;
+letter-spacing: 0.3vw;
+
+}
+
 .s1_product_physic {
   position: relative;
   left: -25%;
   top: -15%;
   width: 30%;
   aspect-ratio : 4/4;
+}
+
+.rideau {
+  background-color: #332d2a;
+  position: absolute;
+  z-index: 1000;
+}
+
+.s2_photo_studio{
+  position: absolute;
+  top: 15%;
+  right : 35%;
+}
+
+.sentence_pro {
+  position: relative;
+  right: -20%;
 }
 
 .s1_product_physic img {
@@ -341,7 +375,14 @@ h2 {
  */
 }
 
+.s2_studio_button {
+  position: absolute;
+  bottom: 15%;
+  right: 13%;
+}
+
 .s2_col_canvas{
+  position : relative;
   height: 100%;
 }
 
@@ -380,7 +421,7 @@ h2 {
   font-weight: 100;
   font-size: 2vw;
   padding-top: 1vw;
-  letter-spacing: 1vw !important;
+  letter-spacing: 0.7vw !important;
   /*   position : relative;
   bottom : -20vh;
  */
@@ -389,13 +430,32 @@ h2 {
 .sub2 {
   font-size: 1.25vw;
 }
+.s3_row_icons div {
+  position: relative!important;
+}
+.s3_arrow_left {
+  color: #d0c3b4;
+  font-size: 1.2vw;
+  background-color: #332d2a;
+  position: absolute!important;
+  left: -0.6vw;
+  top:30%;
+}
+.s3_arrow_right {
+  color: #d0c3b4;
+  font-size: 1.2vw;
+  background-color: #332d2a;
+  position: absolute!important;
+  right: -0.6vw;
+  top:30%;
+}
 
 .s3_diy_bg {
   width: 100%;
   height: 80vh;
   background: url("../Indus.svg");
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
@@ -403,22 +463,22 @@ h2 {
   padding-top: 5vh;
 }
 
-.s3_diy_guide_row {
-  padding-top: 18%;
-}
-
 .s3_diy_guide_text {
+  position: relative;
   font-size: 0.9vw;
   text-align: justify;
-}
-
-.s3_diy_guide_text {
-  align-items: center;
-  padding-top: 1.5vw;
+  bottom: 3%!important;
   line-height: 1.5vw;
 }
+.s3_row_explanation{
+min-height: 15vh;
+}
+
+
+
 .s3_diy_guide_text img {
-  height: 5vw;
+  height: 6vw;
+  padding: 15%;
 }
 
 .cards {
@@ -444,15 +504,25 @@ h2 {
   margin: auto;
 }
 
+
 .btn-primary {
-  font-family: "Alcubierre", sans-serif !important;
   color: #332d2a !important;
-  background-color: #f1f1f1 !important;
-  border-color: white !important;
+  background-color: #8EA65F !important;
+  border: none!important;
   letter-spacing: 4px !important;
   text-transform: uppercase;
   border-radius: 5px !important;
   padding: 0.8vw !important;
+  font-weight: 800!important;
+  margin: 1vw!important;
+  width: 400px!important;
+}
+
+.btn-primary:hover {
+  background-color: #a1be66 !important;
+}
+.btn-primary i {
+  margin-right: 20px;
 }
 
 .btn-secondary {
@@ -485,10 +555,6 @@ h2 {
 color: #E07E7E;
 }
 
-.button_home {
-  width: 100% !important;
-}
-
 .marquee_diy {
   font-size: 2vw;
   font-family: "Alcubierre", sans-serif !important;
@@ -518,10 +584,9 @@ color: #E07E7E;
 }
 
 .values_text_title {
-  font-size: smaller;
-  background-color: #413b394d;
   letter-spacing: 0.2vw;
   border-radius: 3px;
+  width: 100%;
 }
 
 .values_presentation hr {
@@ -553,7 +618,7 @@ color: #E07E7E;
 }
 
 .bg_light {
-  background-color: #3d3634;
+  background-color: #8ea65f8a;
 }
 
 .h-10 {

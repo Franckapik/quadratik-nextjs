@@ -18,7 +18,7 @@ export const LoadLight = ({ url }) => {
                   shadow-mapSize-height={1024}
                   shadow-mapSize-width={1024}
                   shadow-bias={-0.001}
-                  intensity={0.8}
+                  intensity={1}
                   decay={2}
                   distance={10}
                   position={objWorldPos}

@@ -48,60 +48,88 @@ export const S3_DIY = () => {
 
   return (
     <animated.div style={springs} ref={ref}>
-      <Row id="s3_diy" className="m-0 d-flex align-items-center justify-content-center">
-        <Col md={10} className="d-flex flex_column s3_diy_bg p-0 m-0 border_creme">
-          <Row className="s3_diy_bg_content w-100 justify-content-center align-items-center p-4">
-            <Col xl={6} className="d-flex flex-column h-100 ">
-              <Row className="pt-5 ">
-                <Button variant="primary" className="button_home w-50 m-auto">
-                  Dessiner un diffuseur
-                </Button>
-              </Row>
-            </Col>
-            <Col xl={6} className="s3_diy_guide_text d-flex flex-column h-100 p-5 ">
-              <Row className="s3_diy_guide_row">
-                <p className=" m-1 p-2 pe-5 ps-5 values_text_title text-center">Comment fonctionne un diffuseur ?</p>
-              </Row>
-              <Row className="justify-content-evenly m-4 p-4 w-100">
-                <Col xl={2} className="text-center cursor">
-                  <img
-                    onMouseOver={() => setExplanation(1)}
-                    src="./s3_guide_i1.png"
-                    style={{ opacity: explanation === 1 ? 1 : 0.1 }}
-                  ></img>
-                </Col>
+      <Row id="s3_diy" className="m-0 d-flex align-items-center justify-content-center w-100">
+        <Col md={1}></Col>
+        <Col md={11} className="d-flex flex_column h-100 justify-content-center align-items-center">
+          <Col md={11}>
+            {" "}
+            <Row className="s3_diy_bg s3_diy_bg_content  w-100 justify-content-center align-items-center p-4 m-0">
+              <Col xl={6} className="d-flex flex-column h-100 ps-4 p-0 ">
+                <Row className="pt-5 ">
+                  <Button variant="primary" className="button_home m-auto">
+                  <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
+                  </Button>
+                </Row>
+              </Col>
+              <Col xl={6} className="s3_diy_guide_text d-flex flex-column pe-4 p-0  ">
+                <Row className="values_text_title text-center p-4 ps-5 ">
+                  <p className="p-0">Comment fonctionne un diffuseur ?</p>
+                </Row>
+                <Row className="ps-5 p-4 w-100 text-center s3_row_icons">
+                  <Col xl={3} className={explanation === 1 ? "border_creme " : null}>
+                    {explanation === 1 ? (
+                      <>
+                        <i className="fad fa-arrow-alt-square-left s3_arrow_left"></i>
+                        <i className="fad fa-arrow-alt-square-right s3_arrow_right"></i>
+                      </>
+                    ) : null}
 
-                <Col xl={2} className="text-center cursor">
-                  <img
-                    onMouseOver={() => setExplanation(2)}
-                    src="./s3_guide_i2.png"
-                    style={{ opacity: explanation === 2 ? 1 : 0.1 }}
-                  ></img>
-                </Col>
+                    <img
+                      onMouseOver={() => setExplanation(1)}
+                      src="./s3_guide_i1.png"
+                      style={{ opacity: explanation === 1 ? 1 : 0.1 }}
+                    ></img>
+                  </Col>
 
-                <Col xl={2} className="text-center cursor">
-                  <img
-                    onMouseOver={() => setExplanation(3)}
-                    src="./s3_guide_i3.png"
-                    style={{ opacity: explanation === 3 ? 1 : 0.1 }}
-                  ></img>
-                </Col>
+                  <Col xl={3} className={explanation === 2 ? "border_creme " : null}>
+                    {explanation === 2 ? (
+                      <>
+                        <i className="fad fa-arrow-alt-square-left s3_arrow_left"></i>
+                        <i className="fad fa-arrow-alt-square-right s3_arrow_right"></i>
+                      </>
+                    ) : null}
 
-                <Col xl={2} className="text-center cursor">
-                  <img
-                    onMouseOver={() => setExplanation(4)}
-                    src="./s3_guide_i4.png"
-                    style={{ opacity: explanation === 4 ? 1 : 0.1 }}
-                  ></img>
-                </Col>
-              </Row>
-              <Row className="">
-                <Col xl={10} className="m-auto">
-                  {switchExplanation(explanation)}
-                </Col>
-              </Row>
-            </Col>
-          </Row>
+                    <img
+                      onMouseOver={() => setExplanation(2)}
+                      src="./s3_guide_i2.png"
+                      style={{ opacity: explanation === 2 ? 1 : 0.1 }}
+                    ></img>
+                  </Col>
+
+                  <Col xl={3} className={explanation === 3 ? "border_creme " : null}>
+                    {explanation === 3 ? (
+                      <>
+                        <i className="fad fa-arrow-alt-square-left s3_arrow_left"></i>
+                        <i className="fad fa-arrow-alt-square-right s3_arrow_right"></i>
+                      </>
+                    ) : null}
+
+                    <img
+                      onMouseOver={() => setExplanation(3)}
+                      src="./s3_guide_i3.png"
+                      style={{ opacity: explanation === 3 ? 1 : 0.1 }}
+                    ></img>
+                  </Col>
+
+                  <Col xl={3} className={explanation === 4 ? "border_creme " : null}>
+                    {explanation === 4 ? (
+                      <>
+                        <i className="fad fa-arrow-alt-square-left s3_arrow_left"></i>
+                        <i className="fad fa-arrow-alt-square-right s3_arrow_right"></i>
+                      </>
+                    ) : null}
+
+                    <img
+                      onMouseOver={() => setExplanation(4)}
+                      src="./s3_guide_i4.png"
+                      style={{ opacity: explanation === 4 ? 1 : 0.1 }}
+                    ></img>
+                  </Col>
+                </Row>
+                <Row className="ps-5 p-4 s3_row_explanation">{switchExplanation(explanation)}</Row>
+              </Col>
+            </Row>
+          </Col>
         </Col>
       </Row>
     </animated.div>

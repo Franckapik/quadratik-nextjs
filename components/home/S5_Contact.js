@@ -31,9 +31,9 @@ export const S5_Contact = () => {
     <Row id="s5_contact">
     <Marquee pauseOnHover gradient={false} speed={100} className="marquee_diy ">
       <span className="p-5">Actualites musicales</span>{" "}
-      <img src="./logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />{" "}
+      <img src="./logo/logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />{" "}
       <span className="p-5">Mai verra la sortie de Skippy chez Kaona</span>{" "}
-      <img src="./logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
+      <img src="./logo/logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
     </Marquee>
 
     <Row className="contact_row border_creme m-0 p-0">
