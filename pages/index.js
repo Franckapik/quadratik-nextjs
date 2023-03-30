@@ -30,7 +30,7 @@ const Home = () => {
   return (
     <div>
       {scroll > vh ? <Burger></Burger> : null}
-      {scroll > vh ? <IndexPage scroll={scroll}></IndexPage> : null}
+      {scroll > vh ? <IndexPage scroll={scroll} vh={vh}></IndexPage> : null}
       <Parallax pages={10} ref={parallax}>
         <ParallaxLayer offset={0} speed={0}>
           <S0_Landing />
