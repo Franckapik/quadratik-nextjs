@@ -50,7 +50,6 @@ export const IndexPage = ({ scroll, vh }) => {
   return (
     <animated.div style={props}>
       {switchPage(scroll)}
-      {/* {scroll} */}
     </animated.div>
   );
 };

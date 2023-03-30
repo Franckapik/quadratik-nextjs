@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useSpring, animated, config, easings } from "@react-spring/web";
 
-
 const useAnimatedPath = ({ toggle, delay, onRest, duration }) => {
   const [length, setLength] = useState(null);
   const animatedStyle = useSpring({
@@ -52,7 +51,8 @@ const AnimatedLogo2 = ({ toggle, setLoading }) => {
         y="107.28"
         ry="0"
         transform="rotate(-45)"
-        {...animatedProps} />
+        {...animatedProps}
+      />
       <animated.rect
         width="27.1"
         height="27.078"
@@ -60,7 +60,8 @@ const AnimatedLogo2 = ({ toggle, setLoading }) => {
         y="107.28"
         ry="0"
         transform="rotate(-45)"
-        {...animatedProps} />
+        {...animatedProps}
+      />
       <animated.rect
         width="27.1"
         height="27.078"
@@ -68,7 +69,8 @@ const AnimatedLogo2 = ({ toggle, setLoading }) => {
         y="148.485"
         ry="0"
         transform="rotate(-45)"
-        {...animatedProps} />
+        {...animatedProps}
+      />
       <animated.rect
         width="27.1"
         height="27.078"
@@ -76,7 +78,8 @@ const AnimatedLogo2 = ({ toggle, setLoading }) => {
         y="148.485"
         ry="0"
         transform="rotate(-45)"
-        {...animatedProps} />{" "}
+        {...animatedProps}
+      />{" "}
     </>
   );
 };
@@ -118,38 +121,39 @@ export const S0_Landing = () => {
   }, [loaded]);
 
   return (
-    <Row id="s0_landing" className="justify-content-between m-0">
+    <Row id="s0_landing" className="m-0 w-100">
       {loaded ? (
-        <Row className="header d-none d-md-flex justify-content-end text-uppercase m-0 p-0">
+        <Row className="s0_header d-none d-md-flex justify-content-end text-uppercase m-0 p-0">
           <Col md={1}>Boutique</Col>
           <Col md={1}>Contact</Col>
           <Col md={1} className="d-none d-md-flex"></Col>
         </Row>
       ) : null}
-      <Col xs={1} className="d-none d-md-block m-0 p-0 ">
-        {" "}
-        {loaded ? <animated.div style={goRight} className="border_creme cadre_home_gauche"></animated.div> : null}
-      </Col>
-      <Col xs={10} sm={8} md={5} className="d-flex flex-wrap justify-content-center align-items-center">
-        <Row className="logo_cadre ">
-          <svg xmlns="http://www.w3.org/2000/svg" stroke="#D0C3B4" stroke-width="2">
+      <div  className="d-none d-md-block m-0 p-0 ">
+        {loaded ? <animated.div style={goRight} className="border_creme s0_cadre_home_gauche"></animated.div> : null}
+      </div>
+      <div className="d-flex flex-wrap justify-content-center align-items-center">
+        <div className="s0_animated_square text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" stroke="#D0C3B4" stroke-width="0.5" className="s0_svg_square">
             <AnimatedSquare toggle={loaded} />
           </svg>
-        </Row>
-        <Col className="logo_row d-flex flex-column justify-content-center align-items-center text-center">
-          <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
-            <g transform="" fill="none" stroke="#D0C3B4" stroke-width="1" stroke-linecap="square">
-              <AnimatedLogo toggle={toggle} />
-              <AnimatedLogo2 toggle={toggle} setLoading={setLoading} />
-            </g>
-          </svg>
-          <p className="text-nowrap text-uppercase brand_name m-0">Quadratik</p>
-          <p className="text-nowrap m-0 brand_subtitle ">ACOUSTIQUE & ARTISANAT</p>
-        </Col>
-      </Col>
-      <Col xs={1} className="d-none d-md-block p-0">
-        {loaded ? <animated.div style={goLeft} className="border_creme cadre_home_droit "></animated.div> : null}
-      </Col>
+          <div className="s0_logo bg-red">
+            <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+              <g transform="" fill="none" stroke="#D0C3B4" stroke-width="1" stroke-linecap="square">
+                <AnimatedLogo toggle={toggle} />
+                <AnimatedLogo2 toggle={toggle} setLoading={setLoading} />
+              </g>
+            </svg>
+          </div>{" "}
+          <div className="s0_brand_name">
+            <div className="text-nowrap text-uppercase s0_quadratik_text w-100">Quadratik</div>
+            <div className="text-nowrap text-uppercase s0_brand_subtitle w-100">Acoustique & Artisanat</div>
+          </div>
+        </div>
+      </div>
+      <div className="d-none d-md-block p-0">
+        {loaded ? <animated.div style={goLeft} className="border_creme s0_cadre_home_droit "></animated.div> : null}
+      </div>
     </Row>
   );
 };

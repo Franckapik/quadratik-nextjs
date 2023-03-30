@@ -3,11 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { Burger } from "../components/Burger";
 import { IndexPage } from "../components/home/IndexPage";
 import { S0_Landing } from "../components/home/S0_Landing";
-import { S1_Product } from "../components/home/S1_Product";
-import { S2_HomeStudio } from "../components/home/S2_HomeStudio";
-import { S3_DIY } from "../components/home/S3_DIY";
-import { S4_Business } from "../components/home/S4_Business";
-import { S5_Contact } from "../components/home/S5_Contact";
 
 const Home = () => {
   const [scroll, setScroll] = useState(0);
@@ -35,7 +30,7 @@ const Home = () => {
         <ParallaxLayer offset={0} speed={0}>
           <S0_Landing />
         </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={0} sticky={{ start: 1, end: 2 }}>
+       {/*  <ParallaxLayer offset={1} speed={0} sticky={{ start: 1, end: 2 }}>
           <S1_Product vh={vh} scroll={scroll}  />
         </ParallaxLayer>
         <ParallaxLayer offset={3} speed={0} sticky={{ start: 3, end: 6 }}>
@@ -49,7 +44,7 @@ const Home = () => {
         </ParallaxLayer>
         <ParallaxLayer offset={9} speed={0}>
           <S5_Contact />
-        </ParallaxLayer>
+        </ParallaxLayer> */}
       </Parallax>
     </div>
   );
