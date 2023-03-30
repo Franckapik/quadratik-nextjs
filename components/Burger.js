@@ -18,7 +18,7 @@ export const Burger = () => {
   )
   return (
     <animated.div style={props}>
-    <Col md={1} className="d-flex burger justify-content-center pt-5">
+    <Col md={1} className="d-flex burger justify-content-center">
       <Hamburger toggled={isOpen} toggle={setOpen} color="#FFFFFF" />
     </Col>
   </animated.div>

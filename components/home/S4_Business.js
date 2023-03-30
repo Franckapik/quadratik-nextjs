@@ -205,7 +205,7 @@ export const S4_Business = () => {
               </div>
             </Col>
             <Col md={4}  className="values_text text-left ps-5 ">
-              <Row className="values_header text-uppercase text-creme">
+              <Row className="s4_values_header text-uppercase text-creme">
                 <p className="ps-1 mt-0 m-1 values_subtitles1">Depuis 5 ans</p>
                 <p className="p-0 m-1 values_subtitles2">Quadratik</p>
                 <p className="ps-1 m-1 values_subtitles3">joue cartes sur table !</p>

@@ -20,8 +20,8 @@ export const S1_Product = ({ vh, scroll }) => {
 
   return (
     <Row id="s1_product" className="justify-content-start align-items-center m-0 ">
-      <Col md={1}></Col>
-      <Col md={5} className="s1_square text-end pt-3">
+      <Col md={1} className="d-none d-md-flex"></Col>
+      <Col md={5} className="s1_square">
         <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
           <Carousel.Item>
             <img className="d-block w-100 image-hover" src="../difrender10wrot30.png" alt="First slide" />
@@ -33,11 +33,10 @@ export const S1_Product = ({ vh, scroll }) => {
           </Carousel.Item>
         </Carousel>
       </Col>
-      <Col md={5} className="">
-        <Row>
-          <Col md={3}></Col>
-          <Col md={9} className="d-flex flex-column align-items-center justify-content-center">
-            <div className="border_creme s1_product_name">
+      <Col md={6} className="s1_product_order">
+        <Row className="justify-content-center ">
+          <Col md={10} className="d-flex flex-column align-items-center justify-content-center s1_col_product">
+            <Row className="d-flex border_creme s1_product_name">
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
                   <h2 className="pt-4 p-3">
@@ -56,8 +55,8 @@ export const S1_Product = ({ vh, scroll }) => {
                   </h2>
                 </Carousel.Item>
               </Carousel>
-            </div>
-            <div className="border_creme s1_product_physic dark_bg d-flex justify-content-center align-itmes-center">
+            </Row>
+            <Row className="d-none border_creme s1_product_physic dark_bg d-md-flex justify-content-center align-items-center">
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
                   <img className="d-block w-100" src="./physic_dif.svg" alt="First slide" />
@@ -66,20 +65,19 @@ export const S1_Product = ({ vh, scroll }) => {
                   <img className="d-block w-100" src="./physic_abs.svg" alt="Second slide" />
                 </Carousel.Item>
               </Carousel>
-            </div>
-            <Row className="text-uppercase text-center justify-content-center mt-4">
-              <p className="m-0 pb-2 button_subtitle">Commande en ligne </p>
+            </Row>
+            <Row className="text-uppercase text-center justify-content-center">
+              <p className="m-0 pb-2 s1_button_subtitle">Commande en ligne </p>
               <Button variant="primary" className="button_home">
                 <i className="fad fa-store"></i> Entrer dans l'atelier
               </Button>
-              <p className="m-0 pt-2 pb-2 button_subtitle">
+              <p className="m-0 pt-2 pb-2 s1_button_subtitle">
                 <span className="s1_product_sub_blue">Fabrication</span>
                 <span className=""> Artisanale </span>
                 <span className="s1_product_sub_red"> Française</span>{" "}
               </p>
             </Row>
           </Col>
-          <Col md={1}></Col>
         </Row>
       </Col>
     </Row>

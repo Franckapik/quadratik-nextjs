@@ -48,7 +48,7 @@ export const IndexPage = ({ scroll, vh }) => {
   };
 
   return (
-    <animated.div style={props}>
+    <animated.div style={props} className="d-none d-md-flex">
       {switchPage(scroll)}
     </animated.div>
   );
