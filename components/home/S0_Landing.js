@@ -40,7 +40,12 @@ const AnimatedLogo = ({ toggle }) => {
   );
 };
 const AnimatedLogo2 = ({ toggle, setLoading }) => {
-  const animatedProps = useAnimatedPath({ toggle, delay: 800, onRest: () => setLoading(true), duration: 1000 });
+  const animatedProps = useAnimatedPath({
+    toggle,
+    delay: 800,
+    duration: 1000,
+    onRest: () => setLoading(true),
+  });
 
   return (
     <>
@@ -129,7 +134,7 @@ export const S0_Landing = () => {
           <Col md={1} className="d-none d-md-flex"></Col>
         </Row>
       ) : null}
-      <div  className="d-none d-md-block m-0 p-0 ">
+      <div className="d-none d-md-block m-0 p-0 ">
         {loaded ? <animated.div style={goRight} className="border_creme s0_cadre_home_gauche"></animated.div> : null}
       </div>
       <div className="d-flex flex-wrap justify-content-center align-items-center">

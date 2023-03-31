@@ -1,5 +1,5 @@
-import { animated, easings, useSpring } from "@react-spring/web";
-import { Stats } from "@react-three/drei";
+import { animated, easings, Globals, useSpring } from "@react-spring/web";
+import { AdaptiveDpr, Stats } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
@@ -7,6 +7,8 @@ import { MathUtils } from "three";
 import { LoadCamera } from "../threejs/loadCamera";
 import { LoadLight } from "../threejs/loadLight";
 import { LoadMesh } from "../threejs/loadMesh";
+
+Globals.assign({ frameLoop: "always" });
 
 const RotateScroll = ({ children, scroll, setRotation, vh }) => {
   const scene = useRef();
@@ -35,7 +37,7 @@ const RotateScroll = ({ children, scroll, setRotation, vh }) => {
   );
 };
 
-export const S2_HomeStudio = ({ scroll, vh }) => {
+export const S2_Customers = ({ scroll, vh }) => {
   const [rotation, setRotation] = useState(0);
   const options = {
     threshold: 0.25,
@@ -82,7 +84,7 @@ export const S2_HomeStudio = ({ scroll, vh }) => {
 
   return (
     <Row id="s2_customers" className="p-0 m-0">
-      <Col md={2} className="text-end p-0 ">
+      <Col md={2} className="text-end p-0 d-none d-md-flex ">
         <animated.div style={vertical}>
           <Row className="p-0 m-0">
             <Col md={8} className="p-0 m-0">
@@ -107,48 +109,40 @@ export const S2_HomeStudio = ({ scroll, vh }) => {
           </Row>
         </animated.div>
       </Col>
-      <Col md={10} className="d-flex flex-column justify-content-center s2_col_canvas">
-        {/*       <Row className="justify-content-center align-items-center h-100">
-        <Col md={8} className="d-flex flex-column  p-0 justify-content-end align-items-center">
-          <img src="./studio1.svg" alt="image de studio d'enregistrement de musique" />
-        </Col>
-      </Row> */}
-
-        <animated.div
-          className="rideau w-100 h-100 d-flex flex-column align-items-center justify-content-start"
-          style={props}
-        >
-          <Row className="sentence_pro text-center p-3 pt-5 ">
-            <span>Révelez votre</span>
-            <h2>Professionnalisme</h2>
-            <span className="sub2">quelles que soient les dimensions de votre espace</span>
+      <Col md={10} className="d-flex flex-column justify-content-center " >
+        <animated.div className="w-100 h-100 s2_rideau" style={props} >
+          <Row className="s2_sentence_pro text-center">
+            <h2 className="">Professionnel</h2>
+            <span className="s2_sub2">quelles que soient les dimensions de votre espace</span>
           </Row>
-          <div>
-            {" "}
+          <Row>
             <img
-              className="s2_photo_studio"
+              className="s2_photo_studio m-auto"
               src="./discostudio.png"
               alt="Photographie des produits quadratik.fr dans le studio DiscoCasino de Rennes"
             />
-          </div>
-          <div>
+          </Row>
+          <Row>
             <Button variant="primary" className="s2_studio_button">
               <i className="fad fa-projector"></i>Découvrir les réalisations
             </Button>
-          </div>
+          </Row>
         </animated.div>
+        {scroll > 3.5 * vh && scroll < 6 * vh ? (
+          <Row className="s2_canvas_row">
+            <Canvas dpr={1} shadows>
+              <Stats showPanel={0} className="stats" />
 
-        <Canvas shadows>
-          <Stats showPanel={0} className="stats" />
-          {/*         <OrbitControls /> */}
-          <LoadCamera url={"/glb/scene_customers.glb"} />
-          <RotateScroll scroll={scroll} vh={vh} setRotation={setRotation}>
-            <LoadMesh url={"/glb/scene_customers.glb"} />
-            <LoadLight url={"/glb/scene_customers.glb"} />
-          </RotateScroll>
-
-          <ambientLight intensity={0.15} />
-        </Canvas>
+              <LoadCamera url={"/glb/scene_customers.glb"} />
+              <RotateScroll scroll={scroll} vh={vh} setRotation={setRotation}>
+                <LoadMesh url={"/glb/scene_customers.glb"} />
+                <LoadLight url={"/glb/scene_customers.glb"} />
+              </RotateScroll>
+              <AdaptiveDpr pixelated />
+              <ambientLight intensity={0.15} />
+            </Canvas>
+          </Row>
+        ) : null}
       </Col>
     </Row>
   );

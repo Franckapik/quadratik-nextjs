@@ -350,21 +350,35 @@ letter-spacing: calc(0.3rem + 0.2vw);
   aspect-ratio : 4/4;
 }
 
-.rideau {
+.s2_rideau {
+  position: relative;
   background-color: #332d2a;
-  position: absolute;
   z-index: 1000;
 }
 
 .s2_photo_studio{
-  position: absolute;
-  top: 15%;
-  right : 35%;
+  width : calc(50vh + 20vw)!important;
+  padding: calc(5vh);
 }
 
-.sentence_pro {
-  position: relative;
-  right: -20%;
+.s2_sentence_pro{
+  margin-top: 5vh!important;
+}
+
+ .s2_sentence_pro h2 {
+  font-weight: 100;
+  font-size: calc(1rem + 3vw);
+  letter-spacing:calc(0.2rem + 0.5vw) !important;
+  padding-left: 0.4em; 
+}
+
+.s2_sub2 {
+  font-size: calc(0.7rem + 0.8vw);
+  
+}
+
+.s2_canvas_row {
+  position : absolute;
 }
 
 .s1_product_physic img {
@@ -377,31 +391,10 @@ letter-spacing: calc(0.3rem + 0.2vw);
   --bs-list-group-border-width: none;
 }
 
-#s2_homeStudio img,
-#s2_proStudio img {
-  width: 50vw;
-  margin: auto;
-}
-
-#s2_realPreview img {
-  opacity: 0.8;
-  filter: saturate(90%);
-  filter: contrast(90%);
-  filter: sepia(30%);
-  padding: 2vw;
-  /*   filter: brightness(1.1);
- */
-}
-
 .s2_studio_button {
   position: absolute;
   bottom: 15%;
   right: 13%;
-}
-
-.s2_col_canvas{
-  position : relative;
-  height: 100%;
 }
 
 .bg-red {
@@ -434,20 +427,7 @@ letter-spacing: calc(0.3rem + 0.2vw);
   font-size: 0.8vw;
 }
 
-#s2_customers h2 {
-  font-family: "futura-light";
-  font-weight: 100;
-  font-size: 2vw;
-  padding-top: 1vw;
-  letter-spacing: 0.7vw !important;
-  /*   position : relative;
-  bottom : -20vh;
- */
-}
 
-.sub2 {
-  font-size: 1.25vw;
-}
 .s3_row_icons div {
   position: relative!important;
 }
