@@ -179,7 +179,7 @@ export const S4_Business = () => {
   };
 
   return (
-    <Row id="s4_business">
+    <Row id="s4_business" className="section">
       <Row className="p-0 m-0">
         <Marquee pauseOnHover gradient={false} speed={70} className="s4_marquee">
           <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>{" "}

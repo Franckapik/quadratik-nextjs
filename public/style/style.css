@@ -195,21 +195,9 @@ h2 {
   font-size: 1vw;
 }
 
-#s0_landing,
-#s1_product,
-#s2,
-#s2_customers,
-#s2_homeStudio,
-#s2_proStudio,
-#s2_realPreview,
-#s3_diy,
-#s4_business,
-#s5_contact,
-#s1_square,
-#s1_product_dif,
-#s1_product_abs {
-  height: 100vh;
-      border-bottom: solid thin #FFFFFF;
+.section {
+  min-height: 100vh;
+      border: solid thin #FFFFFF;
 
 }
 
@@ -218,11 +206,6 @@ h2 {
 }
 
 /* s4 */
-
-.s4_values_text {
-/*   padding: calc(0.5rem + 0.8vw)!important;
- */
-}
 
 .s4_list_icon {
   width: 40px;
@@ -611,8 +594,12 @@ text-align: justify;
   rotate: -1.5deg;
 }
 
-.contact_row {
-  height: 50vh;
+.s5_contact_row {
+  min-height: 600px;
+}
+
+.s5_contact_row .row {
+  min-height: 150px;
 }
 
 .ft {
@@ -643,17 +630,16 @@ text-align: justify;
   border-bottom: solid thin #d0c3b4;
 }
 
-.logo_orientation {
+.s5_logo_orientation {
   height: 40vh;
 }
 
-.ekleo_logo {
+.s5_ekleo_logo {
   width: 50% !important;
-  margin: auto;
 }
 
-.social i {
-  font-size: 2vw;
+.s5_social i {
+  font-size: 2rem;
 }
 
 .bg_light {
@@ -720,6 +706,9 @@ text-align: justify;
 .s4_list_icon {
   width: 100%;
 }
-  
+
+.h-20 {
+  height: 5vh;
+}
   
 }

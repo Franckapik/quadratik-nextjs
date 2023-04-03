@@ -12,7 +12,7 @@ export const S3_DIY = () => {
       opacity: 1,
       scale: 1,
     },
-  }));
+  }), {once:true});
 
   const switchExplanation = (explanation) => {
     switch (explanation) {
@@ -48,7 +48,7 @@ export const S3_DIY = () => {
 
   return (
     <animated.div style={springs} ref={ref}>
-      <Row id="s3_diy" className="m-0 d-flex align-items-center justify-content-center w-100">
+      <Row id="s3_diy" className="section m-0 d-flex align-items-center justify-content-center w-100">
         <Col md={1} className="d-none d-md-flex"></Col>
         <Col md={11} className="d-flex flex_column h-100 justify-content-center align-items-center">
           <Col md={12}>

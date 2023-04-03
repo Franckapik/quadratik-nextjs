@@ -126,7 +126,7 @@ export const S0_Landing = () => {
   }, [loaded]);
 
   return (
-    <Row id="s0_landing" className="m-0 w-100">
+    <Row id="s0_landing" className=" section m-0 w-100">
       {loaded ? (
         <Row className="s0_header d-none d-md-flex justify-content-end text-uppercase m-0 p-0">
           <Col md={1}>Boutique</Col>

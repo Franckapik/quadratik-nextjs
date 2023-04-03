@@ -19,7 +19,7 @@ export const S1_Product = ({ vh, scroll }) => {
   });
 
   return (
-    <Row id="s1_product" className="justify-content-start align-items-center m-0 ">
+    <Row id="s1_product" className="section justify-content-start align-items-center m-0 ">
       <Col md={1} className="d-none d-md-flex"></Col>
       <Col md={5} className="s1_square">
         <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
