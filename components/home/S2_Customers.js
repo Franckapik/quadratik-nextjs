@@ -83,15 +83,15 @@ export const S2_Customers = ({ scroll, vh }) => {
   }, [scroll]);
 
   return (
-    <Row id="s2_customers" className="p-0 m-0">
-      <Col md={2} className="text-end p-0 d-none d-md-flex ">
+    <Row id="s2_customers " className="p-0 m-0 justify-content-md-start justify-content-md-start">
+      <Col md={1} className="text-end p-0 d-none d-md-flex ">
         <animated.div style={vertical}>
           <Row className="p-0 m-0">
             <Col md={8} className="p-0 m-0">
               <img src="./vertical_square.svg" alt="Ligne verticale" className="s2_vertical_square" />
             </Col>
             <Col md={4} className="p-0 m-0 d-flex flex-colmun justify-content-end">
-              <Row className="d-flex justify-content-between text-uppercase text-center list_pro">
+              <Row className="d-flex justify-content-between text-uppercase text-center s2_list_pro">
                 <Col>
                   <p style={{ opacity: rotation > 3.8 ? 1 : 0.2 }}>Home cinéma</p>
                 </Col>
@@ -109,18 +109,71 @@ export const S2_Customers = ({ scroll, vh }) => {
           </Row>
         </animated.div>
       </Col>
-      <Col md={10} className="d-flex flex-column justify-content-center " >
-        <animated.div className="w-100 h-100 s2_rideau" style={props} >
+      
+
+      <Col md={10} className="mt-2">
+        <animated.div className="d-flex flex-column w-100 h-100 justify-content-evenly s2_customers_photo dark_bg" style={props} >
+        <Row className="align-items-stretch justify-content-center">
+          <Col md={3} className="text-center text-md-start">
+            <img src="/customers/customer1.png" alt="Image du studio Disco casino" />
+          </Col>
+          <Col className=" d-flex flex-column justify-content-evenly align-items-center mt-5">
+            <Row className="s2_sentence_pro text-center">
+              <h2 className="">Professionnel</h2>
+              <span className="s2_sub2">quelles que soient les dimensions de votre espace</span>
+            </Row>
+            <Row>
+              <Button variant="primary" className="s2_studio_button">
+                <i className="fad fa-projector"></i>Découvrir les réalisations
+              </Button>
+            </Row>
+          </Col>
+          <Col  md={3} className="text-center text-md-end d-none d-md-flex">
+            <img src="/customers/customer2.png" alt="Image du studio Disco casino" />
+          </Col>
+        </Row>
+        <Row className="d-none d-md-flex align-items-stretch justify-content-center ">
+          <Col className="w-12 text-start ">
+            <img src="/customers/customer3.png" alt="Image du studio Disco casino" />
+          </Col>
+          <Col className="w-25  ">
+            <img src="/customers/customer4.png" alt="Image du studio Disco casino" />
+          </Col>
+          <Col className="w-25  ">
+            <img src="/customers/customer5.png" alt="Image du studio Disco casino" />
+          </Col>
+          <Col className="w-25  ">
+            <img src="/customers/customer6.png" alt="Image du studio Disco casino" />
+          </Col>
+          <Col className="w-12 text-end ">
+            <img src="/customers/customer7.png" alt="Image du studio Disco casino" />
+          </Col>
+        </Row>      </animated.div >
+        {scroll > 3.5 * vh && scroll < 6 * vh ? (
+          <div className="s2_canvas_row h-100 w-100 d-flex align-items-center justify-content-center ">
+            <div className="s2_canvas_container ">
+            <Canvas dpr={1} shadows>
+              <Stats showPanel={0} className="stats" />
+              <LoadCamera url={"/glb/scene_customers.glb"} />
+              <RotateScroll scroll={scroll} vh={vh} setRotation={setRotation}>
+                <LoadMesh url={"/glb/scene_customers.glb"} />
+                <LoadLight url={"/glb/scene_customers.glb"} />
+              </RotateScroll>
+              <AdaptiveDpr pixelated />
+              <ambientLight intensity={0.15} />
+            </Canvas> 
+          </div></div>
+        ) : null}
+      </Col>
+
+
+
+      {/*       <Col md={11} className="d-flex flex-column justify-content-center " >
+        <animated.div className="w-100 h-100 s2_rideau bg-red" style={props} >
+          <Row></Row>
           <Row className="s2_sentence_pro text-center">
             <h2 className="">Professionnel</h2>
             <span className="s2_sub2">quelles que soient les dimensions de votre espace</span>
-          </Row>
-          <Row>
-            <img
-              className="s2_photo_studio m-auto"
-              src="./discostudio.png"
-              alt="Photographie des produits quadratik.fr dans le studio DiscoCasino de Rennes"
-            />
           </Row>
           <Row>
             <Button variant="primary" className="s2_studio_button">
@@ -143,7 +196,7 @@ export const S2_Customers = ({ scroll, vh }) => {
             </Canvas>
           </Row>
         ) : null}
-      </Col>
+      </Col> */}
     </Row>
   );
 };
