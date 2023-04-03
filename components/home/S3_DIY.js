@@ -47,7 +47,7 @@ export const S3_DIY = () => {
   const [explanation, setExplanation] = useState(1);
 
   return (
-    <animated.div style={springs} ref={ref}>
+/*     <animated.div style={springs} ref={ref}> */
       <Row id="s3_diy" className="section m-0 d-flex align-items-center justify-content-center w-100">
         <Col md={1} className="d-none d-md-flex"></Col>
         <Col md={11} className="d-flex flex_column h-100 justify-content-center align-items-center">
@@ -141,6 +141,6 @@ export const S3_DIY = () => {
           </Col>
         </Col>
       </Row>
-    </animated.div>
+/*     </animated.div> */
   );
 };
