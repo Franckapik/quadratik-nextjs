@@ -1,10 +1,9 @@
-import { AdaptiveDpr, ScrollControls, Stats } from "@react-three/drei";
+import { ScrollControls, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Row } from "react-bootstrap";
-import { useBearStore } from "../../hooks/store";
 import { LoadCamera } from "../threejs/loadCamera";
-import { LoadMesh } from "../threejs/loadMesh";
 import { LoadLight } from "../threejs/loadLight";
+import { LoadMesh } from "../threejs/loadMesh";
 
 export const S2_Canvas = () => {
   return (
@@ -17,8 +16,6 @@ export const S2_Canvas = () => {
           </ScrollControls>
           <LoadMesh url={"/glb/scene_customers.glb"} />
           <LoadLight url={"/glb/scene_customers.glb"} />
-
-          <AdaptiveDpr pixelated />
           <ambientLight intensity={0.15} />
         </Canvas>
       </div>
