@@ -1,5 +1,6 @@
 import { ScrollControls, Stats } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
 import { Row } from "react-bootstrap";
 import { LoadCamera } from "../threejs/loadCamera";
 import { LoadLight } from "../threejs/loadLight";
@@ -14,9 +15,10 @@ export const S2_Canvas = () => {
           <ScrollControls pages={3}>
             <LoadCamera url={"/glb/scene_customers.glb"} />{" "}
           </ScrollControls>
+          <Suspense fallback={null}>
           <LoadMesh url={"/glb/scene_customers.glb"} />
           <LoadLight url={"/glb/scene_customers.glb"} />
-          <ambientLight intensity={0.15} />
+          <ambientLight intensity={0.15} /></Suspense>
         </Canvas>
       </div>
     </Row>
