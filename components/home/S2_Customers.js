@@ -1,14 +1,5 @@
-import { animated, easings, Globals, useSpring } from "@react-spring/web";
-import { AdaptiveDpr, Stats } from "@react-three/drei";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useEffect, useRef, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import { MathUtils } from "three";
-import { LoadCamera } from "../threejs/loadCamera";
-import { LoadLight } from "../threejs/loadLight";
-import { LoadMesh } from "../threejs/loadMesh";
 
-Globals.assign({ frameLoop: "always" });
 
 export const S2_Customers = ({ scroll, vh, mobile }) => {
 

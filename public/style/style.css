@@ -24,7 +24,6 @@ body {
   font-weight: 300 !important;
   line-height: 1.8em !important;
   letter-spacing: 0.1em;
-  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
@@ -88,8 +87,9 @@ h2 {
 
 .burger {
   z-index: 1000;
-  position: fixed;
+  position: sticky!important;
   padding-top: calc(2vh + 2vw);
+  top: 100px;
 }
 
 .trait {
@@ -379,8 +379,7 @@ h2 {
   height : 80%;
 }
 
-.s2_canvas_container {
-  width : auto;
+.s2_canvas_container  {
 }
 
 .s1_product_physic img {

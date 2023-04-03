@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
+import { useBearStore } from "../../hooks/store";
 
-export const S1_Product = ({ vh, scroll }) => {
+export const S1_Product = () => {
   const [index, setIndex] = useState(0);
-  
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
+  const scroll = useBearStore((state) => state.scroll)
+  const height = useBearStore((state) => state.height)
+
+
   useEffect(() => {
-    if (scroll > vh * 1.5) {
+    if (scroll > height * 1.5) {
       handleSelect(1);
     } else {
       handleSelect(0);
@@ -21,7 +25,7 @@ export const S1_Product = ({ vh, scroll }) => {
   return (
     <Row id="s1_product" className="section justify-content-start align-items-center m-0 ">
       <Col md={1} className="d-none d-md-flex"></Col>
-      <Col md={5} className="s1_square">
+      <Col md={5} className="s1_square"> {scroll}
         <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
           <Carousel.Item>
             <img className="d-block w-100 image-hover" src="../difrender10wrot30.png" alt="First slide" />

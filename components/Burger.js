@@ -1,24 +1,29 @@
-import { useSpring, animated } from "@react-spring/web";
+import { animated, useInView } from "@react-spring/web";
 import { Turn as Hamburger } from "hamburger-react";
 import { useState } from "react";
 import { Col } from "react-bootstrap";
 
 export const Burger = () => {
   const [isOpen, setOpen] = useState(false);
-  const [props, api] = useSpring(
+  const [ref, springs] = useInView(
     () => ({
-      from: { opacity: 0 },
-      to: { opacity: 1 },
-      delay : 1000, 
-      config :  {
-        duration : 2000
-      }
+      from: {
+        opacity: 0,
+      },
+      to: {
+        opacity: 1,
+      },
     }),
-    []
+    {
+    
+    }
   )
+  
+
   return (
-    <animated.div style={props}>
+    <animated.div ref={ref} style={springs}>
     <Col md={1} className="d-flex burger justify-content-center">
+      {scrollY}
       <Hamburger toggled={isOpen} toggle={setOpen} color="#FFFFFF" />
     </Col>
   </animated.div>
