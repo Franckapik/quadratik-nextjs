@@ -356,11 +356,7 @@ p {
 }
 
 .s3_diy_guide_text {
-  font-size: calc(0.7rem + 0.5vh);
-  height: 45vh;
-  padding-left: calc(0.5rem + 2vw) !important;
-  padding-right: calc(0.5rem + 2vw) !important;
-  position: relative;
+  height: calc(35vh + 10vw);
 }
 
 .s3_diy_guide_text img {

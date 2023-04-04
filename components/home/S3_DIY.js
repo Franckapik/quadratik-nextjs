@@ -50,9 +50,8 @@ export const S3_DIY = () => {
 /*     <animated.div style={springs} ref={ref}> */
       <Row id="s3_diy" className="section m-0 d-flex align-items-center justify-content-center w-100">
         <Col md={1} className="d-none d-md-flex"></Col>
-        <Col md={11} className="d-flex flex_column h-100 justify-content-center align-items-center">
-          <Col md={12}>
-            <Row className="s3_diy_bg justify-content-center align-items-center m-auto">
+        <Col md={11} className="d-flex flex_column h-100 justify-content-start align-items-center">
+            <Row className="s3_diy_bg justify-content-center align-items-center p-2 p-md-5">
               <Col md={6} className="d-flex flex-column justify-content-evenly align-items-center s3_diy_draw p-0 ">
                 <Row className="pt-2 ">
                   <Button variant="primary" className="button_home m-auto">
@@ -71,8 +70,8 @@ export const S3_DIY = () => {
                 </Row>
               </Col>
               <Col md={6} className="d-flex flex-column s3_diy_guide_text justify-content-evenly">
-                <Row className=" w-100 justify-content-center">
-                  <h2>Comment fonctionne un diffuseur ?</h2>
+                <Row className="justify-content-center ft1 text-uppercase text-center">
+                  Comment fonctionne un diffuseur ?
                 </Row>
                 <Row className="text-center s3_row_icons justify-content-evenly flex-nowrap">
                   <Col className={explanation === 1 ? "border_creme " : null}>
@@ -135,11 +134,11 @@ export const S3_DIY = () => {
                     ></img>
                   </Col>
                 </Row>
-                <Row className="s3_row_explanation">{switchExplanation(explanation)}</Row>
+                <Row className="s3_row_explanation ft4">{switchExplanation(explanation)}</Row>
               </Col>
             </Row>
           </Col>
-        </Col>
+        
       </Row>
 /*     </animated.div> */
   );
