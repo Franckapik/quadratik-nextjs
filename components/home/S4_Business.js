@@ -67,7 +67,7 @@ const Deck = ({ setVisibleCard }) => {
   return (
     <>
       {props.map(({ x, y, rot, scale }, i) => (
-        <animated.div className={"deck"} key={i} style={{ x, y }}>
+        <animated.div className={"s4_deck"} key={i} style={{ x, y }}>
           {/* This is the card itself, we're binding our gesture to it (and inject its index so we know which is which) */}
           <animated.div
             {...bind(i)}
@@ -204,11 +204,11 @@ export const S4_Business = () => {
                 <Row className="s4_list ft">{switchList(visibleCard)}</Row>
             </Col>
             <Col md={6}  className="order-md-1">
-              <div className={"cards_container"}>
+              <div className={"s4_cards_container"}>
                 <img
                   src="./card_table.svg"
                   alt="Table des valeurs de l'entreprise Quadratik.fr"
-                  className="card_table"
+                  className="s4_card_table"
                 />
                 {inView ? <Deck setVisibleCard={setVisibleCard} /> : null}
              </div>

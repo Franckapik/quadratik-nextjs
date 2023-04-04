@@ -11,8 +11,8 @@ export const S2_Canvas = () => {
 
   return (
     <Row id="S2_Canvas " className="section p-0 m-0 justify-content-md-start justify-content-md-start">
-      <div className="s2_canvas_container ">
-        <Canvas frameloop="demand" dpr={1} shadows>
+      <div className="s2_canvas_container bg-red ">
+{/*         <Canvas frameloop="demand" dpr={1} shadows>
           <Stats showPanel={0} className="stats" />
           <ScrollControls pages={3}>
             <LoadCamera url={"/glb/scene_customers.glb"} />{" "}
@@ -22,7 +22,7 @@ export const S2_Canvas = () => {
           <BakeShadows />
           <LoadLight url={"/glb/scene_customers.glb"} />
           <ambientLight intensity={0.15} /></Suspense> 
-        </Canvas>
+        </Canvas> */}
       </div>
     </Row>
   );

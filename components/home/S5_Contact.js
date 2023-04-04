@@ -53,7 +53,7 @@ export const S5_Contact = () => {
             <animated.div
               ref={ref}
               style={springs}
-              className="d-flex flex-column animatedcontainer border_creme  bg_light align-items-center justify-content-center p-0 m-0"
+              className="d-flex flex-column s5_animatedcontact border_creme  bg_light align-items-center justify-content-center p-0 m-0"
             >
               <p className="m-auto text-center text-uppercase">Contact direct avec l'artisan</p>{" "}
               <p className="m-auto text-center">06.31.92.74.81</p>
