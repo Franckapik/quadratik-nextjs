@@ -25,7 +25,9 @@
 .bottom_creme {
   border-bottom: solid thin #d0c3b4;
 }
-
+p {
+  margin-bottom: 0!important;
+}
 .btn-primary {
   background-color: #8ea65f !important;
   border: none !important;
@@ -80,8 +82,8 @@
 }
 
 .ft05 {
-  font-size: calc(1.5rem + 1.5vw) !important;
-  letter-spacing: calc(0.3rem + 0.8vw);
+  font-size: calc(1.3rem + 1.2vw) !important;
+  letter-spacing: calc(0.2rem + 0.2vw);
 }
 
 .ft1 {
@@ -267,10 +269,12 @@
   z-index: -1;
 }
 
+
+
 .s2_customers_photo img {
   border-radius: 1%;
   filter: brightness(0.9) contrast(100%) grayscale(20%) opacity(80%) saturate(100%) sepia(30%);
-  width: 90%;
+  height: 90%;
 }
 
 .s2_customers_photo img:hover {
@@ -304,20 +308,7 @@
   z-index: 1000;
 }
 
-.s2_sentence_pro h2 {
-  font-size: calc(1rem + 2vw);
-  font-weight: 100;
-  letter-spacing: calc(0.2rem + 0.5vw) !important;
-  padding-left: 0.4em;
-}
 
-.s2_studio_button {
-  margin: calc(2rem + 1vw) !important;
-}
-
-.s2_sub2 {
-  font-size: calc(0.7rem + 0.8vw);
-}
 
 .s2_vertical_square {
   height: 100vh;
@@ -554,15 +545,14 @@
   width: 100%;
 }
 
-.w-12 {
-  flex-grow: 1 !important;
-  text-align: center;
-}
 
+
+
+/* 
 .w-25 {
   flex-grow: 2 !important;
   text-align: center;
-}
+} */
 
 .zi_up {
   z-index: 1000 !important;
@@ -631,4 +621,30 @@ h2 {
   .s4_row_business_values {
     rotate: none;
   }
+
+  .s2_customers_photo {
+    flex-direction: column-reverse;
+        height : 500px;
+  }
+  
+
+  .hor_flex {   
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width : auto;
+    
+
+  }
+  
+  .hor_flex .col {
+    display: flex 0 0 !important ;
+    min-width: 250px;
+    }
+
+  .hor_flex .col img {
+    width : auto;
+    height : 200px;
+    }
+  
 }

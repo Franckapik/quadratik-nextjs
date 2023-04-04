@@ -43,20 +43,20 @@ export const S1_Product = () => {
             <Row className="d-flex border_creme s1_product_name text-center text-md-end">
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
-                  <h2 className="pt-md-4 p-md-3">
+                  <div className="p-4">
                     <p>
-                      <span className="ft4">Le diffuseur</span>
+                      <div className="ft3 text-uppercase">Le diffuseur</div>
                     </p>
-                    <span className="ft3">Woodik-7</span>
-                  </h2>
+                    <div className="ft05 text-uppercase mt-2 mt-md-4">Woodik-7</div>
+                  </div>
                 </Carousel.Item>
                 <Carousel.Item>
-                <h2 className="pt-md-4 p-md-3">
+                <div className="p-4">
                     <p>
-                      <span className="ft4">L'absorbeur</span>
+                      <div className="ft3 text-uppercase">L'absorbeur</div>
                     </p>
-                    <span className="ft3">Quadrablack</span>
-                  </h2>
+                    <div className="ft05 text-uppercase mt-2 mt-md-4">Quadrablack</div>
+                  </div>
                 </Carousel.Item>
               </Carousel>
             </Row>
@@ -71,7 +71,7 @@ export const S1_Product = () => {
               </Carousel>
             </Row>
             <Row className="text-uppercase text-center justify-content-center">
-              <p className="m-0 pb-2 s1_button_subtitle">Commande en ligne </p>
+              <p className="m-0 pb-2 ft5">Commande en ligne </p>
               <Button variant="primary" className="button_home">
                 <i className="fad fa-store"></i> Entrer dans l'atelier
               </Button>

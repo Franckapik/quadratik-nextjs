@@ -11,44 +11,49 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
       </Col>
       
 
-      <Col md={10} className="mt-2">
-        <div className="d-flex flex-column w-100 h-100 justify-content-evenly s2_customers_photo dark_bg" >
-        <Row className="align-items-stretch justify-content-center">
-          <Col md={3} className="text-center text-md-start">
+      <Col md={10} className="d-flex flex-column-reverse flex-md-column mt-2 justify-content-evenly s2_customers_photo">
+        <Row className=" align-items-between justify-content-center ">
+          <Col md={4} className="d-none d-md-flex text-center justify-content-start p-0">
             <img src="/customers/customer1.png" alt="Image du studio Disco casino" />
           </Col>
-          <Col className=" d-flex flex-column justify-content-evenly align-items-center mt-5">
-            <Row className="s2_sentence_pro text-center">
-              <h2 className="">Professionnel</h2>
-              <span className="s2_sub2">quelles que soient les dimensions de votre espace</span>
+          <Col className=" d-flex flex-column justify-content-evenly align-items-center ">
+            <Row className="text-center">
+              <span className="ft05 text-uppercase p-2">Professionnel</span>
+              <span className="ft5 p-2">quelles que soient les dimensions de votre espace</span>
             </Row>
             <Row>
-              <Button variant="primary" className="s2_studio_button">
-                <i className="fad fa-projector"></i>Découvrir les réalisations
+              <Button variant="primary" className="m-2">
+                <i className="fad fa-projector"></i>Découvrir les projets
               </Button>
             </Row>
           </Col>
-          <Col  md={3} className="text-center text-md-end d-none d-md-flex">
+          <Col  md={4} className="text-center justify-content-end d-none d-md-flex p-0">
             <img src="/customers/customer2.png" alt="Image du studio Disco casino" />
           </Col>
         </Row>
-        <Row className="d-md-flex align-items-stretch justify-content-center ">
-          <Col className="w-12 text-start ">
+        <Row className="d-flex justify-content-start hor_flex flex-nowrap ">
+          <Col className="text-start d-md-none  ">
+            <img src="/customers/customer1.png" alt="Image du studio Disco casino" />
+          </Col>
+          <Col className="text-start d-md-none  ">
+            <img src="/customers/customer2.png" alt="Image du studio Disco casino" />
+          </Col>
+          <Col className="text-start d-none d-md-flex ">
             <img src="/customers/customer3.png" alt="Image du studio Disco casino" />
           </Col>
-          <Col className="w-25  ">
+          <Col className="">
             <img src="/customers/customer4.png" alt="Image du studio Disco casino" />
           </Col>
-          <Col className="w-25  ">
+          <Col className="  ">
             <img src="/customers/customer5.png" alt="Image du studio Disco casino" />
           </Col>
-          <Col className="w-25  ">
+          <Col className="  ">
             <img src="/customers/customer6.png" alt="Image du studio Disco casino" />
           </Col>
-          <Col className="w-12 text-end ">
+          <Col className="justify-content-end  d-none d-md-flex ">
             <img src="/customers/customer7.png" alt="Image du studio Disco casino" />
           </Col>
-        </Row>      </div >
+        </Row>     
       </Col>
     </Row>
   );
