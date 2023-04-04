@@ -123,7 +123,7 @@ export const S4_Business = () => {
               <img src="./icones/hache.svg" className="s4_list_icon me-md-5 m-2" /> Travail du bois à la main
            </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/controle.svg" className="s4_list_icon me-md-5 m-2" /> Contrôle intégral à l'envoi
+              <img src="./icones/controle.svg" className="s4_list_icon me-md-5 m-2" /> Contrôle intégral
            </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
               <img src="./icones/finition.svg" className="s4_list_icon me-md-5 m-2" /> Finition à la demande
@@ -140,7 +140,7 @@ export const S4_Business = () => {
       case 3:
         return (
           <div className="m-md-5">
-            <p className="s4_values_text_title pt-4"><h4>Ecoresponsabilité</h4></p>
+            <p className="ft1 pt-4">Ecoresponsabilité</p>
             L'intégralité des matières premières est issue du territoire Français. Les livraisons sont assurées
             uniquement en France afin de garantir une empreinte carbone réduite. Le choix du bois contribue à assurer la
             pérennité et le renouvellement des forêts. La colle et les peintures utilisées sont garanties sans solvant
@@ -152,7 +152,7 @@ export const S4_Business = () => {
       case 1:
         return (
           <div className="m-md-5">
-            <p className=" s4_values_text_title pt-4"><h4>A votre écoute</h4></p>
+            <p className=" ft1 pt-4">A votre écoute</p>
             Du début à la fin, vos interrogations et votre projet sont confiés à un seul artisan responsable de la
             construction des solutions Quadratik. Les différentes expériences reçues depuis plus de 10 ans dans le
             domaine du son permettent de répondre à vos questions et de faire correspondre au mieux votre situation à
@@ -164,7 +164,7 @@ export const S4_Business = () => {
       case 2:
         return (
           <div className="m-md-5">
-            <p className=" s4_values_text_title pt-4"><h4>Un savoir-faire</h4></p>
+            <p className=" ft1 pt-4">Un savoir-faire</p>
             L’essentiel de la transformation, du conditionnement et de son contrôle est réalisé à la main. Les solutions
             acoustiques Quadratik ne sont pas issues d'un procédé industriel et se dispensent ainsi des erreurs liées au
             commerce de masse. La qualité esthetique des produits est fondamentale avant l'envoi vers une nouvelle
@@ -194,14 +194,14 @@ export const S4_Business = () => {
           <Row>
             <Col md={2} className="d-none d-md-flex"></Col>
             <Col md={4}  className="s4_values_text text-center text-md-start order-md-2 p-md-2 ">
-                  <Row className="s4_values_header mt-4 mt-md-0 text-uppercase text-creme">
-                    <p className="s4_values_subtitles1">Depuis 5 ans</p>
-                    <p className=" s4_values_subtitles2">Quadratik</p>
-                    <p className="s4_values_subtitles3">joue cartes sur table !</p>
-                    <p ref={ref}></p>
+                  <Row className="mt-4 mt-md-0 text-uppercase text-creme">
+                    <p className="ft4 pb-md-3">Depuis 5 ans</p>
+                    <p className="ft05 pb-md-3">Quadratik</p>
+                    <p className="ft5">joue cartes sur table !</p>
+                    <p ref={ref}></p> 
 
                   </Row>
-                <Row className="s4_list ft">{switchList(visibleCard)}</Row>
+                <Row className="s4_list ft4">{switchList(visibleCard)}</Row>
             </Col>
             <Col md={6}  className="order-md-1">
               <div className={"s4_cards_container"}>
@@ -216,10 +216,10 @@ export const S4_Business = () => {
           </Row>
         </Col>
 
-        <Col md={4} className="d-flex flex-column justify-content-center">
+        <Col md={4} className="d-none d-md-flex flex-column justify-content-center">
           <Row>
             <Col md={1}></Col>
-            <Col md={9} className="text-justify text-md-end ft">
+            <Col md={9} className="text-justify text-md-end ft4">
               {switchText(visibleCard)}
             </Col>
             <Col md={2} className="d-none d-md-flex"></Col>

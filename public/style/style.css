@@ -438,13 +438,12 @@ p {
 }
 
 .s4_list {
-  min-height: 200px;
+  min-height: 150px;
 }
 
 .s4_list_icon {
   color: #8ea65f;
-  height: 40px;
-  width: 40px;
+  height: calc(5vh);
 }
 
 .s4_marquee {
@@ -467,28 +466,6 @@ p {
   rotate: -1.5deg;
 }
 
-.s4_values_header {
-  letter-spacing: 0.3vw;
-}
-
-.s4_values_subtitles1 {
-  font-size: calc(0.9rem + 0.4vw);
-}
-
-.s4_values_subtitles2 {
-  font-size: calc(1.8rem + 2vw);
-}
-
-.s4_values_subtitles3 {
-  font-size: calc(0.9rem + 0.2vw);
-}
-
-.s4_values_text_title {
-  border-radius: 3px;
-  font-size: calc(1rem + 0.3vw) !important;
-  letter-spacing: 0.2vw;
-  width: 100%;
-}
 
 .s5_animatedcontact {
   will-change: transform, opacity;
@@ -602,9 +579,7 @@ h2 {
   }
 
   .s2_customers_photo img,
-  .s4_list_icon {
-    width: 100%;
-  }
+
 
   .s3_diy_bg {
     aspect-ratio: none;
