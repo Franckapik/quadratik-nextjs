@@ -400,7 +400,7 @@ p {
 }
 
 .s4_card_table {
-  width: 100%;
+  height: calc(30vh + 10vw);
 }
 
 .s4_cards_container {
@@ -408,7 +408,6 @@ p {
   background: 0 0;
   cursor: grab;
   display: flex;
-  height: 100%;
   justify-content: center;
 }
 
@@ -431,8 +430,8 @@ p {
   border-radius: 10px;
   box-shadow: 0 10px 10px -10px #332d2a;
   height: 85vh;
-  max-height: 285px;
-  max-width: 150px;
+  max-height: calc(28vh);
+  max-width: calc(15vh);
   width: 45vh;
   will-change: transform;
 }
@@ -447,12 +446,10 @@ p {
 }
 
 .s4_marquee {
-  border-bottom: #d0c3b4 solid 5px;
-  border-top: #d0c3b4 solid 5px;
+  border-bottom: #d0c3b4 solid 0.5vh;
+  border-top: #d0c3b4 solid 0.5vh;
   font-family: Alcubierre, sans-serif !important;
-  font-size: calc(1rem + 1vw);
-  height: 15vh;
-  letter-spacing: 0.6vw;
+  height: calc(5vh + 5vw);
   text-transform: uppercase;
 }
 
@@ -473,11 +470,11 @@ p {
 }
 
 .s5_contact_row {
-  min-height: 600px;
+  min-height: 360px;
 }
 
 .s5_contact_row .row {
-  min-height: 150px;
+  min-height: 40px;
 }
 
 .s5_ekleo_logo {
@@ -493,8 +490,8 @@ p {
 }
 
 .section {
-  border: solid thin #fff;
-  min-height: 100vh;
+/*   border: solid thin #fff;
+ */  min-height: 100vh;
 }
 
 .snapy {

@@ -23,45 +23,46 @@ export const S5_Contact = () => {
 
   return (
     <Row id="s5_contact" className="section">
-      <Marquee pauseOnHover gradient={false} speed={100} className="s4_marquee ">
+            <Row className="p-0 m-0">    
+      <Marquee pauseOnHover gradient={false} speed={100} className="s4_marquee ft1">
         <span className="p-5">Actualites musicales</span>{" "}
         <img src="./logo/logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />{" "}
         <span className="p-5">Mai verra la sortie de Skippy chez Kaona</span>{" "}
         <img src="./logo/logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
       </Marquee>
-
-      <Row className="s5_contact_row border_creme m-0 p-0">
-        <Col sm={1} className="right_creme d-flex align-items-center justify-content-center"></Col>
-        <Col sm={4} className="right_creme d-none d-md-flex flex-column align-items-center justify-content-center">
-          <p>Besoin d'être orienté dans votre projet ?</p>
+  </Row>
+      <Row className="s5_contact_row border_creme m-0 p-0 ft4 ">
+        <Col sm={1} className="right_creme d-none d-md-flex align-items-center justify-content-center"></Col>
+        <Col sm={4} className="right_creme d-none d-md-flex flex-column align-items-center justify-content-center text-uppercase">
+          Besoin d'être orienté dans votre projet ?
           <img
             src="/logo/logo_orientation.svg"
             alt="Image illustrant un choix à réaliser à partir du logo de Quadratik.fr"
             className="s5_logo_orientation"
           />
         </Col>
-        <Col sm={3} className="right_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
-          <Row className="bottom_creme w-100 h-100 ">
-            <p className="m-auto text-center text-uppercase">Recevoir des bonnes ondes</p>
+        <Col sm={3} className="right_creme d-flex flex-column align-items-center justify-content-start p-0 m-0">
+          <Row className="text-uppercase bottom_creme h-50 w-100 align-items-center justify-content-center">
+           Recevoir des bonnes ondes
           </Row>
-          <Row className="w-100 h-100 ">
-            <p className="m-auto text-center">atelier@quadratik.fr</p>
+          <Row className="align-items-center justify-content-center h-50 w-100">
+          atelier@quadratik.fr
           </Row>
         </Col>
-        <Col sm={3} className="right_creme d-flex flex-column align-items-center justify-content-center p-0 m-0">
-          <Row className="bottom_creme w-100 h-100">
+        <Col sm={3} className=" text-uppercase right_creme d-flex flex-column align-items-center justify-content-start p-0 m-0">
+          <Row className="bottom_creme w-100 h-50">
             <animated.div
               ref={ref}
               style={springs}
-              className="d-flex flex-column s5_animatedcontact border_creme  bg_light align-items-center justify-content-center p-0 m-0"
+              className="d-flex flex-column s5_animatedcontact border_creme  bg_light align-items-center justify-content-evenly"
             >
-              <p className="m-auto text-center text-uppercase">Contact direct avec l'artisan</p>{" "}
-              <p className="m-auto text-center">06.31.92.74.81</p>
-              <p className="m-auto text-center text-uppercase">Discussions sans engagements</p>
+              <p className=" text-center ">Contact direct avec l'artisan</p>{" "}
+              <p className=" text-center">06.31.92.74.81</p>
+              <p className=" text-center ">Discussions sans engagements</p>
             </animated.div>
           </Row>
-          <Row className="w-100 h-100 flex-column justify-content-center align-items-center">
-            <p className="text-center text-uppercase">Etude acoustique avec notre partenaire </p>
+          <Row className="flex-column justify-content-evenly align-items-center h-50">
+Etude acoustique avec notre partenaire 
             <img
               src="./logo/ekleo_logo.png"
               className="s5_ekleo_logo"

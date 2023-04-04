@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
 import { useDrag } from "react-use-gesture";
 import { useSprings, animated, to as interpolate, useInView } from "@react-spring/web";
@@ -181,7 +181,7 @@ export const S4_Business = () => {
   return (
     <Row id="s4_business" className="section">
       <Row className="p-0 m-0">
-        <Marquee pauseOnHover gradient={false} speed={70} className="s4_marquee">
+        <Marquee pauseOnHover gradient={false} speed={70} className="s4_marquee ft1">
           <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>{" "}
           <img
             src="./logo/logo_marquee.svg"
@@ -213,6 +213,11 @@ export const S4_Business = () => {
                 {inView ? <Deck setVisibleCard={setVisibleCard} /> : null}
              </div>
             </Col>
+          </Row>
+          <Row className="d-md-none justify-content-center w-100 mt-2">
+          <Button variant="primary" className="">
+          <i className="fad fa-id-badge"></i> En savoir plus
+              </Button>
           </Row>
         </Col>
 
