@@ -40,27 +40,27 @@ export const S1_Product = () => {
       <Col md={6} className="s1_product_order">
         <Row className="justify-content-center ">
           <Col md={10} className="d-flex flex-column align-items-center justify-content-center s1_col_product">
-            <Row className="d-flex border_creme s1_product_name">
+            <Row className="d-flex border_creme s1_product_name text-center text-md-end">
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
-                  <h2 className="pt-4 p-3">
+                  <h2 className="pt-md-4 p-md-3">
                     <p>
-                      <span>Le diffuseur</span>
+                      <span className="ft4">Le diffuseur</span>
                     </p>
-                    <strong>Woodik-7</strong>{" "}
+                    <span className="ft3">Woodik-7</span>
                   </h2>
                 </Carousel.Item>
                 <Carousel.Item>
-                  <h2 className="pt-4 p-3">
+                <h2 className="pt-md-4 p-md-3">
                     <p>
-                      <span>L'Absorbeur</span>
+                      <span className="ft4">L'absorbeur</span>
                     </p>
-                    <strong>Quadrablack</strong>{" "}
+                    <span className="ft3">Quadrablack</span>
                   </h2>
                 </Carousel.Item>
               </Carousel>
             </Row>
-            <Row className="d-none border_creme s1_product_physic dark_bg d-md-flex justify-content-center align-items-center">
+            <Row className="d-none border_creme s1_product_physic dark_bg d-md-flex justify-content-start align-items-center">
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
                   <img className="d-block w-100" src="./physic_dif.svg" alt="First slide" />
@@ -75,7 +75,7 @@ export const S1_Product = () => {
               <Button variant="primary" className="button_home">
                 <i className="fad fa-store"></i> Entrer dans l'atelier
               </Button>
-              <p className="m-0 pt-2 pb-2 s1_button_subtitle">
+              <p className="m-0 pt-2 pb-2 ft4">
                 <span className="s1_product_sub_blue">Fabrication</span>
                 <span className=""> Artisanale </span>
                 <span className="s1_product_sub_red"> Française</span>{" "}

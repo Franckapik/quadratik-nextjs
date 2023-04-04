@@ -37,25 +37,25 @@ const Home = () => {
 <Burger></Burger>
       {/* {scroll > vh ? <IndexPage scroll={scroll} vh={vh}></IndexPage> : null}  */}
       <Parallax pages={10} ref={parallax}>
-        <ParallaxLayer offset={0} speed={0}>
+        <ParallaxLayer offset={0} >
           <S0_Landing />
         </ParallaxLayer>
-        <ParallaxLayer offset={1} speed={0} sticky={{ start: 1, end: 2 }}>
+        <ParallaxLayer offset={1}  sticky={{ start: 1, end: 2 }}>
           <S1_Product />
         </ParallaxLayer>
-        <ParallaxLayer offset={3} speed={0}>
+        <ParallaxLayer offset={3} >
         <S2_Customers />
         </ParallaxLayer>
-        <ParallaxLayer offset={4} speed={0} sticky={{ start: 4, end: 6 }}>
+        <ParallaxLayer offset={4}  sticky={{ start: 4, end: 6 }}>
         <S2_Canvas  />
         </ParallaxLayer>
-        <ParallaxLayer offset={7} speed={0}>
+        <ParallaxLayer offset={7} >
           <S3_DIY />
         </ParallaxLayer>
-        <ParallaxLayer offset={8} speed={0}>
+        <ParallaxLayer offset={8} >
           <S4_Business />
         </ParallaxLayer>
-        <ParallaxLayer offset={9} speed={0}>
+        <ParallaxLayer offset={9} >
           <S5_Contact />
         </ParallaxLayer>
       </Parallax>
