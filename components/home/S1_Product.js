@@ -47,7 +47,7 @@ export const S1_Product = () => {
                     <p>
                       <div className="ft3 text-uppercase">Le diffuseur</div>
                     </p>
-                    <div className="ft05 text-uppercase mt-2 mt-md-4">Woodik-7</div>
+                    <div className="ft1 text-uppercase mt-2 mt-md-4">Woodik-7</div>
                   </div>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -55,7 +55,7 @@ export const S1_Product = () => {
                     <p>
                       <div className="ft3 text-uppercase">L'absorbeur</div>
                     </p>
-                    <div className="ft05 text-uppercase mt-2 mt-md-4">Quadrablack</div>
+                    <div className="ft1 text-uppercase mt-2 mt-md-4">Quadrablack</div>
                   </div>
                 </Carousel.Item>
               </Carousel>
