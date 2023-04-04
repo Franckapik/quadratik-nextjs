@@ -25,7 +25,7 @@ export const S1_Product = () => {
   return (
     <Row id="s1_product" className="section justify-content-start align-items-center m-0 ">
       <Col md={1} className="d-none d-md-flex"></Col>
-      <Col md={5} className="s1_square"> {scroll}
+      <Col md={5} className="s1_square"> 
         <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
           <Carousel.Item>
             <img className="d-block w-100 image-hover" src="../difrender10wrot30.png" alt="First slide" />

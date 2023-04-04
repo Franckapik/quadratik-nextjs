@@ -17,7 +17,9 @@ export const S5_Contact = () => {
       transform: `perspective(300px) rotateX(0deg)`,
     },
     delay: 3000,
-  }));
+  }), {
+    once : true
+  });
 
   return (
     <Row id="s5_contact" className="section">
