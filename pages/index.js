@@ -36,7 +36,7 @@ const Home = () => {
     <div>
 <Burger></Burger>
       {/* {scroll > vh ? <IndexPage scroll={scroll} vh={vh}></IndexPage> : null}  */}
-      <Parallax pages={10} ref={parallax}>
+      <Parallax pages={8} ref={parallax}>
         <ParallaxLayer offset={0} >
           <S0_Landing />
         </ParallaxLayer>
@@ -46,16 +46,16 @@ const Home = () => {
         <ParallaxLayer offset={3} >
         <S2_Customers />
         </ParallaxLayer>
-        <ParallaxLayer offset={4}  sticky={{ start: 4, end: 6 }}>
+        <ParallaxLayer offset={4} >
         <S2_Canvas  />
         </ParallaxLayer>
-        <ParallaxLayer offset={7} >
+        <ParallaxLayer offset={5} >
           <S3_DIY />
         </ParallaxLayer>
-        <ParallaxLayer offset={8} >
+        <ParallaxLayer offset={6} >
           <S4_Business />
         </ParallaxLayer>
-        <ParallaxLayer offset={9} >
+        <ParallaxLayer offset={7} >
           <S5_Contact />
         </ParallaxLayer>
       </Parallax>

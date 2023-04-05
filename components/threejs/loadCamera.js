@@ -3,17 +3,17 @@ import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 
 
-export const LoadCamera = ({ url }) => {
+export const LoadCamera = ({ url, target }) => {
   const { nodes, materials, animations } = useGLTF(
     url
   );
 
   const scroll = useScroll()
   useFrame((state, delta) => {
-    // The offset is between 0 and 1, you can apply it to your models any way you like
-    const offset = 1 - scroll.offset
-
-    state.camera.position.set(Math.sin( scroll.offset * 6  ) * -10, 0, Math.cos( scroll.offset * 6  ) * -10)
+    const distance = 8;
+    const oldP = new Vector3(Math.sin( target ) * distance, 1, Math.cos( target ) * distance);
+/*     scene.current.rotation.y = MathUtils.lerp(scene.current.rotation.y, currentScroll * ((Math.PI * 2) / (scrollMax - scrollMin)), 0.05)
+ */    state.camera.position.lerp(oldP, 0.01);
     state.camera.lookAt(0, 0, 0)
   })
     return (
@@ -30,7 +30,6 @@ export const LoadCamera = ({ url }) => {
               far={obj.far}
               near={obj.near}
               fov={40} //obj.fov
-              position={objWorldPos}
               rotation={[obj.rotation.x, obj.rotation.y, obj.rotation.z]} 
             />
             );
