@@ -2,6 +2,7 @@ import { useSpring, animated, useInView } from "@react-spring/web";
 import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
+import Moment from "react-moment";
 
 export const S5_Contact = () => {
   const [flipped, set] = useState(false);
@@ -119,7 +120,9 @@ export const S5_Contact = () => {
           className="d-none d-md-flex border_creme border-bottom-0 h-20 order-md-2  align-items-center d-flex justify-content-center bg_darker"
           md={2}
         >
-          Quadratik.fr © 2023
+          Quadratik.fr © <Moment format="YYYY">
+             
+            </Moment>
         </Col>
       </Row>
       <Row className="justify-content-center align-items-center text-center ft5 order-md-1 p-2">

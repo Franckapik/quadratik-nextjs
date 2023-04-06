@@ -3,6 +3,8 @@ import { Button, Col, Row } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
 import { useDrag } from "react-use-gesture";
 import { useSprings, animated, to as interpolate, useInView } from "@react-spring/web";
+import Moment from "react-moment";
+import 'moment/locale/fr';
 
 const cards = ["./carte_savoirfaire.jpg", "./carte_ecoute.jpg", "./carte_ecoresponsable.jpg"];
 
@@ -196,7 +198,7 @@ export const S4_Business = () => {
             <Col md={2} className="d-none d-md-flex"></Col>
             <Col md={4}  className="s4_values_text text-center text-md-start order-md-2 p-md-2 ">
                   <Row className="mt-md-0 text-uppercase text-creme">
-                    <p className="ft4 pb-md-3">Depuis 5 ans</p>
+                    <p className="ft4 pb-md-3">Depuis  <Moment diff="2018" unit="years" /> ans</p>
                     <p className="ft05 pb-md-3">Quadratik</p>
                     <p className="ft5">joue cartes sur table !</p>
                     <p ref={ref}></p> 
