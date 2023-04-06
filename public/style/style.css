@@ -309,6 +309,22 @@ p {
 }
 
 
+.s2_customer_title_container {
+  height: 10vh;
+  background-color : #2F2A28;
+  border-radius : 10px;
+  box-shadow: inset 0px 2px 2px 2px#00000025;
+}
+
+.s2_customer_col i {
+ font-size: 50px;
+ margin : 50px;
+}
+
+.text_grey {
+  color : #ffffff41;
+}
+
 
 .s2_vertical_square {
   height: 100vh;

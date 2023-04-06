@@ -21,7 +21,7 @@ export const LoadCamera = ({ url }) => {
               makeDefault={true}
               far={obj.far}
               near={obj.near}
-              fov={25} //obj.fov
+              fov={30} //obj.fov
               position={objWorldPos}
               rotation={[obj.rotation.x, obj.rotation.y, obj.rotation.z]} 
             />
