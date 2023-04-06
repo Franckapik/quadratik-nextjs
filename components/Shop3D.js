@@ -32,7 +32,7 @@ const Shop3D = ({ p3d }) => {
           maxAzimuthAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 4}
           maxPolarAngle={Math.PI / 4}
-          enableZoom={true}
+          enableZoom={false}
           enablePan={true}
           zoomSpeed={0.8}
         />
