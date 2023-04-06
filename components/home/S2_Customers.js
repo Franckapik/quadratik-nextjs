@@ -53,7 +53,7 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
           </Col>
           <div className="text-center d-md-none d-flex flex-column justify-content-center align-items-center s2_col_plus  ">
             <i className="fad fa-plus-square"></i>
-            <p className="ft1 mt-3 ">Découvrir <p>les autres réalisations</p></p>
+            <div className="ft1 mt-3 ">Découvrir <p>les autres réalisations</p></div>
           </div>
         </Row>
       </Col>

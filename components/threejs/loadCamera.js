@@ -18,6 +18,7 @@ export const LoadCamera = ({ url }) => {
             return (
               <PerspectiveCamera
               name="Camera"
+              key={"Camera" + key}
               makeDefault={true}
               far={obj.far}
               near={obj.near}

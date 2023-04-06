@@ -20,6 +20,7 @@ export const LoadLight = ({ url }) => {
                   shadow-bias={-0.001}
                   intensity={1}
                   decay={2}
+                  key={"PointLight" + key}
                   distance={10}
                   position={objWorldPos}
                   scale={0.6}
@@ -35,6 +36,7 @@ export const LoadLight = ({ url }) => {
                   intensity={0.8}
                   decay={2}
                   distance={10}
+                  key={"SpotLight" + key}
                   position={objWorldPos}
                   scale={0.6}
                 />

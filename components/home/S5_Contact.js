@@ -1,8 +1,10 @@
 import { useSpring, animated, useInView } from "@react-spring/web";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
 import Moment from "react-moment";
+import Parser from "rss-parser";
+
 
 export const S5_Contact = () => {
   const [flipped, set] = useState(false);
@@ -24,6 +26,22 @@ export const S5_Contact = () => {
       once: true,
     }
   );
+
+
+/* const attributesFetchById = (id) => axios.create({
+  baseURL: `https://fr.audiofanzine.com/news/a.rss.xml`
+});
+ 
+  useEffect(async () => {
+    let parser = new Parser();
+    let feed = await parser.parseURL('https://www.reddit.com/.rss');
+
+
+  }, [])*/
+  
+
+
+
 
   return (
     <Row id="s5_contact" className="section">
@@ -60,7 +78,7 @@ export const S5_Contact = () => {
           <Row className="align-items-center justify-content-evenly h-50 w-100 text-center">
             <div>
               {" "}
-              <i class="fad fa-envelope"></i>
+              <i className="fad fa-envelope"></i>
               <p>atelier@quadratik.fr</p>
             </div>
           </Row>
@@ -75,7 +93,7 @@ export const S5_Contact = () => {
               <p className=" text-center ">Contact direct avec l'artisan</p>{" "}
               <div className="text-center">
                 {" "}
-                <i class="fad fa-phone"></i>
+                <i className="fad fa-phone"></i>
                 <p>06.31.92.74.81</p>
               </div>
               <p className=" text-center ">Discussions sans engagements</p>

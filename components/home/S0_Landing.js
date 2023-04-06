@@ -49,12 +49,12 @@ export const S0_Landing = () => {
       </div>
       <div className="d-flex flex-wrap justify-content-center align-items-center">
         <div className="s0_animated_square text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" stroke="#D0C3B4" stroke-width="1" className="s0_svg_square">
+          <svg xmlns="http://www.w3.org/2000/svg" stroke="#D0C3B4" strokeWidth="1" className="s0_svg_square">
             <AnimatedSquare toggle={loaded} />
           </svg>
           <div className="s0_logo bg-red">
             <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
-              <g transform="" fill="none" stroke="#D0C3B4" stroke-width="1" stroke-linecap="square">
+              <g transform="" fill="none" stroke="#D0C3B4" strokeWidth="1" strokeLinecap="square">
                 <AnimatedLogo toggle={toggle} />
                 <AnimatedLogo2 toggle={toggle} setLoading={setLoading} />
               </g>

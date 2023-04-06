@@ -80,16 +80,12 @@ export const S2_Canvas = () => {
       <Col md={8}>
         <div className="s2_canvas_container">
           <Canvas dpr={1} shadows>
-            <Suspense fallback={null}>
-{/*               <Stats showPanel={0} className="stats" />
- */}              <LoadCamera url={"/glb/scene_customers.glb"} />
+            <LoadCamera url={"/glb/scene_customers.glb"} />
               <RotateScroll target={target}>
                 <LoadMesh url={"/glb/scene_customers.glb"} />
-                {/*   <BakeShadows /> */}
                 <LoadLight url={"/glb/scene_customers.glb"} />
               </RotateScroll>
               <ambientLight intensity={0.15} />
-            </Suspense>
           </Canvas>
         </div>
       </Col>

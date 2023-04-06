@@ -44,17 +44,17 @@ export const S1_Product = () => {
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
                   <div className="p-4">
-                    <p>
+                 
                       <div className="ft5 text-uppercase">Le diffuseur</div>
-                    </p>
+           
                     <div className="ft05 text-uppercase mt-2 mt-md-4">Woodik-7</div>
                   </div>
                 </Carousel.Item>
                 <Carousel.Item>
                 <div className="p-4">
-                    <p>
+               
                       <div className="ft5 text-uppercase">L'absorbeur</div>
-                    </p>
+                 
                     <div className="ft05 text-uppercase mt-2 mt-md-4">Quadrablack</div>
                   </div>
                 </Carousel.Item>
