@@ -481,10 +481,9 @@ h2 {
   margin-left: 15%;
   margin-top: 10% !important;
 }
-.attributes_col {
+.product_attributes_col {
   background-color: #d0c3b4;
   margin-right: 2vw;
-  height: 100vh;
   padding-top: 12vh;
 }
 .product_preview_col {
@@ -493,7 +492,6 @@ h2 {
 }
 .product_preview_row {
   height: 55vh;
-  background-color: #f2f2f2;
 }
 
 .shop_menu {

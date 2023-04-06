@@ -1,17 +1,17 @@
-import { queryTypes, useQueryState, useQueryStates } from "next-usequerystate";
-import React, { useEffect, useRef, useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { queryTypes, useQueryStates } from "next-usequerystate";
+import React, { useEffect, useState } from "react";
+import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { DiffusorOffset } from "../../components/DiffusorOffset";
 import { attributesAllFetch, attributesFetchById, productFetchById } from "../../components/dolibarrApi/fetch";
+import { Modele3D } from "../../components/product/Modele3D";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import Select_Options from "../../components/product/SelectOptions";
 import Shop3D from "../../components/Shop3D";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { usePrice } from "../../hooks/usePrice";
-import Layout from "../../layouts/Layout";
 
 const Product = () => {
   const [display, setDisplay] = useState("model");
@@ -23,7 +23,7 @@ const Product = () => {
   const [valuesSelected, setValuesSelected] = useQueryStates(
     {
       PID: queryTypes.string.withDefault(8),
-      TAG : queryTypes.string.withDefault("Diffuseurs"),
+      TAG: queryTypes.string.withDefault("Diffuseurs"),
       P: queryTypes.string.withDefault(11),
       W: queryTypes.string.withDefault(25),
       L: queryTypes.string.withDefault(28),
@@ -61,19 +61,22 @@ const Product = () => {
   const makeProductSelected = (newValues) => {
     const product = Object.entries(newValues).reduce((acc, [key, val] = item) => {
       const v = values.filter((a) => a.id == val);
-       if (notInForm.includes(key)) {
+      if (notInForm.includes(key)) {
         return { ...acc, [key]: val };
       } else {
-        const attribute_value =  v[0].value.split(",");
-        return { ...acc, [key]: {
-          ...v[0], 
-          ["value3D"] : attribute_value[0], 
-          ["operation"] : attribute_value[3],
-          ["attribute_price"] : attribute_value[2]
-        } };
-      } 
+        const attribute_value = v[0].value.split(",");
+        return {
+          ...acc,
+          [key]: {
+            ...v[0],
+            ["value3D"]: attribute_value[0],
+            ["operation"]: attribute_value[3],
+            ["attribute_price"]: attribute_value[2],
+          },
+        };
+      }
     }, {});
-    
+
     product.PID = newValues.PID;
     return product;
   };
@@ -136,16 +139,15 @@ const Product = () => {
         if (typeof val === "object") {
           if (isNaN(val.value3D)) {
             return { ...acc, [key]: val.value3D };
-
           } else {
             return { ...acc, [key]: parseInt(val.value3D) };
           }
         } else {
           return { ...acc, [key]: val };
         }
-        return acc
+        return acc;
       }, {});
-    setProduct3D(p3d);
+      setProduct3D(p3d);
     }
   }, [product]);
 
@@ -163,126 +165,55 @@ const Product = () => {
   }, [valuesSelected]);
 
   return (
-    <>
-      <div className="product_shop_menu">
-        {" "}
+    <Row className="section">
+      <Row>
         <Navbar expand="lg">
-          <Container>
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
-                <Nav.Link href="?TAG=Diffuseurs">Diffuseurs</Nav.Link>
-                <Nav.Link href="?TAG=Absorbeurs">Absorbeurs</Nav.Link>
-                <Nav.Link href="#link">Reflecteurs</Nav.Link>
-                <Nav.Link href="#link">Accessoires</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link href="?TAG=Diffuseurs">Diffuseurs</Nav.Link>
+              <Nav.Link href="?TAG=Absorbeurs">Absorbeurs</Nav.Link>
+              <Nav.Link href="#link">Reflecteurs</Nav.Link>
+              <Nav.Link href="#link">Accessoires</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
-      </div>
-      <Layout>
+      </Row>
+      {!error ? (
         <Row>
-          {!error ? (
-            <>
-              <Col sm={4} className="attributes_col">
-                {!loading ? (
-                  <Select_Options
-                    setValuesSelected={setValuesSelected}
-                    notInForm={notInForm}
-                    attributes={attributes}
-                    values={values}
-                    product={product}
-                    prices={[basePrice, totalPrice]}
-                    valuesSelected={valuesSelected}
-                    nomenclature={nomenclature}
-                  ></Select_Options>
-                ) : (
-                  "Chargement des options du produit"
-                )}
-                {totalPrice && "Prix: " + totalPrice + " €"}
+          {/*  <Col md={1}></Col> */}
+          <Col md={3} className="product_attributes_col h-100">
+            {!loading ? (
+              <Select_Options setValuesSelected={setValuesSelected} notInForm={notInForm} attributes={attributes} values={values} product={product} prices={[basePrice, totalPrice]} valuesSelected={valuesSelected} nomenclature={nomenclature}></Select_Options>
+            ) : (
+              "Chargement des options du produit"
+            )}
+            {totalPrice && "Prix: " + totalPrice + " €"}
+          </Col>
+          <Col md={8} className="product_preview_col">
+            <Row>
+              <Col onClick={() => setDisplay("model")}>Model</Col>
+              <Col onClick={() => setDisplay("coefDif")}>Coef</Col>
+              <Col onClick={() => setDisplay("plot")}>Plot</Col>
+            </Row>
+            <Row className="product_preview_row border_creme">
+              {display === "coefDif" ? <PerformanceCharts /> : null}
+              {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
+              {display === "model" ? <Modele3D p3d={p3d} ratio={ratio} amax={amax} setAmax={setAmax} cwidth={cwidth} setCwidth={setCwidth} setProduct={setProduct} /> : null}
+            </Row>
+            <Row>
+              <Col>
+                {fmin} Hz -{fmax} Hz
               </Col>
-              <Col sm={7} className="product_preview_col">
-                <ul>
-                  {" "}
-                  <li onClick={() => setDisplay("model")}>Model</li>
-                  <li onClick={() => setDisplay("coefDif")}>Coef</li>
-                  <li onClick={() => setDisplay("plot")}>Plot</li>
-                </ul>
-                <Row className="product_preview_row">
-                  {display === "coefDif" ? <PerformanceCharts /> : null}
-                  {display === "plot" ? (
-                    <img
-                      src={"/performances/Spatial/D2N7P5W50.png"}
-                      style={{ height: "100%", width: "auto", margin: "auto" }}
-                    />
-                  ) : null}
-                  {display === "model" ? (
-                    <>
-                      <Col sm={2}>
-                        <ul>
-                          <li onClick={() => setProduct((prevProduct) => ( {...prevProduct, C: 0} ))}>Motif0</li>
-                          <li onClick={() => setProduct((prevProduct) => ( {...prevProduct, C: 1} ))}>Motif1</li>
-                          <li onClick={() => setProduct((prevProduct) => ( {...prevProduct, C: 2} ))}>Motif2</li>
-                          <li onClick={() => setProduct((prevProduct) => ( {...prevProduct, I: !prevProduct.I } ))}>Invert</li>
-                          <li
-                            onClick={() => {
-                              console.log(p3d.N)
-                              switch (p3d.N) {
-                                case "7":
-                                  setProduct((prevProduct) => ( {...prevProduct, H: -3, V : -3 } ))
-                                  break;
-                                case "11":
-                                  setProduct((prevProduct) => ( {...prevProduct, H: 6, V : -5 } ))
-                                  break;
-                                case "13":
-                                  setProduct((prevProduct) => ( {...prevProduct, H: -6, V : -6 } ))
-                                  break;
-
-                                default:
-                                  break;
-                              }
-                            }}
-                          >
-                            Optimiser
-                          </li>
-                        </ul>
-                        {p3d && <DiffusorOffset p3d={p3d} setProduct={setProduct}></DiffusorOffset>}
-                      </Col>
-                      <Col>
-                        <div className="product_canvas_container">
-                         {p3d && Object.keys(p3d).length ? (
-                            <Shop3D
-                              style={{ position: "absolute" }}
-                              p3d = {p3d}
-                              ratio={ratio}
-                              amax={amax}
-                              setAmax={setAmax}
-                              cwidth={cwidth}
-                              setCwidth={setCwidth}
-                            ></Shop3D>
-                          ) : (
-                            "Chargemement modèle"
-                          )}  
-                        </div>
-                      </Col>
-                    </>
-                  ) : null}
-                </Row>
-                <Row>
-                  <li>
-                    {fmin} Hz -{fmax} Hz
-                  </li>
-                  <li>Taille de cellule : {Math.round(cwidth * 10)} mm</li>
-                  <li>{nomenclature.structurel}</li>
-                  <li>{nomenclature.simple}</li>
-                </Row>
-              </Col>
-            </>
-          ) : (
-            "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
-          )}
+              <Col>Taille de cellule : {Math.round(cwidth * 10)} mm</Col>
+              <Col>{nomenclature.structurel}</Col>
+              <Col>{nomenclature.simple}</Col>
+            </Row>
+          </Col>
         </Row>
-      </Layout>
-    </>
+      ) : (
+        "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
+      )}
+    </Row>
   );
 };
 
