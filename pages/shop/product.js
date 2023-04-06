@@ -1,15 +1,11 @@
 import { queryTypes, useQueryStates } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import { DiffusorOffset } from "../../components/DiffusorOffset";
 import { attributesAllFetch, attributesFetchById, productFetchById } from "../../components/dolibarrApi/fetch";
 import { Modele3D } from "../../components/product/Modele3D";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
+import { ProductNavBar } from "../../components/product/ProductNavBar";
 import Select_Options from "../../components/product/SelectOptions";
-import Shop3D from "../../components/Shop3D";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { usePrice } from "../../hooks/usePrice";
 
@@ -166,30 +162,43 @@ const Product = () => {
 
   return (
     <Row className="section">
-      <Row>
-        <Navbar expand="lg">
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="?TAG=Diffuseurs">Diffuseurs</Nav.Link>
-              <Nav.Link href="?TAG=Absorbeurs">Absorbeurs</Nav.Link>
-              <Nav.Link href="#link">Reflecteurs</Nav.Link>
-              <Nav.Link href="#link">Accessoires</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </Row>
+      <ProductNavBar/>
       {!error ? (
-        <Row>
-          {/*  <Col md={1}></Col> */}
-          <Col md={3} className="product_attributes_col h-100">
+        <Row className="d-flex align-items-start ft4 product_main_row ">
+           <Col md={1}>1</Col> 
+          <Col md={3} className="d-flex flex-column justify-content-start product_attributes_col bg_darker h-100 p-4">
             {!loading ? (
-              <Select_Options setValuesSelected={setValuesSelected} notInForm={notInForm} attributes={attributes} values={values} product={product} prices={[basePrice, totalPrice]} valuesSelected={valuesSelected} nomenclature={nomenclature}></Select_Options>
+              <Select_Options setValuesSelected={setValuesSelected} notInForm={notInForm} attributes={attributes} values={values} product={product} prices={[basePrice, totalPrice]} valuesSelected={valuesSelected} nomenclature={nomenclature} />
             ) : (
               "Chargement des options du produit"
             )}
-            {totalPrice && "Prix: " + totalPrice + " €"}
+           {/*  {totalPrice && "Prix: " + totalPrice + " €"} */}
           </Col>
-          <Col md={8} className="product_preview_col">
+          <Col md={8} className="d-flex flex-column justify-content-evenly ps-5 pe-5">
+            <Row className="justify-content-between text-center">
+              <Col className="product_tab bg_darker" onClick={() => setDisplay("model")}>Model</Col>
+              <Col />
+              <Col className="product_tab " onClick={() => setDisplay("coefDif")}>Coef</Col>
+              <Col />
+              <Col className="product_tab " onClick={() => setDisplay("plot")}>Plot</Col>
+              <Col />
+
+            </Row>
+            <Row className="product_preview_row border_creme bg_darker">
+              {display === "coefDif" ? <PerformanceCharts /> : null}
+              {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
+              {display === "model" ? <Modele3D p3d={p3d} ratio={ratio} amax={amax} setAmax={setAmax} cwidth={cwidth} setCwidth={setCwidth} setProduct={setProduct} /> : null}
+            </Row>
+{/*             <Row>
+              <Col>
+                {fmin} Hz -{fmax} Hz
+              </Col>
+              <Col>Taille de cellule : {Math.round(cwidth * 10)} mm</Col>
+              <Col>{nomenclature.structurel}</Col>
+              <Col>{nomenclature.simple}</Col>
+            </Row> */}
+         </Col> 
+         {/*  <Col md={8} className="product_preview_col">
             <Row>
               <Col onClick={() => setDisplay("model")}>Model</Col>
               <Col onClick={() => setDisplay("coefDif")}>Coef</Col>
@@ -208,7 +217,7 @@ const Product = () => {
               <Col>{nomenclature.structurel}</Col>
               <Col>{nomenclature.simple}</Col>
             </Row>
-          </Col>
+          </Col> */}
         </Row>
       ) : (
         "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire

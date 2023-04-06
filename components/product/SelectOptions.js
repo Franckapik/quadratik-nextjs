@@ -67,7 +67,7 @@ const Select_Options = ({
         if (!notInForm.includes(a.ref)) {
           const valuesFromAttributeId = values.filter((v, i) => v.fk_product_attribute == a.id);
           return (
-            <Form.Group className="mb-3" controlId="media_category_id_id">
+            <Form.Group className="product_select_options" controlId="media_category_id_id">
               <Form.Label htmlFor="disabledTextInput">{a.label}</Form.Label>
               <Controller
                 control={control}
@@ -98,12 +98,12 @@ const Select_Options = ({
           return null;
         }
       })}
-      <Button variant="outline-primary m-2" size="lg" type="submit">
+      <Button variant="primary" type="submit" className="m-auto mt-4">
         Ajouter au panier
       </Button>
-      <Button variant="outline-secondary m-2" size="lg">
+   {/*    <Button variant="secondary" >
         Configurer
-      </Button>{" "}
+      </Button> */}
     </Form>
   );
 };
