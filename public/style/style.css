@@ -281,27 +281,23 @@ p {
 .s2_vertical_square {
   height: 100vh
 }
-
 .s3_diy_swipe {
   height: 200px!important;
   border-top: solid 1px #d0c3b426;
   border-bottom: solid 1px #d0c3b426
 }
-
 .s3_arrow {
   color: #d0c3b4;
   font-size: 2rem;
   max-width: 20px!important;
-  opacity: 0.7;
+  opacity: .7
 }
 .s3_dif_diy {
   width: calc(40vh + 5vw)
 }
-
 .s3_diy_guide_text {
-  height: 600px!important;
+  height: 600px!important
 }
-
 .s3_diy_bg {
   aspect-ratio: 4/2.25!important;
   background: url(../indus.svg);
@@ -318,7 +314,6 @@ p {
 .s3_diy_draw {
   height: 60vh
 }
-
 .s3_line_bg div {
   font-size: calc(.3rem + .6vw);
   position: relative
@@ -349,7 +344,7 @@ p {
   position: relative!important
 }
 .s4_card_table {
-  height: calc(30vh + 10vw)
+  height: calc(35vh + 10vw)
 }
 .s4_cards_container {
   align-items: center;
@@ -382,7 +377,7 @@ p {
   will-change: transform
 }
 .s4_list {
-  min-height: 150px
+  min-height: 100px
 }
 .s4_list_icon {
   color: #8ea65f;
@@ -404,7 +399,6 @@ p {
   height: 80%;
   rotate: -1.5deg
 }
-
 .s5_animatedcontact {
   will-change: transform,opacity;
   z-index: -1
@@ -497,8 +491,6 @@ h2 {
     font-size: 4rem;
     color: #8ea65f
   }
-
-  
   .s3_diy_bg {
     aspect-ratio: none;
     background: 0 0;
@@ -558,23 +550,16 @@ h2 {
     border-top: 0;
     height: 150px!important
   }
-
-
   .s3_diy_draw {
     height: 50vh
   }
-
   .s3_diy_swipe .col {
     width: 200px!important;
-    margin-right : 40px!important;
-    margin-left : 40px!important;
+    margin-right: 40px!important;
+    margin-left: 40px!important
   }
   .s2_customers_swipe {
     border-top: solid 1px #d0c3b426;
     border-bottom: solid 1px #d0c3b426
   }
-
-/*   .s3_diy_guide_text {
-    height: 100vh!important;
-  } */
 }

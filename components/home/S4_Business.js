@@ -90,23 +90,23 @@ export const S4_Business = () => {
     switch (visibleCard) {
       case 1:
         return (
-          <Row className="pt-4 pb-4 flex-md-column">
+          <Row className=" flex-md-column justify-content-center align-items-center">
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/interlocuteur.svg" className="s4_list_icon me-md-5 m-2" /> Un seul interlocuteur
+              <img src="./icones/interlocuteur.svg" className="s4_list_icon me-md-5 m-2" /> Unique contact
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
               <img src="./icones/enceinte.svg" className="s4_list_icon me-md-5 m-2" /> La passion du son
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/singularite.svg" className="s4_list_icon me-md-5 m-2" /> Chaque projet est unique
+              <img src="./icones/singularite.svg" className="s4_list_icon me-md-5 m-2" /> Singularité
             </Col>
           </Row>
         );
       case 3:
         return (
-      <Row className="pt-4 pb-4 flex-md-column">
+      <Row className=" flex-md-column justify-content-center align-items-center ">
 
-            <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
+            <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0 bg">
               <img src="./icones/bois.svg" className="s4_list_icon me-md-5 m-2" /> Bois PEFC/FSC
            </Col>
            <Col className="d-flex align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
@@ -119,15 +119,15 @@ export const S4_Business = () => {
         );
       case 2:
         return (
-      <Row className="pt-4 pb-4 flex-md-column">
+      <Row className=" flex-md-column justify-content-center align-items-center">
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/hache.svg" className="s4_list_icon me-md-5 m-2" /> Travail du bois à la main
+              <img src="./icones/hache.svg" className="s4_list_icon me-md-5 m-2" /> Travail manuel
            </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
               <img src="./icones/controle.svg" className="s4_list_icon me-md-5 m-2" /> Contrôle intégral
            </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/finition.svg" className="s4_list_icon me-md-5 m-2" /> Finition à la demande
+              <img src="./icones/finition.svg" className="s4_list_icon me-md-5 m-2" /> Finitions
            </Col>
          </Row>
         );
@@ -180,7 +180,7 @@ export const S4_Business = () => {
   };
 
   return (
-    <Row id="s4_business" className="section p-0">
+    <Row id="s4_business" className="section p-0 h-100">
       <Row className="p-0 m-0 mt-2 mb-2">
         <Marquee pauseOnHover gradient={false} speed={70} className="s4_marquee ft1">
           <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>{" "}
@@ -202,7 +202,7 @@ export const S4_Business = () => {
                     <p ref={ref}></p> 
 
                   </Row>
-                <Row className="s4_list ft4">{switchList(visibleCard)}</Row>
+                <Row className="s4_list ft5">{switchList(visibleCard)}</Row>
             </Col>
             <Col md={6}  className="order-md-1">
               <div className={"s4_cards_container"}>
