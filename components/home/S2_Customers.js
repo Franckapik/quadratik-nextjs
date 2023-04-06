@@ -27,9 +27,9 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
           </Col>
         </Row>
         <Row className="d-flex justify-content-start align-items-center s2_hor_swipe flex-nowrap s2_customers_swipe p-5 p-md-0 ">
-          <Col className="d-md-none d-flex justify-content-center align-items-center s2_hor_swipe_arrow ">
+          <div className="d-md-none d-flex justify-content-center align-items-center s2_hor_swipe_arrow ">
             <i className="fad fa-chevron-left"></i>
-          </Col>
+          </div>
           <Col className="text-start d-md-none  ">
             <img src="/customers/customer1.png" alt="Image du studio Disco casino" />
           </Col>
@@ -51,10 +51,10 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
           <Col className="justify-content-end  d-none d-md-flex ">
             <img src="/customers/customer7.png" alt="Image du studio Disco casino" />
           </Col>
-          <Col className="text-center d-md-none d-flex flex-column justify-content-center align-items-center s2_col_plus  ">
+          <div className="text-center d-md-none d-flex flex-column justify-content-center align-items-center s2_col_plus  ">
             <i className="fad fa-plus-square"></i>
             <p className="ft1 mt-3 ">Découvrir <p>les autres réalisations</p></p>
-          </Col>
+          </div>
         </Row>
       </Col>
     </Row>

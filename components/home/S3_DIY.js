@@ -51,33 +51,27 @@ export const S3_DIY = () => {
 
   return (
     /*     <animated.div style={springs} ref={ref}> */
-    <Row id="s3_diy" className="section bg_darker m-0 d-flex align-items-center justify-content-center w-100 p-2">
+    <Row id="s3_diy" className="section bg_darker m-0 d-flex align-items-center justify-content-center h-100 w-100">
       <Col md={1} className="d-none d-md-flex"></Col>
       <Col md={11} className="d-flex flex_column h-100 justify-content-start align-items-center">
-        <Row className="s3_diy_bg justify-content-center align-items-center p-2 pt-5 p-md-5">
-          <Col md={6} className="d-flex flex-column s3_diy_guide_text justify-content-evenly order-md-last">
-            <Row className="justify-content-center ft3 text-uppercase text-center">
+        <Row className="s3_diy_bg justify-content-center align-items-center">
+          <Col md={6} className="d-flex flex-column s3_diy_guide_text justify-content-evenly order-md-last p-2 p-md-5">
+            <Row className="justify-content-center ft4 text-uppercase text-center">
               Comment fonctionne un diffuseur ?
             </Row>
-            <Row className="d-flex justify-content-start align-items-center s2_hor_swipe flex-nowrap p-5 p-md-0">
-              <Col className={explanation === 1 ? "border_creme " : null}>
-                <i className="fad fa-arrow-alt-square-left s3_arrow_left"></i>
+            <Row className="d-flex s2_hor_swipe s3_diy_swipe flex-nowrap p-md-0 align-items-center text-center">
+              <div className="s3_arrow d-flex d-md-none justify-content-center align-items-center h-100">
+                <i className="fad fa-chevron-left "></i>
+              </div>
+              <Col >
                 <img
                   onMouseOver={() => setExplanation(1)}
                   src="./s3_guide_i1.png"
                   style={{ opacity: explanation === 1 ? 1 : 0.1 }}
                 ></img>
-                <i className="fad fa-arrow-alt-square-right s3_arrow_right"></i>
               </Col>
 
-              <Col className={explanation === 2 ? "border_creme " : null}>
-                {explanation === 2 ? (
-                  <>
-                    <i className="fad fa-arrow-alt-square-left s3_arrow_left"></i>
-                    <i className="fad fa-arrow-alt-square-right s3_arrow_right"></i>
-                  </>
-                ) : null}
-
+              <Col >
                 <img
                   onMouseOver={() => setExplanation(2)}
                   src="./s3_guide_i2.png"
@@ -85,14 +79,7 @@ export const S3_DIY = () => {
                 ></img>
               </Col>
 
-              <Col className={explanation === 3 ? "border_creme " : null}>
-                {explanation === 3 ? (
-                  <>
-                    <i className="fad fa-arrow-alt-square-left s3_arrow_left"></i>
-                    <i className="fad fa-arrow-alt-square-right s3_arrow_right"></i>
-                  </>
-                ) : null}
-
+              <Col >
                 <img
                   onMouseOver={() => setExplanation(3)}
                   src="./s3_guide_i3.png"
@@ -100,40 +87,41 @@ export const S3_DIY = () => {
                 ></img>
               </Col>
 
-              <Col className={explanation === 4 ? "border_creme " : null}>
-                {explanation === 4 ? (
-                  <>
-                    <i className="fad fa-arrow-alt-square-left s3_arrow_left"></i>
-                    <i className="fad fa-arrow-alt-square-right s3_arrow_right"></i>
-                  </>
-                ) : null}
-
+              <Col >
                 <img
                   onMouseOver={() => setExplanation(4)}
                   src="./s3_guide_i4.png"
                   style={{ opacity: explanation === 4 ? 1 : 0.1 }}
                 ></img>
               </Col>
+              <div className="s3_arrow d-flex d-md-none justify-content-center align-items-center h-100">
+                <i className="fad fa-chevron-right "></i>
+              </div>
             </Row>
             <Row className="s3_row_explanation ft4">{switchExplanation(explanation)}</Row>
+            <Row className="d-md-none pt-2 ">
+              <Button variant="primary" className="button_home m-auto">
+                <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
+              </Button>
+            </Row>
           </Col>
           <Col
             md={6}
-            className="d-flex flex-column justify-content-evenly align-items-center s3_diy_draw p-0 order-md-first "
+            className="d-none d-md-flex flex-column justify-content-evenly align-items-center s3_diy_draw p-0 order-md-first "
           >
             <Row className="pt-2 ">
               <Button variant="primary" className="button_home m-auto">
                 <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
               </Button>
             </Row>
-            <Row className="d-none d-md-flex s3_line_bg w-75 h-25 align-items-center">
+            <Row className=" s3_line_bg w-75 h-25 align-items-center">
               <div className="d-flex justify-content-evenly">
                 <span>Taille</span>
                 <span>Matière</span>
                 <span>Couleur</span>
               </div>
             </Row>
-            <Row className="d-none d-md-flex s3_dif_diy mt-4">
+            <Row className=" s3_dif_diy mt-4">
               <img src="./diy_diffuseur.svg" alt="Image d'un diffuseur personnalisé" />
             </Row>
           </Col>

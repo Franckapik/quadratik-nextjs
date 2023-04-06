@@ -38,11 +38,12 @@ p {
   width: 25vw!important;
   display: flex!important;
   justify-content: center!important;
-  align-items: center!important;}
+  align-items: center!important
+}
 .btn-primary i {
   font-size: 1.5rem;
-  margin-right: 0.8rem;
-  margin-bottom: 0.4rem;
+  margin-right: .8rem;
+  margin-bottom: .4rem
 }
 .btn-primary:hover {
   background-color: #a1be66!important
@@ -73,7 +74,7 @@ p {
   letter-spacing: calc(.3rem + .8vw)
 }
 .ft05 {
-  font-size: calc(1.2rem + 0.8vw)!important;
+  font-size: calc(1.2rem + .8vw)!important;
   letter-spacing: calc(.2rem + .2vw)
 }
 .ft1 {
@@ -280,25 +281,27 @@ p {
 .s2_vertical_square {
   height: 100vh
 }
-.s3_arrow_left {
-  background-color: #332d2a;
-  color: #d0c3b4;
-  font-size: 1.2vw;
-  left: -.6vw;
-  position: absolute!important;
-  top: 30%
+
+.s3_diy_swipe {
+  height: 200px!important;
+  border-top: solid 1px #d0c3b426;
+  border-bottom: solid 1px #d0c3b426
 }
-.s3_arrow_right {
-  background-color: #332d2a;
+
+.s3_arrow {
   color: #d0c3b4;
-  font-size: 1.2vw;
-  position: absolute!important;
-  right: -.6vw;
-  top: 30%
+  font-size: 2rem;
+  max-width: 20px!important;
+  opacity: 0.7;
 }
 .s3_dif_diy {
   width: calc(40vh + 5vw)
 }
+
+.s3_diy_guide_text {
+  height: 600px!important;
+}
+
 .s3_diy_bg {
   aspect-ratio: 4/2.25!important;
   background: url(../indus.svg);
@@ -315,14 +318,7 @@ p {
 .s3_diy_draw {
   height: 60vh
 }
-.s3_diy_guide_text {
-  height: calc(35vh + 10vw)
-}
 
-.s3_diy_guide_text img {
-  height: 100%;
-  padding: 15%
-}
 .s3_line_bg div {
   font-size: calc(.3rem + .6vw);
   position: relative
@@ -398,8 +394,7 @@ p {
   font-family: Alcubierre,sans-serif!important;
   height: calc(5vh + 5vw);
   text-transform: uppercase;
-  overflow-y: hidden;
-  
+  overflow-y: hidden
 }
 .s4_marquee img {
   margin: auto;
@@ -409,6 +404,7 @@ p {
   height: 80%;
   rotate: -1.5deg
 }
+
 .s5_animatedcontact {
   will-change: transform,opacity;
   z-index: -1
@@ -501,6 +497,8 @@ h2 {
     font-size: 4rem;
     color: #8ea65f
   }
+
+  
   .s3_diy_bg {
     aspect-ratio: none;
     background: 0 0;
@@ -522,22 +520,22 @@ h2 {
     width: auto
   }
   .s2_hor_swipe .col {
-    display: flex 0 0!important;
-    min-width: 250px
+    display: flex 0 0!important
   }
-
   .s2_hor_swipe_arrow {
-    min-width: 50px!important;
+    max-width: 50px!important;
     font-size: 2.5rem;
-    left : -25px;
     position: relative;
-    opacity: 0.5;
-        color: #8ea65f
-
+    opacity: .5;
+    color: #8ea65f
   }
   .s2_customers_swipe .col img {
     width: auto;
-    height: 200px;
+    height: 200px
+  }
+  .s2_customers_swipe .col {
+    min-width: 250px!important;
+    padding: 20px!important
   }
   .sm_rotate_left {
     transform: rotate(-90deg)
@@ -561,13 +559,22 @@ h2 {
     height: 150px!important
   }
 
+
   .s3_diy_draw {
     height: 50vh
   }
 
-.s2_customers_swipe {
-  border-top: solid 1px #d0c3b426;
-  border-bottom: solid 1px #d0c3b426;
-}
+  .s3_diy_swipe .col {
+    width: 200px!important;
+    margin-right : 40px!important;
+    margin-left : 40px!important;
+  }
+  .s2_customers_swipe {
+    border-top: solid 1px #d0c3b426;
+    border-bottom: solid 1px #d0c3b426
+  }
 
+/*   .s3_diy_guide_text {
+    height: 100vh!important;
+  } */
 }
