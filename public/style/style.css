@@ -28,17 +28,21 @@ p {
   border: none!important;
   border-radius: 5px!important;
   color: #332d2a!important;
-  font-size: calc(.7rem + .4vw)!important;
+  font-size: calc(.7rem + .3vw)!important;
   font-weight: 800!important;
   letter-spacing: calc(.2rem + .1vw)!important;
   margin: 1vw!important;
   min-width: 300px!important;
   padding: 2vh!important;
   text-transform: uppercase;
-  width: 25vw!important
-}
+  width: 25vw!important;
+  display: flex!important;
+  justify-content: center!important;
+  align-items: center!important;}
 .btn-primary i {
-  margin-right: 1rem
+  font-size: 1.5rem;
+  margin-right: 0.8rem;
+  margin-bottom: 0.4rem;
 }
 .btn-primary:hover {
   background-color: #a1be66!important
