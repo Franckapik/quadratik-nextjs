@@ -70,7 +70,7 @@ export const S3_DIY = () => {
                 </Row>
               </Col>
               <Col md={6} className="d-flex flex-column s3_diy_guide_text justify-content-evenly">
-                <Row className="justify-content-center ft1 text-uppercase text-center">
+                <Row className="justify-content-center ft3 text-uppercase text-center">
                   Comment fonctionne un diffuseur ?
                 </Row>
                 <Row className="text-center s3_row_icons justify-content-evenly flex-nowrap">

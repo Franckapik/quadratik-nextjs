@@ -81,8 +81,8 @@ export const S2_Canvas = () => {
         <div className="s2_canvas_container">
           <Canvas dpr={1} shadows>
             <Suspense fallback={null}>
-              <Stats showPanel={0} className="stats" />
-              <LoadCamera url={"/glb/scene_customers.glb"} />
+{/*               <Stats showPanel={0} className="stats" />
+ */}              <LoadCamera url={"/glb/scene_customers.glb"} />
               <RotateScroll target={target}>
                 <LoadMesh url={"/glb/scene_customers.glb"} />
                 {/*   <BakeShadows /> */}
