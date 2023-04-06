@@ -448,10 +448,13 @@ p {
 .zi_up {
   z-index: 1000!important
 }
+
 a {
   cursor: pointer;
-  text-decoration: none
+  text-decoration: none!important;
+  color : inherit!important;
 }
+
 body {
   background-color: #332d2a!important;
   color: #fff!important;

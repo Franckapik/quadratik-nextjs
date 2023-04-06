@@ -8,6 +8,7 @@ import Parser from "rss-parser";
 
 export const S5_Contact = () => {
   const [flipped, set] = useState(false);
+  const [rssFeed, setRssFeed] = useState([])
 
   const [ref, springs] = useInView(
     () => ({
@@ -27,17 +28,29 @@ export const S5_Contact = () => {
     }
   );
 
-
-/* const attributesFetchById = (id) => axios.create({
-  baseURL: `https://fr.audiofanzine.com/news/a.rss.xml`
-});
- 
-  useEffect(async () => {
+  useEffect( () => {
     let parser = new Parser();
-    let feed = await parser.parseURL('https://www.reddit.com/.rss');
+    const fetchRss = async () => {
+      let feed = await parser.parseURL('https://fr.audiofanzine.com/news/a.rss.xml');
+      let arr = [];
 
+for (let i = 0; i < 5; i++) { 
+   arr.push(feed.items[i]);  
+}
+      return arr
+    }
 
-  }, [])*/
+    fetchRss().then(res => {
+      setRssFeed(res);
+      console.log(res)})
+
+/*     feed.items.forEach(item => {
+      console.log(item);
+    }); */
+
+   
+
+  }, [])
   
 
 
@@ -46,19 +59,24 @@ export const S5_Contact = () => {
   return (
     <Row id="s5_contact" className="section">
       <Row className="p-0 m-2">
-        <Marquee pauseOnHover gradient={false} speed={100} className="s4_marquee ft1">
-          <span className="p-5">Actualites musicales</span>{" "}
-          <img
-            src="./logo/logo_marquee.svg"
-            alt="Miniature du logo de l'entreprise Quadratik"
-            className="logo_marquee"
-          />{" "}
-          <span className="p-5">Mai verra la sortie de Skippy chez Kaona</span>{" "}
-          <img
-            src="./logo/logo_marquee.svg"
-            alt="Miniature du logo de l'entreprise Quadratik"
-            className="logo_marquee"
-          />
+        <Marquee pauseOnHover gradient={false} speed={40} className="s4_marquee ft1">
+
+        {rssFeed.map((a,i) => (
+         <>
+                    <span className="p-5">Actualites musicales</span>{" "}
+                    <img
+                      src="./logo/logo_marquee.svg"
+                      alt="Miniature du logo de l'entreprise Quadratik"
+                      className="logo_marquee"
+                    />{" "}
+                    <span className="p-5"> <a href={a.link}>{a.title}</a></span>
+                    <img
+                      src="./logo/logo_marquee.svg"
+                      alt="Miniature du logo de l'entreprise Quadratik"
+                      className="logo_marquee"
+                    /></>
+        ))}
+
         </Marquee>
       </Row>
       <Row className="s5_contact_row m-0 mt-2 p-2 p-md-0 ft4 ">
