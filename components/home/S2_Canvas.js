@@ -78,7 +78,7 @@ export const S2_Canvas = () => {
       </Col>
 
       <Col md={8}>
-        <div className="s2_canvas_container h-100">
+        <div className="s2_canvas_container">
           <Canvas dpr={1} shadows>
             <Suspense fallback={null}>
               <Stats showPanel={0} className="stats" />
