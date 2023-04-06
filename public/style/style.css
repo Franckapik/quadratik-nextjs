@@ -396,7 +396,9 @@ p {
   border-top: #d0c3b4 solid .5vh;
   font-family: Alcubierre,sans-serif!important;
   height: calc(5vh + 5vw);
-  text-transform: uppercase
+  text-transform: uppercase;
+  overflow-y: hidden;
+  
 }
 .s4_marquee img {
   margin: auto;
