@@ -67,7 +67,7 @@ export const S2_Canvas = () => {
           <i className="fad fa-chevron-up d-none d-md-inline"></i>
           <i className="fad fa-chevron-left d-md-none"></i>
         </Row>
-        <Row className="s2_customer_title_container d-flex justify-content-center align-items-center ft05 text-center ">
+        <Row className="s2_customer_title_container bg_darker d-flex justify-content-center align-items-center ft05 text-center ">
        {customers[circular(index)]}
         </Row>
         <Row className="w-100 justify-content-center align-items-center text-center" onClick={() => handleClick("increase")}>
