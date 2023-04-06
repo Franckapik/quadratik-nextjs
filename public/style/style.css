@@ -473,6 +473,84 @@ h2 {
   letter-spacing: 5px;
   text-transform: uppercase
 }
+
+/* product page */
+
+.product_canvas_container {
+  height: 65vh;
+  margin-left: 15%;
+  margin-top: 10% !important;
+}
+.attributes_col {
+  background-color: #d0c3b4;
+  margin-right: 2vw;
+  height: 100vh;
+  padding-top: 12vh;
+}
+.product_preview_col {
+  position: relative;
+  padding-top: 12vh;
+}
+.product_preview_row {
+  height: 55vh;
+  background-color: #f2f2f2;
+}
+
+.shop_menu {
+  position: absolute;
+  display: block;
+  top: 2vh;
+  left: 8vw;
+  font-weight : 600;
+  font-size : 1.5em;
+}
+
+.horizontal {
+  font-weight : 500;
+  margin-top : 5em;
+display: block;
+  transform: rotate(-90deg);
+
+}
+
+.navbar .navbar-nav .nav-link {
+  position: relative;
+}
+.navbar .navbar-nav .nav-link::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color:#9fb07c;
+  width: 0%;
+  content: "";
+  height: 2px;
+}
+.navbar .navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+.navbar .navbar-nav .nav-link.active::after {
+  width: 100%;
+}
+
+.navbar .navbar-nav .nav-link::after {
+  transition: all 0.5s;
+}
+
+.overlay3D {
+  position : relative,
+
+}
+
+.lateral_menu {
+  flex-grow: 0.02!important;
+  background-color: white;
+  border-right: 3px solid black;
+  text-align: center;
+}
+
+
 @media (max-width:575.98px) {
   .row > * {
     padding-right: 0!important;

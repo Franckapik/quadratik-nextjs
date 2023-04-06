@@ -164,7 +164,7 @@ const Product = () => {
 
   return (
     <>
-      <div className="shop_menu">
+      <div className="product_shop_menu">
         {" "}
         <Navbar expand="lg">
           <Container>
@@ -200,14 +200,14 @@ const Product = () => {
                 )}
                 {totalPrice && "Prix: " + totalPrice + " €"}
               </Col>
-              <Col sm={7} className="preview_col">
+              <Col sm={7} className="product_preview_col">
                 <ul>
                   {" "}
                   <li onClick={() => setDisplay("model")}>Model</li>
                   <li onClick={() => setDisplay("coefDif")}>Coef</li>
                   <li onClick={() => setDisplay("plot")}>Plot</li>
                 </ul>
-                <Row className="preview_row">
+                <Row className="product_preview_row">
                   {display === "coefDif" ? <PerformanceCharts /> : null}
                   {display === "plot" ? (
                     <img
@@ -248,7 +248,7 @@ const Product = () => {
                         {p3d && <DiffusorOffset p3d={p3d} setProduct={setProduct}></DiffusorOffset>}
                       </Col>
                       <Col>
-                        <div className="canvas_container">
+                        <div className="product_canvas_container">
                          {p3d && Object.keys(p3d).length ? (
                             <Shop3D
                               style={{ position: "absolute" }}

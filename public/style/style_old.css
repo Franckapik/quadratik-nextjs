@@ -67,7 +67,7 @@ svg path:hover {
   stroke: red;
 }
 
-.canvas_container {
+.product_canvas_container {
   height: 65vh;
   margin-left: 15%;
   margin-top: 10% !important;
@@ -78,16 +78,16 @@ svg path:hover {
   height: 100vh;
   padding-top: 12vh;
 }
-.preview_col {
+.product_preview_col {
   position: relative;
   padding-top: 12vh;
 }
-.preview_row {
+.product_preview_row {
   height: 55vh;
   background-color: #f2f2f2;
 }
 
-.shop_menu {
+.product_shop_menu {
   position: absolute;
   display: block;
   top: 2vh;
