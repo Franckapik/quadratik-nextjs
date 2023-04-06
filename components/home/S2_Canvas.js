@@ -3,6 +3,7 @@ import { BakeShadows, ContactShadows, ScrollControls, Stage, Stats } from "@reac
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { useSwipeable } from "react-swipeable";
 import { MathUtils } from "three";
 import { useBearStore } from "../../hooks/store";
 import { LoadCamera } from "../threejs/loadCamera";
@@ -24,7 +25,7 @@ const RotateScroll = ({ children, target }) => {
 };
 
 export const S2_Canvas = () => {
-  const [target, setTarget] = useState(-0.5);
+  const [target, setTarget] = useState(0);
   const [index, setIndex] = useState(0);
   const customers = ["Home Studio", "Enregistrement", "Salle de spectacle", "Home Cinéma"];
   const circular = (i) => ((i % 4) + 4) % 4;
@@ -45,20 +46,34 @@ export const S2_Canvas = () => {
     }
   };
 
+  const handlers = useSwipeable({
+    onSwiped: (eventData) => {
+      if(eventData.dir === "Right") {
+        handleClick("decrease");
+      } else if (eventData.dir === "Left") {
+        handleClick("increase");
+
+      }
+    }
+    /* ...config, */
+  });
+
   return (
-    <Row id="S2_Canvas " className="section p-0 m-0 justify-content-md-start justify-content-md-start">
+    <Row id="S2_Canvas"  {...handlers} className="section p-0 m-0 justify-content-md-start justify-content-md-start">
       <Col md={1}></Col>
-      <Col md={3} className="p-0 d-none d-md-flex flex-column  s2_customer_col text-creme justify-content-center">
+      <Col md={3} className="p-0 d-flex flex-row flex-md-column  s2_customer_col text-creme justify-content-center align-items-center">
         <Row className="w-100 justify-content-center text-center" onClick={() => handleClick("decrease")}>
-          <p className="ft1 text_grey"> {customers[circular(index + 1)]}</p>
-          <i className="fad fa-chevron-up"></i>
+          <p className="ft1 text_grey d-none d-md-flex justify-content-center"> {customers[circular(index -1)]}</p>
+          <i className="fad fa-chevron-up d-none d-md-inline"></i>
+          <i className="fad fa-chevron-left d-md-none"></i>
         </Row>
-        <div className="s2_customer_title_container d-flex justify-content-center align-items-center ft05 ">
-          {customers[circular(index)]}
-        </div>
-        <Row className="w-100 justify-content-center text-center" onClick={() => handleClick("increase")}>
-          <i className="fad fa-chevron-down"></i>
-          <p className="ft1 text_grey"> {customers[circular(index - 1)]}</p>
+        <Row className="s2_customer_title_container d-flex justify-content-center align-items-center ft05 text-center ">
+       {customers[circular(index)]}
+        </Row>
+        <Row className="w-100 justify-content-center align-items-center text-center" onClick={() => handleClick("increase")}>
+          <i className="fad fa-chevron-down d-none d-md-inline"></i>
+          <i className="fad fa-chevron-right d-md-none"></i>
+          <p className="ft1 text_grey d-none d-md-flex justify-content-center"> {customers[circular(index + 1)]}</p>
         </Row>
       </Col>
 

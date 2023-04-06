@@ -311,14 +311,15 @@ p {
 
 .s2_customer_title_container {
   height: 10vh;
+  min-width: calc(35vh + 5vw);
   background-color : #2F2A28;
   border-radius : 10px;
   box-shadow: inset 0px 2px 2px 2px#00000025;
 }
 
 .s2_customer_col i {
- font-size: 50px;
- margin : 50px;
+ font-size: calc(2rem + 2vw);
+ margin : calc(1rem + 2vw);
 }
 
 .text_grey {
@@ -631,4 +632,19 @@ h2 {
     height : 200px;
     }
   
+    .sm_rotate_left {
+      transform: rotate(-90deg);
+    }
+    .sm_rotate_right {
+      transform: rotate(-90deg);
+    }
+
+    .s2_customer_col i {
+      font-size: calc(2rem + 2vw);
+      margin :0;
+     }
+
+     .s2_canvas_container {
+height: 50vh!important;
+     }
 }
