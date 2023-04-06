@@ -19,11 +19,11 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
           <Col className=" d-flex flex-column justify-content-evenly align-items-center ">
             <Row className="text-center">
               <span className="ft05 text-uppercase p-2">Professionnel</span>
-              <span className="ft5 p-2">quelles que soient les dimensions de votre espace</span>
+              <span className="ft2 p-2">quelles que soient les dimensions de votre espace</span>
             </Row>
-            <Row>
+            <Row className="d-none d-md-flex">
               <Button variant="primary" className="m-2">
-                <i className="fad fa-projector"></i>Découvrir les projets
+                <i className="fad fa-projector"></i>Découvrir les réalisations
               </Button>
             </Row>
           </Col>
@@ -52,6 +52,10 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
           </Col>
           <Col className="justify-content-end  d-none d-md-flex ">
             <img src="/customers/customer7.png" alt="Image du studio Disco casino" />
+          </Col>
+          <Col className="text-start d-md-none d-flex flex-column justify-content-center align-items-center s2_col_plus border_creme ">
+         <i className="fad fa-plus-square"></i>
+        <p className="ft1 mt-3 ">Découvrir les réalisations</p>
           </Col>
         </Row>     
       </Col>

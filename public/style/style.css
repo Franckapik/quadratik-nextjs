@@ -269,6 +269,10 @@ p {
   z-index: -1;
 }
 
+.s2_canvas_container {
+  height: 100%;
+       }
+
 
 
 .s2_customers_photo img {
@@ -594,6 +598,10 @@ h2 {
 
   .s2_customers_photo img,
 
+  .s2_col_plus {
+    font-size: 4rem;
+    color : #8ea65f
+  }
 
   .s3_diy_bg {
     aspect-ratio: none;
