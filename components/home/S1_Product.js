@@ -38,24 +38,24 @@ export const S1_Product = () => {
         </Carousel>
       </Col>
       <Col md={6} className="s1_product_order">
-        <Row className="justify-content-center ">
+        <Row className="justify-content-center">
           <Col md={10} className="d-flex flex-column align-items-center justify-content-center s1_col_product">
             <Row className="d-flex border_creme s1_product_name text-center text-md-end">
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
                   <div className="p-4">
                     <p>
-                      <div className="ft3 text-uppercase">Le diffuseur</div>
+                      <div className="ft5 text-uppercase">Le diffuseur</div>
                     </p>
-                    <div className="ft1 text-uppercase mt-2 mt-md-4">Woodik-7</div>
+                    <div className="ft05 text-uppercase mt-2 mt-md-4">Woodik-7</div>
                   </div>
                 </Carousel.Item>
                 <Carousel.Item>
                 <div className="p-4">
                     <p>
-                      <div className="ft3 text-uppercase">L'absorbeur</div>
+                      <div className="ft5 text-uppercase">L'absorbeur</div>
                     </p>
-                    <div className="ft1 text-uppercase mt-2 mt-md-4">Quadrablack</div>
+                    <div className="ft05 text-uppercase mt-2 mt-md-4">Quadrablack</div>
                   </div>
                 </Carousel.Item>
               </Carousel>

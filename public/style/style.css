@@ -73,7 +73,7 @@ p {
   letter-spacing: calc(.3rem + .8vw)
 }
 .ft05 {
-  font-size: calc(1.3rem + 1.2vw)!important;
+  font-size: calc(1.2rem + 0.8vw)!important;
   letter-spacing: calc(.2rem + .2vw)
 }
 .ft1 {
@@ -318,8 +318,9 @@ p {
 .s3_diy_guide_text {
   height: calc(35vh + 10vw)
 }
+
 .s3_diy_guide_text img {
-  height: calc(50px + 4vw);
+  height: 100%;
   padding: 15%
 }
 .s3_line_bg div {
@@ -514,19 +515,29 @@ h2 {
     flex-direction: column-reverse;
     height: 500px
   }
-  .hor_flex {
+  .s2_hor_swipe {
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
     width: auto
   }
-  .hor_flex .col {
+  .s2_hor_swipe .col {
     display: flex 0 0!important;
     min-width: 250px
   }
-  .hor_flex .col img {
+
+  .s2_hor_swipe_arrow {
+    min-width: 50px!important;
+    font-size: 2.5rem;
+    left : -25px;
+    position: relative;
+    opacity: 0.5;
+        color: #8ea65f
+
+  }
+  .s2_customers_swipe .col img {
     width: auto;
-    height: 200px
+    height: 200px;
   }
   .sm_rotate_left {
     transform: rotate(-90deg)
@@ -553,4 +564,10 @@ h2 {
   .s3_diy_draw {
     height: 50vh
   }
+
+.s2_customers_swipe {
+  border-top: solid 1px #d0c3b426;
+  border-bottom: solid 1px #d0c3b426;
+}
+
 }

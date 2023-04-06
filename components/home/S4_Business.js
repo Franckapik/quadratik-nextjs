@@ -105,11 +105,12 @@ export const S4_Business = () => {
       case 3:
         return (
       <Row className="pt-4 pb-4 flex-md-column">
-            <Col className="d-flex align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/1380.svg" className="s4_list_icon me-md-5 m-2" /> 1380km maximum
-           </Col>
+
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
               <img src="./icones/bois.svg" className="s4_list_icon me-md-5 m-2" /> Bois PEFC/FSC
+           </Col>
+           <Col className="d-flex align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
+              <img src="./icones/1380.svg" className="s4_list_icon me-md-5 m-2" /> 1380km maximum
            </Col>
            <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
               <img src="./icones/plastique.svg" className="s4_list_icon me-md-5 m-2" /> Zero plastique
@@ -179,8 +180,8 @@ export const S4_Business = () => {
   };
 
   return (
-    <Row id="s4_business" className="section">
-      <Row className="p-0 m-0">
+    <Row id="s4_business" className="section p-0">
+      <Row className="p-0 m-0 mt-2 mb-2">
         <Marquee pauseOnHover gradient={false} speed={70} className="s4_marquee ft1">
           <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>{" "}
           <img
@@ -189,12 +190,12 @@ export const S4_Business = () => {
           />
         </Marquee>
       </Row>
-      <Row className="s4_row_business_values">
+      <Row className="s4_row_business_values p-2">
         <Col md={8} className="d-flex flex-column justify-content-center p-0">
           <Row>
             <Col md={2} className="d-none d-md-flex"></Col>
             <Col md={4}  className="s4_values_text text-center text-md-start order-md-2 p-md-2 ">
-                  <Row className="mt-4 mt-md-0 text-uppercase text-creme">
+                  <Row className="mt-md-0 text-uppercase text-creme">
                     <p className="ft4 pb-md-3">Depuis 5 ans</p>
                     <p className="ft05 pb-md-3">Quadratik</p>
                     <p className="ft5">joue cartes sur table !</p>
