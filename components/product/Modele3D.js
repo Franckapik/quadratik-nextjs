@@ -5,7 +5,7 @@ import Shop3D from "../Shop3D";
 export const Modele3D = ({ p3d, setProduct, ratio, amax, setAmax, cwidth, setCwidth }) => {
   return (
     <Row className="product_modele_main h-100">
-      <Col md={4} className="d-flex flex-column justify-content-evenly ps-5">
+      <Col md={5} className="d-flex flex-column justify-content-evenly ps-5">
 <Row><p className="ft05 mb-1">Woodik - 710</p><span className="ft4">REF : D1N7W50L1P10E5MM</span></Row>
 <Row></Row>
 <Row className="align-items-center"><div className="product_list_square border_creme d-flex justify-content-center align-items-center me-4">S</div>983 Hz - 4300 Hz</Row>
@@ -43,7 +43,7 @@ export const Modele3D = ({ p3d, setProduct, ratio, amax, setAmax, cwidth, setCwi
         </Row>
         {p3d && <DiffusorOffset p3d={p3d} setProduct={setProduct}></DiffusorOffset>} */}
       </Col>
-      <Col md={8} className="product_canvas_container">
+      <Col md={7} className="product_canvas_container">
        {p3d && Object.keys(p3d).length ? <Shop3D p3d={p3d} ratio={ratio} amax={amax} setAmax={setAmax} cwidth={cwidth} setCwidth={setCwidth}></Shop3D> : "Chargemement modèle"}
       </Col>
     </Row>

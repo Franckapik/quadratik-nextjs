@@ -165,7 +165,7 @@ const Product = () => {
       <ProductNavBar/>
       {!error ? (
         <Row className="d-flex align-items-start ft4 product_main_row ">
-           <Col md={1}>1</Col> 
+           <Col md={1}></Col> 
           <Col md={3} className="d-flex flex-column justify-content-start product_attributes_col bg_darker h-100 p-4">
             {!loading ? (
               <Select_Options setValuesSelected={setValuesSelected} notInForm={notInForm} attributes={attributes} values={values} product={product} prices={[basePrice, totalPrice]} valuesSelected={valuesSelected} nomenclature={nomenclature} />
@@ -174,7 +174,7 @@ const Product = () => {
             )}
            {/*  {totalPrice && "Prix: " + totalPrice + " €"} */}
           </Col>
-          <Col md={8} className="d-flex flex-column justify-content-evenly ps-5 pe-5">
+          <Col md={7} className="d-flex flex-column justify-content-evenly ps-5 pe-5">
             <Row className="justify-content-between text-center">
               <Col className="product_tab bg_darker" onClick={() => setDisplay("model")}>Model</Col>
               <Col />
