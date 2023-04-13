@@ -55,6 +55,28 @@ const Product = () => {
   const fmin = Math.round((((344 / 2 / p3d.P / 10) * amax) / p3d.N) * 1000);
   const fmax = Math.round(344 / 2 / (cwidth / 100));
 
+  const makeProductSelected = (newValues) => {
+    const product = Object.entries(newValues).reduce((acc, [key, val] = item) => {
+      const v = values.filter((a) => a.id == val);
+      if (notInForm.includes(key)) {
+        return { ...acc, [key]: val };
+      } else {
+        const attribute_value = v[0].value.split(",");
+        return {
+          ...acc,
+          [key]: {
+            ...v[0],
+            ["value3D"]: attribute_value[0],
+            ["operation"]: attribute_value[3],
+            ["attribute_price"]: attribute_value[2],
+          },
+        };
+      }
+    }, {});
+
+    product.PID = newValues.PID;
+    return product;
+  };
 
   //get all attributes
   useEffect(() => {

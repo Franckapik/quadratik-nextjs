@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import useToggle from "../hooks/useToggle";
+import { queryTypes, useQueryState } from "next-usequerystate";
+import React, { useState } from "react";
 import {
   Button,
   Card,
   Col,
+  Form,
   ListGroup,
   ListGroupItem,
   Row,
-  Form,
   Table,
 } from "react-bootstrap";
 import Preview3D from "./Preview3D";
-import { useQueryState, queryTypes } from "next-usequerystate";
 
 export const Product3D = ({ p_selected }) => {
   const [width, setWidth] = useQueryState(
