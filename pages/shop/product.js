@@ -1,42 +1,24 @@
-import { queryTypes, useQueryStates } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { attributesAllFetch, attributesFetchById, productFetchById } from "../../components/dolibarrApi/fetch";
+import { attributesAllFetch, attributesFetchById, objectsInCategory } from "../../components/dolibarrApi/fetch";
 import { Modele3D } from "../../components/product/Modele3D";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
+import ProductOptions from "../../components/product/ProductOptions";
 import { ProductNavBar } from "../../components/product/ProductNavBar";
-import Select_Options from "../../components/product/SelectOptions";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { usePrice } from "../../hooks/usePrice";
+import { useRouter } from "next/router";
+import { queryTypes, useQueryState, useQueryStates } from "next-usequerystate";
 
 const Product = () => {
   const [display, setDisplay] = useState("model");
   const [error, setError] = useState(false);
   const [attributes, setAttributes] = useState([]);
   const [productentier, setProductentier] = useState({});
+  const [defaultProduct, setDefaultProduct] = useState({});
   const [values, setValues] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const [valuesSelected, setValuesSelected] = useQueryStates(
-    {
-      PID: queryTypes.string.withDefault(8),
-      TAG: queryTypes.string.withDefault("Diffuseurs"),
-      P: queryTypes.string.withDefault(11),
-      W: queryTypes.string.withDefault(25),
-      L: queryTypes.string.withDefault(28),
-      E: queryTypes.string.withDefault(22),
-      N: queryTypes.integer.withDefault(14),
-      C: queryTypes.integer.withDefault(0),
-      I: queryTypes.boolean.withDefault(false),
-      V: queryTypes.integer.withDefault(-3),
-      H: queryTypes.integer.withDefault(-3),
-      D: queryTypes.string.withDefault(36),
-      M: queryTypes.string.withDefault(38),
-    },
-    {
-      history: "push",
-    }
-  );
   const [productParent, setProductParent] = useState(false);
 
   const [product, setProduct] = useState(false);
@@ -55,13 +37,94 @@ const Product = () => {
   const fmin = Math.round((((344 / 2 / p3d.P / 10) * amax) / p3d.N) * 1000);
   const fmax = Math.round(344 / 2 / (cwidth / 100));
 
+  const [valuesSelected, setValuesSelected] = useQueryStates(
+    {
+      PID: queryTypes.string.withDefault(8),
+      TAG: queryTypes.string.withDefault(1),
+    },
+    {
+      history: "push",
+    }
+  );
 
-  //get all attributes
+  const router = useRouter();
+
+  // Get the query parameter from the URL
+  const { TAG } = router.query;
+
+  //get product from category
   useEffect(() => {
-    attributesAllFetch()
+    console.log(valuesSelected.TAG);
+    objectsInCategory(valuesSelected.TAG)
       .get()
       .then((response) => {
-        setAttributes(response.data);
+        var attributes = JSON.parse(response.data[0].note_private);
+        setDefaultProduct({...response.data[0], attributes : attributes});
+        console.log(defaultProduct);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
+  }, [valuesSelected]);
+
+  useEffect(() => {
+    attributesAllFetch() // get all attributes
+      .get()
+      .then((response) => {
+        const attributes = response.data;
+        if (attributes.length) {
+          Promise.all(
+            attributes.map((a) =>
+              attributesFetchById(a.id) //get all values according to attributes
+                .get()
+                .then((response) => {
+                  return response.data;
+                }) .catch((error) => {
+                  return error;
+                })
+            )
+          )
+            .then((values) => {
+              const filteredValues = values.filter((item) => item).flat(); //no undefined and same level
+              const attributesAndValues = Object.entries(attributes).reduce((acc, [key, val] = item) => {
+                const v = filteredValues.filter((a) => a.fk_product_attribute == val.id);
+                let newV = {};
+                if (v.length) {
+                  newV = Object.entries(v).reduce((acc, [key, val] = item) => {
+                    return {
+                      ...acc,
+                      [key]: {
+                        v_id: val.id,
+                        v_ref: val.ref,
+                        v_3d: val.value?.split(",")[0],
+                        v_label: val.value?.split(",")[1],
+                        v_operator: val.value?.split(",")[3],
+                        v_factor: val.value?.split(",")[2],
+                      },
+                    };
+                  }, 0);
+                }
+    
+                return {
+                  ...acc,
+                  [key]: {
+                    a_id: val.id,
+                    a_ref: val.ref,
+                    a_position: val.position,
+                    a_label: val.label,
+                    values: newV,
+                  },
+                };
+              }, 0);
+              setAttributes(attributesAndValues);
+              setLoading(false);
+            })
+            .catch((error) => {
+              return error
+            });
+            
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -69,7 +132,7 @@ const Product = () => {
       });
   }, []);
 
-  //gets all values from attributes
+  /* //gets all values from attributes
   useEffect(() => {
     if (attributes.length) {
       Promise.all(
@@ -83,8 +146,8 @@ const Product = () => {
             })
         )
       )
-        .then((valuesData) => {
-          const filteredValues = valuesData.filter((item) => item).flat(); //no undefined and same level
+        .then((values) => {
+          const filteredValues = values.filter((item) => item).flat(); //no undefined and same level
           const product = Object.entries(attributes).reduce((acc, [key, val] = item) => {
             const v = filteredValues.filter((a) => a.fk_product_attribute == val.id);
             let newV = {};
@@ -116,7 +179,6 @@ const Product = () => {
             };
           }, 0);
 
-console.log(product);
           setProductentier(product)
           setLoading(false);
         })
@@ -125,15 +187,8 @@ console.log(product);
         });
         
     }
-  }, [attributes]);
+  }, [attributes]); */
 
-  //maker a product from initialValues or new valuesSelected
-  useEffect(() => {
-    if (valuesSelected && values) {
-      const product = makeProductSelected(valuesSelected);
-      setProduct(product);
-    }
-  }, [valuesSelected, values]);
 
   //make a 3D product for nomenclature and 3D model
   useEffect(() => {
@@ -154,18 +209,6 @@ console.log(product);
     }
   }, [product]);
 
-  //looking for the  parent of the product for prices and nomenclature
-  useEffect(() => {
-    productFetchById(valuesSelected.PID)
-      .get()
-      .then((response) => {
-        setProductParent(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error);
-      });
-  }, [valuesSelected]);
 
   return (
     <Row className="section">
@@ -174,7 +217,7 @@ console.log(product);
         <Row className="d-flex align-items-start ft4 product_main_row ">
           <Col md={1}></Col>
           <Col md={3} className="d-flex flex-column justify-content-start product_attributes_col bg_darker h-100 p-4">
-            {!loading ? <Select_Options setValuesSelected={setValuesSelected} notInForm={notInForm} attributes={attributes} values={values} product={product} prices={[basePrice, totalPrice]} valuesSelected={valuesSelected} nomenclature={nomenclature} /> : "Chargement des options du produit"}
+            {!loading ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct}  /> : "Chargement des options du produit"}
             {/*  {totalPrice && "Prix: " + totalPrice + " €"} */}
           </Col>
           <Col md={7} className="d-flex flex-column justify-content-evenly ps-5 pe-5">

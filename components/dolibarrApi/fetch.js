@@ -8,6 +8,22 @@ const attributesFetchById = (id) => axios.create({
       DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
   });
+
+const objectsInCategory = (id) => axios.create({
+    baseURL: `https://shop.quadratik.fr/api/index.php/categories/${id}/objects?type=product`,
+    headers: {
+      Accept: "application/json",
+      DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
+    },
+  });
+
+const listCategories = () => axios.create({
+    baseURL: `https://shop.quadratik.fr/api/index.php/categories`,
+    headers: {
+      Accept: "application/json",
+      DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
+    },
+  });
 const attributesAllFetch = () => axios.create({
     baseURL: `https://shop.quadratik.fr/api/index.php/products/attributes?sortfield=t.ref&sortorder=ASC&limit=100`,
     headers: {
@@ -23,4 +39,4 @@ const attributesAllFetch = () => axios.create({
     },
   });
 
-  export {attributesAllFetch, productFetchById, attributesFetchById}
+  export {attributesAllFetch, productFetchById, attributesFetchById, listCategories, objectsInCategory}

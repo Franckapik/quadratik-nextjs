@@ -3,11 +3,34 @@ import { Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import useToggle from "../../hooks/useToggle";
 import { variantPost } from "../dolibarrApi/post";
+import { queryTypes, useQueryStates } from "next-usequerystate";
 
-const Select_Options = ({ values, attributes, notInForm, setValuesSelected, nomenclature, product, prices, valuesSelected }) => {
+const Select_Options = ({ values, attributes, notInForm,  nomenclature, product, prices, productentier }) => {
   const { handleSubmit, control, reset, watch } = useForm();
   const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle();
+
+
+  const [valuesSelected, setValuesSelected] = useQueryStates(
+    {
+      PID: queryTypes.string.withDefault(8),
+      TAG: queryTypes.string.withDefault("Diffuseurs"),
+      P: queryTypes.string.withDefault(11),
+      W: queryTypes.string.withDefault(25),
+      L: queryTypes.string.withDefault(28),
+      E: queryTypes.string.withDefault(22),
+      N: queryTypes.integer.withDefault(14),
+      C: queryTypes.integer.withDefault(0),
+      I: queryTypes.boolean.withDefault(false),
+      V: queryTypes.integer.withDefault(-3),
+      H: queryTypes.integer.withDefault(-3),
+      D: queryTypes.string.withDefault(36),
+      M: queryTypes.string.withDefault(38),
+    },
+    {
+      history: "push",
+    }
+  );
 
   useEffect(() => {
     if (product) {
@@ -93,6 +116,12 @@ const Select_Options = ({ values, attributes, notInForm, setValuesSelected, nome
         })
       ) : (
         <Form.Group className="product_select_options" /* style={{visibility : mode === "advanced" ? "hidden" : "visible"}} */ controlId="media_category_id_id">
+ {productentier.map((a,i) => {
+  return (
+    
+  )
+ })}
+          
           <Form.Label htmlFor="disabledTextInput">Motif</Form.Label>
 
           {/*   
