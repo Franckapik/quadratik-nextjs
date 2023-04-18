@@ -6,17 +6,15 @@ import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import ProductOptions from "../../components/product/ProductOptions";
 import { ProductNavBar } from "../../components/product/ProductNavBar";
 import { useNomenclature } from "../../hooks/useNomenclature";
-import { usePrice } from "../../hooks/usePrice";
 import { useRouter } from "next/router";
 import { queryTypes, useQueryState, useQueryStates } from "next-usequerystate";
+import { useProductStore } from "../../hooks/store";
 
 const Product = () => {
   const [display, setDisplay] = useState("model");
   const [error, setError] = useState(false);
-  const [attributes, setAttributes] = useState([]);
-  const [productentier, setProductentier] = useState({});
+  const [attributes, setAttributes] = useState({});
   const [defaultProduct, setDefaultProduct] = useState({});
-  const [values, setValues] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [productParent, setProductParent] = useState(false);
@@ -24,10 +22,7 @@ const Product = () => {
   const [product, setProduct] = useState(false);
   const [p3d, setProduct3D] = useState(false);
 
-  const notInForm = ["H", "V", "I", "C", "PID", "TAG"];
 
-  const [basePrice, totalPrice] = usePrice(product, productParent);
-  const nomenclature = useNomenclature(p3d, productParent);
   const [ratio, setRatio] = useState(false);
 
   // retrouver ces variables différemment en utilisant un global state ou bien un hook ?
@@ -52,15 +47,13 @@ const Product = () => {
   // Get the query parameter from the URL
   const { TAG } = router.query;
 
-  //get product from category
+  //get default product from category
   useEffect(() => {
-    console.log(valuesSelected.TAG);
     objectsInCategory(valuesSelected.TAG)
       .get()
       .then((response) => {
         var attributes = JSON.parse(response.data[0].note_private);
         setDefaultProduct({...response.data[0], attributes : attributes});
-        console.log(defaultProduct);
       })
       .catch((error) => {
         console.log(error);
@@ -88,10 +81,10 @@ const Product = () => {
             .then((values) => {
               const filteredValues = values.filter((item) => item).flat(); //no undefined and same level
               const attributesAndValues = Object.entries(attributes).reduce((acc, [key, val] = item) => {
-                const v = filteredValues.filter((a) => a.fk_product_attribute == val.id);
+                const v = filteredValues.filter((a) => a.fk_product_attribute == val.id).sort((a,b) => a.id-b.id);
                 let newV = {};
                 if (v.length) {
-                  newV = Object.entries(v).reduce((acc, [key, val] = item) => {
+                  newV = Object.entries(v).reduce((acc, [key, val] = item) => {                    
                     return {
                       ...acc,
                       [key]: {
@@ -117,6 +110,8 @@ const Product = () => {
                   },
                 };
               }, 0);
+
+              useProductStore.setState({attributes : attributesAndValues})
               setAttributes(attributesAndValues);
               setLoading(false);
             })
@@ -131,64 +126,6 @@ const Product = () => {
         setError(error);
       });
   }, []);
-
-  /* //gets all values from attributes
-  useEffect(() => {
-    if (attributes.length) {
-      Promise.all(
-        attributes.map((a) =>
-          attributesFetchById(a.id)
-            .get()
-            .then((response) => {
-              return response.data;
-            }) .catch((error) => {
-              return error;
-            })
-        )
-      )
-        .then((values) => {
-          const filteredValues = values.filter((item) => item).flat(); //no undefined and same level
-          const product = Object.entries(attributes).reduce((acc, [key, val] = item) => {
-            const v = filteredValues.filter((a) => a.fk_product_attribute == val.id);
-            let newV = {};
-            if (v.length) {
-              newV = Object.entries(v).reduce((acc, [key, val] = item) => {
-                return {
-                  ...acc,
-                  [key]: {
-                    v_id: val.id,
-                    v_ref: val.ref,
-                    v_3d: val.value?.split(",")[0],
-                    v_label: val.value?.split(",")[1],
-                    v_operator: val.value?.split(",")[3],
-                    v_factor: val.value?.split(",")[2],
-                  },
-                };
-              }, 0);
-            }
-
-            return {
-              ...acc,
-              [key]: {
-                a_id: val.id,
-                a_ref: val.ref,
-                a_position: val.position,
-                a_label: val.label,
-                values: newV,
-              },
-            };
-          }, 0);
-
-          setProductentier(product)
-          setLoading(false);
-        })
-        .catch((error) => {
-          return error
-        });
-        
-    }
-  }, [attributes]); */
-
 
   //make a 3D product for nomenclature and 3D model
   useEffect(() => {
@@ -208,6 +145,8 @@ const Product = () => {
       setProduct3D(p3d);
     }
   }, [product]);
+
+
 
 
   return (

@@ -1,6 +1,7 @@
 import Part from "./parts3D/Part";
 import Cell from "./parts3D/Cell";
 import { useRouter } from "next/router";
+import { usePerformances } from "../../hooks/usePerformances";
 
 const Diffuseur1D = ({ p3d }) => {
 
@@ -29,8 +30,10 @@ const Diffuseur1D = ({ p3d }) => {
       return an;
     });
 
-  const amax = Math.max(...a);
-  const start = [-w / 2, -l / 2, d / 2];
+/*   const amax = Math.max(...a);
+ */  const start = [-w / 2, -l / 2, d / 2];
+
+  const [amax] = usePerformances(n, p, w, e, P, N);
 
   return (
     <>

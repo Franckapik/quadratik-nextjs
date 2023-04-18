@@ -1,12 +1,16 @@
 import { Col, Row } from "react-bootstrap";
 import { DiffusorOffset } from "../DiffusorOffset";
 import Shop3D from "../Shop3D";
+import { useProductStore } from "../../hooks/store";
 
 export const Modele3D = ({ p3d, setProduct, ratio, amax, setAmax, cwidth, setCwidth }) => {
+  const price = useProductStore((state) => state.price);
+  const nomenclature = useProductStore((state) => state.nomenclature)
+
   return (
     <Row className="product_modele_main h-100">
       <Col md={5} className="d-flex flex-column justify-content-evenly ps-5">
-<Row><p className="ft05 mb-1">Woodik - 710</p><span className="ft4">REF : D1N7W50L1P10E5MM</span></Row>
+<Row><p className="ft05 mb-1">{nomenclature.simple} {price} </p><span className="ft4">REF : {nomenclature.structurel}</span></Row>
 <Row></Row>
 <Row className="align-items-center"><div className="product_list_square border_creme d-flex justify-content-center align-items-center me-4">S</div>983 Hz - 4300 Hz</Row>
 <Row className="align-items-center"><div className="product_list_square border_creme d-flex justify-content-center align-items-center me-4">E</div> 40 mm</Row>

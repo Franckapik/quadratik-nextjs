@@ -1,35 +1,33 @@
 import { queryTypes, useQueryStates } from "next-usequerystate";
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useWatch } from "react-hook-form";
 import useToggle from "../../hooks/useToggle";
 import { variantPost } from "../dolibarrApi/post";
 import { Field } from "./Field";
+import { usePrice } from "../../hooks/usePrice";
+import { useNomenclature } from "../../hooks/useNomenclature";
+import { useProductStore } from "../../hooks/store";
 
-const ProductOptions = ({ nomenclature, product, prices, attributes, defaultProduct }) => {
+
+const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
   const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle(true);
 
+  const defaultValuesQuery =  Object.values(attributes).reduce((prev,cur) => {
+    return ({...prev, [cur.a_ref] : queryTypes.string.withDefault(cur.values[0]?.v_id)  })
+  }, 0)
+
+
   const [valuesSelected, setValuesSelected] = useQueryStates(
-    {
-      PID: queryTypes.string.withDefault(8),
-      TAG: queryTypes.string.withDefault("Diffuseurs"),
-      P: queryTypes.string.withDefault(11),
-      W: queryTypes.string.withDefault(25),
-      L: queryTypes.string.withDefault(28),
-      E: queryTypes.string.withDefault(22),
-      N: queryTypes.integer.withDefault(14),
-      C: queryTypes.integer.withDefault(0),
-      I: queryTypes.boolean.withDefault(false),
-      V: queryTypes.integer.withDefault(-3),
-      H: queryTypes.integer.withDefault(-3),
-      D: queryTypes.string.withDefault(36),
-      M: queryTypes.string.withDefault(38),
-    },
+    defaultValuesQuery,
     {
       history: "push",
     }
   );
+
+  const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
+
 
   useEffect(() => {
     if (product) {
@@ -58,8 +56,19 @@ const ProductOptions = ({ nomenclature, product, prices, attributes, defaultProd
   }, [product, prices, nomenclature]);
 
   const onSubmit = async (data) => {
+    const variant = {
+      weight_impact: 0,
+      price_impact: prices[1] - prices[0],
+      price_impact_is_percent: false,
+      features: features,
+      reference: nomenclature.structurel,
+      ref_ext: nomenclature.complet,
+    };
+
+    console.log(data);
     console.log(variant);
-    variantPost(product.PID)
+    console.log(defaultProduct)
+    variantPost(defaultProduct.id)
       .post("", variant)
       .then((response) => {
         console.log("Ajout du variant [ID]:", response.data);
@@ -69,14 +78,21 @@ const ProductOptions = ({ nomenclature, product, prices, attributes, defaultProd
       });
   };
 
-  /*   useEffect(() => {
-    const subscription = watch((valuesSelected) => {
-      setValuesSelected((prevValuesSelected) => ({ ...prevValuesSelected, ...valuesSelected }));
-    });
-    return () => subscription.unsubscribe();
-  }, []); */
 
   const methods = useForm();
+
+
+    useEffect(() => {
+    const subscription = methods.watch((value) => {
+      setValuesSelected(() => ({ ...value }));
+      useProductStore.setState({valuesSelected : valuesSelected});
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const [price, setPrice] = usePrice(valuesSelected, defaultProduct, attributes);
+
+
 
   return (
     <FormProvider {...methods}>
@@ -85,7 +101,7 @@ const ProductOptions = ({ nomenclature, product, prices, attributes, defaultProd
           <Form.Group className="product_select_options" controlId="media_category_id_id">
             {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
               const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-              return <Field id={a[0]} type={a[1]} values={attribute.values} label={attribute.a_label}></Field>;
+              return <Field id={a[0]} type={a[1]} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
             })}
           </Form.Group>
         ) : (

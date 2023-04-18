@@ -1,9 +1,8 @@
 import { Form } from "react-bootstrap";
 import { Controller, useFormContext } from "react-hook-form";
 
-export const Field = ({ label, id, type, values }) => {
+export const Field = ({ label, id, type, values, defaultVal }) => {
   const { control } = useFormContext();
-
   return (
     <>
       <Form.Label htmlFor="disabledTextInput">{label}</Form.Label>
@@ -13,6 +12,7 @@ export const Field = ({ label, id, type, values }) => {
           required: "Ce champ est manquant",
         }}
         name={id}
+        defaultValue={defaultVal}
         render={({ field }) => {
           switch (type) {
             case "switch":
@@ -20,9 +20,9 @@ export const Field = ({ label, id, type, values }) => {
               break;
             case "radio":
               return (
-                <div key={`inline-${type}`} className="mb-3">
+                <div key={`inline-${type}`}  className="mb-3">
                   {Object.values(values).map((a, i) => (
-                    <Form.Check {...field} inline label={a.v_label} name="group" type={type} id={`inline-${type}-1`} />
+                    <Form.Check label={a.v_label} type={type} name="group" id={`inline-${type}-${i}`} />
                   ))}
                 </div>
               );
@@ -42,7 +42,7 @@ export const Field = ({ label, id, type, values }) => {
             case "range":
               return (
                 <>
-                  <Form.Range min={-6} max={6} />
+                  <Form.Range {...field} min={-6} max={6} />
                 </>
               );
               break;
