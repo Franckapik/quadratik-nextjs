@@ -3,12 +3,13 @@ import Cell from "./parts3D/Cell";
 import { useRouter } from "next/router";
 import { usePerformances } from "../../hooks/usePerformances";
 
-const Diffuseur1D = ({ p3d }) => {
+const Diffuseur1D = ({ p3d, dimensions }) => {
 
   const router = useRouter();
 
   // Get the query parameter from the URL
-  const { E, N, W, L, P, H, V, I, C } = router.query;
+  const { E, N, W, L, P, H, V, I, C } = dimensions;
+  console.log(E);
 
   const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
@@ -30,10 +31,11 @@ const Diffuseur1D = ({ p3d }) => {
       return an;
     });
 
-/*   const amax = Math.max(...a);
- */  const start = [-w / 2, -l / 2, d / 2];
+  const amax = Math.max(...a);
+  const start = [-w / 2, -l / 2, d / 2];
+  const cwidth = (w - (p + 1) * e) / p;
 
-  const [amax] = usePerformances(n, p, w, e, P, N);
+  usePerformances(amax, cwidth, P, N)
 
   return (
     <>

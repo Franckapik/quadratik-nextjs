@@ -14,6 +14,7 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
   const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle(true);
 
+
   const defaultValuesQuery =  Object.values(attributes).reduce((prev,cur) => {
     return ({...prev, [cur.a_ref] : queryTypes.string.withDefault(cur.values[0]?.v_id)  })
   }, 0)
@@ -27,6 +28,12 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
   );
 
   const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
+
+  useEffect(() => {
+    useProductStore.setState({valuesSelected : valuesSelected});
+  }, [valuesSelected])
+
+
 
 
   useEffect(() => {
@@ -85,7 +92,6 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
     useEffect(() => {
     const subscription = methods.watch((value) => {
       setValuesSelected(() => ({ ...value }));
-      useProductStore.setState({valuesSelected : valuesSelected});
     });
     return () => subscription.unsubscribe();
   }, []);

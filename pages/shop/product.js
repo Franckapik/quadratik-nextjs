@@ -13,7 +13,7 @@ import { useProductStore } from "../../hooks/store";
 const Product = () => {
   const [display, setDisplay] = useState("model");
   const [error, setError] = useState(false);
-  const [attributes, setAttributes] = useState({});
+  const [attributes, setAttributes] = useState(false);
   const [defaultProduct, setDefaultProduct] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -41,6 +41,7 @@ const Product = () => {
       history: "push",
     }
   );
+  
 
   const router = useRouter();
 
@@ -177,7 +178,7 @@ const Product = () => {
             <Row className="product_preview_row border_creme bg_darker">
               {display === "coefDif" ? <PerformanceCharts /> : null}
               {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
-              {display === "model" ? <Modele3D p3d={p3d} ratio={ratio} amax={amax} setAmax={setAmax} cwidth={cwidth} setCwidth={setCwidth} setProduct={setProduct} /> : null}
+              {display === "model" ? <Modele3D p3d={p3d} ratio={ratio} amax={amax} setAmax={setAmax} cwidth={cwidth} setCwidth={setCwidth} setProduct={setProduct} attributes={attributes} /> : null}
             </Row>
             {/*             <Row>
               <Col>

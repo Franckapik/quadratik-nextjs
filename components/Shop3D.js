@@ -7,10 +7,43 @@ import Absorbeur from "./models3D/Absorbeur";
 import Diffuseur1D from "./models3D/Diffuseur1D";
 import Diffuseur2D from "./models3D/Diffuseur2D";
 import { Lights } from "./models3D/parts3D/Lights";
+import { useProductStore } from "../hooks/store";
 
 const Shop3D = ({ p3d }) => {
-  const shadowPos = [0, -p3d.P / 10 - 0.1, 0];
+  const attributes= useProductStore((state) => state.attributes)
+  const valuesSelected= useProductStore((state) => state.valuesSelected)
 
+  const get3D = (attributes, valuesSelected) => {
+    console.log(attributes);
+    const listOfValues = Object.entries(attributes).reduce((acc, [i, a] = cur) => {
+      for (let key in a.values) {
+        acc.push(a.values[key]);
+      }
+      return acc;
+    }, []);
+  
+    const listOfvRef = Object.entries(valuesSelected).reduce((acc, [i, a] = cur) => {
+      const pickValue = listOfValues.filter((value) => value.v_id === a)[0];
+      if (pickValue !== undefined) {
+        return {
+          ...acc,
+          [i]: pickValue.v_3d,
+        };
+      } else {
+        return acc;
+      }
+    }, 0);
+
+    return listOfvRef
+  }
+
+
+ 
+ const monObj3d = get3D(attributes, valuesSelected);
+ console.log(monObj3d);
+
+
+  console.log(attributes, valuesSelected);
   return (
     <>
       <Canvas linear flat shadows dpr={[1, 2]} camera={{ position: [10, 15, 10], zoom: 4 }}>
@@ -21,7 +54,7 @@ const Shop3D = ({ p3d }) => {
           alphaTest={0.9}
           opacity={2}
           scale={10}
-          position={shadowPos} //0.1 for shadow issue with model
+          position={[0, monObj3d.P / 10 - 0.1, 0]} //0.1 for shadow issue with model
         >
           <RandomizedLight amount={8} radius={50} ambient={0.9} intensity={1} position={[0, 40, 0]} bias={0.001} />
         </AccumulativeShadows>
@@ -37,9 +70,10 @@ const Shop3D = ({ p3d }) => {
           zoomSpeed={0.8}
         />
         <group scale={0.1} rotation={[Math.PI / 2, 0, 0]}>
-          {p3d.TAG === "Diffuseurs" && p3d.D === "D1" && <Diffuseur1D p3d={p3d} />}
+        {monObj3d ? <Diffuseur1D p3d={p3d} dimensions={monObj3d} /> : "pas de modele"}
+{/*           {p3d.TAG === "Diffuseurs" && p3d.D === "D1" && <Diffuseur1D p3d={p3d} dimensions={monObj3d} />}
           {p3d.TAG === "Diffuseurs" && p3d.D === "D2" && <Diffuseur2D p3d={p3d} />}
-          {p3d.TAG === "Absorbeurs" && <Absorbeur p3d={p3d} />}
+          {p3d.TAG === "Absorbeurs" && <Absorbeur p3d={p3d} />} */}
         </group>
         <EffectComposer>
           <BrightnessContrast

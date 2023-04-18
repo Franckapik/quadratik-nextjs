@@ -12,7 +12,10 @@ const useBearStore = create((set) => ({
     price: 0,
     nomenclature : 0,
     valuesSelected : {},
-    attributes : {}
+    attributes : {},
+    fmin : 0,
+    fmax : 0,
+    cwidth : 0
   }))
 
   export {useBearStore, useProductStore};
