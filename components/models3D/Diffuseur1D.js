@@ -12,7 +12,7 @@ const Diffuseur1D = ({ dimensions }) => {
   const l = N * L * (c + e) + e; //longueur
   const d = P; //profondeur
   const hor = H; //decalage horizontal
-  const vert = V; //decalage vertical
+  const vert = 0; //decalage vertical NO DECALAGE FOR D1
   const invert = I; //decalage vertical
   const n = N * N * L; // nb de cellules
   const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
