@@ -1,12 +1,21 @@
+import { useEffect, useState } from "react";
 import { usePerformances } from "../../hooks/usePerformances";
 import Cell from "./parts3D/Cell";
 import Part from "./parts3D/Part";
 
-const Diffuseur1D = ({dimensions }) => {
-  // Get the query parameter from the URL
-  const { E, N, W, L, P, H, V, I, C } = dimensions;
+const Diffuseur1D = ({ dimensions }) => {
+  const [defaultModele, setDefaultModele] = useState(false);
 
-  const e = E / 10; //epaisseur
+  useEffect(() => {
+    console.table(dimensions);
+    const { E, N, W, L, P, H, V, I, C } = dimensions;
+
+  }, [dimensions]);
+
+  const {e, p, w,c,l,d,hor,vert,invert,n,n2,a} = defaultModele;
+
+  const { E, N, W, L, P, H, V, I, C } = dimensions;
+/*   const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
   const w = W; //largeur
   const c = (w - (p + 1) * e) / p; //largeur cellule
@@ -24,17 +33,19 @@ const Diffuseur1D = ({dimensions }) => {
       const m = Math.floor(i / p);
       const an = (Math.pow(n, 2) + Math.pow(m, 2)) % p;
       return an;
-    });
+    }); */
 
-  const amax = Math.max(...a);
-  const start = [-w / 2, -l / 2, d / 2];
-  const cwidth = (w - (p + 1) * e) / p;
+if (defaultModele) {
+  usePerformances(amax, c, P, N);
 
-  usePerformances(amax, cwidth, P, N)
+  console.log(defaultModele);
+
+}
+
 
   return (
     <>
-      {Array(p + 1) //peignes longs
+    {defaultModele ? <> {Array(p + 1) //peignes longs
         .fill("")
         .map((a, i) => (
           <Part key={"Part" + i} args={[e, l - e, d]} position={[start[0] + (c + e) * i, 0, start[2]]} rotation={[0, 0, 0]} />
@@ -43,9 +54,7 @@ const Diffuseur1D = ({dimensions }) => {
         .fill("")
         .map((a, i) => {
           if (i === 0 || i === n2 - 1) {
-            return (
-              <Part key={"Part" + i} args={[w - e, e, d]} position={[0, start[1] + e + (c + e) * i, start[2]]} rotation={[0, 0, 0]} />
-            );
+            return <Part key={"Part" + i} args={[w - e, e, d]} position={[0, start[1] + e + (c + e) * i, start[2]]} rotation={[0, 0, 0]} />;
           }
         })}
       {Array(p) //cellules
@@ -58,17 +67,9 @@ const Diffuseur1D = ({dimensions }) => {
           const z = start[1] + c / 2 + e + m * (c + e);
           const y = invert ? d - (o * d) / amax : (o * d) / amax;
 
-          return (
-            <Cell
-            key={"Cell" + i}
-              args={[c, l - e, e]}
-              position={[x + e / 2, 0, y === d ? y - e : y + e]}
-              rotation={[0, 0, 0]}
-              index={i}
-              motif={C}
-            />
-          );
-        })}
+          return <Cell key={"Cell" + i} args={[c, l - e, e]} position={[x + e / 2, 0, y === d ? y - e : y + e]} rotation={[0, 0, 0]} index={i} motif={C} />;
+        })}</>: null}
+     
     </>
   );
 };
