@@ -1,17 +1,19 @@
 import Part from "./parts3D/Part";
 import Cell from "./parts3D/Cell";
+import { usePerformances } from "../../hooks/usePerformances";
 
-const Diffuseur2D = ({ p3d }) => {
-  const e = p3d.E / 10; //epaisseur
-  const p = parseInt(p3d.N); //type (type du diffuseur) Prime number (p)
-  const w = p3d.W; //largeur
+const Diffuseur2D = ({ dimensions }) => {
+  const { E, N, W, L, P, H, V, I, C } = dimensions;
+  const e =E / 10; //epaisseur
+  const p = parseInt(N); //type (type du diffuseur) Prime number (p)
+  const w =W; //largeur
   const c = (w - (p + 1) * e) / p; //largeur cellule
-  const l = p3d.N * p3d.L * (c + e) + e; //longueur
-  const d = p3d.P; //profondeur
-  const hor = p3d.H; //decalage horizontal
-  const vert = p3d.V; //decalage vertical
-  const invert = p3d.I; //decalage vertical
-  const n = p3d.N * p3d.N * p3d.L; // nb de cellules
+  const l =N *L * (c + e) + e; //longueur
+  const d =P; //profondeur
+  const hor =H; //decalage horizontal
+  const vert =V; //decalage vertical
+  const invert =I; //decalage vertical
+  const n =N *N *L; // nb de cellules
   const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
   const a = Array(n)
     .fill("")
@@ -22,8 +24,10 @@ const Diffuseur2D = ({ p3d }) => {
       return an;
     });
 
-  const amax = Math.max(...a);
-  const start = [-w / 2, -l / 2, d / 2];
+    const amax = Math.max(...a);
+    const start = [-w / 2, -l / 2, d / 2];
+  
+    usePerformances(amax, c, P, N)
 
   return (
     <>
@@ -65,7 +69,7 @@ const Diffuseur2D = ({ p3d }) => {
               position={[x, z, y === d ? y - e : y + e]}
               rotation={[0, 0, 0]}
               index={i}
-              motif={p3d.C}
+              motif={C}
             />
           );
         })}

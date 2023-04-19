@@ -9,6 +9,7 @@ const useBearStore = create((set) => ({
 }));
 
 const useProductStore = create((set) => ({
+  tag : 1,
   price: 0,
   nomenclature: 0,
   valuesSelected: {},

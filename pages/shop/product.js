@@ -25,6 +25,9 @@ const Product = () => {
 
   //get default product from tag category
   const [tag, setCategories] = useQueryState("TAG", queryTypes.integer.withDefault(1));
+  useProductStore.setState({ tag: tag }); //global state
+  console.log(tag);
+
 
   useEffect(() => {
     objectsInCategory(tag)
@@ -35,7 +38,7 @@ const Product = () => {
       })
       .catch((error) => {
         console.log(error);
-        setError(error);
+       /*  setError(error); */ //waiting for work on absorbeurs
       });
   }, [tag]);
 
@@ -104,7 +107,7 @@ const Product = () => {
         console.log(error);
         setError(error);
       });
-  }, []);
+  }, [tag]);
 
   return (
     <Row className="section">

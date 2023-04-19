@@ -5,15 +5,16 @@ import { BlendFunction } from "postprocessing";
 import React from "react";
 import { useProductStore } from "../../hooks/store";
 import Diffuseur1D from "../models3D/Diffuseur1D";
+import Diffuseur2D from "../models3D/Diffuseur2D";
+import Absorbeur from "../models3D/Absorbeur";
 import { Lights } from "../models3D/parts3D/Lights";
 import { useValues3D } from "../../hooks/useValues3D";
 
 const ProductCanvas = () => {
   const attributes = useProductStore((state) => state.attributes);
   const valuesSelected = useProductStore((state) => state.valuesSelected);
-  const tag = useProductStore((state) => state.tag);
+  const tag = useProductStore.getState().tag;
   const dimensions = useValues3D(valuesSelected, attributes);
-
   return (
     <>
       {dimensions ? (
@@ -32,7 +33,9 @@ const ProductCanvas = () => {
           <Lights />
           <OrbitControls makeDefault minAzimuthAngle={0} maxAzimuthAngle={Math.PI / 2} minPolarAngle={Math.PI / 4} maxPolarAngle={Math.PI / 4} enableZoom={false} enablePan={true} zoomSpeed={0.8} />
           <group scale={0.1} rotation={[Math.PI / 2, 0, 0]}>
-            <Diffuseur1D dimensions={dimensions} />
+           {tag === 1 && dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} />: null} 
+           {tag === 1 && dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} />: null} 
+           {tag === 2 ? <Absorbeur dimensions={dimensions} />: null} 
             {/*           {p3d.TAG === "Diffuseurs" && p3d.D === "D1" && <Diffuseur1D p3d={p3d} dimensions={monObj3d} />}
           {p3d.TAG === "Diffuseurs" && p3d.D === "D2" && <Diffuseur2D p3d={p3d} />}
           {p3d.TAG === "Absorbeurs" && <Absorbeur p3d={p3d} />} */}
