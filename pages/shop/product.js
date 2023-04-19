@@ -19,20 +19,15 @@ const Product = () => {
   const [display, setDisplay] = useState("model");
   const [error, setError] = useState(false);
 
-  /* const [ratio, setRatio] = useState(false);
-  const fmin = Math.round((((344 / 2 / p3d.P / 10) * amax) / p3d.N) * 1000);
-  const fmax = Math.round(344 / 2 / (cwidth / 100)); */
-
   //get default product from tag category
   const [tag, setCategories] = useQueryState("TAG", queryTypes.integer.withDefault(1));
   useProductStore.setState({ tag: tag }); //global state
-  console.log(tag);
-
 
   useEffect(() => {
     objectsInCategory(tag)
       .get()
       .then((response) => {
+        console.log(response.data[0]);
         var attributes = JSON.parse(response.data[0].note_private);
         setDefaultProduct({ ...response.data[0], attributes: attributes });
       })
