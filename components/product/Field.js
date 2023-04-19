@@ -42,7 +42,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
             case "range":
               return (
                 <>
-                  <Form.Range {...field} min={-6} max={6} />
+                  <Form.Range {...field} min={0} max={13} />
                 </>
               );
               break;

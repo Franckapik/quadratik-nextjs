@@ -4,7 +4,6 @@ import Part from "./parts3D/Part";
 
 const Diffuseur1D = ({ dimensions }) => {
   const { E, N, W, L, P, H, V, I, C } = dimensions;
-  console.log(H);
   const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
   const w = W; //largeur
@@ -28,7 +27,6 @@ const Diffuseur1D = ({ dimensions }) => {
   const amax = Math.max(...a);
   const start = [-w / 2, -l / 2, d / 2];
   const cwidth = (w - (p + 1) * e) / p;
-
 
   usePerformances(amax, cwidth, P, N)
   return (
