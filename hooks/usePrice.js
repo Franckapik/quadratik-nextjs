@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useProductStore } from "../hooks/store";
 
-
 export const usePrice = (valuesSelected, defaultProduct, attributes) => {
   const [price, setPrice] = useState(0);
   useProductStore.setState({ price: price });
@@ -18,21 +17,28 @@ export const usePrice = (valuesSelected, defaultProduct, attributes) => {
 
     const optionsPrice = Object.entries(valuesSelected).reduce((acc, [i, a] = cur) => {
       const pickValue = listOfValues.filter((value) => value.v_id === a)[0];
-      if (pickValue !== undefined) {
-        switch (pickValue.v_operator) {
-          case "multiplication":
-            acc += (Number(pickValue.v_factor) - 1) * basePrice;
-            break;
 
-          case "addition":
-            acc += Number(pickValue.v_factor) * basePrice;
-            break;
+      if (!["H", "V"].includes(i)) {
+        const pickValue = listOfValues.filter((value) => value.v_id === a)[0];
+        if (pickValue !== undefined) {
+          switch (pickValue.v_operator) {
+            case "multiplication":
+              acc += (Number(pickValue.v_factor) - 1) * basePrice;
+              break;
 
-          default:
-            console.log("Strategie de calcul de prix non repertoriée : ", pickValue.v_operator);
+            case "addition":
+              acc += Number(pickValue.v_factor) * basePrice;
+              break;
+
+            default:
+              console.log("Strategie de calcul de prix non repertoriée : ", pickValue.v_operator);
+          }
         }
-      }
+      } else {
+        //if H or V
 
+        return acc;
+      }
       return acc;
     }, basePrice);
 

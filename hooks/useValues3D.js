@@ -4,7 +4,6 @@ export const useValues3D = (valuesSelected, attributes) => {
   const [values3D, setValues3D] = useState(false);
 
   useEffect(() => {
-    console.log(valuesSelected);
     const listOfValues = Object.entries(attributes).reduce((acc, [i, a] = cur) => {
       for (let key in a.values) {
         acc.push(a.values[key]);
