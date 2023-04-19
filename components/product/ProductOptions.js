@@ -9,7 +9,7 @@ import { usePrice } from "../../hooks/usePrice";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { useProductStore } from "../../hooks/store";
 
-const ProductOptions = ({attributes, defaultProduct }) => {
+const ProductOptions = ({attributes, defaultProduct, setLoading }) => {
   const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle(true);
 
@@ -24,6 +24,9 @@ const ProductOptions = ({attributes, defaultProduct }) => {
   const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
   const [price, setPrice] = usePrice(valuesSelected, defaultProduct, attributes);
 
+  if (nomenclature) { //render Modele after ProductOptions
+    setLoading(false)
+  }
 
   useEffect(() => {
     useProductStore.setState({ valuesSelected: valuesSelected });

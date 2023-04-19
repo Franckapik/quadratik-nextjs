@@ -12,6 +12,7 @@ const Product = () => {
   //Data
   const [attributes, setAttributes] = useState(false);
   const [defaultProduct, setDefaultProduct] = useState({});
+  const [fetching, setFetching] = useState(true);
   const [loading, setLoading] = useState(true);
 
   //Display
@@ -92,7 +93,7 @@ const Product = () => {
 
               useProductStore.setState({ attributes: attributesAndValues }); //global state
               setAttributes(attributesAndValues);
-              setLoading(false);
+              setFetching(false);
             })
             .catch((error) => {
               return error;
@@ -112,7 +113,7 @@ const Product = () => {
         <Row className="d-flex align-items-start ft4 product_main_row ">
           <Col md={1}></Col>
           <Col md={3} className="d-flex flex-column justify-content-start product_attributes_col bg_darker h-100 p-4">
-            {!loading ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} /> : "Chargement des options du produit"}
+            {!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
           </Col>
           <Col md={7} className="d-flex flex-column justify-content-evenly ps-5 pe-5">
             <Row className="justify-content-between text-center">
