@@ -1,6 +1,6 @@
 import { useTexture } from "@react-three/drei"
 
-const Cell = (props) => {
+const Cell = ({position, rotation, args, index, motif}) => {
   const [colorMap, wengeMap, normalMap, roughnessMap] = useTexture([
     '/textures_wood/plywood.jpg',
     '/textures_wood/wenge.jpg',
@@ -13,22 +13,22 @@ const Cell = (props) => {
   return (
     <mesh
       castShadow
-      position={props.position}
-      rotation={props.rotation}
+      position={position}
+      rotation={rotation}
     >
-      <boxGeometry args={props.args} /> {/*x z y */}
-      {props.motif === 0 ? <meshStandardMaterial
+      <boxGeometry args={args} /> {/*x z y */}
+      {motif == 0 ? <meshStandardMaterial
         map={colorMap}
         normalMap={normalMap}
         roughnessMap={roughnessMap}
       /> : null}
-      {props.motif === 1 ? <meshStandardMaterial
-        map={motif1.includes(props.index) ? wengeMap : colorMap}
+      {motif == 1 ? <meshStandardMaterial
+        map={motif1.includes(index) ? wengeMap : colorMap}
         normalMap={normalMap}
         roughnessMap={roughnessMap}
       /> : null}
-      {props.motif === 2 ? <meshStandardMaterial
-        map={props.index%2 ==0 ? wengeMap : colorMap}
+      {motif == 2 ? <meshStandardMaterial
+        map={index%2 ==0 ? wengeMap : colorMap}
         normalMap={normalMap}
         roughnessMap={roughnessMap}
       /> : null}
