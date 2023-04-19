@@ -4,18 +4,9 @@ import Cell from "./parts3D/Cell";
 import Part from "./parts3D/Part";
 
 const Diffuseur1D = ({ dimensions }) => {
-  const [defaultModele, setDefaultModele] = useState(false);
-
-  useEffect(() => {
-    console.table(dimensions);
-    const { E, N, W, L, P, H, V, I, C } = dimensions;
-
-  }, [dimensions]);
-
-  const {e, p, w,c,l,d,hor,vert,invert,n,n2,a} = defaultModele;
-
   const { E, N, W, L, P, H, V, I, C } = dimensions;
-/*   const e = E / 10; //epaisseur
+
+  const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
   const w = W; //largeur
   const c = (w - (p + 1) * e) / p; //largeur cellule
@@ -33,19 +24,17 @@ const Diffuseur1D = ({ dimensions }) => {
       const m = Math.floor(i / p);
       const an = (Math.pow(n, 2) + Math.pow(m, 2)) % p;
       return an;
-    }); */
+    });
 
-if (defaultModele) {
-  usePerformances(amax, c, P, N);
+  const amax = Math.max(...a);
+  const start = [-w / 2, -l / 2, d / 2];
+  const cwidth = (w - (p + 1) * e) / p;
 
-  console.log(defaultModele);
+  console.log("dif1d", amax, cwidth, P, N);
 
-}
-
-
+  usePerformances(amax, cwidth, P, N)
   return (
-    <>
-    {defaultModele ? <> {Array(p + 1) //peignes longs
+    <> {Array(p + 1) //peignes longs
         .fill("")
         .map((a, i) => (
           <Part key={"Part" + i} args={[e, l - e, d]} position={[start[0] + (c + e) * i, 0, start[2]]} rotation={[0, 0, 0]} />
@@ -68,7 +57,7 @@ if (defaultModele) {
           const y = invert ? d - (o * d) / amax : (o * d) / amax;
 
           return <Cell key={"Cell" + i} args={[c, l - e, e]} position={[x + e / 2, 0, y === d ? y - e : y + e]} rotation={[0, 0, 0]} index={i} motif={C} />;
-        })}</>: null}
+        })}
      
     </>
   );
