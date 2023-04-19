@@ -9,7 +9,7 @@ import { usePrice } from "../../hooks/usePrice";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { useProductStore } from "../../hooks/store";
 
-const ProductOptions = ({attributes, defaultProduct, setLoading }) => {
+const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle(true);
 
@@ -24,15 +24,18 @@ const ProductOptions = ({attributes, defaultProduct, setLoading }) => {
   const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
   const [price, setPrice] = usePrice(valuesSelected, defaultProduct, attributes);
 
-  if (nomenclature) { //render Modele after ProductOptions
-    setLoading(false)
-  }
+  //render Modele after ProductOptions
+  useEffect(() => {
+    if (nomenclature) {
+      setLoading(false);
+    }
+  }, [nomenclature]);
 
   useEffect(() => {
     useProductStore.setState({ valuesSelected: valuesSelected });
   }, [valuesSelected]);
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     if (product) {
       const keys = Object.keys(product);
       const features = keys.reduce((acc, item) => {
@@ -89,7 +92,6 @@ const ProductOptions = ({attributes, defaultProduct, setLoading }) => {
     });
     return () => subscription.unsubscribe();
   }, []);
-
 
   return (
     <FormProvider {...methods}>
