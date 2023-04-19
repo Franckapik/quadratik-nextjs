@@ -1,5 +1,5 @@
 import { animated } from "@react-spring/web";
-import { useAnimatedPath } from "../../hooks/useAnimatedPath";
+import { useAnimatedPath } from "../../../hooks/useAnimatedPath";
 
 export const AnimatedLogo2 = ({ toggle, setLoading }) => {
   const animatedProps = useAnimatedPath({

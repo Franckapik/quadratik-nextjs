@@ -6,9 +6,9 @@ import { Col, Row } from "react-bootstrap";
 import { useSwipeable } from "react-swipeable";
 import { MathUtils } from "three";
 import { useBearStore } from "../../hooks/store";
-import { LoadCamera } from "../threejs/loadCamera";
-import { LoadLight } from "../threejs/loadLight";
-import { LoadMesh } from "../threejs/loadMesh";
+import { LoadCamera } from "./canvas_components/loadCamera";
+import { LoadLight } from "./canvas_components/loadLight";
+import { LoadMesh } from "./canvas_components/loadMesh";
 
 const RotateScroll = ({ children, target }) => {
   const scene = useRef();

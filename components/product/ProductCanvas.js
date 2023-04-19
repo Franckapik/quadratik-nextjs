@@ -3,14 +3,15 @@ import { Canvas } from "@react-three/fiber";
 import { BrightnessContrast, EffectComposer, SSAO, ToneMapping } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import React from "react";
-import { useProductStore } from "../hooks/store";
-import Diffuseur1D from "./models3D/Diffuseur1D";
-import { Lights } from "./models3D/parts3D/Lights";
-import { useValues3D } from "../hooks/useValues3D";
+import { useProductStore } from "../../hooks/store";
+import Diffuseur1D from "../models3D/Diffuseur1D";
+import { Lights } from "../models3D/parts3D/Lights";
+import { useValues3D } from "../../hooks/useValues3D";
 
-const Shop3D = () => {
+const ProductCanvas = () => {
   const attributes = useProductStore((state) => state.attributes);
   const valuesSelected = useProductStore((state) => state.valuesSelected);
+  const tag = useProductStore((state) => state.tag);
   const dimensions = useValues3D(valuesSelected, attributes);
 
   return (
@@ -60,4 +61,4 @@ const Shop3D = () => {
   );
 };
 
-export default Shop3D;
+export default ProductCanvas;

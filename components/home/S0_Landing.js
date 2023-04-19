@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useSpring, animated } from "@react-spring/web";
-import { AnimatedLogo } from "../landing_logo/AnimatedLogo";
-import { AnimatedLogo2 } from "../landing_logo/AnimatedLogo2";
-import { AnimatedSquare } from "../landing_logo/AnimatedSquare";
+import { AnimatedLogo } from "./landing_logo/AnimatedLogo";
+import { AnimatedLogo2 } from "./landing_logo/AnimatedLogo2";
+import { AnimatedSquare } from "./landing_logo/AnimatedSquare";
 
 export const S0_Landing = () => {
   const [toggle, setToggle] = useState(false);

@@ -2,7 +2,7 @@ import { queryTypes, useQueryState } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { attributesAllFetch, attributesFetchById, objectsInCategory } from "../../components/dolibarrApi/fetch";
-import { Modele3D } from "../../components/product/Modele3D";
+import { ProductHud } from "../../components/product/ProductHud";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import { ProductNavBar } from "../../components/product/ProductNavBar";
 import ProductOptions from "../../components/product/ProductOptions";
@@ -136,7 +136,7 @@ const Product = () => {
                   {" "}
                   {display === "coefDif" ? <PerformanceCharts /> : null}
                   {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
-                  {display === "model" ? <Modele3D /> : null}
+                  {display === "model" ? <ProductHud /> : null}
                 </>
               ) : (
                 "Chargement du modèle"

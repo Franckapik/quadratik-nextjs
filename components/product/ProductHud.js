@@ -1,8 +1,8 @@
 import { Col, Row } from "react-bootstrap";
 import { useProductStore } from "../../hooks/store";
-import Shop3D from "../Shop3D";
+import ProductCanvas from "./ProductCanvas";
 
-export const Modele3D = () => {
+export const ProductHud = () => {
 
   //just on page render
   const price = useProductStore.getState().price
@@ -36,7 +36,7 @@ export const Modele3D = () => {
         </Row>
       </Col>
       <Col md={7} className="product_canvas_container">
-        <Shop3D></Shop3D>
+        <ProductCanvas></ProductCanvas>
       </Col>
     </Row>
   );
