@@ -1,15 +1,10 @@
-import Part from "./parts3D/Part";
-import Cell from "./parts3D/Cell";
-import { useRouter } from "next/router";
 import { usePerformances } from "../../hooks/usePerformances";
+import Cell from "./parts3D/Cell";
+import Part from "./parts3D/Part";
 
-const Diffuseur1D = ({ p3d, dimensions }) => {
-
-  const router = useRouter();
-
+const Diffuseur1D = ({dimensions }) => {
   // Get the query parameter from the URL
   const { E, N, W, L, P, H, V, I, C } = dimensions;
-  console.log(E);
 
   const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)

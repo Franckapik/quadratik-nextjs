@@ -9,32 +9,24 @@ import { usePrice } from "../../hooks/usePrice";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { useProductStore } from "../../hooks/store";
 
-
 const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
   const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle(true);
 
+  const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
+    return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(cur.values[0]?.v_id) };
+  }, 0);
 
-  const defaultValuesQuery =  Object.values(attributes).reduce((prev,cur) => {
-    return ({...prev, [cur.a_ref] : queryTypes.string.withDefault(cur.values[0]?.v_id)  })
-  }, 0)
-
-
-  const [valuesSelected, setValuesSelected] = useQueryStates(
-    defaultValuesQuery,
-    {
-      history: "push",
-    }
-  );
+  const [valuesSelected, setValuesSelected] = useQueryStates(defaultValuesQuery, {
+    history: "push",
+  });
 
   const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
 
   useEffect(() => {
-    useProductStore.setState({valuesSelected : valuesSelected});
-  }, [valuesSelected])
-
-
-
+    console.log(valuesSelected);
+    useProductStore.setState({ valuesSelected: valuesSelected });
+  }, [valuesSelected]);
 
   useEffect(() => {
     if (product) {
@@ -74,7 +66,7 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
 
     console.log(data);
     console.log(variant);
-    console.log(defaultProduct)
+    console.log(defaultProduct);
     variantPost(defaultProduct.id)
       .post("", variant)
       .then((response) => {
@@ -85,11 +77,9 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
       });
   };
 
-
   const methods = useForm();
 
-
-    useEffect(() => {
+  useEffect(() => {
     const subscription = methods.watch((value) => {
       setValuesSelected(() => ({ ...value }));
     });
@@ -97,8 +87,6 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
   }, []);
 
   const [price, setPrice] = usePrice(valuesSelected, defaultProduct, attributes);
-
-
 
   return (
     <FormProvider {...methods}>

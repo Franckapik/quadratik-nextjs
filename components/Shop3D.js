@@ -3,15 +3,15 @@ import { Canvas } from "@react-three/fiber";
 import { BrightnessContrast, EffectComposer, SSAO, ToneMapping } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import React from "react";
-import Absorbeur from "./models3D/Absorbeur";
-import Diffuseur1D from "./models3D/Diffuseur1D";
-import Diffuseur2D from "./models3D/Diffuseur2D";
-import { Lights } from "./models3D/parts3D/Lights";
 import { useProductStore } from "../hooks/store";
+import Diffuseur1D from "./models3D/Diffuseur1D";
+import { Lights } from "./models3D/parts3D/Lights";
 
-const Shop3D = ({ p3d }) => {
+const Shop3D = () => {
   const attributes= useProductStore((state) => state.attributes)
   const valuesSelected= useProductStore((state) => state.valuesSelected)
+
+console.log("shop")
 
   const get3D = (attributes, valuesSelected) => {
     const listOfValues = Object.entries(attributes).reduce((acc, [i, a] = cur) => {
@@ -66,7 +66,7 @@ const Shop3D = ({ p3d }) => {
           zoomSpeed={0.8}
         />
         <group scale={0.1} rotation={[Math.PI / 2, 0, 0]}>
-        {monObj3d ? <Diffuseur1D p3d={p3d} dimensions={monObj3d} /> : "pas de modele"}
+        {monObj3d ? <Diffuseur1D dimensions={monObj3d} /> : "pas de modele"}
 {/*           {p3d.TAG === "Diffuseurs" && p3d.D === "D1" && <Diffuseur1D p3d={p3d} dimensions={monObj3d} />}
           {p3d.TAG === "Diffuseurs" && p3d.D === "D2" && <Diffuseur2D p3d={p3d} />}
           {p3d.TAG === "Absorbeurs" && <Absorbeur p3d={p3d} />} */}

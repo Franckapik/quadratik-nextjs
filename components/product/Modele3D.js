@@ -6,6 +6,7 @@ export const Modele3D = () => {
   const price = useProductStore((state) => state.price);
   const nomenclature = useProductStore((state) => state.nomenclature);
   /*   const {fmin, fmax, cwidth} = useProductStore((state) => ({fmin : state.fmin, fmax : state.fmax, cwidth : state.cwidth})) */
+
   return (
     <Row className="product_modele_main h-100">
       <Col md={5} className="d-flex flex-column justify-content-evenly ps-5">
