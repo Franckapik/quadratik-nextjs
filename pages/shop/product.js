@@ -22,7 +22,6 @@ const Product = () => {
   const [product, setProduct] = useState(false);
   const [p3d, setProduct3D] = useState(false);
 
-
   const [ratio, setRatio] = useState(false);
 
   // retrouver ces variables différemment en utilisant un global state ou bien un hook ?
@@ -32,16 +31,12 @@ const Product = () => {
   const fmin = Math.round((((344 / 2 / p3d.P / 10) * amax) / p3d.N) * 1000);
   const fmax = Math.round(344 / 2 / (cwidth / 100));
 
-  const [valuesSelected, setValuesSelected] = useQueryStates(
-    {
-      PID: queryTypes.string.withDefault(8),
-      TAG: queryTypes.string.withDefault(1),
-    },
-    {
-      history: "push",
-    }
+  const [tag, setCategories] = useQueryState(
+    'TAG',
+    queryTypes.integer.withDefault(1)
   );
-  
+
+  console.log(tag);
 
   const router = useRouter();
 
@@ -50,17 +45,17 @@ const Product = () => {
 
   //get default product from category
   useEffect(() => {
-    objectsInCategory(valuesSelected.TAG)
+    objectsInCategory(tag)
       .get()
       .then((response) => {
         var attributes = JSON.parse(response.data[0].note_private);
-        setDefaultProduct({...response.data[0], attributes : attributes});
+        setDefaultProduct({ ...response.data[0], attributes: attributes });
       })
       .catch((error) => {
         console.log(error);
         setError(error);
       });
-  }, [valuesSelected]);
+  }, [tag]);
 
   useEffect(() => {
     attributesAllFetch() // get all attributes
@@ -74,7 +69,8 @@ const Product = () => {
                 .get()
                 .then((response) => {
                   return response.data;
-                }) .catch((error) => {
+                })
+                .catch((error) => {
                   return error;
                 })
             )
@@ -82,10 +78,10 @@ const Product = () => {
             .then((values) => {
               const filteredValues = values.filter((item) => item).flat(); //no undefined and same level
               const attributesAndValues = Object.entries(attributes).reduce((acc, [key, val] = item) => {
-                const v = filteredValues.filter((a) => a.fk_product_attribute == val.id).sort((a,b) => a.id-b.id);
+                const v = filteredValues.filter((a) => a.fk_product_attribute == val.id).sort((a, b) => a.id - b.id);
                 let newV = {};
                 if (v.length) {
-                  newV = Object.entries(v).reduce((acc, [key, val] = item) => {                    
+                  newV = Object.entries(v).reduce((acc, [key, val] = item) => {
                     return {
                       ...acc,
                       [key]: {
@@ -99,7 +95,7 @@ const Product = () => {
                     };
                   }, 0);
                 }
-    
+
                 return {
                   ...acc,
                   [key]: {
@@ -112,14 +108,13 @@ const Product = () => {
                 };
               }, 0);
 
-              useProductStore.setState({attributes : attributesAndValues})
+              useProductStore.setState({ attributes: attributesAndValues });
               setAttributes(attributesAndValues);
               setLoading(false);
             })
             .catch((error) => {
-              return error
+              return error;
             });
-            
         }
       })
       .catch((error) => {
@@ -147,9 +142,6 @@ const Product = () => {
     }
   }, [product]);
 
-
-
-
   return (
     <Row className="section">
       <ProductNavBar />
@@ -157,7 +149,7 @@ const Product = () => {
         <Row className="d-flex align-items-start ft4 product_main_row ">
           <Col md={1}></Col>
           <Col md={3} className="d-flex flex-column justify-content-start product_attributes_col bg_darker h-100 p-4">
-            {!loading ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct}  /> : "Chargement des options du produit"}
+            {!loading ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} /> : "Chargement des options du produit"}
             {/*  {totalPrice && "Prix: " + totalPrice + " €"} */}
           </Col>
           <Col md={7} className="d-flex flex-column justify-content-evenly ps-5 pe-5">

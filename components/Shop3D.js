@@ -14,7 +14,6 @@ const Shop3D = ({ p3d }) => {
   const valuesSelected= useProductStore((state) => state.valuesSelected)
 
   const get3D = (attributes, valuesSelected) => {
-    console.log(attributes);
     const listOfValues = Object.entries(attributes).reduce((acc, [i, a] = cur) => {
       for (let key in a.values) {
         acc.push(a.values[key]);
@@ -40,10 +39,7 @@ const Shop3D = ({ p3d }) => {
 
  
  const monObj3d = get3D(attributes, valuesSelected);
- console.log(monObj3d);
 
-
-  console.log(attributes, valuesSelected);
   return (
     <>
       <Canvas linear flat shadows dpr={[1, 2]} camera={{ position: [10, 15, 10], zoom: 4 }}>
