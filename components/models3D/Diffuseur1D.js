@@ -4,6 +4,7 @@ import Part from "./parts3D/Part";
 
 const Diffuseur1D = ({ dimensions }) => {
   const { E, N, W, L, P, H, V, I, C } = dimensions;
+  console.log(H);
   const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
   const w = W; //largeur
