@@ -12,7 +12,7 @@ export const useValues3D = (valuesSelected, attributes) => {
     }, []);
 
     const listOfv3d = Object.entries(valuesSelected).reduce((acc, [i, a] = cur) => {
-      if (!["H", "V"].includes(i)) {
+      if (!["H", "V", "I"].includes(i)) {
         const pickValue = listOfValues.filter((value) => value.v_id === a)[0];
         if (pickValue !== undefined) {
           return {

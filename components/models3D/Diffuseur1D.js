@@ -4,7 +4,7 @@ import Part from "./parts3D/Part";
 
 const Diffuseur1D = ({ dimensions }) => {
   const { E, N, W, L, P, H, V, I, C } = dimensions;
-  console.log(C);
+  console.log(I);
   const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
   const w = W; //largeur
@@ -13,7 +13,7 @@ const Diffuseur1D = ({ dimensions }) => {
   const d = P; //profondeur
   const hor = H; //decalage horizontal
   const vert = 0; //decalage vertical NO DECALAGE FOR D1
-  const invert = I; //decalage vertical
+  const invert = (I === "true"); //decalage vertical
   const n = N * N * L; // nb de cellules
   const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
   const a = Array(n)
