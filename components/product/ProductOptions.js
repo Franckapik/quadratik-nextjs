@@ -9,7 +9,7 @@ import { usePrice } from "../../hooks/usePrice";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { useProductStore } from "../../hooks/store";
 
-const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
+const ProductOptions = ({attributes, defaultProduct }) => {
   const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle(true);
 
@@ -22,13 +22,14 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
   });
 
   const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
+  const [price, setPrice] = usePrice(valuesSelected, defaultProduct, attributes);
+
 
   useEffect(() => {
-    console.log(valuesSelected);
     useProductStore.setState({ valuesSelected: valuesSelected });
   }, [valuesSelected]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (product) {
       const keys = Object.keys(product);
       const features = keys.reduce((acc, item) => {
@@ -52,7 +53,7 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
 
       setVariant(variant);
     }
-  }, [product, prices, nomenclature]);
+  }, [nomenclature]); */
 
   const onSubmit = async (data) => {
     const variant = {
@@ -86,7 +87,6 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const [price, setPrice] = usePrice(valuesSelected, defaultProduct, attributes);
 
   return (
     <FormProvider {...methods}>
@@ -95,7 +95,7 @@ const ProductOptions = ({ product, prices, attributes, defaultProduct }) => {
           <Form.Group className="product_select_options" controlId="media_category_id_id">
             {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
               const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-              return <Field id={a[0]} type={a[1]} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+              return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
             })}
           </Form.Group>
         ) : (

@@ -3,10 +3,10 @@ import { useProductStore } from "../../hooks/store";
 import Shop3D from "../Shop3D";
 
 export const Modele3D = () => {
-  const price = useProductStore((state) => state.price);
-  const nomenclature = useProductStore((state) => state.nomenclature);
+  const price = useProductStore.getState().price
+  const nomenclature = useProductStore.getState().nomenclature
   /*   const {fmin, fmax, cwidth} = useProductStore((state) => ({fmin : state.fmin, fmax : state.fmax, cwidth : state.cwidth})) */
-
+console.log("coucou");
   return (
     <Row className="product_modele_main h-100">
       <Col md={5} className="d-flex flex-column justify-content-evenly ps-5">

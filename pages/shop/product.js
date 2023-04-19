@@ -113,7 +113,6 @@ const Product = () => {
           <Col md={1}></Col>
           <Col md={3} className="d-flex flex-column justify-content-start product_attributes_col bg_darker h-100 p-4">
             {!loading ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} /> : "Chargement des options du produit"}
-            {/*  {totalPrice && "Prix: " + totalPrice + " €"} */}
           </Col>
           <Col md={7} className="d-flex flex-column justify-content-evenly ps-5 pe-5">
             <Row className="justify-content-between text-center">
@@ -136,7 +135,7 @@ const Product = () => {
                   {" "}
                   {display === "coefDif" ? <PerformanceCharts /> : null}
                   {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
-                  {display === "model" ? <Modele3D attributes={attributes} /> : null}
+                  {display === "model" ? <Modele3D /> : null}
                 </>
               ) : (
                 "Chargement du modèle"

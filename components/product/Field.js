@@ -5,7 +5,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
   const { control } = useFormContext();
   return (
     <>
-      <Form.Label htmlFor="disabledTextInput">{label}</Form.Label>
+      <Form.Label>{label}</Form.Label>
       <Controller
         control={control}
         rules={{
@@ -22,7 +22,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
               return (
                 <div key={`inline-${type}`}  className="mb-3">
                   {Object.values(values).map((a, i) => (
-                    <Form.Check label={a.v_label} type={type} name="group" id={`inline-${type}-${i}`} />
+                    <Form.Check label={a.v_label} type={type} name="group" id={`inline-${type}-${i}`} key={"FormCheck" + i} />
                   ))}
                 </div>
               );
@@ -32,7 +32,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
               return (
                 <Form.Select {...field}>
                   {Object.values(values).map((a, i) => (
-                    <option value={a.v_id} selected>
+                    <option value={a.v_id} key={"Option_"+label + i}>
                       {a.v_label}
                     </option>
                   ))}
