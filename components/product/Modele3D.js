@@ -3,11 +3,15 @@ import { useProductStore } from "../../hooks/store";
 import Shop3D from "../Shop3D";
 
 export const Modele3D = () => {
+
+  //just on page render
   const price = useProductStore.getState().price
   const nomenclature = useProductStore.getState().nomenclature
-  const fmin = useProductStore.getState().fmin
-  const fmax = useProductStore.getState().fmax
-  const cwidth = useProductStore.getState().cwidth
+
+  //need to re-render the page
+  const fmin = useProductStore(state => state.fmin);
+  const fmax = useProductStore(state => state.fmax);
+  const cwidth = useProductStore(state => state.cwidth);
   
   return (
     <Row className="product_modele_main h-100">

@@ -3,6 +3,8 @@ import { useProductStore } from "./store";
 
 export const usePerformances = (amax, cwidth, P, N) => {
   const [performances, setPerformances] = useState(false);
+  console.log("hook", amax, cwidth, P, N);
+
 
   useEffect(() => {
     const fmin = Math.round((((344 / 2 / P / 10) * amax) / N) * 1000);
