@@ -1,49 +1,30 @@
+import { queryTypes, useQueryState } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { attributesAllFetch, attributesFetchById, objectsInCategory } from "../../components/dolibarrApi/fetch";
 import { Modele3D } from "../../components/product/Modele3D";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
-import ProductOptions from "../../components/product/ProductOptions";
 import { ProductNavBar } from "../../components/product/ProductNavBar";
-import { useNomenclature } from "../../hooks/useNomenclature";
-import { useRouter } from "next/router";
-import { queryTypes, useQueryState, useQueryStates } from "next-usequerystate";
+import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 
 const Product = () => {
-  const [display, setDisplay] = useState("model");
-  const [error, setError] = useState(false);
+  //Data
   const [attributes, setAttributes] = useState(false);
   const [defaultProduct, setDefaultProduct] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const [productParent, setProductParent] = useState(false);
+  //Display
+  const [display, setDisplay] = useState("model");
+  const [error, setError] = useState(false);
 
-  const [product, setProduct] = useState(false);
-  const [p3d, setProduct3D] = useState(false);
-
-  const [ratio, setRatio] = useState(false);
-
-  // retrouver ces variables différemment en utilisant un global state ou bien un hook ?
-  const [amax, setAmax] = useState(4);
-  const [cwidth, setCwidth] = useState(4);
-
+  /* const [ratio, setRatio] = useState(false);
   const fmin = Math.round((((344 / 2 / p3d.P / 10) * amax) / p3d.N) * 1000);
-  const fmax = Math.round(344 / 2 / (cwidth / 100));
+  const fmax = Math.round(344 / 2 / (cwidth / 100)); */
 
-  const [tag, setCategories] = useQueryState(
-    'TAG',
-    queryTypes.integer.withDefault(1)
-  );
+  //get default product from tag category
+  const [tag, setCategories] = useQueryState("TAG", queryTypes.integer.withDefault(1));
 
-  console.log(tag);
-
-  const router = useRouter();
-
-  // Get the query parameter from the URL
-  const { TAG } = router.query;
-
-  //get default product from category
   useEffect(() => {
     objectsInCategory(tag)
       .get()
@@ -57,15 +38,16 @@ const Product = () => {
       });
   }, [tag]);
 
+  // get attributes (ex : Width) and then values (ex: 50cm)
   useEffect(() => {
-    attributesAllFetch() // get all attributes
+    attributesAllFetch()
       .get()
       .then((response) => {
         const attributes = response.data;
         if (attributes.length) {
           Promise.all(
             attributes.map((a) =>
-              attributesFetchById(a.id) //get all values according to attributes
+              attributesFetchById(a.id)
                 .get()
                 .then((response) => {
                   return response.data;
@@ -108,7 +90,7 @@ const Product = () => {
                 };
               }, 0);
 
-              useProductStore.setState({ attributes: attributesAndValues });
+              useProductStore.setState({ attributes: attributesAndValues }); //global state
               setAttributes(attributesAndValues);
               setLoading(false);
             })
@@ -122,25 +104,6 @@ const Product = () => {
         setError(error);
       });
   }, []);
-
-  //make a 3D product for nomenclature and 3D model
-  useEffect(() => {
-    if (product) {
-      const p3d = Object.entries(product).reduce((acc, [key, val] = entry) => {
-        if (typeof val === "object") {
-          if (isNaN(val.value3D)) {
-            return { ...acc, [key]: val.value3D };
-          } else {
-            return { ...acc, [key]: parseInt(val.value3D) };
-          }
-        } else {
-          return { ...acc, [key]: val };
-        }
-        return acc;
-      }, {});
-      setProduct3D(p3d);
-    }
-  }, [product]);
 
   return (
     <Row className="section">
@@ -168,39 +131,18 @@ const Product = () => {
               <Col />
             </Row>
             <Row className="product_preview_row border_creme bg_darker">
-              {display === "coefDif" ? <PerformanceCharts /> : null}
-              {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
-              {display === "model" ? <Modele3D p3d={p3d} ratio={ratio} amax={amax} setAmax={setAmax} cwidth={cwidth} setCwidth={setCwidth} setProduct={setProduct} attributes={attributes} /> : null}
+              {!loading ? (
+                <>
+                  {" "}
+                  {display === "coefDif" ? <PerformanceCharts /> : null}
+                  {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
+                  {display === "model" ? <Modele3D attributes={attributes} /> : null}
+                </>
+              ) : (
+                "Chargement du modèle"
+              )}
             </Row>
-            {/*             <Row>
-              <Col>
-                {fmin} Hz -{fmax} Hz
-              </Col>
-              <Col>Taille de cellule : {Math.round(cwidth * 10)} mm</Col>
-              <Col>{nomenclature.structurel}</Col>
-              <Col>{nomenclature.simple}</Col>
-            </Row> */}
           </Col>
-          {/*  <Col md={8} className="product_preview_col">
-            <Row>
-              <Col onClick={() => setDisplay("model")}>Model</Col>
-              <Col onClick={() => setDisplay("coefDif")}>Coef</Col>
-              <Col onClick={() => setDisplay("plot")}>Plot</Col>
-            </Row>
-            <Row className="product_preview_row border_creme">
-              {display === "coefDif" ? <PerformanceCharts /> : null}
-              {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
-              {display === "model" ? <Modele3D p3d={p3d} ratio={ratio} amax={amax} setAmax={setAmax} cwidth={cwidth} setCwidth={setCwidth} setProduct={setProduct} /> : null}
-            </Row>
-            <Row>
-              <Col>
-                {fmin} Hz -{fmax} Hz
-              </Col>
-              <Col>Taille de cellule : {Math.round(cwidth * 10)} mm</Col>
-              <Col>{nomenclature.structurel}</Col>
-              <Col>{nomenclature.simple}</Col>
-            </Row>
-          </Col> */}
         </Row>
       ) : (
         "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
