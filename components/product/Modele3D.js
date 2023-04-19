@@ -12,6 +12,7 @@ export const Modele3D = () => {
   const fmin = useProductStore(state => state.fmin);
   const fmax = useProductStore(state => state.fmax);
   const cwidth = useProductStore(state => state.cwidth);
+  const sizes = useProductStore(state => state.sizes);
   
   return (
     <Row className="product_modele_main h-100">
@@ -31,7 +32,7 @@ export const Modele3D = () => {
           <div className="product_list_square border_creme d-flex justify-content-center align-items-center me-4">E</div> {(cwidth*10).toFixed(0)} mm
         </Row>
         <Row className="align-items-center">
-          <div className="product_list_square border_creme d-flex justify-content-center align-items-center me-4">D</div> 500x 100 x 5 mm
+          <div className="product_list_square border_creme d-flex justify-content-center align-items-center me-4">D</div> {sizes.longueur} x {sizes.largeur} x {sizes.epaisseur} mm
         </Row>
       </Col>
       <Col md={7} className="product_canvas_container">

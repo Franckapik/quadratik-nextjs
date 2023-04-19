@@ -8,6 +8,7 @@ import { Field } from "./Field";
 import { usePrice } from "../../hooks/usePrice";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { useProductStore } from "../../hooks/store";
+import { useSizes } from "../../hooks/useSizes";
 
 const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   const [variant, setVariant] = useState({});
@@ -23,6 +24,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
 
   const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
   const [price, setPrice] = usePrice(valuesSelected, defaultProduct, attributes);
+  const [sizes] = useSizes(valuesSelected, attributes);
 
   //render Modele after ProductOptions
   useEffect(() => {
