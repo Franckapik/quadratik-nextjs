@@ -22,8 +22,9 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
     history: "push",
   });
 
+  //global states
   const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
-  const [price, setPrice] = usePrice(valuesSelected, defaultProduct, attributes);
+  const [price, basePrice] = usePrice(valuesSelected, defaultProduct, attributes);
   const [sizes] = useSizes(valuesSelected, attributes);
 
   //render Modele after ProductOptions
@@ -37,45 +38,24 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
     useProductStore.setState({ valuesSelected: valuesSelected });
   }, [valuesSelected]);
 
-  /*   useEffect(() => {
-    if (product) {
-      const keys = Object.keys(product);
-      const features = keys.reduce((acc, item) => {
-        if (product[item].id !== undefined) {
-          return {
-            ...acc,
-            [product[item].attribute_id]: product[item].id,
-          };
-        }
-        return acc;
-      }, {});
-
-      const variant = {
-        weight_impact: 0,
-        price_impact: prices[1] - prices[0],
-        price_impact_is_percent: false,
-        features: features,
-        reference: nomenclature.structurel,
-        ref_ext: nomenclature.complet,
-      };
-
-      setVariant(variant);
-    }
-  }, [nomenclature]); */
-
   const onSubmit = async (data) => {
+    const features = Object.entries(data).reduce((acc, [i, a] = cur) => {
+      const getAttributeRef = Object.values(attributes).filter((val) => val.a_ref === i)[0];
+      return {
+        ...acc,
+        [getAttributeRef.a_id]: a,
+      };
+    }, {});
+
     const variant = {
       weight_impact: 0,
-      price_impact: prices[1] - prices[0],
+      price_impact: basePrice - price,
       price_impact_is_percent: false,
       features: features,
       reference: nomenclature.structurel,
       ref_ext: nomenclature.complet,
     };
 
-    console.log(data);
-    console.log(variant);
-    console.log(defaultProduct);
     variantPost(defaultProduct.id)
       .post("", variant)
       .then((response) => {

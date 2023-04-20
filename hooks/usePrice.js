@@ -3,10 +3,12 @@ import { useProductStore } from "../hooks/store";
 
 export const usePrice = (valuesSelected, defaultProduct, attributes) => {
   const [price, setPrice] = useState(0);
+  const [basePrice, setBasePrice] = useState(0);
   useProductStore.setState({ price: price });
 
   useEffect(() => {
     const basePrice = parseFloat(defaultProduct.price_ttc);
+    setBasePrice(basePrice);
 
     const listOfValues = Object.entries(attributes).reduce((acc, [i, a] = cur) => {
       for (let key in a.values) {
@@ -16,8 +18,6 @@ export const usePrice = (valuesSelected, defaultProduct, attributes) => {
     }, []);
 
     const optionsPrice = Object.entries(valuesSelected).reduce((acc, [i, a] = cur) => {
-      const pickValue = listOfValues.filter((value) => value.v_id === a)[0];
-
       if (!["H", "V"].includes(i)) {
         const pickValue = listOfValues.filter((value) => value.v_id === a)[0];
         if (pickValue !== undefined) {
@@ -45,5 +45,5 @@ export const usePrice = (valuesSelected, defaultProduct, attributes) => {
     setPrice(Math.round(optionsPrice));
   }, [valuesSelected]);
 
-  return [price, setPrice];
+  return [price, basePrice];
 };
