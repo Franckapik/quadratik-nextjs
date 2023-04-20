@@ -3,6 +3,7 @@ import Cell from "./parts3D/Cell";
 import { usePerformances } from "../../hooks/usePerformances";
 import { useProductStore } from "../../hooks/store";
 import { Text } from "@react-three/drei";
+import { useReport2D } from "../../hooks/useReport2D";
 
 const LightenDarkenColor = (col, amt) => {
   var usePound = false;
@@ -61,17 +62,20 @@ const Diffuseur2D = ({ dimensions, isQuadralab }) => {
 
   usePerformances(amax, c, P, N);
 
+  const report2D = useReport2D(n, p, hor, vert, c, invert, start, amax, e, d);
+  console.log(report2D);
+
   return (
     <>
       {isQuadralab ? (
         <>
-          <Text color="white" scale={w/10} position={[0, -l + l / 4, d / 2]}>
+          <Text color="d0c3b4" scale={w / 10} position={[0, -l + l / 4, d / 2]}>
             {w} cm
           </Text>
-          <Text color="white" scale={w/10}  position={[-w + w / 4, 0, d / 2]} rotation={[0, 0, Math.PI / 2]}>
+          <Text color="d0c3b4" scale={w / 10} position={[-w + w / 4, 0, d / 2]} rotation={[0, 0, Math.PI / 2]}>
             {l} cm
           </Text>
-          <Text color="white" scale={w/10}  position={[w - w / 4, 0, d / 2]} rotation={[0, Math.PI / 2, 0]}>
+          <Text color="d0c3b4" scale={w / 10} position={[w - w / 4, 0, d / 2]} rotation={[0, Math.PI / 2, 0]}>
             {d} cm
           </Text>
         </>
@@ -107,7 +111,7 @@ const Diffuseur2D = ({ dimensions, isQuadralab }) => {
                 color="black" // default
                 anchorX="center" // default
                 anchorY="middle" // default
-                scale={w/20}
+                scale={w / 30}
                 position={[x, z, y + 1]}
               >
                 {ratio ? Math.round((y / d) * amax) : Math.round(y * 100) / 100}

@@ -3,6 +3,7 @@ import { usePerformances } from "../../hooks/usePerformances";
 import Cell from "./parts3D/Cell";
 import Part from "./parts3D/Part";
 import { useProductStore } from "../../hooks/store";
+import { useReport2D } from "../../hooks/useReport2D";
 
 const LightenDarkenColor = (col, amt) => {
   var usePound = false;
@@ -41,7 +42,7 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
   const w = parseInt(W); //largeur
   const c = (w - (p + 1) * e) / p; //largeur cellule
-  const l = parseInt((N * L * (c + e) + e)); //longueur
+  const l = parseInt(N * L * (c + e) + e); //longueur
   const d = P; //profondeur
   const hor = H; //decalage horizontal
   const vert = 0; //decalage vertical NO DECALAGE FOR D1
@@ -60,19 +61,22 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const amax = Math.max(...a);
   const start = [-w / 2, -l / 2, d / 2];
 
+  const report2D = useReport2D(n, p, hor, vert, c, invert, start, amax, e, d);
+  console.log(report2D);
+
   usePerformances(amax, c, P, N);
   return (
     <>
       {" "}
       {isQuadralab ? (
         <>
-          <Text color="white" scale={w/10} position={[0, -l + l / 4, d / 2]}>
+          <Text color="d0c3b4" scale={w / 10} position={[0, -l + l / 4, d / 2]}>
             {w} cm
           </Text>
-          <Text color="white" scale={w/10}  position={[-w + w / 4, 0, d / 2]} rotation={[0, 0, Math.PI / 2]}>
+          <Text color="d0c3b4" scale={w / 10} position={[-w + w / 4, 0, d / 2]} rotation={[0, 0, Math.PI / 2]}>
             {l} cm
           </Text>
-          <Text color="white" scale={w/10}  position={[w - w / 4, 0, d / 2]} rotation={[0, Math.PI / 2, 0]}>
+          <Text color="d0c3b4" scale={w / 10} position={[w - w / 4, 0, d / 2]} rotation={[0, Math.PI / 2, 0]}>
             {d} cm
           </Text>
         </>
@@ -106,7 +110,7 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
                 color="black" // default
                 anchorX="center" // default
                 anchorY="middle" // default
-                scale={w/20}
+                scale={w / 30}
                 position={[x, z, y + 1]}
               >
                 {ratio ? Math.round((y / d) * amax) : Math.round(y * 100) / 100}

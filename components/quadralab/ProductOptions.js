@@ -84,11 +84,13 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
             return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
           })}
         </Form.Group>
-        <span onClick={() => useProductStore.setState(state =>({ ratio: !state.ratio }))}>Ratio/Cm</span>
-        <span onClick={() => useProductStore.setState(state =>({ highlights: !state.highlights }))}>highlights</span>
+        <Form.Label>Ratio</Form.Label>
+        <Form.Check type={"switch"} id="custom-switch" label={"Hauteur(cm) / Ratio"} onChange={(e) => useProductStore.setState(({ ratio: e.target.checked }))} />
+{/*         <span onClick={() => useProductStore.setState(state =>({ ratio: !state.ratio }))}>Ratio/Cm</span>
+ */}        <span onClick={() => useProductStore.setState(state =>({ highlights: !state.highlights }))}>highlights</span>
 
         <Button variant="primary" type="submit" className="m-auto mt-4">
-          Ajouter au panier
+          Demander un devis
         </Button>
       </Form>
     </FormProvider>

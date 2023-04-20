@@ -28,7 +28,6 @@ export const useValues3D = (valuesSelected, attributes, isQuadralab) => {
           return acc;
         }
       } else { //if H or V
-        console.log(i);
         return {
           ...acc,
           [i]: a,
