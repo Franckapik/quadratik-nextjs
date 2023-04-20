@@ -49,7 +49,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
 
     const variant = {
       weight_impact: 0,
-      price_impact: basePrice - price,
+      price_impact: price - basePrice,
       price_impact_is_percent: false,
       features: features,
       reference: nomenclature.structurel,
