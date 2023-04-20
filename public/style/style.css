@@ -491,7 +491,19 @@ h2 {
 .product_preview_row {
   height: 55vh;
 }
+.quadralab_preview_row {
+  height: 85vh!important;
+}
+.quadralab_attributes_col {
+position: absolute;
+z-index: 2;
+}
 
+.quadralab_hud_col {
+  right: 5vw;
+position: absolute;
+z-index: 2;
+}
 .product_list_square {
   width : 50px!important;
   height : 50px!important;
@@ -527,6 +539,9 @@ h2 {
 }
 .product_main_row {
   height : 65vh!important;
+}
+.quadralab_main_row {
+  height : 90vh!important;
 }
 
 .product_tab {

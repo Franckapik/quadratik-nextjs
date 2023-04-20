@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useProductStore } from "../hooks/store";
 
-export const usePrice = (valuesSelected, defaultProduct, attributes) => {
+export const usePrice = (valuesSelected, defaultProduct, attributes, isQuadralab) => {
   const [price, setPrice] = useState(0);
   const [basePrice, setBasePrice] = useState(0);
   useProductStore.setState({ price: price });
@@ -18,7 +18,12 @@ export const usePrice = (valuesSelected, defaultProduct, attributes) => {
     }, []);
 
     const optionsPrice = Object.entries(valuesSelected).reduce((acc, [i, a] = cur) => {
-      if (!["H", "V"].includes(i)) {
+      const isNotIdValue = ["H", "V", "I"];
+      if (isQuadralab) {
+        isNotIdValue.push("W")
+        isNotIdValue.push("P")
+      }
+      if (!isNotIdValue.includes(i)) {
         const pickValue = listOfValues.filter((value) => value.v_id === a)[0];
         if (pickValue !== undefined) {
           switch (pickValue.v_operator) {

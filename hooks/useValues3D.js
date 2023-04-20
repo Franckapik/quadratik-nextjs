@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useValues3D = (valuesSelected, attributes) => {
+export const useValues3D = (valuesSelected, attributes, isQuadralab) => {
   const [values3D, setValues3D] = useState(false);
 
   useEffect(() => {
@@ -12,7 +12,12 @@ export const useValues3D = (valuesSelected, attributes) => {
     }, []);
 
     const listOfv3d = Object.entries(valuesSelected).reduce((acc, [i, a] = cur) => {
-      if (!["H", "V", "I"].includes(i)) {
+      const isNotIdValue = ["H", "V", "I"];
+      if (isQuadralab) {
+        isNotIdValue.push("W")
+        isNotIdValue.push("P")
+      }
+      if (!isNotIdValue.includes(i)) {
         const pickValue = listOfValues.filter((value) => value.v_id === a)[0];
         if (pickValue !== undefined) {
           return {
@@ -23,6 +28,7 @@ export const useValues3D = (valuesSelected, attributes) => {
           return acc;
         }
       } else { //if H or V
+        console.log(i);
         return {
           ...acc,
           [i]: a,

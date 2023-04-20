@@ -18,6 +18,9 @@ const useProductStore = create((set) => ({
   fmax: 0,
   cwidth: 0,
   sizes: { longueur: 0, largeur: 0, epaisseur: 0 },
+  ratio : false,
+  highlights : false
 }));
+
 
 export { useBearStore, useProductStore };

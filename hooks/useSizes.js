@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useProductStore } from "./store";
 
 
-export const useSizes = (valuesSelected,  attributes) => {
+export const useSizes = (valuesSelected,  attributes, isQuadralab) => {
   const [sizes, setSizes] = useState(false);
   useProductStore.setState({ sizes: sizes });
 
@@ -15,11 +15,11 @@ export const useSizes = (valuesSelected,  attributes) => {
     }, []);
     
     const facteurLongueur = listOfValues.filter((value) => value.v_id === valuesSelected.L)[0].v_3d;
-    const largeur = listOfValues.filter((value) => value.v_id === valuesSelected.W)[0].v_3d;
+    const largeur = isQuadralab ? valuesSelected.W : listOfValues.filter((value) => value.v_id === valuesSelected.W)[0].v_3d;
     const longueur = facteurLongueur * largeur;
-    const epaisseur = listOfValues.filter((value) => value.v_id === valuesSelected.E)[0].v_3d;
+    const profondeur =  isQuadralab ? valuesSelected.P : listOfValues.filter((value) => value.v_id === valuesSelected.P)[0].v_3d;
     
-    setSizes({longueur : longueur,largeur : largeur,  epaisseur : epaisseur});
+    setSizes({longueur : longueur,largeur : largeur,  profondeur : profondeur});
   }, [valuesSelected]);
 
   return [sizes, setSizes];

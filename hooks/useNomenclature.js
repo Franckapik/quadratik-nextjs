@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useProductStore } from "./store";
 import { useValues3D } from "./useValues3D";
 
-export const useNomenclature = (valuesSelected, defaultProduct, attributes) => {
+export const useNomenclature = (valuesSelected, defaultProduct, attributes, isQuadralab) => {
   const [nomenclature, setNomenclature] = useState(false);
   useProductStore.setState({ nomenclature: nomenclature });
-  const dimensions = useValues3D(valuesSelected, attributes);
+  const dimensions = useValues3D(valuesSelected, attributes, isQuadralab);
 
   useEffect(() => {  
     const {C, D, E, I, L, M, N, P, W, H, V} = dimensions;

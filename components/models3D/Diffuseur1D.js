@@ -1,18 +1,51 @@
+import { Text } from "@react-three/drei";
 import { usePerformances } from "../../hooks/usePerformances";
 import Cell from "./parts3D/Cell";
 import Part from "./parts3D/Part";
+import { useProductStore } from "../../hooks/store";
 
-const Diffuseur1D = ({ dimensions }) => {
+const LightenDarkenColor = (col, amt) => {
+  var usePound = false;
+
+  if (col[0] == "#") {
+    col = col.slice(1);
+    usePound = true;
+  }
+
+  var num = parseInt(col, 16);
+
+  var r = (num >> 16) + amt;
+
+  if (r > 255) r = 255;
+  else if (r < 0) r = 0;
+
+  var b = ((num >> 8) & 0x00ff) + amt;
+
+  if (b > 255) b = 255;
+  else if (b < 0) b = 0;
+
+  var g = (num & 0x0000ff) + amt;
+
+  if (g > 255) g = 255;
+  else if (g < 0) g = 0;
+
+  return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16);
+};
+
+const Diffuseur1D = ({ dimensions, isQuadralab }) => {
+  const ratio = useProductStore((state) => state.ratio);
+  const highlights = useProductStore((state) => state.highlights);
+
   const { E, N, W, L, P, H, V, I, C } = dimensions;
   const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
-  const w = W; //largeur
+  const w = parseInt(W); //largeur
   const c = (w - (p + 1) * e) / p; //largeur cellule
-  const l = N * L * (c + e) + e; //longueur
+  const l = parseInt((N * L * (c + e) + e)); //longueur
   const d = P; //profondeur
   const hor = H; //decalage horizontal
   const vert = 0; //decalage vertical NO DECALAGE FOR D1
-  const invert = (I === "true"); //decalage vertical
+  const invert = I === "true"; //decalage vertical
   const n = N * N * L; // nb de cellules
   const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
   const a = Array(n)
@@ -27,9 +60,24 @@ const Diffuseur1D = ({ dimensions }) => {
   const amax = Math.max(...a);
   const start = [-w / 2, -l / 2, d / 2];
 
-  usePerformances(amax, c, P, N)
+  usePerformances(amax, c, P, N);
   return (
-    <> {Array(p + 1) //peignes longs
+    <>
+      {" "}
+      {isQuadralab ? (
+        <>
+          <Text color="white" scale={w/10} position={[0, -l + l / 4, d / 2]}>
+            {w} cm
+          </Text>
+          <Text color="white" scale={w/10}  position={[-w + w / 4, 0, d / 2]} rotation={[0, 0, Math.PI / 2]}>
+            {l} cm
+          </Text>
+          <Text color="white" scale={w/10}  position={[w - w / 4, 0, d / 2]} rotation={[0, Math.PI / 2, 0]}>
+            {d} cm
+          </Text>
+        </>
+      ) : null}
+      {Array(p + 1) //peignes longs
         .fill("")
         .map((a, i) => (
           <Part key={"Part" + i} args={[e, l - e, d]} position={[start[0] + (c + e) * i, 0, start[2]]} rotation={[0, 0, 0]} />
@@ -51,9 +99,21 @@ const Diffuseur1D = ({ dimensions }) => {
           const z = start[1] + c / 2 + e + m * (c + e);
           const y = invert ? d - (o * d) / amax : (o * d) / amax;
 
-          return <Cell key={"Cell" + i} args={[c, l - e, e]} position={[x + e / 2, 0, y === d ? y - e : y + e]} rotation={[0, 0, 0]} index={i} motif={C} />;
+          return (
+            <group>
+              <Cell key={"Cell" + i} args={[c, l - e, e]} position={[x + e / 2, 0, y === d ? y - e : y + e]} rotation={[0, 0, 0]} index={i} motif={C} color={y === 0 ? "red" : LightenDarkenColor("#012000", (y * 355) / d)} highlights={highlights} />
+              <Text
+                color="black" // default
+                anchorX="center" // default
+                anchorY="middle" // default
+                scale={w/20}
+                position={[x, z, y + 1]}
+              >
+                {ratio ? Math.round((y / d) * amax) : Math.round(y * 100) / 100}
+              </Text>
+            </group>
+          );
         })}
-     
     </>
   );
 };

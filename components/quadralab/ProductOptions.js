@@ -23,9 +23,9 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   });
 
   //global states
-  const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
-  const [price, basePrice] = usePrice(valuesSelected, defaultProduct, attributes);
-  const [sizes] = useSizes(valuesSelected, attributes);
+   const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes, true);
+  const [price, basePrice] = usePrice(valuesSelected, defaultProduct, attributes, true);
+  const [sizes] = useSizes(valuesSelected, attributes, true); 
 
   //render Modele after ProductOptions
   useEffect(() => {
@@ -78,24 +78,15 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   return (
     <FormProvider {...methods}>
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
-        {mode ? (
-          <Form.Group className="product_select_options" controlId="media_category_id_id">
-            {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
-              const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-              return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-            })}
-          </Form.Group>
-        ) : (
-          <Form.Group className="product_select_options" controlId="media_category_id_id">
-            {Object.entries(defaultProduct.attributes.advanced).map((a, i) => {
-              const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-              return <Field id={a[0]} type={a[1]}  key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label}></Field>;
-            })}
-          </Form.Group>
-        )}
-        <span onClick={() => setMode()} className="">
-          Options avancées
-        </span>
+        <Form.Group className="product_select_options" controlId="media_category_id_id">
+          {Object.entries(defaultProduct.attributes.quadralab).map((a, i) => {
+            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+            return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+          })}
+        </Form.Group>
+        <span onClick={() => useProductStore.setState(state =>({ ratio: !state.ratio }))}>Ratio/Cm</span>
+        <span onClick={() => useProductStore.setState(state =>({ highlights: !state.highlights }))}>highlights</span>
+
         <Button variant="primary" type="submit" className="m-auto mt-4">
           Ajouter au panier
         </Button>
