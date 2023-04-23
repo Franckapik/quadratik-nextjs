@@ -52,8 +52,8 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
       price_impact: price - basePrice,
       price_impact_is_percent: false,
       features: features,
-      reference: nomenclature.simple,
-      ref_ext: nomenclature.complet,
+      reference: nomenclature.complet,
+      ref_ext: nomenclature.simple,
     };
 
     variantPost(defaultProduct.id)
