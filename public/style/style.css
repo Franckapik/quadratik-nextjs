@@ -14,6 +14,10 @@
 .bg_light {
   background-color: #8ea65f8a;
 }
+
+.bg_lighter {
+  background-color: #d3cec7a4;
+}
 .bg_creme {
   background-color: #d0c3b4;
 }
@@ -93,6 +97,10 @@ p {
 }
 .ft5 {
   font-size: calc(0.5rem + 0.5vw) !important;
+  letter-spacing: calc(0.1rem );
+}
+.ft6 {
+  font-size: calc(0.4rem + 0.5vw) !important;
   letter-spacing: calc(0.1rem + 0.1vw);
 }
 .h-10 {
@@ -586,8 +594,8 @@ h2 {
 
 .shop_default_row img {
   position: relative;
-  right: 0px;
-  width: 650px;
+  right: 20%;
+  width: 800px;
   max-width: none;
 }
 
@@ -604,11 +612,36 @@ bottom: -1vh;
 
 .shop_card_price {
   position: absolute;
-  bottom: 18%;
+  bottom: 15%;
 }
 
 .zup {
   z-index: 1000 !important;
+}
+
+.shop_firstcategory {
+  padding-top : 20%!important;
+}
+
+.shop_subcategory {
+  margin-top : 5%!important;
+  margin-bottom : 15%!important;
+}
+
+.shop_page_vertical_title {
+  display: flex;
+  font-family: alcubierre;
+  font-size: 1vw !important;
+  height: 100%;
+  justify-content: center;
+  left: 3vw;
+  letter-spacing: 0.5vw;
+  top : 0;
+  position: fixed;
+  text-transform: uppercase;
+  transform: rotate(180deg);
+  transform-origin: center center;
+  writing-mode: vertical-rl;
 }
 
 @media (max-width: 575.98px) {

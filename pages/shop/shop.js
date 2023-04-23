@@ -15,7 +15,7 @@ const ShopNavBar = ({ categories }) => {
       <Col md={3} className="justify-content-start d-flex flex-column p-0 m-0 ">
         <Row className="ft05 h-100">
           <Col md={10} className="bg_creme d-flex flex-column justify-content-center align-items-center ">
-            <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" /> <div className="text-nowrap text-uppercase shop_header_quadratik_title ft2 p-2">Quadratik</div>
+            <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" /> <div className="text-nowrap text-uppercase shop_header_quadratik_title ft2 pt-3">Quadratik</div>
           </Col>
           <Col md={2} className=""></Col>
         </Row>
@@ -75,7 +75,7 @@ const DefaultProduct = ({ tagId }) => {
         <Col className=" d-flex flex-column w-100 justify-content-evenly align-item-center">
           <Row className="shop_default_row">{document.ecmfiles_infos ? <img src={"http://shop.quadratik.fr/document.php?hashp=" + document.ecmfiles_infos[0].share} /> : "pas d'image"}</Row>
           <Row className="text-end m-2 ft2 ">
-            <span>{defaultProduct.ref}</span>
+            <span> La référence : {defaultProduct.ref}</span>
           </Row>
         </Col>
       ) : (
@@ -100,7 +100,7 @@ const SubCategory = ({ subcategory }) => {
   }, [subcategory]);
 
   return (
-    <Row className="pb-5 bg_darker mb-4 ">
+    <Row className="pb-5 bg_darker shop_subcategory ">
       <Row className="ft05 justify-content-start mb-4 ps-4 pt-4 pb-4  ft2">{subcategory.label.split("-")[1]}</Row>
       <Row className="justify-content-center">{subcategory.description}</Row>
       <Row className="">
@@ -259,28 +259,29 @@ const Product = () => {
           .filter((cat) => cat.fk_parent == 0)
           .map((firstCat, i) => (
             <Row className="show_row_tag">
-              <Col md={1}></Col>
+              <Col md={1}>
+                <div className="shop_page_vertical_title">Boutique</div>
+              </Col>
               <Col md={3} className="d-flex flex-column p-0 justify-content-start align-items-start h-100 text_dark">
-                <Row className="ft05 w-100 h-100">
-                  <Col md={10} className="bg_creme">
-                    <Row className="pt-4">{firstCat.label.split("-")[1]}</Row>
-                    <Row className="ft5">{firstCat.description}</Row>
-
+                <Row className="ft1 w-100 h-100 ">
+                  <Col md={10} className="bg_creme shop_firstcategory">
+                    <Row className="p-2 bg_lighter">{">" + firstCat.label.split("-")[1]}</Row>
                     <DefaultProduct tagId={firstCat.id}></DefaultProduct>
+                    <Row className="text-justify m-4 ft6 ">{firstCat.description}</Row>
                   </Col>
                   <Col md={2} className=""></Col>
                 </Row>
               </Col>
-              <Col md={8} className="d-flex flex-column justify-content-evenly h-100 pe-5">
-                  {categories
-                    .filter((cat) => cat.fk_parent == firstCat.id)
-                    .map((SubCat, i) => {
-                      return (
-                        <>
-                          <SubCategory subcategory={SubCat} />
-                        </>
-                      );
-                    })}
+              <Col md={8} className="d-flex flex-column justify-content-evenly h-100 ps-5">
+                {categories
+                  .filter((cat) => cat.fk_parent == firstCat.id)
+                  .map((SubCat, i) => {
+                    return (
+                      <>
+                        <SubCategory subcategory={SubCat} />
+                      </>
+                    );
+                  })}
               </Col>
             </Row>
           ))}
