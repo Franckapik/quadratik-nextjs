@@ -8,11 +8,11 @@ export const useNomenclature = (valuesSelected, defaultProduct, attributes, isQu
   const dimensions = useValues3D(valuesSelected, attributes, isQuadralab);
 
   useEffect(() => {  
-    const {C, D, E, I, L, M, N, P, W, H, V} = dimensions;
+    const {C, D, E, I, L, M, N, P, W, H, V, T} = dimensions;
 
     const n = {
       structurel: D + "N" + N + "W" + W + "L" + L + "P" + P + "E" + E + M,
-      complet: D + "N" + N + "W" + W + "L" + L + "P" + P + "E" + E + M + "C" + C + "I" + I + "H" + H + "V" + V,
+      complet: D + "N" + N + "W" + W + "L" + L + "P" + P + "E" + E + M + "C" + C + "I" + I + "H" + H + "V" + V + "T" + T,
       simple: defaultProduct.ref + "-" + N + P + (L == "2" ? "L" : ""),
     };
 

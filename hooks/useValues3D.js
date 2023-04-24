@@ -13,7 +13,7 @@ export const useValues3D = (valuesSelected, attributes, isQuadralab) => {
 
     const listOfv3d = Object.entries(valuesSelected).reduce((acc, [i, a] = cur) => {
       const isNotIdValue = ["H", "V", "I"];
-      if (isQuadralab) {
+      if (isQuadralab) { //range instead of select
         isNotIdValue.push("W")
         isNotIdValue.push("P")
       }
