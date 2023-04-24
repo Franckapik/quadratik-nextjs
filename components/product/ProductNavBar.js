@@ -25,7 +25,7 @@ export const ProductNavBar = () => {
 
     return (
     <Row className="product_navbar_row ft1 align-items-center">
-      {categories.map((a,i) => (
+      {categories.filter((cat) => cat.fk_parent == 0).map((a,i) => (
         <Col md={2} key={"Tag" + i} ><Link href={`?TAG=${a.id}`}>{a.label}</Link></Col>
         
       ))}
