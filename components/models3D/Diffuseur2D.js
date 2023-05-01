@@ -106,7 +106,7 @@ const Diffuseur2D = ({ dimensions, isQuadralab }) => {
 
           return (
             <group>
-              <Cell key={"Cell" + i} args={[c + e, c, e]} position={[x, z, y === d ? y - e : y + e]} rotation={[0, 0, 0]} index={i} motif={C} color={y === 0 ? "red" : LightenDarkenColor("#012000", (y * 355) / d)} highlights={highlights} />
+              <Cell key={"Cell" + i} args={[c + e, c, e]} position={[x, z, y === d ? y - e : y + e]} rotation={[0, 0, 0]} index={i} motif={C} color={y === 0 ? "blue" : LightenDarkenColor("#012000", (y * 355) / d)} highlights={highlights} />
               <Text
                 color="black" // default
                 anchorX="center" // default

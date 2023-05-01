@@ -36,6 +36,7 @@ const LightenDarkenColor = (col, amt) => {
 const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const ratio = useProductStore((state) => state.ratio);
   const highlights = useProductStore((state) => state.highlights);
+  console.log(dimensions);
 
   const { E, N, W, L, P, H, V, I, C } = dimensions;
   const e = E / 10; //epaisseur
@@ -105,7 +106,7 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
 
           return (
             <group>
-              <Cell key={"Cell" + i} args={[c, l - e, e]} position={[x + e / 2, 0, y === d ? y - e : y + e]} rotation={[0, 0, 0]} index={i} motif={C} color={y === 0 ? "red" : LightenDarkenColor("#012000", (y * 355) / d)} highlights={highlights} />
+              <Cell key={"Cell" + i} args={[c, l - e, e]} position={[x + e / 2, 0, y === d ? y - e : y + e]} rotation={[0, 0, 0]} index={i} motif={C} color={y === 0 ? "blue" : LightenDarkenColor("#012000", (y * 355) / d)} highlights={highlights} />
               <Text
                 color="black" // default
                 anchorX="center" // default
