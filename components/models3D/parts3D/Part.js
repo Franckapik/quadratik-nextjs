@@ -4,7 +4,7 @@ const Part = (props) => {
 
     const [colorMap,  normalMap, roughnessMap] = useTexture( [
       '/textures_wood/plywood.jpg',
-      '/textures_wood/normal.jpg',
+      '/textures_wood/norm.jpg',
       '/textures_wood/rough.jpg',
     ])
   
