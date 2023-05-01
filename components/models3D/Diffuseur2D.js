@@ -63,7 +63,6 @@ const Diffuseur2D = ({ dimensions, isQuadralab }) => {
   usePerformances(amax, c, P, N);
 
   const report2D = useReport2D(n, p, hor, vert, c, invert, start, amax, e, d);
-  console.log(report2D);
 
   return (
     <>
