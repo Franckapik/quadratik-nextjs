@@ -36,7 +36,6 @@ const LightenDarkenColor = (col, amt) => {
 const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const ratio = useProductStore((state) => state.ratio);
   const highlights = useProductStore((state) => state.highlights);
-  console.log(dimensions);
 
   const { E, N, W, L, P, H, V, I, C, T } = dimensions;
   const e = E / 10; //epaisseur
@@ -63,7 +62,6 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const start = [-w / 2, -l / 2, d / 2];
 
   const report2D = useReport2D(n, p, hor, vert, c, invert, start, amax, e, d);
-  console.log(report2D);
 
   usePerformances(amax, c, P, N);
   return (

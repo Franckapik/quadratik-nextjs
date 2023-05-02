@@ -40,7 +40,6 @@ const Deck = ({ setVisibleCard }) => {
     // If button/finger's up and trigger velocity is reached, we flag the card ready to fly out
     if (!down && trigger) {
       gone.add(index);
-      console.log();
       setVisibleCard(gone.size);
     }
 

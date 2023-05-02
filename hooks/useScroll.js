@@ -8,7 +8,6 @@ export const useScroll = () => {
       setScrollY(e.target.scrollTop);
     };
 
-    console.log(scrollY);
     window.addEventListener("scroll", getScroll);
 
     return () => {
