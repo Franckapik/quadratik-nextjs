@@ -8,13 +8,13 @@ const Cell = ({ position, rotation, args, index, motif, color, highlights, teint
   let teinteMap = colorMap;
 
   switch (teinte) {
-    case "wenge":
+    case "W":
       teinteMap = wengeMap
       break;
-    case "teck":
+    case "T":
       teinteMap = teckMap
       break;
-    case "chene":
+    case "C":
       teinteMap = cheneMap
       break;
   

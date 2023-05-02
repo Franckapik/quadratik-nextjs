@@ -39,7 +39,7 @@ export const ProductHud = () => {
       <Col md={12} className="d-flex flex-column justify-content-evenly ps-5">
         <Row>
           <p className="ft05 mb-1">
-            {nomenclature.simple} {price}{" "}
+            {nomenclature?.simple} {price}{" "}
           </p>
           <span className="ft4">REF : {nomenclature.structurel}</span>
         </Row>

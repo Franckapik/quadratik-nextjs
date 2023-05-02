@@ -11,6 +11,7 @@ import { useProductStore } from "../../hooks/store";
 import { useSizes } from "../../hooks/useSizes";
 
 const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
+  const tag = useProductStore.getState().tag;
   const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle(true);
 
@@ -23,7 +24,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   });
 
   //global states
-  const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes);
+  const nomenclature = useNomenclature(valuesSelected, tag, attributes);
   const [price, basePrice] = usePrice(valuesSelected, defaultProduct, attributes);
   const [sizes] = useSizes(valuesSelected, attributes);
 
@@ -52,8 +53,8 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
       price_impact: price - basePrice,
       price_impact_is_percent: false,
       features: features,
-      reference: nomenclature.complet,
-      ref_ext: nomenclature.simple,
+      reference: nomenclature?.complet,
+      ref_ext: nomenclature?.simple,
     };
 
     variantPost(defaultProduct.id)

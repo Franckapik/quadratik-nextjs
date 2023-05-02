@@ -27,7 +27,6 @@ const Product = () => {
     objectsInCategory(tag)
       .get()
       .then((response) => {
-        console.log(response.data[0]);
         var attributes = JSON.parse(response.data[0].note_private);
         setDefaultProduct({ ...response.data[0], attributes: attributes });
       })
