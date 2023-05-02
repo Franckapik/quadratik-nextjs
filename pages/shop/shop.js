@@ -132,7 +132,6 @@ const FirstCategory = ({ categories, firstCat, attributes }) => {
 
 const SubCategory = ({ subcategory, variants, attributes }) => {
   const [listProducts, setListProducts] = useState(false);
-  console.log(subcategory);
 
   //get attributes from variants and make valueSelected object
   useEffect(() => {
@@ -176,7 +175,6 @@ const SubCategory = ({ subcategory, variants, attributes }) => {
 
 const CardProduct = ({ product, subcategory, attributes }) => {
 
-  console.log(product);
 
   const nomenclature = useNomenclature(product.valuesSelected, subcategory.fk_parent, attributes)
 
