@@ -26,7 +26,7 @@ export const useNomenclature = (valuesSelected, tag, attributes, isQuadralab) =>
       name = {
         structurel: D + "N" + N + "W" + W + "L" + L + "P" + P + "E" + E + M,
         complet: D + "N" + N + "W" + W + "L" + L + "P" + P + "E" + E + M + "C" + C + "I" + I + "H" + H + "V" + V + (C != 0 ? "T" + T : ""),
-        simple: basename + "-" + N + P + (L == "2" ? "L" : "") + (C != 0 ? T : ""),
+        simple: basename + "-" + N + P + (L == "2" ? "L" : "") + (C != 0 && T !== undefined ? T : ""),
       };
     }
     if (tag === 2) {

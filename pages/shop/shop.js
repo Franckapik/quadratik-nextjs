@@ -1,12 +1,14 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
 import { Breadcrumb, Card, Col, Row } from "react-bootstrap";
-import { attributesAllFetch, attributesFetchById, documentByProductId, listCategories, objectsInCategory } from "../../components/dolibarrApi/fetch";
+import { attributesAllFetch, attributesFetchById, documentByProductId, listCategories, objectsInCategory, variantFetchByParentId } from "../../components/dolibarrApi/fetch";
 import { ProductHud } from "../../components/product/ProductHud";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import { ProductNavBar } from "../../components/product/ProductNavBar";
 import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
+import { useNomenclature } from "../../hooks/useNomenclature";
+import Link from "next/link";
 
 const ShopNavBar = ({ categories }) => {
   return (
@@ -56,11 +58,9 @@ const DefaultProduct = ({ tagId }) => {
 
   useEffect(() => {
     if (defaultProduct?.id) {
-      console.log(defaultProduct.id);
       documentByProductId(defaultProduct.id)
         .get()
         .then((response) => {
-          console.log(response.data.ecmfiles_infos);
           setDocument(response.data);
         })
         .catch((error) => {
@@ -85,19 +85,79 @@ const DefaultProduct = ({ tagId }) => {
   );
 };
 
-const SubCategory = ({ subcategory }) => {
-  const [listProducts, setListProducts] = useState(false);
+const FirstCategory = ({ categories, firstCat, attributes }) => {
+  const [defaultProduct, setDefaultProduct] = useState(false);
+  const [variants, setVariants] = useState(false);
+
   useEffect(() => {
-    objectsInCategory(subcategory.id)
+    objectsInCategory(firstCat.id)
       .get()
       .then((response) => {
-        setListProducts(response.data);
+        setDefaultProduct(response.data[0]);
       })
       .catch((error) => {
         console.log(error);
-        /*  setError(error); */ //waiting for work on absorbeurs
       });
-  }, [subcategory]);
+  }, [firstCat]);
+
+  useEffect(() => {
+    if (defaultProduct) {
+      variantFetchByParentId(defaultProduct.id)
+        .get()
+        .then((response) => {
+          setVariants(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [defaultProduct]);
+
+  return (
+    <>
+      {firstCat.label + firstCat.id}
+
+      {categories
+        .filter((cat) => cat.fk_parent == firstCat.id)
+        .map((SubCat, i) => {
+          return (
+            <>
+              <SubCategory subcategory={SubCat} variants={variants} attributes={attributes} />
+            </>
+          );
+        })}
+    </>
+  );
+};
+
+const SubCategory = ({ subcategory, variants, attributes }) => {
+  const [listProducts, setListProducts] = useState(false);
+  console.log(subcategory);
+
+  //get attributes from variants and make valueSelected object
+  useEffect(() => {
+    if (variants.length) {
+      objectsInCategory(subcategory.id)
+        .get()
+        .then((response) => {
+          if (response.data.length) {
+            const pwithAttributes = Object.values(response.data).map((a, i) => {
+              const g = Object.values(variants).filter((val) => val.fk_product_child === a.id)[0];
+              const valuesSelected = g.attributes.reduce((acc, cur) => {
+                let a_ref = Object.values(attributes).filter((val) => val.a_id === cur.id)[0].a_ref;
+                return { ...acc, [a_ref]: cur.fk_prod_attr_val };
+              }, {});
+              return { ...a, ...g, valuesSelected: {...valuesSelected} };
+            });
+            setListProducts(pwithAttributes);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          /*  setError(error); */ //waiting for work on absorbeurs
+        });
+    }
+  }, [subcategory, variants]);
 
   return (
     <Row className="pb-5 bg_darker shop_subcategory ">
@@ -106,7 +166,7 @@ const SubCategory = ({ subcategory }) => {
       <Row className="">
         {listProducts.length
           ? listProducts.map((a, i) => {
-              return <CardProduct product={a}></CardProduct>;
+              return <CardProduct product={a} subcategory={subcategory} attributes={attributes}></CardProduct>;
             })
           : null}
       </Row>
@@ -114,7 +174,12 @@ const SubCategory = ({ subcategory }) => {
   );
 };
 
-const CardProduct = ({ product }) => {
+const CardProduct = ({ product, subcategory, attributes }) => {
+
+  console.log(product);
+
+  const nomenclature = useNomenclature(product.valuesSelected, subcategory.fk_parent, attributes)
+
   const [document, setDocument] = useState(false);
   useEffect(() => {
     if (product?.id) {
@@ -124,21 +189,23 @@ const CardProduct = ({ product }) => {
           setDocument(response.data);
         })
         .catch((error) => {
-          console.log(error);
+          /* console.log(error); */
         });
     }
   }, [product]);
 
   return (
     <>
-      {document ? (
+      {true ?  (
         <Col md={4} className="shop_card_col d-flex flex-column align-items-center justify-content-evenly">
-          <Row className="p-3">{document.ecmfiles_infos ? <img src={"http://shop.quadratik.fr/document.php?hashp=" + document.ecmfiles_infos[0].share} /> : "pas d'image"}</Row>
+          <Row className="p-3">{document?.ecmfiles_infos ? <img src={"http://shop.quadratik.fr/document.php?hashp=" + document?.ecmfiles_infos[0].share} /> : "pas d'image"}</Row>
           <Row className="text-center p-3 ft5 shop_card_price text_dark ">
-            <span>{product.ref}</span>
+   {/*          <span>{product.ref}</span> */}
           </Row>
           <Row className="text-center p-3 ft2 ">
-            <span>89 €</span>
+          <Link href={{ pathname: '/shop/product', query: product.valuesSelected }}><span>{nomenclature.simple}</span></Link>
+            
+            <span>{Math.round(product.price)} €</span>
           </Row>
         </Col>
       ) : (
@@ -254,12 +321,33 @@ const Product = () => {
   return (
     <Row className="section">
       <ShopNavBar categories={categories} />
-      <Row className="d-flex ft4 shop_main_row ">
+      <Row className="show_row_tag">
+        <Col md={1}>
+          <div className="shop_page_vertical_title">Boutique</div>
+        </Col>
+        <Col md={3} className="d-flex flex-column p-0 justify-content-start align-items-start h-100 text_dark">
+          <Row className="ft1 w-100 h-100 ">
+            <Col md={10} className="bg_creme shop_firstcategory">
+              "Produit parent en state"
+            </Col>
+            <Col md={2} className=""></Col>
+          </Row>
+        </Col>
+        <Col md={8} className="d-flex flex-column justify-content-evenly h-100 ps-5">
+          sous-categroeies
+          {categories
+            .filter((cat) => cat.fk_parent == 0)
+            .map((firstCat, i) => (
+              <FirstCategory categories={categories} firstCat={firstCat} attributes={attributes} />
+            ))}
+        </Col>
+      </Row>
+      {/*  <Row className="d-flex ft4 shop_main_row ">
         {categories
           .filter((cat) => cat.fk_parent == 0)
           .map((firstCat, i) => (
             <Row className="show_row_tag">
-              <Col md={1}>
+              <Col md={1}> 
                 <div className="shop_page_vertical_title">Boutique</div>
               </Col>
               <Col md={3} className="d-flex flex-column p-0 justify-content-start align-items-start h-100 text_dark">
@@ -285,7 +373,7 @@ const Product = () => {
               </Col>
             </Row>
           ))}
-      </Row>
+      </Row> */}
     </Row>
   );
 };
