@@ -1,7 +1,7 @@
 import { queryTypes, useQueryStates } from "next-usequerystate";
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { FormProvider, useForm, useWatch } from "react-hook-form";
+import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
 import useToggle from "../../hooks/useToggle";
 import { variantPost } from "../dolibarrApi/post";
 import { Field } from "./Field";
@@ -11,7 +11,6 @@ import { useProductStore } from "../../hooks/store";
 import { useSizes } from "../../hooks/useSizes";
 
 const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
-  const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle(true);
 
   const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
@@ -38,35 +37,7 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
     useProductStore.setState({ valuesSelected: valuesSelected });
   }, [valuesSelected]);
 
-  const onSubmit = async (data) => {
-    const features = Object.entries(data).reduce((acc, [i, a] = cur) => {
-      const getAttributeRef = Object.values(attributes).filter((val) => val.a_ref === i)[0];
-      return {
-        ...acc,
-        [getAttributeRef.a_id]: a,
-      };
-    }, {});
-
-    const variant = {
-      weight_impact: 0,
-      price_impact: price - basePrice,
-      price_impact_is_percent: false,
-      features: features,
-      reference: nomenclature.structurel,
-      ref_ext: nomenclature.complet,
-    };
-
-    variantPost(defaultProduct.id)
-      .post("", variant)
-      .then((response) => {
-        console.log("Ajout du variant [ID]:", response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const methods = useForm();
+  const methods = useFormContext();
 
   useEffect(() => {
     const subscription = methods.watch((value) => {
@@ -83,8 +54,7 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
         </div>
       </Col>
       <Col md={10}>
-        <FormProvider {...methods}>
-          <Form onSubmit={methods.handleSubmit(onSubmit)} className="quadralab_game_border quadralab_params bg_darker">
+          <Row className="quadralab_game_border quadralab_params bg_darker">
             {mode ? (
               <Form.Group className="">
                <p><Form.Label>Modèle</Form.Label></p> 
@@ -102,11 +72,8 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
                 })}
               </Form.Group>
             )}
-            <Button variant="primary" type="submit" className="m-auto mt-4">
-  Demander un devis
-</Button>
-          </Form>
-        </FormProvider>
+           
+          </Row>
       </Col>
       <Col md={2} className="h-100" onClick={() => setMode()}>
         {" "}
@@ -119,15 +86,3 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
 };
 
 export default QuadralabOptions;
-
-/* { <Form.Label>Ratio</Form.Label>
-<Form.Check type={"switch"} id="custom-switch" label={"Hauteur(cm) / Ratio"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
-      <span onClick={() => useProductStore.setState(state =>({ ratio: !state.ratio }))}>Ratio/Cm</span>
-
-<span onClick={() => useProductStore.setState((state) => ({ highlights: !state.highlights }))}>highlights</span>
-<span onClick={() => setMode()} className="">
-  Options avancées
-</span>
-<Button variant="primary" type="submit" className="m-auto mt-4">
-  Demander un devis
-</Button>} */

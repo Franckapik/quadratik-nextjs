@@ -8,6 +8,7 @@ import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
 import { Layout } from "../../components/Layout";
+import { FormProvider, useForm } from "react-hook-form";
 
 const Quadralab = () => {
   //Data
@@ -19,6 +20,10 @@ const Quadralab = () => {
   //get default product from tag category
   const [tag, setCategories] = useQueryState("TAG", queryTypes.integer.withDefault(1));
   useProductStore.setState({ tag: tag }); //global state
+  const methods = useForm();
+
+  const onSubmit = data => console.log(data);
+
 
   useEffect(() => {
     objectsInCategory(tag)
@@ -38,6 +43,8 @@ const Quadralab = () => {
       {!error ? (
         <Row className="d-flex ft4 quadralab_main_row">
           <Layout header>
+          <FormProvider {...methods}>
+            <Form onSubmit={methods.handleSubmit(onSubmit)}>
             {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
             <Col md={12} className="flex-column justify-content-start p-4">
               <QuadralabHud></QuadralabHud>
@@ -47,8 +54,9 @@ const Quadralab = () => {
             </Col>{" "}
             <Row className="quadralab_display flex-nowrap">
               <Form.Check type={"switch"} id="custom-switch" label={"Hauteur(cm) / Ratio"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
-              <Form.Check type={"switch"} id="custom-switch" label={"Highlight"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
-            </Row>
+              <Form.Check type={"switch"} id="custom-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
+            </Row></Form>
+            </FormProvider>
           </Layout>
         </Row>
       ) : (

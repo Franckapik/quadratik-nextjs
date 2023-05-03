@@ -44,6 +44,10 @@ export const QuadralabHud = () => {
       <Button variant="secondary" type="submit" className="m-auto mt-4">
   Rapport 2D
 </Button>
+
+<Button variant="primary" type="submit" className="m-auto mt-4">
+  Demander un devis
+</Button>
     </Col>
   );
 };
