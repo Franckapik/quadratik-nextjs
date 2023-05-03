@@ -1,5 +1,7 @@
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Burger } from "../components/Burger";
+import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
 import { S0_Landing } from "../components/home/S0_Landing";
 import { S1_Product } from "../components/home/S1_Product";
 import { S2_Canvas } from '../components/home/S2_Canvas';
@@ -32,6 +34,7 @@ const Home = () => {
 
   return (
     <div>
+      <VerticalSideIndex ></VerticalSideIndex> 
       <Parallax pages={8} ref={parallax}>
         <ParallaxLayer offset={0} >
           <S0_Landing />

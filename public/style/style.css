@@ -69,7 +69,6 @@ p {
 .burger {
   padding-top: calc(2vh + 2vw);
   position: fixed !important;
-  z-index: 1000;
 }
 .cursor {
   cursor: pointer;
@@ -158,6 +157,8 @@ p {
   text-align: right;
   top: 4vh;
 }
+
+
 .s0_logo svg {
   left: 10%;
   position: absolute;
@@ -180,6 +181,7 @@ p {
   transform: rotate(180deg);
   transform-origin: center center;
   writing-mode: vertical-rl;
+  z-index: 2;
 }
 .s0_quadratik_text {
   font-family: alcubierre;
@@ -270,11 +272,7 @@ p {
   padding: calc(5vh);
   width: calc(50vh + 20vw) !important;
 }
-.s2_rideau {
-  background-color: #332d2a;
-  position: relative;
-  z-index: 1000;
-}
+
 .s2_customer_title_container {
   height: 10vh;
   min-width: calc(35vh + 5vw);
@@ -462,9 +460,7 @@ p {
   margin-top: 3vh;
   width: 100%;
 }
-.zi_up {
-  z-index: 1000 !important;
-}
+
 
 a {
   cursor: pointer;
@@ -609,9 +605,7 @@ bottom: -1vh;
   bottom: 15%;
 }
 
-.zup {
-  z-index: 1000 !important;
-}
+
 
 .shop_fixed_col {
   top: 15%!important;
