@@ -4,18 +4,6 @@ import { Controller, useFormContext } from "react-hook-form";
 export const Field = ({ label, id, type, values, defaultVal }) => {
   const { control } = useFormContext();
 
-  console.log(values);
-
-  const handleChange = (e) => {
-    e.persist();
-    console.log(e.target.value);
-
-    /*     setItem(prevState => ({
-      ...prevState,
-      kindOfStand: e.target.value
-    })); */
-  };
-
   return (
     <>
       <Form.Label>{type === "radio" || type === "switch" ? null : label}</Form.Label>
@@ -27,7 +15,6 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
         name={id}
         defaultValue={defaultVal}
         render={({ field }) => {
-          console.log(field);
           switch (type) {
             case "switch":
               return <Form.Check {...field} type={type} id="custom-switch" label={label} />;

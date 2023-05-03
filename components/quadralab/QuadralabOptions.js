@@ -22,13 +22,14 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   });
 
   //global states
-  const nomenclature = useNomenclature(valuesSelected, defaultProduct, attributes, true);
-  const [price, basePrice] = usePrice(valuesSelected, defaultProduct, attributes, true);
-  const [sizes] = useSizes(valuesSelected, attributes, true);
+  const nomenclature = useNomenclature(valuesSelected, 1, attributes, true);
+  usePrice(valuesSelected, defaultProduct, attributes, true);
+  useSizes(valuesSelected, attributes, true);
 
   //render Modele after ProductOptions
   useEffect(() => {
     if (nomenclature) {
+      console.log(nomenclature);
       setLoading(false);
     }
   }, [nomenclature]);
@@ -54,26 +55,29 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
         </div>
       </Col>
       <Col md={10}>
-          <Row className="quadralab_game_border quadralab_params bg_darker">
-            {mode ? (
-              <Form.Group className="">
-               <p><Form.Label>Modèle</Form.Label></p> 
-                {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
-                  const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-                  return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-                })}{" "}
-              </Form.Group>
-            ) : (
-              <Form.Group className="">
-               <p><Form.Label>Parametres avancés</Form.Label></p> 
-                {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
-                  const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-                  return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-                })}
-              </Form.Group>
-            )}
-           
-          </Row>
+        <Row className="quadralab_game_border quadralab_params bg_darker">
+          {mode ? (
+            <Form.Group className="">
+              <p>
+                <Form.Label>Modèle</Form.Label>
+              </p>
+              {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
+                const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+                return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+              })}{" "}
+            </Form.Group>
+          ) : (
+            <Form.Group className="">
+              <p>
+                <Form.Label>Parametres avancés</Form.Label>
+              </p>
+              {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
+                const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+                return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+              })}
+            </Form.Group>
+          )}
+        </Row>
       </Col>
       <Col md={2} className="h-100" onClick={() => setMode()}>
         {" "}

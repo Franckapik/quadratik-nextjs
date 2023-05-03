@@ -22,8 +22,11 @@ const Quadralab = () => {
   useProductStore.setState({ tag: tag }); //global state
   const methods = useForm();
 
-  const onSubmit = data => console.log(data);
+  const sizes = useProductStore((state) => state.sizes);
+  const price = useProductStore.getState().price;
+  const nomenclature = useProductStore.getState().nomenclature;
 
+  const onSubmit = (data) => console.log(data);
 
   useEffect(() => {
     objectsInCategory(tag)
@@ -43,19 +46,26 @@ const Quadralab = () => {
       {!error ? (
         <Row className="d-flex ft4 quadralab_main_row">
           <Layout header>
-          <FormProvider {...methods}>
-            <Form onSubmit={methods.handleSubmit(onSubmit)}>
-            {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
-            <Col md={12} className="flex-column justify-content-start p-4">
-              <QuadralabHud></QuadralabHud>
-            </Col>
-            <Col md={12} className="d-flex flex-column justify-content-evenly ps-5 pe-5 quadralab_canvas_container">
-              {!loading ? <ProductCanvas></ProductCanvas> : "Chargement du modèle"}
-            </Col>{" "}
-            <Row className="quadralab_display flex-nowrap">
-              <Form.Check type={"switch"} id="custom-switch" label={"Hauteur(cm) / Ratio"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
-              <Form.Check type={"switch"} id="custom-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
-            </Row></Form>
+            <FormProvider {...methods}>
+              <Form onSubmit={methods.handleSubmit(onSubmit)}>
+                {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
+                <Col md={12} className="flex-column justify-content-start p-4">
+                  <QuadralabHud></QuadralabHud>
+                </Col>
+                <Col md={12} className="d-flex flex-column justify-content-evenly ps-5 pe-5 quadralab_canvas_container">
+                  {!loading ? <ProductCanvas></ProductCanvas> : "Chargement du modèle"}
+                </Col>
+                <Row className="justify-content-center align-items-center quadralab_title border_creme">
+                  {sizes.longueur} x {sizes.largeur} x {sizes.profondeur} cm
+                  <p className="ft05 mb-1">{nomenclature?.simple}</p>
+                  <p>{price} €</p>
+                  <p> {nomenclature?.structurel} </p>
+                </Row>
+                <Row className="quadralab_display flex-nowrap">
+                  <Form.Check type={"switch"} id="custom-switch" label={"Hauteur(cm) / Ratio"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
+                  <Form.Check type={"switch"} id="custom-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
+                </Row>
+              </Form>
             </FormProvider>
           </Layout>
         </Row>
