@@ -1,28 +1,10 @@
 import { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { useSpring, animated } from "@react-spring/web";
 import { AnimatedLogo } from "./landing_logo/AnimatedLogo";
 import { AnimatedLogo2 } from "./landing_logo/AnimatedLogo2";
 import { AnimatedSquare } from "./landing_logo/AnimatedSquare";
-import { Burger } from "../Burger";
-
-const Layout = ({ children, visible }) => {
-  return (
-    <>
-      {visible ? (
-        <Row className="s0_header d-none d-md-flex justify-content-end text-uppercase m-0 p-0 w-100">
-          <Col>
-            <Burger></Burger>
-          </Col>
-          <Col md={1}>Boutique</Col>
-          <Col md={1}>Contact</Col>
-          <Col md={1} className="d-none d-md-flex"></Col>
-        </Row>
-      ) : null}
-      {children}
-    </>
-  );
-};
+import { Layout } from "../Layout";
 
 export const S0_Landing = () => {
   const [toggle, setToggle] = useState(false);
@@ -55,7 +37,7 @@ export const S0_Landing = () => {
   }, [loaded]);
 
   return (
-    <Layout visible={loaded}>
+    <Layout header={loaded}>
       <Row id="s0_landing" className="section">
         <div className="d-none d-md-block m-0 p-0 ">{loaded ? <animated.div style={goRight} className="border_creme s0_cadre_home_gauche"></animated.div> : null}</div>
         <div className="d-flex flex-wrap justify-content-center align-items-center">

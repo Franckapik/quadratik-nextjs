@@ -8,6 +8,7 @@ import { ProductNavBar } from "../../components/product/ProductNavBar";
 import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
+import { Layout } from "../../components/Layout";
 
 const Product = () => {
   //Data
@@ -37,11 +38,11 @@ const Product = () => {
 
 
   return (
+    <Layout onePage header>
     <Row className="section">
       <ProductNavBar />
       {!error ? (
         <Row className="d-flex align-items-start ft4 product_main_row ">
-          <Col md={1}></Col>
           <Col md={3} className="d-flex flex-column justify-content-start product_attributes_col bg_darker h-100 p-4">
             {!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
           </Col>
@@ -77,7 +78,7 @@ const Product = () => {
       ) : (
         "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
       )}
-    </Row>
+    </Row></Layout>
   );
 };
 

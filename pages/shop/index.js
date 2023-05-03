@@ -6,6 +6,7 @@ import { FirstCategory } from "../../components/shop/FirstCategory";
 import { ParentProduct } from "../../components/shop/ParentProduct";
 import { ShopNavBar } from "../../components/shop/ShopNavBar";
 import { useAttributes } from "../../hooks/useAttributes";
+import { Layout } from "../../components/Layout";
 
 const Product = () => {
   //Data
@@ -37,12 +38,12 @@ const Product = () => {
       });
   }, []);
 
+
   return (
+    <Layout onePage header>
     <Row className="section">
       <Row className="show_row_tag">
-        <Col md={1}>
-          <div className="shop_page_vertical_title">Boutique - {viewedCategory}</div>
-        </Col>
+      <div className="shop_page_vertical_title">Boutique - {categories.filter(cat => cat.id === viewedCategory)[0]?.label}</div>
         <Col md={3} className="d-flex flex-column p-0 justify-content-start align-items-start h-100 text_dark">
           <Row className="ft1 w-100 h-100">
             <Col md={3} className=" shop_fixed_col d-flex flex-column justify-content-start align-items-center bg_creme p-5  fixed-top">
@@ -52,8 +53,8 @@ const Product = () => {
           </Row>
         </Col>
         <Col md={8} className="d-flex flex-column justify-content-evenly h-100 ps-5">
-          <ShopNavBar categories={categories} />
-          {categories
+{/*           <ShopNavBar categories={categories} />
+ */}          {categories
             .filter((cat) => cat.fk_parent == 0)
             .map((firstCat, i) => (
               <FirstCategory categories={categories} firstCat={firstCat} attributes={attributes} setViewedCategory={setViewedCategory} />
@@ -61,6 +62,7 @@ const Product = () => {
         </Col>
       </Row>
     </Row>
+    </Layout>
   );
 };
 

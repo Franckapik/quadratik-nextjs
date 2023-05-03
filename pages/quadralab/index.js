@@ -1,14 +1,13 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { attributesAllFetch, attributesFetchById, objectsInCategory } from "../../components/dolibarrApi/fetch";
+import { objectsInCategory } from "../../components/dolibarrApi/fetch";
+import ProductCanvas from "../../components/quadralab/ProductCanvas";
 import { ProductHud } from "../../components/quadralab/ProductHud";
-import { PerformanceCharts } from "../../components/quadralab/PerformanceCharts";
-import { ProductNavBar } from "../../components/quadralab/ProductNavBar";
 import ProductOptions from "../../components/quadralab/ProductOptions";
 import { useProductStore } from "../../hooks/store";
-import ProductCanvas from "../../components/quadralab/ProductCanvas";
 import { useAttributes } from "../../hooks/useAttributes";
+import { Layout } from "../../components/Layout";
 
 const Quadralab = () => {
   //Data
@@ -16,9 +15,6 @@ const Quadralab = () => {
 
   const [defaultProduct, setDefaultProduct] = useState({});
   const [loading, setLoading] = useState(false);
-
-  //Display
-  const [display, setDisplay] = useState("model");
 
   //get default product from tag category
   const [tag, setCategories] = useQueryState("TAG", queryTypes.integer.withDefault(1));
@@ -38,9 +34,8 @@ const Quadralab = () => {
   }, [tag]);
 
 
-
   return (
-    <Row className="section align-items-center ">
+    <Layout onePage header>
       {!error ? (
         <Row className="d-flex align-items-start ft4 quadralab_main_row  ">
           <Col md={1}></Col>
@@ -57,7 +52,7 @@ const Quadralab = () => {
       ) : (
         "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
       )}
-    </Row>
+    </Layout>
   );
 };
 
