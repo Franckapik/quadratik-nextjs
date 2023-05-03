@@ -16,7 +16,7 @@ export const Layout = ({ children, header, onePage }) => {
       ) : null}
       <Row>
         {onePage ? <Col md={1}></Col> : null }
-        <Col md={11}>{children}</Col>
+        <Col md={onePage ? 11 : 12}>{children}</Col>
       </Row>
     </>
   );

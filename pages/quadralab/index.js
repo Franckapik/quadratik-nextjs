@@ -1,9 +1,9 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import { objectsInCategory } from "../../components/dolibarrApi/fetch";
 import ProductCanvas from "../../components/quadralab/ProductCanvas";
-import { ProductHud } from "../../components/quadralab/ProductHud";
+import { QuadralabHud } from "../../components/quadralab/QuadralabHud";
 import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
@@ -36,18 +36,19 @@ const Quadralab = () => {
   return (
     <>
       {!error ? (
-        <Row className="d-flex align-items-start ft4 quadralab_main_row">
-          <Layout onePage header>
-            {" "}
-            <Col md={3} className="flex-column justify-content-start quadralab_attributes_col h-100 p-4">
-              {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
+        <Row className="d-flex ft4 quadralab_main_row">
+          <Layout header>
+            {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
+            <Col md={12} className="flex-column justify-content-start p-4">
+              <QuadralabHud></QuadralabHud>
             </Col>
-            <Col md={3} className="flex-column justify-content-start quadralab_hud_col h-100 p-4">
-              <ProductHud></ProductHud>
-            </Col>
-            <Col md={11} className="d-flex flex-column justify-content-evenly ps-5 pe-5">
-              <Row className="quadralab_preview_row ">{!loading ? <ProductCanvas></ProductCanvas> : "Chargement du modèle"}</Row>
+            <Col md={12} className="d-flex flex-column justify-content-evenly ps-5 pe-5 quadralab_canvas_container">
+              {!loading ? <ProductCanvas></ProductCanvas> : "Chargement du modèle"}
             </Col>{" "}
+            <Row className="quadralab_display flex-nowrap">
+              <Form.Check type={"switch"} id="custom-switch" label={"Hauteur(cm) / Ratio"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
+              <Form.Check type={"switch"} id="custom-switch" label={"Highlight"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
+            </Row>
           </Layout>
         </Row>
       ) : (

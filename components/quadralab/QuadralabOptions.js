@@ -1,6 +1,6 @@
 import { queryTypes, useQueryStates } from "next-usequerystate";
 import { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import useToggle from "../../hooks/useToggle";
 import { variantPost } from "../dolibarrApi/post";
@@ -76,34 +76,58 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   }, []);
 
   return (
-    <FormProvider {...methods}>
-      <Form onSubmit={methods.handleSubmit(onSubmit)}>
-        <Form.Group className="" controlId="media_category_id_id">
-          <div className="quadralab_form_buttons">
-            {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
-              const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-              return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={""} defaultVal={valuesSelected[a[0]]}></Field>;
-            })}{" "}
-          </div>
-          {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
-            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-            return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-          })}
-        </Form.Group>
-        <Form.Label>Ratio</Form.Label>
-        <Form.Check type={"switch"} id="custom-switch" label={"Hauteur(cm) / Ratio"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
-        {/*         <span onClick={() => useProductStore.setState(state =>({ ratio: !state.ratio }))}>Ratio/Cm</span>
-         */}{" "}
-        <span onClick={() => useProductStore.setState((state) => ({ highlights: !state.highlights }))}>highlights</span>
-        <span onClick={() => setMode()} className="">
-          Options avancées
-        </span>
-        <Button variant="primary" type="submit" className="m-auto mt-4">
-          Demander un devis
-        </Button>
-      </Form>
-    </FormProvider>
+    <Row className="quadralab_attributes_col flex-nowrap align-items-center">
+      <Col md={2} className="h-100" onClick={() => setMode()}>
+        <div className="quadralab_arrow">
+          <i className="fad fa-chevron-left "></i>
+        </div>
+      </Col>
+      <Col md={10}>
+        <FormProvider {...methods}>
+          <Form onSubmit={methods.handleSubmit(onSubmit)} className="quadralab_game_border quadralab_params bg_darker">
+            {mode ? (
+              <Form.Group className="">
+               <p><Form.Label>Modèle</Form.Label></p> 
+                {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
+                  const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+                  return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+                })}{" "}
+              </Form.Group>
+            ) : (
+              <Form.Group className="">
+               <p><Form.Label>Parametres avancés</Form.Label></p> 
+                {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
+                  const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+                  return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+                })}
+              </Form.Group>
+            )}
+            <Button variant="primary" type="submit" className="m-auto mt-4">
+  Demander un devis
+</Button>
+          </Form>
+        </FormProvider>
+      </Col>
+      <Col md={2} className="h-100" onClick={() => setMode()}>
+        {" "}
+        <div className="quadralab_arrow">
+          <i className="fad fa-chevron-right "></i>
+        </div>
+      </Col>
+    </Row>
   );
 };
 
 export default QuadralabOptions;
+
+/* { <Form.Label>Ratio</Form.Label>
+<Form.Check type={"switch"} id="custom-switch" label={"Hauteur(cm) / Ratio"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
+      <span onClick={() => useProductStore.setState(state =>({ ratio: !state.ratio }))}>Ratio/Cm</span>
+
+<span onClick={() => useProductStore.setState((state) => ({ highlights: !state.highlights }))}>highlights</span>
+<span onClick={() => setMode()} className="">
+  Options avancées
+</span>
+<Button variant="primary" type="submit" className="m-auto mt-4">
+  Demander un devis
+</Button>} */
