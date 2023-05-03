@@ -3,6 +3,19 @@ import { Controller, useFormContext } from "react-hook-form";
 
 export const Field = ({ label, id, type, values, defaultVal }) => {
   const { control } = useFormContext();
+
+  console.log(values);
+
+  const handleChange = (e) => {
+    e.persist();
+    console.log(e.target.value);
+
+    /*     setItem(prevState => ({
+      ...prevState,
+      kindOfStand: e.target.value
+    })); */
+  };
+
   return (
     <>
       <Form.Label>{label}</Form.Label>
@@ -14,17 +27,23 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
         name={id}
         defaultValue={defaultVal}
         render={({ field }) => {
+          console.log(field);
           switch (type) {
             case "switch":
               return <Form.Check {...field} type={type} id="custom-switch" label={label} />;
               break;
             case "radio":
               return (
-                <div key={`inline-${type}`}  className="mb-3">
-                  {Object.values(values).map((a, i) => (
-                    <Form.Check label={a.v_label} type={type} name="group" id={`inline-${type}-${i}`} key={"FormCheck" + i} />
-                  ))}
-                </div>
+                  <Form.Group {...field} className="form_radio_inline">
+                    {Object.values(values).map((a, i) => (
+                        <Form.Check type={type} key={"radio" + i}>
+                          <Form.Check.Label className="border_creme">
+                            <Form.Check.Input type={type} value={a.v_id} checked={field.value === a.v_id} />
+                            {a.v_label}
+                          </Form.Check.Label>
+                        </Form.Check>
+                    ))}
+                  </Form.Group>
               );
 
               break;
@@ -32,7 +51,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
               return (
                 <Form.Select {...field}>
                   {Object.values(values).map((a, i) => (
-                    <option value={a.v_id} key={"Option_"+label + i}>
+                    <option value={a.v_id} key={"Option_" + label + i}>
                       {a.v_label}
                     </option>
                   ))}
@@ -42,7 +61,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
             case "range":
               return (
                 <>
-                  <Form.Range {...field} min={0} max={100} />
+                  <Form.Range {...field} min={0} max={13} />
                 </>
               );
               break;
@@ -50,7 +69,8 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
             default:
               break;
           }
-        }} />
+        }}
+      />
     </>
   );
 };

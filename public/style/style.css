@@ -310,16 +310,14 @@ p {
 .s3_dif_diy {
   width: calc(40vh + 5vw);
 }
-.s3_diy_guide_text {
-  height: 600px !important;
-}
+
 .s3_diy_bg {
   aspect-ratio: 4/2.25 !important;
   background: url(../indus.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  height: 80vh;
+  height: 85vh;
   width: auto;
 }
 .s3_diy_bg h2 {
@@ -553,9 +551,45 @@ h2 {
   height: 65vh !important;
 }
 .quadralab_main_row {
-  height: 90vh !important;
+  position: relative;
+  height: 100vh!important;
+  background: url(../indus.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
+.quadralab_main_row .form-select {
+  color: #d0c3b4;
+  background: inherit!important;
+  border: solid thin #8ea65f!important;
+}
+
+.quadralab_main_row .form-select option {
+  color: #d0c3b4;
+  background:  #2f2a28!important;
+}
+
+.quadralab_form_buttons {
+  position: absolute;
+  top: 10vh;
+left: 35vw;}
+
+.quadralab_main_row .form_radio_inline .form-check-label input[type=radio] {
+  display: none;
+}
+
+.quadralab_main_row .form_radio_inline {
+  display: flex!important;
+}
+
+.quadralab_main_row .form_radio_inline .form-check-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  padding: 1vw 2vw 1vw 2vw;
+}
 .product_tab {
   width: 10px !important;
   border-top: solid 1px #d0c3b4;

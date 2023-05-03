@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import { objectsInCategory } from "../../components/dolibarrApi/fetch";
 import ProductCanvas from "../../components/quadralab/ProductCanvas";
 import { ProductHud } from "../../components/quadralab/ProductHud";
-import ProductOptions from "../../components/quadralab/ProductOptions";
+import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
 import { Layout } from "../../components/Layout";
@@ -33,26 +33,27 @@ const Quadralab = () => {
       });
   }, [tag]);
 
-
   return (
-    <Layout onePage header>
+    <>
       {!error ? (
-        <Row className="d-flex align-items-start ft4 quadralab_main_row  ">
-          <Col md={1}></Col>
-          <Col md={3} className="flex-column justify-content-start quadralab_attributes_col bg_darker h-100 p-4">
-            {!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
-          </Col>
-          <Col md={3} className="flex-column justify-content-start quadralab_hud_col h-100 p-4">
-            <ProductHud></ProductHud>
-          </Col>
-          <Col md={11} className="d-flex flex-column justify-content-evenly ps-5 pe-5">
-            <Row className="quadralab_preview_row ">{!loading ? <ProductCanvas></ProductCanvas> : "Chargement du modèle"}</Row>
-          </Col>
+        <Row className="d-flex align-items-start ft4 quadralab_main_row">
+          <Layout onePage header>
+            {" "}
+            <Col md={3} className="flex-column justify-content-start quadralab_attributes_col h-100 p-4">
+              {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
+            </Col>
+            <Col md={3} className="flex-column justify-content-start quadralab_hud_col h-100 p-4">
+              <ProductHud></ProductHud>
+            </Col>
+            <Col md={11} className="d-flex flex-column justify-content-evenly ps-5 pe-5">
+              <Row className="quadralab_preview_row ">{!loading ? <ProductCanvas></ProductCanvas> : "Chargement du modèle"}</Row>
+            </Col>{" "}
+          </Layout>
         </Row>
       ) : (
         "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
       )}
-    </Layout>
+    </>
   );
 };
 
