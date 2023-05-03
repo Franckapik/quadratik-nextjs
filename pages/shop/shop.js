@@ -9,34 +9,33 @@ import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import Link from "next/link";
+import { useInView } from "@react-spring/web";
 
 const ShopNavBar = ({ categories }) => {
   return (
     <Row className="shop_header_row zup dark_bg ">
-      <Col md={1} className=""></Col>
+      {/*  <Col md={1} className=""></Col>
       <Col md={3} className="justify-content-start d-flex flex-column p-0 m-0 ">
         <Row className="ft05 h-100">
-          <Col md={10} className="bg_creme d-flex flex-column justify-content-center align-items-center ">
+          <Col md={10} className="d-flex flex-column justify-content-center align-items-center ">
             <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" /> <div className="text-nowrap text-uppercase shop_header_quadratik_title ft2 pt-3">Quadratik</div>
           </Col>
           <Col md={2} className=""></Col>
         </Row>
-      </Col>
-      <Col md={8} className="">
-        <Row className="d-md-flex justify-content-end text-uppercase m-0 p-0 ft2 h-100 align-items-center ">
-          <Col md={8}>
-            <Breadcrumb className="ft4 m-0 shop_breadcrumb">
-              {categories
-                .filter((cat) => cat.fk_parent == 0)
-                .map((a, i) => (
-                  <Breadcrumb.Item href="#" /* active */>{a.label}</Breadcrumb.Item>
-                ))}
-            </Breadcrumb>
-          </Col>
-          <Col md={2}>Accueil</Col>
-          <Col md={2}>Contact</Col>
-        </Row>
-      </Col>
+      </Col> */}
+      <Row className="d-md-flex justify-content-end text-uppercase m-0 p-0 ft2 h-100 align-items-center ">
+        <Col md={8}>
+          <Breadcrumb className="ft4 m-0 shop_breadcrumb">
+            {categories
+              .filter((cat) => cat.fk_parent == 0)
+              .map((a, i) => (
+                <Breadcrumb.Item href="#" /* active */>{a.label}</Breadcrumb.Item>
+              ))}
+          </Breadcrumb>
+        </Col>
+        <Col md={2}>Accueil</Col>
+        <Col md={2}>Contact</Col>
+      </Row>
     </Row>
   );
 };
@@ -61,19 +60,21 @@ const DefaultProduct = ({ tagId }) => {
       documentByProductId(defaultProduct.id)
         .get()
         .then((response) => {
-          setDocument(response.data);
+          console.log(response.data);
+          setDocument(response.data.ecmfiles_infos[response.data.ecmfiles_infos.length - 1]); //issue with historical old file
         })
         .catch((error) => {
-          console.log(error);
-        });
+          setDocument(false); //issue with historical old file
+/*           console.log(error);
+ */        });
     }
   }, [defaultProduct]);
 
   return (
     <>
-      {defaultProduct ? (
+      {defaultProduct && document ? (
         <Col className=" d-flex flex-column w-100 justify-content-evenly align-item-center">
-          <Row className="shop_default_row">{document.ecmfiles_infos ? <img src={"http://shop.quadratik.fr/document.php?hashp=" + document.ecmfiles_infos[0].share} /> : "pas d'image"}</Row>
+          <Row className="shop_default_row">{document ? <img src={"http://shop.quadratik.fr/document.php?hashp=" + document.share} /> : "pas d'image"}</Row>
           <Row className="text-end m-2 ft2 ">
             <span> La référence : {defaultProduct.ref}</span>
           </Row>
@@ -85,9 +86,16 @@ const DefaultProduct = ({ tagId }) => {
   );
 };
 
-const FirstCategory = ({ categories, firstCat, attributes }) => {
+const FirstCategory = ({ categories, firstCat, attributes, setViewedCategory }) => {
   const [defaultProduct, setDefaultProduct] = useState(false);
   const [variants, setVariants] = useState(false);
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      setViewedCategory(firstCat.id);
+    }
+  }, [inView]);
 
   useEffect(() => {
     objectsInCategory(firstCat.id)
@@ -114,7 +122,7 @@ const FirstCategory = ({ categories, firstCat, attributes }) => {
   }, [defaultProduct]);
 
   return (
-    <>
+    <Row ref={ref}>
       {firstCat.label + firstCat.id}
 
       {categories
@@ -126,7 +134,7 @@ const FirstCategory = ({ categories, firstCat, attributes }) => {
             </>
           );
         })}
-    </>
+    </Row>
   );
 };
 
@@ -146,7 +154,7 @@ const SubCategory = ({ subcategory, variants, attributes }) => {
                 let a_ref = Object.values(attributes).filter((val) => val.a_id === cur.id)[0].a_ref;
                 return { ...acc, [a_ref]: cur.fk_prod_attr_val };
               }, {});
-              return { ...a, ...g, valuesSelected: {...valuesSelected} };
+              return { ...a, ...g, valuesSelected: { ...valuesSelected } };
             });
             setListProducts(pwithAttributes);
           }
@@ -173,10 +181,28 @@ const SubCategory = ({ subcategory, variants, attributes }) => {
   );
 };
 
+const ParentProduct = ({ categories, viewedCategory }) => {
+  const [viewedParent, setViewedParent] = useState(false);
+
+  useEffect(() => {
+    setViewedParent(categories.filter((val) => val.id === viewedCategory)[0]);
+  }, [viewedCategory]);
+
+  return (
+    <>
+      {viewedParent && (
+        <Row>
+          <p>{viewedParent.label}</p>
+          <p>{viewedParent.description}</p>
+          <DefaultProduct tagId={viewedCategory}></DefaultProduct>
+        </Row>
+      )}
+    </>
+  );
+};
+
 const CardProduct = ({ product, subcategory, attributes }) => {
-
-
-  const nomenclature = useNomenclature(product.valuesSelected, subcategory.fk_parent, attributes)
+  const nomenclature = useNomenclature(product.valuesSelected, subcategory.fk_parent, attributes);
 
   const [document, setDocument] = useState(false);
   useEffect(() => {
@@ -194,15 +220,15 @@ const CardProduct = ({ product, subcategory, attributes }) => {
 
   return (
     <>
-      {true ?  (
+      {true ? (
         <Col md={4} className="shop_card_col d-flex flex-column align-items-center justify-content-evenly">
           <Row className="p-3">{document?.ecmfiles_infos ? <img src={"http://shop.quadratik.fr/document.php?hashp=" + document?.ecmfiles_infos[0].share} /> : "pas d'image"}</Row>
-          <Row className="text-center p-3 ft5 shop_card_price text_dark ">
-   {/*          <span>{product.ref}</span> */}
-          </Row>
+          <Row className="text-center p-3 ft5 shop_card_price text_dark ">{/*          <span>{product.ref}</span> */}</Row>
           <Row className="text-center p-3 ft2 ">
-          <Link href={{ pathname: '/shop/product', query: product.valuesSelected }}><span>{nomenclature.simple}</span></Link>
-            
+            <Link href={{ pathname: "/shop/product", query: product.valuesSelected }}>
+              <span>{nomenclature.simple}</span>
+            </Link>
+
             <span>{Math.round(product.price)} €</span>
           </Row>
         </Col>
@@ -225,6 +251,7 @@ const Product = () => {
   const [error, setError] = useState(false);
 
   const [categories, setCategories] = useState([]);
+  const [viewedCategory, setViewedCategory] = useState(0);
 
   //get all categories
   useEffect(() => {
@@ -318,25 +345,24 @@ const Product = () => {
 
   return (
     <Row className="section">
-      <ShopNavBar categories={categories} />
       <Row className="show_row_tag">
         <Col md={1}>
-          <div className="shop_page_vertical_title">Boutique</div>
+          <div className="shop_page_vertical_title">Boutique - {viewedCategory}</div>
         </Col>
         <Col md={3} className="d-flex flex-column p-0 justify-content-start align-items-start h-100 text_dark">
-          <Row className="ft1 w-100 h-100 ">
-            <Col md={10} className="bg_creme shop_firstcategory">
-              "Produit parent en state"
+          <Row className="ft1 w-100 h-100">
+            <Col md={3} className=" shop_fixed_col d-flex flex-column justify-content-start align-items-center bg_creme p-5  fixed-top">
+              <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" /> <div className="text-nowrap text-uppercase shop_header_quadratik_title ft2 pt-3">Quadratik</div>
+              <ParentProduct categories={categories} viewedCategory={viewedCategory}></ParentProduct>
             </Col>
-            <Col md={2} className=""></Col>
           </Row>
         </Col>
         <Col md={8} className="d-flex flex-column justify-content-evenly h-100 ps-5">
-          sous-categroeies
+          <ShopNavBar categories={categories} />
           {categories
             .filter((cat) => cat.fk_parent == 0)
             .map((firstCat, i) => (
-              <FirstCategory categories={categories} firstCat={firstCat} attributes={attributes} />
+              <FirstCategory categories={categories} firstCat={firstCat} attributes={attributes} setViewedCategory={setViewedCategory} />
             ))}
         </Col>
       </Row>
