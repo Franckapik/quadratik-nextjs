@@ -1,6 +1,5 @@
-import { Col, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { useProductStore } from "../../hooks/store";
-import ProductCanvas from "./ProductCanvas";
 
 export const ProductHud = () => {
 
@@ -16,32 +15,12 @@ export const ProductHud = () => {
   
   return (
     <Row className="product_modele_main h-100">
- {/*      <ListGroup className="ml-2">
-              <ListGroupItem className="border-0 bg-transparent">
-                <i className="fas fa-ruler-combined mr-2"></i> {width} x{" "}
-                {length} x {depth} cm
-              </ListGroupItem>
-              <ListGroupItem className="border-0 bg-transparent">
-                <i className="fas fa-grip-lines-vertical mr-2"></i> {thickness}{" "}
-                cm
-              </ListGroupItem>
-              <ListGroupItem className="border-0 bg-transparent">
-                <i className="fas fa-square-full mr-2"></i> {cwidth.toFixed(2)}{" "}
-                cm
-              </ListGroupItem>
-              <ListGroupItem
-                className="border-0 bg-transparent"
-                style={{ cursor: "pointer" }}
-              >
-                <i className="fas fa-file-export mr-2 "></i> 2D report
-              </ListGroupItem>
-            </ListGroup> */}
       <Col md={12} className="d-flex flex-column justify-content-evenly ps-5">
         <Row>
           <p className="ft05 mb-1">
             {nomenclature?.simple} {price}{" "}
           </p>
-          <span className="ft4">REF : {nomenclature.structurel}</span>
+          <span className="ft4">REF : {nomenclature?.structurel}</span>
         </Row>
         <Row></Row>
         <Row className="align-items-center">

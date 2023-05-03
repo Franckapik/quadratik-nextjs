@@ -22,7 +22,6 @@ export const DefaultProduct = ({ tagId }) => {
       documentByProductId(defaultProduct.id)
         .get()
         .then((response) => {
-          console.log(response.data);
           setDocument(response.data.ecmfiles_infos[response.data.ecmfiles_infos.length - 1]); //issue with historical old file
         })
         .catch((error) => {

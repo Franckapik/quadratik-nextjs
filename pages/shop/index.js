@@ -5,10 +5,11 @@ import { useProductStore } from "../../hooks/store";
 import { FirstCategory } from "../../components/shop/FirstCategory";
 import { ParentProduct } from "../../components/shop/ParentProduct";
 import { ShopNavBar } from "../../components/shop/ShopNavBar";
+import { useAttributes } from "../../hooks/useAttributes";
 
 const Product = () => {
   //Data
-  const [attributes, setAttributes] = useState(false);
+  const [attributes, fetching, error] = useAttributes();
 
   const [categories, setCategories] = useState([]);
   const [viewedCategory, setViewedCategory] = useState(0);
@@ -29,73 +30,6 @@ const Product = () => {
         }
 
         setCategories(response.data.sort(compare));
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error);
-      });
-  }, []);
-
-  // get attributes (ex : Width) and then values (ex: 50cm)
-  useEffect(() => {
-    attributesAllFetch()
-      .get()
-      .then((response) => {
-        const attributes = response.data;
-        if (attributes.length) {
-          Promise.all(
-            attributes.map((a) =>
-              attributesFetchById(a.id)
-                .get()
-                .then((response) => {
-                  return response.data;
-                })
-                .catch((error) => {
-                  return error;
-                })
-            )
-          )
-            .then((values) => {
-              const filteredValues = values.filter((item) => item).flat(); //no undefined and same level
-              const attributesAndValues = Object.entries(attributes).reduce((acc, [key, val] = item) => {
-                const v = filteredValues.filter((a) => a.fk_product_attribute == val.id).sort((a, b) => a.id - b.id);
-                let newV = {};
-                if (v.length) {
-                  newV = Object.entries(v).reduce((acc, [key, val] = item) => {
-                    return {
-                      ...acc,
-                      [key]: {
-                        v_id: val.id,
-                        v_ref: val.ref,
-                        v_3d: val.value?.split(",")[0],
-                        v_label: val.value?.split(",")[1],
-                        v_operator: val.value?.split(",")[3],
-                        v_factor: val.value?.split(",")[2],
-                      },
-                    };
-                  }, 0);
-                }
-
-                return {
-                  ...acc,
-                  [key]: {
-                    a_id: val.id,
-                    a_ref: val.ref,
-                    a_position: val.position,
-                    a_label: val.label,
-                    values: newV,
-                  },
-                };
-              }, 0);
-
-              useProductStore.setState({ attributes: attributesAndValues }); //global state
-              setAttributes(attributesAndValues);
-              setFetching(false);
-            })
-            .catch((error) => {
-              return error;
-            });
-        }
       })
       .catch((error) => {
         console.log(error);
