@@ -40,7 +40,7 @@ const Quadralab = () => {
 
 
   return (
-    <Row className="section align-items-center">
+    <Row className="section align-items-center ">
       {!error ? (
         <Row className="d-flex align-items-start ft4 quadralab_main_row  ">
           <Col md={1}></Col>

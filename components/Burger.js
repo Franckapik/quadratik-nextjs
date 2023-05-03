@@ -14,19 +14,14 @@ export const Burger = () => {
         opacity: 1,
       },
     }),
-    {
-    
-    }
-  )
-  
+    {}
+  );
 
   return (
     <animated.div ref={ref} style={springs}>
-    <Col md={1} className="d-flex burger justify-content-center">
-      <Hamburger toggled={isOpen} toggle={setOpen} color="#FFFFFF" />
-    </Col>
-  </animated.div>
-
-
+      <Col md={1} className="d-flex burger justify-content-center">
+        <Hamburger toggled={isOpen} toggle={setOpen} color="#FFFFFF" />
+      </Col>
+    </animated.div>
   );
 };
