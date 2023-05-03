@@ -29,7 +29,7 @@ const ShopNavBar = ({ categories }) => {
             {categories
               .filter((cat) => cat.fk_parent == 0)
               .map((a, i) => (
-                <Breadcrumb.Item href="#" /* active */>{a.label}</Breadcrumb.Item>
+                <Breadcrumb.Item href={'#' + a.id} /* active */>{a.label}</Breadcrumb.Item>
               ))}
           </Breadcrumb>
         </Col>
@@ -122,7 +122,7 @@ const FirstCategory = ({ categories, firstCat, attributes, setViewedCategory }) 
   }, [defaultProduct]);
 
   return (
-    <Row ref={ref}>
+    <Row ref={ref} id={firstCat.id}>
       {firstCat.label + firstCat.id}
 
       {categories
