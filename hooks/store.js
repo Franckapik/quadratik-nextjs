@@ -19,7 +19,8 @@ const useProductStore = create((set) => ({
   cwidth: 0,
   sizes: { longueur: 0, largeur: 0, epaisseur: 0 },
   ratio : false,
-  highlights : false
+  highlights : false,
+  report2D : false
 }));
 
 
