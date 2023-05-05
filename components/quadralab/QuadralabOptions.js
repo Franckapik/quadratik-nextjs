@@ -1,14 +1,13 @@
 import { queryTypes, useQueryStates } from "next-usequerystate";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { FormProvider, useForm, useFormContext, useWatch } from "react-hook-form";
-import useToggle from "../../hooks/useToggle";
-import { variantPost } from "../dolibarrApi/post";
-import { Field } from "./Field";
-import { usePrice } from "../../hooks/usePrice";
-import { useNomenclature } from "../../hooks/useNomenclature";
+import { useFormContext } from "react-hook-form";
 import { useProductStore } from "../../hooks/store";
+import { useNomenclature } from "../../hooks/useNomenclature";
+import { usePrice } from "../../hooks/usePrice";
 import { useSizes } from "../../hooks/useSizes";
+import useToggle from "../../hooks/useToggle";
+import { Field } from "./Field";
 
 const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   const [mode, setMode] = useToggle(true);
@@ -52,7 +51,7 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
       <Form.Group className="">
         <Row className="justify-content-center text-center">
           <p className="text-center w-100 mt-4 mb-4 p-3">
-            <i className="fad fa-tools p-2"></i>Paramètres
+            <i className="fad fa-tools p-2"></i>PARAMETRES
           </p>
 
           <Row className=" justify-content-center flex-nowrap">

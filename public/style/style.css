@@ -11,6 +11,10 @@
 .bg_red {
   background-color: red;
 }
+
+.bg_green  {
+  background-color: #8ea65f;
+}
 .bg_light {
   background-color: #8ea65f8a;
 }
@@ -55,6 +59,32 @@ p {
 }
 .btn-primary:hover {
   background-color: #a1be66 !important;
+}
+.btn-ternary {
+  background-color: #cadba8 !important;
+  border: none !important;
+  border-radius: 5px !important;
+  color: #332d2a !important;
+  font-size: calc(0.7rem + 0.3vw) !important;
+  font-weight: 800 !important;
+  letter-spacing: calc(0.2rem + 0.1vw) !important;
+  margin: 1vw !important;
+  min-width: 250px !important;
+  max-width: 400px !important;
+  padding: 2vh !important;
+  text-transform: uppercase;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.btn-ternary i {
+  font-size: 1.5rem;
+  margin-right: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+.btn-ternary:hover {
+  background-color: #d6f0a3 !important;
 }
 .btn-secondary {
   background-color: #8ea65f !important;
@@ -114,6 +144,10 @@ p {
 .ft6 {
   font-size: calc(0.4rem + 0.5vw) !important;
   letter-spacing: calc(0.1rem + 0.1vw);
+}
+.ft7 {
+  font-size: calc(0.3rem + 0.4vw) !important;
+  letter-spacing: calc(0.05rem + 0.05vw);
 }
 .h-10 {
   height: 5vh;
@@ -594,9 +628,11 @@ h2 {
   position: absolute;
   z-index: 2;
   top: 10vh;
-  right: 37.5vw;
-  width: 25vw;
-
+}
+.quadralab_devis_button {
+  position: absolute;
+  z-index: 2;
+  bottom: 5vh;
 }
 
 .quadralab_main_row {
@@ -678,21 +714,39 @@ h2 {
   align-items: center;
   font-size: 3rem;
 }
+
+.quadralab_performance_widget {
+  width: 95%!important;
+}
 .quadralab_line {
-  width: 300px!important;
+  width: 90%!important;
   height: 20px!important;
   color: #d0c3b4;
   position: relative;
-  left: 50px;
+  left: 10%;
   top: -50px;
   z-index: -2;
+}
+
+.quadralab_perf_value {
+  position: relative;
+  top: -40px;
 }
 
 .quadralab_display {
   position: absolute;
   bottom: 5%;
-  left: 40%;
-width: 300px;
+}
+
+.quadralab_title  .form-check {
+  max-width: 200px!important;
+}
+
+.quadralab_2d_view {
+  position: absolute;
+  width:45vw!important;
+  top: 45%;
+  left: 27%;
 }
 
 .shop_header_row {
