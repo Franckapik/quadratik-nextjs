@@ -42,7 +42,7 @@ export const AnimatedLogo2 = ({ toggle, setLoading }) => {
         y="148.485"
         ry="0"
         transform="rotate(-45)"
-        {...animatedProps} />{" "}
+        {...animatedProps} />
     </>
   );
 };

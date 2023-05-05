@@ -64,7 +64,7 @@ const Product = () => {
             <Row className="product_preview_row border_creme bg_darker">
               {!loading ? (
                 <>
-                  {" "}
+                  
                   {display === "coefDif" ? <PerformanceCharts /> : null}
                   {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
                   {display === "model" ? <ProductHud /> : null}

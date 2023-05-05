@@ -78,7 +78,7 @@ export const S1_Product = () => {
               <p className="m-0 pt-2 pb-2 ft4">
                 <span className="s1_product_sub_blue">Fabrication</span>
                 <span className=""> Artisanale </span>
-                <span className="s1_product_sub_red"> Française</span>{" "}
+                <span className="s1_product_sub_red"> Française</span>
               </p>
             </Row>
           </Col>

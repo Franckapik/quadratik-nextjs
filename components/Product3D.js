@@ -76,7 +76,7 @@ export const Product3D = ({ p_selected }) => {
           <h3 style={{ textAlign: "center" }}>
             D2N{prime}P{Math.round(depth)}L{Math.round(width)}
             {width !== length ? "W" + Math.round(length) : null}P
-          </h3>{" "}
+          </h3>
         </Card>
         <Row style={{ height: "33em" }}>
           <div
@@ -90,15 +90,15 @@ export const Product3D = ({ p_selected }) => {
           >
             <ListGroup className="ml-2">
               <ListGroupItem className="border-0 bg-transparent">
-                <i className="fas fa-ruler-combined mr-2"></i> {width} x{" "}
+                <i className="fas fa-ruler-combined mr-2"></i> {width} x
                 {length} x {depth} cm
               </ListGroupItem>
               <ListGroupItem className="border-0 bg-transparent">
-                <i className="fas fa-grip-lines-vertical mr-2"></i> {thickness}{" "}
+                <i className="fas fa-grip-lines-vertical mr-2"></i> {thickness}
                 cm
               </ListGroupItem>
               <ListGroupItem className="border-0 bg-transparent">
-                <i className="fas fa-square-full mr-2"></i> {cwidth.toFixed(2)}{" "}
+                <i className="fas fa-square-full mr-2"></i> {cwidth.toFixed(2)}
                 cm
               </ListGroupItem>
               <ListGroupItem

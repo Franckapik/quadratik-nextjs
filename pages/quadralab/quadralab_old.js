@@ -68,7 +68,7 @@ const Quadralab_Comp = () => {
     posts &&
     posts.map((a, i) => (
       <li>
-        {a.label} {<Values valueId={a.id}></Values>}{" "}
+        {a.label} {<Values valueId={a.id}></Values>}
       </li>
     ))
   );

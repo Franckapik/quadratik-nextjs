@@ -193,7 +193,7 @@ const Preview3D = ({
                 </Text>
               </>
             );
-          })}{" "}
+          })}
       </Canvas>
     </>
   );

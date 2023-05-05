@@ -48,38 +48,38 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   }, []);
 
   return (
-        <Row className="quadralab_params_left quadralab_game_border quadralab_params bg_darker">
-          <Form.Group className="">
-            <Row className="justify-content-center text-center">
-            <p className="text-center w-100 mt-4 mb-4 p-3"><i className="fad fa-tools p-2"></i>Paramètres{" "}</p> 
+    <Row className="quadralab_params_left quadralab_game_border quadralab_params bg_darker">
+      <Form.Group className="">
+        <Row className="justify-content-center text-center">
+          <p className="text-center w-100 mt-4 mb-4 p-3">
+            <i className="fad fa-tools p-2"></i>Paramètres
+          </p>
 
-
-             
-              <Row className=" justify-content-center flex-nowrap">
-                <Col md={6}>
-                  <Button variant="secondary" onClick={() => setMode()}>{mode ? "Simples" : "Avancés"}</Button>{" "}
-                </Col>
-
-              </Row>
-            </Row>{" "}
-          </Form.Group>
-          {mode ? (
-            <Form.Group className="justify-content-center">
-              {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
-                const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-                return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-              })}{" "}
-            </Form.Group>
-          ) : (
-            <Form.Group className="">
-              {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
-                const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-                return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-              })}
-            </Form.Group>
-          )}
+          <Row className=" justify-content-center flex-nowrap">
+            <Col md={6}>
+              <Button variant="secondary" onClick={() => setMode()}>
+                {mode ? "Simples" : "Avancés"}
+              </Button>
+            </Col>
+          </Row>
         </Row>
-
+      </Form.Group>
+      {mode ? (
+        <Form.Group className="justify-content-center">
+          {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
+            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+            return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+          })}
+        </Form.Group>
+      ) : (
+        <Form.Group className="">
+          {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
+            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+            return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+          })}
+        </Form.Group>
+      )}
+    </Row>
   );
 };
 

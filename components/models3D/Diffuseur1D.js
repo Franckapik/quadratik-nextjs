@@ -67,7 +67,7 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   usePerformances(amax, c, P, N);
   return (
     <>
-      {" "}
+      
       {isQuadralab ? (
         <>
           <Text color="d0c3b4" scale={w / 10} position={[0, -l + l / 4, d / 2]}>

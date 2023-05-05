@@ -111,40 +111,40 @@ const DiffusorView2D = ({ sizes, area, volume, fmin, woodArea, woodVolume }) => 
         <Modal.Body>
           <ListGroup>
             <ListGroup.Item>
-              Dimensions du diffuseur (l x L x P) :{" "}
+              Dimensions du diffuseur (l x L x P) :
               <span className="ft2">
                 {sizes?.largeur} cm x {sizes?.longueur} cm x {sizes?.profondeur} cm
-              </span>{" "}
+              </span>
             </ListGroup.Item>
             <ListGroup.Item>
-              Aire du diffuseur : <span className="ft2">{area} m2</span>{" "}
+              Aire du diffuseur : <span className="ft2">{area} m2</span>
             </ListGroup.Item>
             <ListGroup.Item>
-              Volume du diffuseur : <span className="ft2">{volume} m3</span>{" "}
+              Volume du diffuseur : <span className="ft2">{volume} m3</span>
             </ListGroup.Item>
             <ListGroup.Item>
-              Type de diffuseur :{" "}
+              Type de diffuseur :
               <span className="ft2">
                 N{report2D.Type} - {D ? "1D" : "2D"}
-              </span>{" "}
+              </span>
             </ListGroup.Item>
             <ListGroup.Item>
-              Fréquence de design : <span className="ft2">{fmin} Hz</span>{" "}
+              Fréquence de design : <span className="ft2">{fmin} Hz</span>
             </ListGroup.Item>
             <ListGroup.Item>
-              Nombre de puits/cellules : <span className="ft2">{report2D.Cells}</span>{" "}
+              Nombre de puits/cellules : <span className="ft2">{report2D.Cells}</span>
             </ListGroup.Item>
             <ListGroup.Item>
-              Epaisseur des parois : <span className="ft2">{report2D.Thickness * 10} mm</span>{" "}
+              Epaisseur des parois : <span className="ft2">{report2D.Thickness * 10} mm</span>
             </ListGroup.Item>
             <ListGroup.Item>
-              Décalage de cellules en vertical : <span className="ft2">{report2D.ShiftVert}</span>{" "}
+              Décalage de cellules en vertical : <span className="ft2">{report2D.ShiftVert}</span>
             </ListGroup.Item>
             <ListGroup.Item>
-              Décalage de cellules en horizontal : <span className="ft2">{report2D.ShiftHor}</span>{" "}
+              Décalage de cellules en horizontal : <span className="ft2">{report2D.ShiftHor}</span>
             </ListGroup.Item>
             <ListGroup.Item>
-              Nombre de hauteur de cellules différentes: <span className="ft2">{report2D.MaxDepth}</span>{" "}
+              Nombre de hauteur de cellules différentes: <span className="ft2">{report2D.MaxDepth}</span>
             </ListGroup.Item>
           </ListGroup>
           <Row className="align-items-end">
@@ -162,7 +162,7 @@ const DiffusorView2D = ({ sizes, area, volume, fmin, woodArea, woodVolume }) => 
           <Row>
             <ListGroup>
               <ListGroup.Item>
-                Nombre de puits vides :<span className="ft2">{Object.values(report2D).filter((val) => val.hauteur === 0).length}</span>{" "}
+                Nombre de puits vides :<span className="ft2">{Object.values(report2D).filter((val) => val.hauteur === 0).length}</span>
               </ListGroup.Item>
               {Object.entries(hauteurCount)
                 .sort((a, b) => a[0] - b[0])
@@ -175,7 +175,7 @@ const DiffusorView2D = ({ sizes, area, volume, fmin, woodArea, woodVolume }) => 
                 })}
               <ListGroup.Item>
                 Longueur totale des blocs:
-                <span className="ft2"> {report2D.lengthWells?.toFixed(2)} cm</span>{" "}
+                <span className="ft2"> {report2D.lengthWells?.toFixed(2)} cm</span>
               </ListGroup.Item>
             </ListGroup>
             <p>Travail du bois</p>
@@ -335,7 +335,7 @@ const Quadralab = () => {
                 <Row className="justify-content-center align-items-center quadralab_title ">
                   <Link href={{ pathname: "/shop/product", query: valuesSelected }}>
                     <p className="ft4 mb-1">
-                      Modèle similaire disponible : {nomenclature?.simple} ({price} €){" "}
+                      Modèle similaire disponible : {nomenclature?.simple} ({price} €)
                     </p>
                   </Link>
                 </Row>

@@ -184,7 +184,7 @@ export const S4_Business = () => {
     <Row id="s4_business" className="section p-0 h-100">
       <Row className="p-0 m-0 mt-2 mb-2">
         <Marquee pauseOnHover gradient={false} speed={70} className="s4_marquee ft1">
-          <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>{" "}
+          <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>
           <img
             src="./logo/logo_marquee.svg"
             alt="Miniature du logo de l'entreprise Quadratik"

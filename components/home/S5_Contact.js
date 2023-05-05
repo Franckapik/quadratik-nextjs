@@ -63,12 +63,12 @@ for (let i = 0; i < 5; i++) {
 
         {rssFeed.map((a,i) => (
          <>
-                    <span className="p-5">Actualites musicales</span>{" "}
+                    <span className="p-5">Actualites musicales</span>
                     <img
                       src="./logo/logo_marquee.svg"
                       alt="Miniature du logo de l'entreprise Quadratik"
                       className="logo_marquee"
-                    />{" "}
+                    />
                     <span className="p-5"> <a href={a.link}>{a.title}</a></span>
                     <img
                       src="./logo/logo_marquee.svg"
@@ -95,7 +95,7 @@ for (let i = 0; i < 5; i++) {
           </Row>
           <Row className="align-items-center justify-content-evenly h-50 w-100 text-center">
             <div>
-              {" "}
+              
               <i className="fad fa-envelope"></i>
               <p>atelier@quadratik.fr</p>
             </div>
@@ -108,9 +108,9 @@ for (let i = 0; i < 5; i++) {
               style={springs}
               className="d-flex flex-column s5_animatedcontact bg_light align-items-center justify-content-evenly"
             >
-              <p className=" text-center ">Contact direct avec l'artisan</p>{" "}
+              <p className=" text-center ">Contact direct avec l'artisan</p>
               <div className="text-center">
-                {" "}
+                
                 <i className="fad fa-phone"></i>
                 <p>06.31.92.74.81</p>
               </div>
@@ -163,7 +163,7 @@ for (let i = 0; i < 5; i++) {
       </Row>
       <Row className="justify-content-center align-items-center text-center ft5 order-md-1 p-2">
         <p> Entreprise Quadratik.fr </p> SIRET 83529797900014 - 835 297 979 R.C.S RENNES - rue d’Aubigné 35440 Feins -
-        France{" "}
+        France
       </Row>
     </Row>
   );

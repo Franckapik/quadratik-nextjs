@@ -52,7 +52,7 @@ export const S0_Landing = () => {
                   <AnimatedLogo2 toggle={toggle} setLoading={setLoading} />
                 </g>
               </svg>
-            </div>{" "}
+            </div>
             <div className="s0_brand_name">
               <div className="text-nowrap text-uppercase s0_quadratik_text w-100 ft0">Quadratik</div>
               <div className="text-nowrap text-uppercase s0_brand_subtitle w-100 ft4">Acoustique & Artisanat</div>
