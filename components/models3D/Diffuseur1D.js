@@ -47,7 +47,7 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const hor = H; //decalage horizontal
   const vert = 0; //decalage vertical NO DECALAGE FOR D1
   const invert = I === "true"; //decalage vertical
-  const n = N * N * L; // nb de cellules
+  const n = N * L; // nb de cellules
   const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
   const a = Array(n)
     .fill("")
@@ -59,9 +59,10 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
     });
 
   const amax = Math.max(...a);
+  const amin = Math.min(...a);
   const start = [-w / 2, -l / 2, d / 2];
 
-  useReport2D(n, p, hor, vert, c, invert, start, amax, e, d);
+  useReport2D(n, p, hor, vert, c, invert, start, amax, e, d, amin);
 
   usePerformances(amax, c, P, N);
   return (

@@ -58,8 +58,8 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
         <Row className="quadralab_game_border quadralab_params bg_darker">
           {mode ? (
             <Form.Group className="">
-              <p>
-                <Form.Label>Modèle</Form.Label>
+              <p className="text-center">
+                <Form.Label>Paramètres <p>Simples Avancés</p></Form.Label>
               </p>
               {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
                 const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];

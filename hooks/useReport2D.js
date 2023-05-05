@@ -3,7 +3,6 @@ import { useProductStore } from "./store";
 
 export const useReport2D = (n,p, hor, vert, c, invert, start, amax, e, d) => {
   const [report2D, setReport2D] = useState(false);
-  console.log(p);
 
   useEffect(() => {
     const report = Array(n) //cellules
@@ -18,8 +17,11 @@ export const useReport2D = (n,p, hor, vert, c, invert, start, amax, e, d) => {
         return ({"ratio" : Math.round((y / d) * amax), "hauteur" : Math.round(y * 100) / 100});
       });
 
-      const completeReport = {...report, ["Cells"] : n, ["Type"] : p, ["Thickness"] : e}
-      console.log(completeReport);
+
+      const lengthWells = Object.values(report).reduce((acc, val) => acc + val.hauteur, 0 );
+      const completeReport = {...report, ["Cells"] : n, ["Type"] : p, ["Thickness"] : e, ["ShiftHor"] : hor, ["ShiftVert"]: vert, ["MaxDepth"] : amax, ["lengthWells"] : lengthWells}
+      
+      
       useProductStore.setState({ report2D: completeReport });
       setReport2D(completeReport);
 
