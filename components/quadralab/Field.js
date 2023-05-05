@@ -21,7 +21,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
               break;
             case "radio":
               return (
-                  <Form.Group {...field} className="form_radio_inline">
+                  <Form.Group {...field} className="form_radio_inline justify-content-center m-4">
                     {Object.values(values).map((a, i) => (
                         <Form.Check type={type} key={"radio" + i}>
                           <Form.Check.Label className="border_creme">

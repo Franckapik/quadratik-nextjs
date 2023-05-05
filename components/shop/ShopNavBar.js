@@ -3,7 +3,7 @@ import { Breadcrumb, Col, Row } from "react-bootstrap";
 
 export const ShopNavBar = ({ categories }) => {
   return (
-    <Row className="shop_header_row zup dark_bg ">
+    <Row className="shop_header_row zup bg_dark ">
       {/*  <Col md={1} className=""></Col>
             <Col md={3} className="justify-content-start d-flex flex-column p-0 m-0 ">
               <Row className="ft05 h-100">

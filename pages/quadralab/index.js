@@ -35,6 +35,31 @@ const DiffusorTable = ({ report2D, value }) => {
   );
 };
 
+const QuadralabPerformances = ({ nomenclature, fmin, fmax, cwidth, weightPoplar, report2D, area, volume, sizes, woodArea, woodVolume }) => {
+  return (
+    <Col className="flex flex-column quadralab_hud_col quadralab_params quadralab_game_border bg_darker">
+      <Row>
+        <p className="text-center w-100 mt-4 mb-4 p-3"> REF : {nomenclature?.structurel} </p>
+        <PerformanceWidget icon="fad fa-bolt" value={`${fmin} Hz - ${fmax} Hz`} color="red" performance={((fmax - fmin) * 100) / 10000} tooltip={"La plage de fréquence traitée"} /> {/* 10k audio frequency */}
+        <PerformanceWidget icon="fad fa-sort-size-down" value={`${(cwidth * 10).toFixed(0)} mm`} color="red" performance={100 - (cwidth * 10 * 100) / 90} tooltip={"La taille des cellules. Plus elle est petite, plus les aigus sont traités"} />
+        <PerformanceWidget icon="fad fa-weight" value={`${weightPoplar} kg // ${report2D?.lengthWells?.toFixed(0)} cm`} color="red" performance={(weightPoplar * 100) / 30} tooltip={"Le poids du diffuseur estimé si construit en peuplier. La longueur totale des hauteurs de puits du diffuseur"} />
+        <PerformanceWidget icon="fad fa-box-open" value={`${area} m2 // ${volume} m3`} color="red" performance={(volume * 100) / 0.144} tooltip={"L'aire traitée par le diffuseur et le volume (boite) qu'il occupe"} /> {/* 120 * 60 * 20cm */}
+      </Row>
+      {/*       <DiffusorView2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} />
+      <Row>
+        <p>Fabrication d'un modèle Quadratik sur mesure </p>
+        <p>
+          {sizes?.longueur} x {sizes?.largeur} x {sizes?.profondeur} cm
+        </p>
+
+        <Button variant="primary" type="submit" className="quadralab_devis_button m-auto mt-4">
+          Demander un devis
+        </Button>
+      </Row>*/}
+    </Col>
+  );
+};
+
 const DiffusorView2D = ({ sizes, area, volume, fmin, woodArea, woodVolume }) => {
   const report2D = useProductStore((state) => state.report2D);
   const ratio = useProductStore((state) => state.ratio);
@@ -88,7 +113,7 @@ const DiffusorView2D = ({ sizes, area, volume, fmin, woodArea, woodVolume }) => 
             <ListGroup.Item>
               Dimensions du diffuseur (l x L x P) :{" "}
               <span className="ft2">
-                {sizes.largeur} cm x {sizes.longueur} cm x {sizes.profondeur} cm
+                {sizes?.largeur} cm x {sizes?.longueur} cm x {sizes?.profondeur} cm
               </span>{" "}
             </ListGroup.Item>
             <ListGroup.Item>
@@ -149,83 +174,81 @@ const DiffusorView2D = ({ sizes, area, volume, fmin, woodArea, woodVolume }) => 
                   );
                 })}
               <ListGroup.Item>
-                Longueur totale des blocs: 
+                Longueur totale des blocs:
                 <span className="ft2"> {report2D.lengthWells?.toFixed(2)} cm</span>{" "}
               </ListGroup.Item>
-              </ListGroup>
-              <p>Travail du bois</p>
-              <ListGroup>
+            </ListGroup>
+            <p>Travail du bois</p>
+            <ListGroup>
               <ListGroup.Item>
-                Surface de bois découpée: 
-                <span className="ft2"> {woodArea.toFixed(4)} m2</span>
+                Surface de bois découpée:
+                <span className="ft2"> {woodArea?.toFixed(4)} m2</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Volume de bois découpé: 
-                <span className="ft2"> {woodVolume.toFixed(4)} m3</span>
+                Volume de bois découpé:
+                <span className="ft2"> {woodVolume?.toFixed(4)} m3</span>
               </ListGroup.Item>
             </ListGroup>
 
             <p>Poids estimé</p>
-              <ListGroup>
+            <ListGroup>
               <ListGroup.Item>
-                MDF: 
+                MDF:
                 <span className="ft2"> {(woodVolume * 700).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Bois de pin: 
+                Bois de pin:
                 <span className="ft2"> {(woodVolume * 550).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Bois de Cedre: 
+                Bois de Cedre:
                 <span className="ft2"> {(woodVolume * 380).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Mousse Styrofoam: 
+                Mousse Styrofoam:
                 <span className="ft2"> {(woodVolume * 90).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Bois de Balsa: 
+                Bois de Balsa:
                 <span className="ft2"> {(woodVolume * 120).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Contreplaqué ordinaire: 
+                Contreplaqué ordinaire:
                 <span className="ft2"> {(woodVolume * 580).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-               Contreplaqué bouleau: 
+                Contreplaqué bouleau:
                 <span className="ft2"> {(woodVolume * 700).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-               Contreplaqué peuplier: 
+                Contreplaqué peuplier:
                 <span className="ft2"> {(woodVolume * 530).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-               Plâtre: 
+                Plâtre:
                 <span className="ft2"> {(woodVolume * 850).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Bois d'Eucalyptus: 
+                Bois d'Eucalyptus:
                 <span className="ft2"> {(woodVolume * 900).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Verre: 
+                Verre:
                 <span className="ft2"> {(woodVolume * 252).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Granite: 
+                Granite:
                 <span className="ft2"> {(woodVolume * 270).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Aluminium: 
+                Aluminium:
                 <span className="ft2"> {(woodVolume * 280).toFixed(2)} kg</span>
               </ListGroup.Item>
               <ListGroup.Item>
-                Acier: 
+                Acier:
                 <span className="ft2"> {(woodVolume * 800).toFixed(2)} kg</span>
               </ListGroup.Item>
-
             </ListGroup>
-
           </Row>
         </Modal.Body>
         <Modal.Footer>
@@ -242,16 +265,14 @@ const DiffusorView2D = ({ sizes, area, volume, fmin, woodArea, woodVolume }) => 
 const PerformanceWidget = ({ icon, value, color, performance, tooltip }) => {
   return (
     <OverlayTrigger key={"left"} placement={"left"} overlay={<Tooltip id={`tooltip-${value}`}>{tooltip}</Tooltip>}>
-      <Row>
-        <div className="m-2">
-          <div className="flex quadralab_round quadralab_game_border dark_bg ">
-            <i className={icon}></i>
-          </div>
-          <div className="flex quadralab_line quadralab_game_border ">
-            <div className="bg_red h-100" style={{ width: `${performance}%`, maxWidth: "100%", backgroundColor: color }}></div>
-          </div>
-          <div className="text-end">{value}</div>
-        </div>{" "}
+      <Row className="">
+        <div className="flex quadralab_round quadralab_game_border bg_dark ">
+          <i className={icon}></i>
+        </div>
+        <div className="flex quadralab_line quadralab_game_border ">
+          <div className="bg_red h-100" style={{ width: `${performance}%`, maxWidth: "100%", backgroundColor: color }}></div>
+        </div>
+        <p className="text-end">{value}</p>
       </Row>
     </OverlayTrigger>
   );
@@ -276,15 +297,14 @@ const Quadralab = () => {
   const volume = ((area * sizes.profondeur) / 1000).toFixed(5);
   const woodArea = (sizes.longueur * sizes.profondeur * (report2D.Type + 1) + sizes.largeur * sizes.profondeur * (report2D.Type + 1) + report2D.Cells * cwidth * cwidth) / 1000; //cm2
   const woodVolume = (woodArea * report2D.Thickness) / 1000; //m3
-  const weightPoplar = (woodVolume * 530).toFixed(2) //kg pour le peuplier;
+  const weightPoplar = (woodVolume * 530).toFixed(2); //kg pour le peuplier;
   const price = useProductStore.getState().price;
   const nomenclature = useProductStore.getState().nomenclature;
   const fmin = useProductStore((state) => state.fmin);
   const fmax = useProductStore((state) => state.fmax);
   const valuesSelected = useProductStore((state) => state.valuesSelected);
 
-
-  console.log(report2D.Type +1 );
+  console.log(report2D.Type + 1);
 
   const onSubmit = (data) => console.log(data);
 
@@ -319,28 +339,7 @@ const Quadralab = () => {
                     </p>
                   </Link>
                 </Row>
-                <Col className=" flex flex-column quadralab_hud_col quadralab_params">
-                  <Row>
-                    <p className="bg_darker text-center m-2 p-2"> REF : {nomenclature?.structurel} </p>
-                    <PerformanceWidget icon="fad fa-bolt" value={`${fmin} Hz - ${fmax} Hz`} color="red" performance={((fmax - fmin) * 100) / 10000} tooltip={"La plage de fréquence traitée"} /> {/* 10k audio frequency */}
-                    <PerformanceWidget icon="fad fa-sort-size-down" value={`${(cwidth * 10).toFixed(0)} mm`} color="red" performance={100 - (cwidth * 10 * 100) / 90} tooltip={"La taille des cellules. Plus elle est petite, plus les aigus sont traités"} />
-                    <PerformanceWidget icon="fad fa-weight" value={`${weightPoplar} kg // ${report2D.lengthWells?.toFixed(0)} cm`} color="red" performance={(weightPoplar * 100) / 30} tooltip={"Le poids du diffuseur estimé si construit en peuplier. La longueur totale des hauteurs de puits du diffuseur"} />{" "}
-                    {/* 120 * 60 * 20cm */}
-                    <PerformanceWidget icon="fad fa-box-open" value={`${area} m2 // ${volume} m3`} color="red" performance={(volume * 100) / 0.144} tooltip={"L'aire traitée par le diffuseur et le volume (boite) qu'il occupe"} /> {/* 120 * 60 * 20cm */}
-                  </Row>
-                  <DiffusorView2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} />
-                  <Row>
-                    <p>Fabrication d'un modèle Quadratik sur mesure </p>
-                    <p>
-                      {" "}
-                      {sizes.longueur} x {sizes.largeur} x {sizes.profondeur} cm
-                    </p>
-
-                    <Button variant="primary" type="submit" className="quadralab_devis_button m-auto mt-4">
-                      Demander un devis
-                    </Button>
-                  </Row>
-                </Col>
+                <QuadralabPerformances nomenclature={nomenclature} fmin={fmin} fmax={fmax} cwidth={cwidth} weightPoplar={weightPoplar} report2D={report2D} area={area} volume={volume} sizes={sizes} woodArea={woodArea} woodVolume={woodVolume} />
                 <Row className="quadralab_display flex-nowrap">
                   <Form.Check type={"switch"} id="custom-switch" label={"Hauteur(cm) / Ratio"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
                   <Form.Check type={"switch"} id="custom-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />

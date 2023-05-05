@@ -60,7 +60,7 @@ export const S1_Product = () => {
                 </Carousel.Item>
               </Carousel>
             </Row>
-            <Row className="d-none border_creme s1_product_physic dark_bg d-md-flex justify-content-start align-items-center">
+            <Row className="d-none border_creme s1_product_physic bg_dark d-md-flex justify-content-start align-items-center">
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
                   <img className="d-block w-100" src="./physic_dif.svg" alt="First slide" />
