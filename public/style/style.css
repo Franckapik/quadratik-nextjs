@@ -18,6 +18,9 @@
 .bg_light {
   background-color: #8ea65f8a;
 }
+.bg_white {
+  background-color: #ffffffe7;
+}
 
 .bg_lighter {
   background-color: #443c38;
@@ -793,7 +796,27 @@ border-radius: 2px;
   height: 8vh !important;
 }
 .shop_main_row {
-  padding-top: 15vh !important;
+  width: 98%!important;
+}
+
+.shop_product_title{
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: 0.4rem!important;
+}
+
+.shop_card {
+  position: relative;
+  min-width: 500px;
+  height: 700px;
+  border-radius: 5px;
+}
+
+.shop_categorie {
+  width: 464px;
+  height : 640px
 }
 
 .show_row_tag {

@@ -1,7 +1,7 @@
 import { Col, Row } from "react-bootstrap";
 import { Burger } from "./Burger";
 
-export const Layout = ({ children, header, onePage, noburger }) => {
+export const Layout = ({ children, header, onePage, noburger, cart }) => {
   return (
     <>
       {header ? (
@@ -9,7 +9,7 @@ export const Layout = ({ children, header, onePage, noburger }) => {
           {!noburger ? <Col>
             <Burger></Burger>
           </Col> : null}
-          <Col md={1}>Boutique</Col>
+          <Col md={1}>{!cart ? "Boutique" : "Panier"}</Col>
           <Col md={1}>Contact</Col>
           <Col md={1} className="d-none d-md-flex"></Col>
         </Row>

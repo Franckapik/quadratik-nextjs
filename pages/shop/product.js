@@ -2,7 +2,7 @@ import { queryTypes, useQueryState } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Layout } from "../../components/Layout";
-import { objectsInCategory } from "../../components/dolibarrApi/fetch";
+import { listCategories, objectsInCategory } from "../../components/dolibarrApi/fetch";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import { ProductHud } from "../../components/product/ProductHud";
 import { ProductNavBar } from "../../components/product/ProductNavBar";
@@ -20,8 +20,23 @@ const Product = () => {
   const [display, setDisplay] = useState("model");
 
   //get default product from tag category
-  const [tag, setCategories] = useQueryState("TAG", queryTypes.integer.withDefault(1));
+  const [tag, setTAG] = useQueryState("TAG", queryTypes.integer.withDefault(1));
   useProductStore.setState({ tag: tag }); //global state
+
+  const [categories, setCategories] = useState([]);
+
+  //get all categories
+  useEffect(() => {
+    listCategories()
+      .get()
+      .then((response) => {
+        setCategories(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
+  }, []);
 
   useEffect(() => {
     objectsInCategory(tag)
@@ -43,7 +58,7 @@ const Product = () => {
         <div className="trait"></div>Details du modèle
       </div>
       <Row className="section flex_column">
-        <ProductNavBar />
+        <ProductNavBar categories={categories} />
         {!error ? (
           <Row className="d-flex justify-content-evenly ft4 product_main_row ">
             <Col md={2} className="d-flex flex-column justify-content-start product_attributes_col bg_darker p-4">

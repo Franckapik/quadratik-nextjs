@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { attributesAllFetch, attributesFetchById, listCategories } from "../../components/dolibarrApi/fetch";
 import { useProductStore } from "../../hooks/store";
 import { FirstCategory } from "../../components/shop/FirstCategory";
@@ -7,6 +7,7 @@ import { ParentProduct } from "../../components/shop/ParentProduct";
 import { ShopNavBar } from "../../components/shop/ShopNavBar";
 import { useAttributes } from "../../hooks/useAttributes";
 import { Layout } from "../../components/Layout";
+import { ProductNavBar } from "../../components/product/ProductNavBar";
 
 const Product = () => {
   //Data
@@ -38,12 +39,25 @@ const Product = () => {
       });
   }, []);
 
-
   return (
-    <Layout onePage header>
-    <Row className="section">
-      <Row className="show_row_tag">
-      <div className="shop_page_vertical_title">Boutique - {categories.filter(cat => cat.id === viewedCategory)[0]?.label}</div>
+    <Layout onePage header cart>
+      <div className="s0_page_index">
+        {categories.filter((cat) => cat.id === viewedCategory)[0]?.label}
+        <div className="trait"></div>Boutique
+      </div>
+      <Row className="section">
+        <ProductNavBar categories={categories} />
+        <Row className="shop_main_row text_dark">
+          <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Anemone-7.png" /><span className="shop_product_title ft2">Anemone-710</span></Col>
+          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><div className="bg_creme shop_categorie"><img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" className="d-flex mt-4 mx-auto" /></div></Col>
+          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Aubergine-7.png" /></Col>
+          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Chene-7.png" /></Col>
+          <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Gruk-7.png" /></Col>
+          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Indik-7.png" /></Col>
+          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Invader-7.png" /></Col>
+        </Row>
+
+        {/*  <Row className="show_row_tag">
         <Col md={3} className="d-flex flex-column p-0 justify-content-start align-items-start h-100 text_dark">
           <Row className="ft1 w-100 h-100">
             <Col md={3} className=" shop_fixed_col d-flex flex-column justify-content-start align-items-center bg_creme p-5  fixed-top">
@@ -53,15 +67,14 @@ const Product = () => {
           </Row>
         </Col>
         <Col md={8} className="d-flex flex-column justify-content-evenly h-100 ps-5">
-{/*           <ShopNavBar categories={categories} />
- */}          {categories
+       {categories
             .filter((cat) => cat.fk_parent == 0)
             .map((firstCat, i) => (
               <FirstCategory categories={categories} firstCat={firstCat} attributes={attributes} setViewedCategory={setViewedCategory} />
             ))}
         </Col>
+      </Row> */}
       </Row>
-    </Row>
     </Layout>
   );
 };
