@@ -3,7 +3,7 @@ import { Controller, useFormContext } from "react-hook-form";
 
 export const Field = ({ label, id, type, values, defaultVal }) => {
   const { control } = useFormContext();
-
+  console.log(defaultVal);
   return (
     <>
       <Form.Label>{type === "radio" || type === "switch" ? null : label}</Form.Label>
@@ -13,13 +13,13 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
           required: "Ce champ est manquant",
         }}
         name={id}
-        defaultValue={defaultVal}
         render={({ field }) => {
-          switch (type) {
-            case "switch":
+          console.log(field);
+          switch (true) {
+            case type === "switch":
               return <Form.Check {...field} type={type} id="custom-switch" label={label} />;
               break;
-            case "radio":
+            case type === "radio":
               return (
                   <Form.Group {...field} className="form_radio_inline justify-content-center m-4">
                     {Object.values(values).map((a, i) => (
@@ -34,7 +34,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
               );
 
               break;
-            case "select":
+            case type === "select":
               return (
                 <Form.Select {...field}>
                   {Object.values(values).map((a, i) => (
@@ -45,10 +45,11 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
                 </Form.Select>
               );
               break;
-            case "range":
+            case type.includes("range"):
+              const rangeArray = type.replace("range", '').replace('[', '').replace(']', '').split(',');
               return (
                 <>
-                  <Form.Range {...field} min={0} max={13} />
+                 {field.value} <Form.Range {...field} min={rangeArray[0]} max={rangeArray[1]} />
                 </>
               );
               break;

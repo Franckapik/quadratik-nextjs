@@ -5,7 +5,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
   const { control } = useFormContext();
   return (
     <>
-      <Form.Label>{label}</Form.Label>
+      <Form.Label>{type === "radio" || type === "switch" ? null : label}</Form.Label>
       <Controller
         control={control}
         rules={{
@@ -14,35 +14,41 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
         name={id}
         defaultValue={defaultVal}
         render={({ field }) => {
-          switch (type) {
-            case "switch":
+          switch (true) {
+            case type === "switch":
               return <Form.Check {...field} type={type} id="custom-switch" label={label} />;
               break;
-            case "radio":
+            case type === "radio":
               return (
-                <div key={`inline-${type}`}  className="mb-3">
-                  {Object.values(values).map((a, i) => (
-                    <Form.Check label={a.v_label} type={type} name="group" id={`inline-${type}-${i}`} key={"FormCheck" + i} />
-                  ))}
-                </div>
+                  <Form.Group {...field} className="form_radio_inline justify-content-center m-4">
+                    {Object.values(values).map((a, i) => (
+                        <Form.Check type={type} key={"radio" + i}>
+                          <Form.Check.Label className="border_creme">
+                            <Form.Check.Input type={type} value={a.v_id} checked={field.value === a.v_id} />
+                            {a.v_label}
+                          </Form.Check.Label>
+                        </Form.Check>
+                    ))}
+                  </Form.Group>
               );
 
               break;
-            case "select":
+            case type === "select":
               return (
                 <Form.Select {...field}>
                   {Object.values(values).map((a, i) => (
-                    <option value={a.v_id} key={"Option_"+label + i}>
+                    <option value={a.v_id} key={"Option_" + label + i}>
                       {a.v_label}
                     </option>
                   ))}
                 </Form.Select>
               );
               break;
-            case "range":
+            case type.includes("range"):
+              const rangeArray = type.replace("range", '').replace('[', '').replace(']', '').split(',');
               return (
                 <>
-                  <Form.Range {...field} min={0} max={13} />
+                  <Form.Range {...field} min={rangeArray[0]} max={rangeArray[1]} />
                 </>
               );
               break;
@@ -50,7 +56,8 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
             default:
               break;
           }
-        }} />
+        }}
+      />
     </>
   );
 };

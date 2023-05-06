@@ -1,14 +1,13 @@
-import { AccumulativeShadows, Box, Environment, OrbitControls, RandomizedLight } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { BrightnessContrast, EffectComposer, SSAO, ToneMapping } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import React from "react";
 import { useProductStore } from "../../hooks/store";
+import { useValues3D } from "../../hooks/useValues3D";
+import Absorbeur from "../models3D/Absorbeur";
 import Diffuseur1D from "../models3D/Diffuseur1D";
 import Diffuseur2D from "../models3D/Diffuseur2D";
-import Absorbeur from "../models3D/Absorbeur";
-import { Lights } from "../models3D/parts3D/Lights";
-import { useValues3D } from "../../hooks/useValues3D";
 
 const ProductCanvas = () => {
   const attributes = useProductStore((state) => state.attributes);

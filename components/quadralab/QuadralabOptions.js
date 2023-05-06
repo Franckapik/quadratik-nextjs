@@ -11,9 +11,13 @@ import { Field } from "./Field";
 
 const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   const [mode, setMode] = useToggle(true);
-
   const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
-    return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(cur.values[0]?.v_id) };
+    const isNotIdValue = ["H", "V", "I"];
+    if (!isNotIdValue.includes(cur.a_ref)) {
+      return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(cur.values[0]?.v_id) };
+    } else {
+      return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(0) };
+    }
   }, 0);
 
   const [valuesSelected, setValuesSelected] = useQueryStates(defaultValuesQuery, {
@@ -28,7 +32,6 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   //render Modele after ProductOptions
   useEffect(() => {
     if (nomenclature) {
-      console.log(nomenclature);
       setLoading(false);
     }
   }, [nomenclature]);
@@ -44,6 +47,13 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
       setValuesSelected(() => ({ ...value }));
     });
     return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    methods.setValue("P", 10);
+    methods.setValue("H", 0);
+    methods.setValue("V", 0);
+    methods.setValue("W", 50);
   }, []);
 
   return (
@@ -74,7 +84,13 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
         <Form.Group className="">
           {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
             const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-            return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+            let rangeArray;
+            if (a[1].includes("range")) {
+              rangeArray = a[1].replace("range", "").replace("[", "").replace("]", "").split(",");
+              return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={rangeArray[0]}></Field>;
+            } else {
+              return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+            }
           })}
         </Form.Group>
       )}

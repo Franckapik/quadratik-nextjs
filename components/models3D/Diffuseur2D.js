@@ -41,7 +41,7 @@ const Diffuseur2D = ({ dimensions, isQuadralab }) => {
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
   const w = parseInt(W); //largeur
   const c = (w - (p + 1) * e) / p; //largeur cellule
-  const l = parseInt(N * L * (c + e) + e); //longueur
+  const l = Math.round(parseFloat(N * L * (c + e) + e)); //longueur
   const d = P; //profondeur
   const hor = H; //decalage horizontal
   const vert = V; //decalage vertical
@@ -56,7 +56,6 @@ const Diffuseur2D = ({ dimensions, isQuadralab }) => {
       const an = (Math.pow(n, 2) + Math.pow(m, 2)) % p;
       return an;
     });
-
 
   const amax = Math.max(...a);
   const amin = Math.min(...a);
