@@ -49,13 +49,6 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  useEffect(() => {
-    methods.setValue("P", 10);
-    methods.setValue("H", 0);
-    methods.setValue("V", 0);
-    methods.setValue("W", 50);
-  }, []);
-
   return (
     <Row className="quadralab_params_left quadralab_game_border quadralab_params bg_darker">
       <Form.Group className="">
