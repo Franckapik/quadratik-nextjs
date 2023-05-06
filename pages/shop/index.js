@@ -6,6 +6,7 @@ import { ProductNavBar } from "../../components/quadralab/ProductNavBar";
 import { useAttributes } from "../../hooks/useAttributes";
 import { CardProduct } from "../../components/shop/CardProduct";
 import { useInView } from "@react-spring/web";
+import { useProductStore } from "../../hooks/store";
 
 const Shop_Modele = ({ childCat, firstCat, attributes }) => {
   const [defaultProduct, setDefaultProduct] = useState(false);
@@ -78,6 +79,7 @@ const ParentCategorie = ({ firstCat, childCategories, attributes, setViewedCateg
   useEffect(() => {
     if (inView) {
       setViewedCategory(firstCat.id);
+      useProductStore.setState({tag : firstCat.id})
     }
   }, [inView]);
 
@@ -139,7 +141,7 @@ const Product = () => {
         <div className="trait"></div>Boutique
       </div>
       <Row className="section">
-        <ProductNavBar categories={parentCategories} />
+        <ProductNavBar categories={parentCategories} viewedCategory={viewedCategory} />
         <Row className="shop_main_row">
           <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center border_creme_light text-dark">
             <img src="/shop/Anemone-7.png" />
