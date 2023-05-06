@@ -37,7 +37,6 @@ export const S0_Landing = () => {
   }, [loaded]);
 
   return (
-    <Layout header={loaded}>
       <Row id="s0_landing" className="section">
         <div className="d-none d-md-block m-0 p-0 ">{loaded ? <animated.div style={goRight} className="border_creme s0_cadre_home_gauche"></animated.div> : null}</div>
         <div className="d-flex flex-wrap justify-content-center align-items-center">
@@ -61,6 +60,5 @@ export const S0_Landing = () => {
         </div>
         <div className="d-none d-md-block p-0">{loaded ? <animated.div style={goLeft} className="border_creme s0_cadre_home_droit "></animated.div> : null}</div>
       </Row>
-    </Layout>
   );
 };

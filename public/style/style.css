@@ -110,8 +110,10 @@ p {
 }
 
 .burger {
-  padding-top: calc(2vh + 2vw);
-  position: fixed !important;
+  left: calc(1.5vh + 1.5vw);
+  top : 3vh;
+  position:fixed !important;
+  z-index: 2;
 }
 .cursor {
   cursor: pointer;

@@ -10,6 +10,7 @@ import { S4_Business } from "../components/home/S4_Business";
 import { S5_Contact } from "../components/home/S5_Contact";
 import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
 import { useBearStore } from '../hooks/store';
+import { Burger } from "../components/Burger";
 
 const Home = () => {
   const parallax = useRef(null);
@@ -33,7 +34,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>  <VerticalSideIndex ></VerticalSideIndex> 
+    <><Burger></Burger>  <VerticalSideIndex ></VerticalSideIndex> 
       <Parallax pages={8} ref={parallax}>
         <ParallaxLayer offset={0} >
           <S0_Landing />

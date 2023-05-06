@@ -18,10 +18,8 @@ export const Burger = () => {
   );
 
   return (
-    <animated.div ref={ref} style={springs}>
-      <Col md={1} className="d-flex burger justify-content-center">
+    <animated.div ref={ref} style={springs} className="burger">
         <Hamburger toggled={isOpen} toggle={setOpen} color="#FFFFFF" />
-      </Col>
     </animated.div>
   );
 };
