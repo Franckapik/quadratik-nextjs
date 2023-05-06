@@ -3,7 +3,6 @@ import { Controller, useFormContext } from "react-hook-form";
 
 export const Field = ({ label, id, type, values, defaultVal }) => {
   const { control } = useFormContext();
-  console.log(defaultVal);
   return (
     <>
       <Form.Label>{type === "radio" || type === "switch" ? null : label}</Form.Label>
@@ -14,7 +13,6 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
         }}
         name={id}
         render={({ field }) => {
-          console.log(field);
           switch (true) {
             case type === "switch":
               return <Form.Check {...field} type={type} id="custom-switch" label={label} />;
