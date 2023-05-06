@@ -53,8 +53,8 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
     <Row className="quadralab_params_left quadralab_game_border quadralab_params bg_darker">
       <Form.Group className="">
         <Row className="justify-content-center text-center">
-          <p className="text-center w-100 mt-4 mb-4 p-3">
-            <i className="fad fa-tools p-2"></i>PARAMETRES
+          <p className="text-center w-100  p-3">
+            <i className="fad fa-tools me-4"></i>PARAMETRES
           </p>
 
           <Row className=" justify-content-center flex-nowrap">

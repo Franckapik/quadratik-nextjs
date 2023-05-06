@@ -1,6 +1,6 @@
 import { queryTypes, useQueryStates } from "next-usequerystate";
 import { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import useToggle from "../../hooks/useToggle";
 import { variantPost } from "../dolibarrApi/post";
@@ -79,6 +79,21 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   return (
     <FormProvider {...methods}>
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
+      <Form.Group className="">
+        <Row className="justify-content-center text-center">
+          <p className="text-center w-100  p-3">
+            <i className="fad fa-tools  me-4"></i>OPTIONS
+          </p>
+
+          <Row className=" justify-content-center flex-nowrap">
+            <Col md={6}>
+              <Button variant="secondary" onClick={() => setMode()}>
+                {mode ? "Simples" : "Avancés"}
+              </Button>
+            </Col>
+          </Row>
+        </Row>
+      </Form.Group>
         {mode ? (
           <Form.Group className="product_select_options" controlId="media_category_id_id">
             {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
@@ -94,10 +109,8 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
             })}
           </Form.Group>
         )}
-        <span onClick={() => setMode()} className="">
-          Options avancées
-        </span>
-        <Button variant="primary" type="submit" className="m-auto mt-4">
+
+        <Button variant="primary" type="submit" className="product_button_add_basket m-auto mt-4">
           Ajouter au panier
         </Button>
       </Form>
