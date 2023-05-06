@@ -1,20 +1,86 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
-import { attributesAllFetch, attributesFetchById, listCategories } from "../../components/dolibarrApi/fetch";
-import { useProductStore } from "../../hooks/store";
-import { FirstCategory } from "../../components/shop/FirstCategory";
-import { ParentProduct } from "../../components/shop/ParentProduct";
-import { ShopNavBar } from "../../components/shop/ShopNavBar";
-import { useAttributes } from "../../hooks/useAttributes";
+import { Col, Row } from "react-bootstrap";
 import { Layout } from "../../components/Layout";
-import { ProductNavBar } from "../../components/product/ProductNavBar";
+import { listCategories, objectsInCategory, variantFetchByParentId } from "../../components/dolibarrApi/fetch";
+import { ProductNavBar } from "../../components/quadralab/ProductNavBar";
+import { useAttributes } from "../../hooks/useAttributes";
+import { CardProduct } from "../../components/shop/CardProduct";
+
+const Shop_Modele = ({ childCat, firstCat, attributes }) => {
+  const [defaultProduct, setDefaultProduct] = useState(false);
+  const [variants, setVariants] = useState(false);
+  const [listProducts, setListProducts] = useState(false);
+
+  useEffect(() => {
+    objectsInCategory(firstCat.id)
+      .get()
+      .then((response) => {
+        setDefaultProduct(response.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [firstCat]);
+
+  useEffect(() => {
+    if (defaultProduct) {
+      variantFetchByParentId(defaultProduct.id)
+        .get()
+        .then((response) => {
+          setVariants(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [defaultProduct]);
+
+  //get attributes from variants and make valueSelected object
+  useEffect(() => {
+    if (variants) {
+      objectsInCategory(childCat.id)
+        .get()
+        .then((response) => {
+          if (response.data.length) {
+            const pwithAttributes = Object.values(response.data).map((a, i) => {
+              const g = Object.values(variants).filter((val) => val.fk_product_child === a.id)[0];
+              const valuesSelected = g.attributes.reduce((acc, cur) => {
+                let a_ref = Object.values(attributes).filter((val) => val.a_id === cur.id)[0].a_ref;
+                return { ...acc, [a_ref]: cur.fk_prod_attr_val };
+              }, {});
+              return { ...a,  valuesSelected: { ...valuesSelected } };
+            });
+            setListProducts(pwithAttributes);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          /*  setError(error); */ //waiting for work on absorbeurs
+        });
+    }
+  }, [childCat, variants]);
+
+  return (
+    <>
+      {" "}
+      {listProducts &&
+        listProducts.map((variant, i) => {
+          return (
+            <CardProduct  product={variant} childCat={childCat} attributes={attributes} />
+          );
+        })}
+    </>
+  );
+};
 
 const Product = () => {
   //Data
   const [attributes, fetching, error] = useAttributes();
 
   const [categories, setCategories] = useState([]);
-  const [viewedCategory, setViewedCategory] = useState(0);
+  const parentCategories = categories.filter((cat) => cat.fk_parent == 0);
+  const childCategories = categories.filter((cat) => cat.fk_parent !== 0);
+  const [viewedCategory, setViewedCategory] = useState(1);
 
   //get all categories
   useEffect(() => {
@@ -40,40 +106,39 @@ const Product = () => {
   }, []);
 
   return (
-    <Layout onePage header cart>
-      <div className="s0_page_index">
-        {categories.filter((cat) => cat.id === viewedCategory)[0]?.label}
+    <Layout onePage header cart sticky>
+      <div className="s0_page_index position-fixed">
+        {parentCategories.filter((cat) => cat.id == viewedCategory)[0]?.label}
         <div className="trait"></div>Boutique
       </div>
       <Row className="section">
-        <ProductNavBar categories={categories} />
-        <Row className="shop_main_row text_dark">
-          <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Anemone-7.png" /><span className="shop_product_title ft2">Anemone-710</span></Col>
-          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><div className="bg_creme shop_categorie"><img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" className="d-flex mt-4 mx-auto" /></div></Col>
-          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Aubergine-7.png" /></Col>
-          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Chene-7.png" /></Col>
-          <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Gruk-7.png" /></Col>
-          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Indik-7.png" /></Col>
-          <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center"><img src="/shop/Invader-7.png" /></Col>
-        </Row>
-
-        {/*  <Row className="show_row_tag">
-        <Col md={3} className="d-flex flex-column p-0 justify-content-start align-items-start h-100 text_dark">
-          <Row className="ft1 w-100 h-100">
-            <Col md={3} className=" shop_fixed_col d-flex flex-column justify-content-start align-items-center bg_creme p-5  fixed-top">
-              <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" /> <div className="text-nowrap text-uppercase shop_header_quadratik_title ft2 pt-3">Quadratik</div>
-              <ParentProduct categories={categories} viewedCategory={viewedCategory}></ParentProduct>
-            </Col>
-          </Row>
-        </Col>
-        <Col md={8} className="d-flex flex-column justify-content-evenly h-100 ps-5">
-       {categories
-            .filter((cat) => cat.fk_parent == 0)
-            .map((firstCat, i) => (
-              <FirstCategory categories={categories} firstCat={firstCat} attributes={attributes} setViewedCategory={setViewedCategory} />
-            ))}
-        </Col>
-      </Row> */}
+        <ProductNavBar categories={parentCategories} />
+        <Row className="shop_main_row">
+        <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center border_creme_light">
+            <img src="/shop/Anemone-7.png" />
+            <span className="shop_product_title ft2 ">Anemone-710</span>
+            <span className="shop_product_collection ft6 text-uppercase text-nowrap">Diffuseur 2D classiques</span>
+          </Col>
+          {parentCategories.map((firstCat, firstIndex) => {
+            return (
+              <>
+                <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center border_creme_light">
+                  <div className="bg_creme_light shop_categorie text-dark">
+                    <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" className="d-flex mt-4 mx-auto" />
+                    {firstCat.label}
+                  </div>
+                </Col>
+                <>
+                  {childCategories
+                    .filter((cat) => cat.fk_parent == firstCat.id)
+                    .map((childCat, childIndex) => {
+                      return <Shop_Modele firstCat={firstCat} childCat={childCat} attributes={attributes} />;
+                    })}
+                </>
+              </>
+            );
+          })}
+        </Row>  
       </Row>
     </Layout>
   );

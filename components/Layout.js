@@ -1,11 +1,11 @@
 import { Col, Row } from "react-bootstrap";
 import { Burger } from "./Burger";
 
-export const Layout = ({ children, header, onePage, noburger, cart }) => {
+export const Layout = ({ children, header, onePage, noburger, cart, sticky }) => {
   return (
     <>
       {header ? (
-        <Row className="s0_header d-none d-md-flex justify-content-end text-uppercase m-0 p-0 w-100">
+        <Row style={{position : sticky ? "sticky" : "relative"}} className="s0_header d-none d-md-flex justify-content-end text-uppercase m-0 p-0 w-100 ">
           {!noburger ? <Col>
             <Burger></Burger>
           </Col> : null}

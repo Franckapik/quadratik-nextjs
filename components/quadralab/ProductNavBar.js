@@ -1,13 +1,17 @@
 import Link from "next/link";
-import { Col, Row } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { useProductStore } from "../../hooks/store";
 
 export const ProductNavBar = ({categories}) => {
+  const tag = useProductStore.getState().tag;
 
     return (
-    <Row className="product_navbar_row ft1 align-items-center">
-      {categories.map((a,i) => (
-        <Col md={2} key={"Tag" + i} ><Link href={`?TAG=${a.id}`}>{a.label}</Link></Col>
-        
-      ))}
-      </Row>)
+      <Navbar className="product_navbar_row ft2 text-uppercase align-items-center bg_dark">
+      {categories.map((a, i) => (
+          <Nav key={"Tag" + i} style={{backgroundColor : a.id == tag ? "#9fb07ca9" : "inherit"}}>
+            <Link href={`?TAG=${a.id}`}>{a.label}</Link>
+          </Nav>
+        ))}
+    </Navbar>)
 }
