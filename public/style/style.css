@@ -125,6 +125,11 @@ p {
   font-size: calc(1.5rem + 1.5vw) !important;
   letter-spacing: calc(0.3rem + 0.8vw);
 }
+.ft02 {
+  font-size: calc(1.5rem + 2vw) !important;
+  letter-spacing: calc(0.1rem + 0.1vw);
+  opacity: 0.8;
+}
 .ft05 {
   font-size: calc(1.2rem + 0.8vw) !important;
   letter-spacing: calc(0.2rem + 0.2vw);
@@ -330,6 +335,9 @@ p {
 .s2_customer_col i {
   font-size: calc(2rem + 2vw);
   margin: calc(1rem + 2vw);
+}
+.text_green {
+  color: #9fb07c;
 }
 .text_grey {
   color: #ffffff41;
@@ -546,19 +554,31 @@ h2 {
   padding: 25px;
   min-height: 60vh!important;
 }
-.product_preview_col {
-  position: relative;
+
+.producthud_content {
+  height: 70%;
 }
-.product_preview_col {
-  height: 60vh!important;
-}
+
 
 .product_button_add_basket {
   position: absolute;
-  bottom: 4vh;
-  left : 45vw
+  bottom: 3vh;
+  left : 25vw;
+  width : 50vw;
 }
 
+.producthud_price {
+position: relative;
+left : 30vw;
+top : 2vh;
+}
+
+
+
+.product_ref {
+  position: relative;
+  bottom : -10px;
+}
 
 .product_list_square {
   width: 50px !important;
@@ -590,6 +610,10 @@ h2 {
   transition: all 0.5s;
 }
 
+.product_navbar_row {
+  height: 12vh;
+}
+
 .product_navbar_row .navbar-nav{
 min-width: 12vw!important;
 justify-content: center;
@@ -597,15 +621,13 @@ padding: 1vh;
 border-radius: 2px;
 }
 .product_main_row {
-  height: 65vh !important;
+  height: 80vh;
 }
 
 .quadralab_game_border {
   border: solid 1px #1f1d1c;
   box-shadow: inset 0 2px 2px 2px#00000025;
 }
-
-
 
 .quadralab_params {
   border-radius: 10px;

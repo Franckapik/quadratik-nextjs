@@ -15,15 +15,14 @@ export const ProductHud = () => {
   const sizes = useProductStore(state => state.sizes);
   
   return (
-    <Row className="product_modele_main h-100">
+    <Row className="">
       <Col md={5} className="d-flex flex-column justify-content-evenly ps-5">
         <Row>
-          <p className="ft05 mb-1">
-            {nomenclature?.simple} {price}
+          <p className="ft05">
+            {nomenclature?.simple}  <span className="producthud_price text_green ft02 bg_darker">{price} €</span>
           </p>
-          <span className="ft4">REF : {nomenclature?.structurel}</span>
-        </Row>
-        <Row></Row>
+         
+      </Row>
         <Row className="align-items-center">
           <div className="product_list_square border_creme d-flex justify-content-center align-items-center me-4">S</div>
           {fmin} Hz - {fmax} Hz
@@ -34,6 +33,7 @@ export const ProductHud = () => {
         <Row className="align-items-center">
           <div className="product_list_square border_creme d-flex justify-content-center align-items-center me-4">D</div> {sizes.longueur} x {sizes.largeur} x {sizes.profondeur} cm
         </Row>
+        <Row></Row>
       </Col>
       <Col md={7} className="product_canvas_container">
         <ProductCanvas></ProductCanvas>

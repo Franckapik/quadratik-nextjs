@@ -42,14 +42,14 @@ const Product = () => {
         {defaultProduct.label}
         <div className="trait"></div>Details du modèle
       </div>
-      <Row className="section">
+      <Row className="section flex_column">
         <ProductNavBar />
         {!error ? (
-          <Row className="d-flex justify-content-evenly align-items-start ft4 product_main_row ">
+          <Row className="d-flex justify-content-evenly ft4 product_main_row ">
             <Col md={2} className="d-flex flex-column justify-content-start product_attributes_col bg_darker p-4">
               {!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
             </Col>
-            <Col md={9} className="product_preview_col d-flex flex-column justify-content-start ps-5 pe-5">
+            <Col md={9} className="d-flex flex-column justify-content-start ps-5 pe-5">
               <Row className="justify-content-start text-center">
                 <Col className="ft6 p-2 product_tab bg_darker text-uppercase" onClick={() => setDisplay("model")}>
                   Modele
@@ -64,7 +64,7 @@ const Product = () => {
                 </Col>
                 <Col />
               </Row>
-              <Row className="h-100 border_creme bg_darker">
+              <Row className="producthud_content border_creme bg_darker">
                 {!loading ? (
                   <>
                     {display === "coefDif" ? <PerformanceCharts /> : null}

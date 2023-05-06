@@ -29,14 +29,5 @@ export const ProductNavBar = () => {
         <Col md={2} key={"Tag" + i} ><Link href={`?TAG=${a.id}`}>{a.label}</Link></Col>
         
       ))}
-{/*         <Navbar >
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="">
-             
-              <Nav.Link href="?TAG=Absorbeurs">Absorbeurs</Nav.Link>
-              <Nav.Link href="#link">Accessoires</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar> */}
       </Row>)
 }

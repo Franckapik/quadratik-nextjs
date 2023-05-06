@@ -58,11 +58,11 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
           </p>
 
           <Row className=" justify-content-center flex-nowrap">
-            <Col md={6}>
-              <Button variant="secondary" onClick={() => setMode()}>
-                {mode ? "Simples" : "Avancés"}
-              </Button>
-            </Col>
+          <Col >
+                <Button variant="secondary" onClick={() => setMode()}>
+                  {mode ? "Mode Basique" : "Mode Avancé"}
+                </Button>
+              </Col>
           </Row>
         </Row>
       </Form.Group>

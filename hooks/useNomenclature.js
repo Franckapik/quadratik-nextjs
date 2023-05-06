@@ -37,8 +37,6 @@ export const useNomenclature = (valuesSelected, tag, attributes, isQuadralab) =>
       };
     }
 
-    console.log(name);
-
     setNomenclature(name);
     useProductStore.setState({ nomenclature: name });
   }, [tag, dimensions]);

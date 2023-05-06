@@ -79,21 +79,21 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   return (
     <FormProvider {...methods}>
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
-      <Form.Group className="">
-        <Row className="justify-content-center text-center">
-          <p className="text-center w-100  p-3">
-            <i className="fad fa-tools  me-4"></i>OPTIONS
-          </p>
+        <Form.Group className="">
+          <Row className="justify-content-center text-center">
+            <p className="text-center w-100  p-3">
+              <i className="fad fa-tools  me-4"></i>OPTIONS
+            </p>
 
-          <Row className=" justify-content-center flex-nowrap">
-            <Col md={6}>
-              <Button variant="secondary" onClick={() => setMode()}>
-                {mode ? "Simples" : "Avancés"}
-              </Button>
-            </Col>
+            <Row className=" justify-content-center flex-nowrap">
+              <Col >
+                <Button variant="secondary" onClick={() => setMode()}>
+                  {mode ? "Mode Basique" : "Mode Avancé"}
+                </Button>
+              </Col>
+            </Row>
           </Row>
-        </Row>
-      </Form.Group>
+        </Form.Group>
         {mode ? (
           <Form.Group className="product_select_options" controlId="media_category_id_id">
             {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
@@ -105,14 +105,18 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
           <Form.Group className="product_select_options" controlId="media_category_id_id">
             {Object.entries(defaultProduct.attributes.advanced).map((a, i) => {
               const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-              return <Field id={a[0]} type={a[1]}  key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label}></Field>;
+              return <Field id={a[0]} type={a[1]} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label}></Field>;
             })}
           </Form.Group>
         )}
-
-        <Button variant="primary" type="submit" className="product_button_add_basket m-auto mt-4">
-          Ajouter au panier
-        </Button>
+        <Row className="product_button_add_basket justify-content-center">
+          <Row className="product_ref text-center">
+            <p>REF : {nomenclature?.structurel}</p>
+          </Row>
+          <Button variant="primary" type="submit" className="mt-4">
+            Ajouter au panier
+          </Button>
+        </Row>
       </Form>
     </FormProvider>
   );
