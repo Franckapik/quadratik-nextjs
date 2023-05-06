@@ -5,6 +5,7 @@ import { listCategories, objectsInCategory, variantFetchByParentId } from "../..
 import { ProductNavBar } from "../../components/quadralab/ProductNavBar";
 import { useAttributes } from "../../hooks/useAttributes";
 import { CardProduct } from "../../components/shop/CardProduct";
+import { useInView } from "@react-spring/web";
 
 const Shop_Modele = ({ childCat, firstCat, attributes }) => {
   const [defaultProduct, setDefaultProduct] = useState(false);
@@ -48,7 +49,7 @@ const Shop_Modele = ({ childCat, firstCat, attributes }) => {
                 let a_ref = Object.values(attributes).filter((val) => val.a_id === cur.id)[0].a_ref;
                 return { ...acc, [a_ref]: cur.fk_prod_attr_val };
               }, {});
-              return { ...a,  valuesSelected: { ...valuesSelected } };
+              return { ...a, valuesSelected: { ...valuesSelected } };
             });
             setListProducts(pwithAttributes);
           }
@@ -65,10 +66,36 @@ const Shop_Modele = ({ childCat, firstCat, attributes }) => {
       {" "}
       {listProducts &&
         listProducts.map((variant, i) => {
-          return (
-            <CardProduct  product={variant} childCat={childCat} attributes={attributes} />
-          );
+          return <CardProduct product={variant} childCat={childCat} attributes={attributes} />;
         })}
+    </>
+  );
+};
+
+const ParentCategorie = ({ firstCat, childCategories, attributes, setViewedCategory }) => {
+  const [ref, inView] = useInView();
+
+  useEffect(() => {
+    if (inView) {
+      setViewedCategory(firstCat.id);
+    }
+  }, [inView]);
+
+  return (
+    <>
+      <Col ref={ref} id={firstCat.id} className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center border_creme_light">
+        <div className="bg_creme_light shop_categorie text-dark">
+          <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" className="d-flex mt-4 mx-auto" />
+          {firstCat.label}
+        </div>
+      </Col>
+      <>
+        {childCategories
+          .filter((cat) => cat.fk_parent == firstCat.id)
+          .map((childCat, childIndex) => {
+            return <Shop_Modele firstCat={firstCat} childCat={childCat} attributes={attributes} />;
+          })}
+      </>
     </>
   );
 };
@@ -114,31 +141,15 @@ const Product = () => {
       <Row className="section">
         <ProductNavBar categories={parentCategories} />
         <Row className="shop_main_row">
-        <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center border_creme_light">
+          <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center border_creme_light text-dark">
             <img src="/shop/Anemone-7.png" />
             <span className="shop_product_title ft2 ">Anemone-710</span>
             <span className="shop_product_collection ft6 text-uppercase text-nowrap">Diffuseur 2D classiques</span>
           </Col>
           {parentCategories.map((firstCat, firstIndex) => {
-            return (
-              <>
-                <Col className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center border_creme_light">
-                  <div className="bg_creme_light shop_categorie text-dark">
-                    <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" className="d-flex mt-4 mx-auto" />
-                    {firstCat.label}
-                  </div>
-                </Col>
-                <>
-                  {childCategories
-                    .filter((cat) => cat.fk_parent == firstCat.id)
-                    .map((childCat, childIndex) => {
-                      return <Shop_Modele firstCat={firstCat} childCat={childCat} attributes={attributes} />;
-                    })}
-                </>
-              </>
-            );
+            return <ParentCategorie firstCat={firstCat} childCategories={childCategories} attributes={attributes} setViewedCategory={setViewedCategory} />;
           })}
-        </Row>  
+        </Row>
       </Row>
     </Layout>
   );
