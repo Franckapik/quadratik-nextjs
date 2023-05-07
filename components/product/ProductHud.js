@@ -31,6 +31,7 @@ export const ProductHud = () => {
   const fmax = useProductStore((state) => state.fmax);
   const cwidth = useProductStore((state) => state.cwidth);
   const sizes = useProductStore((state) => state.sizes);
+  const tag = useProductStore((state) => state.tag);
 
   return (
     <Row className="">
@@ -40,9 +41,12 @@ export const ProductHud = () => {
             {nomenclature?.simple} <p className=" ft1 mt-3 text_green bg_darker">{price + " €"}</p>
           </p>
         </Row>
-        <PerformanceRow value= {`${fmin} Hz - ${fmax} Hz`} text="Spectre de fréquences traité" icon="fad fa-bolt ft2" />
-        <PerformanceRow value= {`${(cwidth * 10).toFixed(0)} mm`} text="Taille d'une cellule" icon="fad fa-sort-size-down ft2"/>
-        <PerformanceRow value= {`${sizes.longueur} x ${sizes.largeur} x ${sizes.profondeur} cm`} text="Spectre de fréquences traité" icon="fad fa-box-open ft2"/>
+       
+       { tag != 2 ? 
+       <> <PerformanceRow value= {`${fmin} Hz - ${fmax} Hz`} text="Spectre de fréquences traité" icon="fad fa-bolt ft2" />
+       <PerformanceRow value= {`${(cwidth * 10).toFixed(0)} mm`} text="Taille d'une cellule" icon="fad fa-sort-size-down ft2"/> </>
+       : null}
+        <PerformanceRow value= {`${sizes.longueur} x ${sizes.largeur} x ${sizes.profondeur} cm`} text="Dimension du modèle" icon="fad fa-box-open ft2"/>
         <Row></Row>
       </Col>
       <Col md={7} className="product_canvas_container">
