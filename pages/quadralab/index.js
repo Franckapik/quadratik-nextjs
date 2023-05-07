@@ -93,7 +93,7 @@ const Quadralab = () => {
     <>
       {!error ? (
         <Row className="quadralab_main_row justify-content-center align-items-center">
-          <Layout header>
+          <Layout header contact home>
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(onSubmit)}>
                 {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}

@@ -31,15 +31,6 @@ export const ProductNavBar = () => {
             <Link href={`?TAG=${a.id}`}>{a.label}</Link>
           </Nav>
         ))}
-      {/*         <Navbar >
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="">
-             
-              <Nav.Link href="?TAG=Absorbeurs">Absorbeurs</Nav.Link>
-              <Nav.Link href="#link">Accessoires</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar> */}
     </Navbar>
   );
 };

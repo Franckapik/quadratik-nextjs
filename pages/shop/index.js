@@ -137,7 +137,7 @@ const Product = () => {
   }, []);
 
   return (
-    <Layout onePage header cart sticky>
+    <Layout onePage header cart contact sticky>
       <div className="s0_page_index position-fixed">
         {parentCategories.filter((cat) => cat.id == viewedCategory)[0]?.label}
         <div className="trait"></div>Boutique

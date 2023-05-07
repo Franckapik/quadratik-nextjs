@@ -52,7 +52,7 @@ const Product = () => {
   }, [tag]);
 
   return (
-    <Layout onePage header>
+    <Layout onePage header shop cart >
       <div className="s0_page_index">
         {defaultProduct.label}
         <div className="trait"></div>Details du modèle
