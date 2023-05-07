@@ -65,7 +65,7 @@ export const S3_DIY = () => {
             </Row>
             <Row className="s3_row_explanation ft4 pt-md-4">{switchExplanation(explanation)}</Row>
             <Row className="d-md-none pt-2 ">
-              <Button variant="primary" className="button_home m-auto">
+              <Button variant="primary" className="button_home m-auto" href="/quadralab">
                 <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
               </Button>
             </Row>
@@ -75,7 +75,7 @@ export const S3_DIY = () => {
           </Col>
           <Col md={6} className="d-none d-md-flex flex-column justify-content-evenly align-items-center s3_diy_draw p-0 order-md-first ">
             <Row className="pt-2 ">
-              <Button variant="primary" className="button_home m-auto">
+              <Button variant="primary" className="button_home m-auto" href="/quadralab">
                 <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
               </Button>
             </Row>

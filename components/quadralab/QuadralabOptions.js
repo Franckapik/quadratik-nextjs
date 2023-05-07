@@ -99,7 +99,7 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
             const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
             if(a[1].includes("[")) {
               const rangeArray = a[1].replace("range", "").replace("[", "").replace("]", "").split(",");
-              return <Field id={a[0]} type={!mode ? "notIdRange": "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={rangeArray[0]}></Field>;
+              return <Field id={a[0]} type={!mode ? "notIdRange": "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={rangeArray[2]}></Field>;
             } else {
               return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
 

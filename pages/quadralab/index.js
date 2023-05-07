@@ -95,7 +95,7 @@ const Quadralab = () => {
           <Layout header contact home>
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(onSubmit)}>
-              <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
+                <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
 
                 {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
 
