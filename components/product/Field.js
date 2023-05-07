@@ -15,7 +15,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
 
   return (
     <>
-      <Form.Label>{type === "radio" || type === "switch" ? null : label}</Form.Label>
+      <Form.Label>{type === "radio" || type === "switch" || type === "hidden" ? null : label}</Form.Label>
       <Controller
         control={control}
         rules={{

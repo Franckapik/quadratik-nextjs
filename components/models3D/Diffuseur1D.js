@@ -37,8 +37,6 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const ratio = useProductStore((state) => state.ratio);
   const highlights = useProductStore((state) => state.highlights);
   const { E, N, W, L, P, H, V, I, C, T } = dimensions;
-  console.log(I);
-
   const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
   const w = parseInt(W); //largeur

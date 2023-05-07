@@ -47,7 +47,6 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
       };
     }, {});
 
-    console.log(price, basePrice);
 
     const variant = {
       weight_impact: 0,
@@ -58,7 +57,6 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
       ref_ext: nomenclature?.simple,
     };
 
-    console.log(variant);
 
     variantPost(defaultProduct.id)
       .post("", variant)
