@@ -561,6 +561,17 @@ h2 {
   text-transform: uppercase;
 }
 
+.techno_main_row img {
+  width:80%;
+  margin: auto;
+}
+.techno_main_row .col {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+}
+
 /* product page */
 
 .product_canvas_container {

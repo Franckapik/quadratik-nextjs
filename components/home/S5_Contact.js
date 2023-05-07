@@ -6,11 +6,13 @@ import Moment from "react-moment";
 import Parser from "rss-parser";
 import { LegalMentions } from "./legal/LegalMentions";
 import { CGV } from "./legal/CGV";
+import { Techno } from "./legal/Techno";
 
 export const S5_Contact = () => {
 
   const [legalshow,setLegalShow]= useState(false);
   const [cgvShow,setCgvShow]= useState(false);
+  const [technoShow,setTechnoShow]= useState(false);
   const [flipped, set] = useState(false);
   const [rssFeed, setRssFeed] = useState([])
 
@@ -142,7 +144,7 @@ for (let i = 0; i < 5; i++) {
       <Row className="s5_legal  text-center justify-content-evenly align-items-md-end ft4 order-md-2  ">
         <LegalMentions show={legalshow} setShow={setLegalShow}/>
         <CGV show={cgvShow} setShow={setCgvShow}/>
-        
+        <Techno show={technoShow} setShow={setTechnoShow}/>
         <Col
           className="border_creme border-bottom-0 h-10 order-md-1 align-items-center d-flex justify-content-center bg_darker"
           md={2}
@@ -165,6 +167,8 @@ for (let i = 0; i < 5; i++) {
         <Col
           className="d-none d-md-flex border_creme border-bottom-0 h-20 order-md-2  align-items-center d-flex justify-content-center bg_darker"
           md={2}
+          onClick={()=> setTechnoShow(!technoShow)}
+
         >
           Quadratik.fr © <Moment format="YYYY">
              
