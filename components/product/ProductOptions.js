@@ -40,6 +40,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   }, [valuesSelected]);
 
   const onSubmit = async (data) => {
+    console.log(data);
     const features = Object.entries(data).reduce((acc, [i, a] = cur) => {
       const getAttributeRef = Object.values(attributes).filter((val) => val.a_ref === i)[0];
       return {
@@ -79,7 +80,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   return (
     <FormProvider {...methods}>
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
-        <Form.Group className="">
+        <Form.Group className="" >
           <Row className="justify-content-center text-center">
             <p className="text-center w-100  p-3">
               <i className="fad fa-tools  me-4"></i>OPTIONS
@@ -95,25 +96,28 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
           </Row>
         </Form.Group>
         {mode ? (
-          <Form.Group className="product_select_options" controlId="media_category_id_id">
+          <Form.Group className="product_select_options" controlId="product_simple">
             {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
               const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
               return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
             })}
           </Form.Group>
         ) : (
-          <Form.Group className="product_select_options" controlId="media_category_id_id">
+          <Form.Group className="product_select_options" controlId="product_advanced">
             {Object.entries(defaultProduct.attributes.advanced).map((a, i) => {
               const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-              return <Field id={a[0]} type={a[1]} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label}></Field>;
+              return <Field id={a[0]} type={a[1]} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
             })}
           </Form.Group>
         )}
+         
+        <p onClick={() => methods.reset()} className="text-center mt-4">-- Reset --</p>
+      
         <Row className="product_button_add_basket justify-content-center">
           <Row className="product_ref text-center">
             <p>REF : {nomenclature?.structurel}</p>
           </Row>
-          <Button variant="primary" type="submit" className="mt-4">
+          <Button variant="primary" type="submit" id="product_submit" className="mt-4">
             Ajouter au panier
           </Button>
         </Row>

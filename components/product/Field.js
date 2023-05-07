@@ -1,8 +1,17 @@
+import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { Controller, useFormContext } from "react-hook-form";
 
 export const Field = ({ label, id, type, values, defaultVal }) => {
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
+  const [inverted, setInverted] = useState(0)
+
+  useEffect(() => { // work around to avoid false issue submitting switch
+    if (type === "switch") {
+      setValue('I', inverted ? values[1].v_id : values[0].v_id)
+    }
+  }, [type, inverted]) 
+
   return (
     <>
       <Form.Label>{type === "radio" || type === "switch" ? null : label}</Form.Label>
@@ -16,7 +25,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
         render={({ field }) => {
           switch (true) {
             case type === "switch":
-              return <Form.Check {...field} type={type} id="custom-switch" label={label} />;
+              return <Form.Check {...field} type={type} id={"switch" + label} label={label} onChange={() => setInverted(!inverted)} />;
               break;
             case type === "radio":
               return (
