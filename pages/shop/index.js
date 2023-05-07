@@ -86,9 +86,11 @@ const ParentCategorie = ({ firstCat, childCategories, attributes, setViewedCateg
   return (
     <>
       <Col ref={ref} id={firstCat.id} className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center border_creme_light">
-        <div className="bg_creme_light shop_categorie text-dark">
-          <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" className="d-flex mt-4 mx-auto" />
-          {firstCat.label}
+        <div className="bg_creme_light shop_categorie text-dark p-5">
+          <Row className="shop_categorie_logo">          <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" className="d-flex mt-4 mx-auto" />
+</Row>
+          <p className="ft05 mt-5 text-center">{firstCat.label}</p>
+          <div className="ft4 mt-5 text-justify" dangerouslySetInnerHTML={{__html: firstCat.description}}></div>
         </div>
       </Col>
       <>
@@ -107,7 +109,7 @@ const Product = () => {
   const [attributes, fetching, error] = useAttributes();
 
   const [categories, setCategories] = useState([]);
-  const parentCategories = categories.filter((cat) => cat.fk_parent == 0);
+  const parentCategories = categories.filter((cat) => cat.fk_parent == 0).map(cat => ({...cat, ["label"] : cat.label.substring(5)}));
   const childCategories = categories.filter((cat) => cat.fk_parent !== 0);
   const [viewedCategory, setViewedCategory] = useState(1);
 

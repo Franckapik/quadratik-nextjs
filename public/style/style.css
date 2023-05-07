@@ -152,6 +152,9 @@ p {
 .ft2 {
   font-size: calc(1rem + 0.3vw) !important;
 }
+.ft3 {
+  font-size: calc(1rem + 0.2vw) !important;
+}
 .ft4 {
   font-size: calc(0.8rem + 0.2vw) !important;
 }
@@ -841,6 +844,9 @@ h2 {
 .shop_categorie {
   width: 464px;
   height: 640px;
+}
+.shop_categorie_logo img {
+  height: 60px;
 }
 
 .show_row_tag {
