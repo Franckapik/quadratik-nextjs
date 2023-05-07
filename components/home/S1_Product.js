@@ -72,7 +72,7 @@ export const S1_Product = () => {
             </Row>
             <Row className="text-uppercase text-center justify-content-center">
               <p className="m-0 pb-2 ft5">Commande en ligne </p>
-              <Button variant="primary" className="button_home">
+              <Button variant="primary" className="button_home" href="/shop">
                 <i className="fad fa-store"></i> Entrer dans l'atelier
               </Button>
               <p className="m-0 pt-2 pb-2 ft4">

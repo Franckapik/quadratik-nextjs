@@ -377,6 +377,9 @@ p {
   border-top: solid 1px #d0c3b426;
   border-bottom: solid 1px #d0c3b426;
 }
+.s3_diy_swipe img {
+transition: all 1s;
+}
 .s3_arrow {
   color: #d0c3b4;
   font-size: 2rem;
