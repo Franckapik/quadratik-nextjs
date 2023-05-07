@@ -61,7 +61,18 @@ export const S2_Canvas = () => {
   return (
     <Row id="S2_Canvas"  {...handlers} className="section p-0 m-0 justify-content-md-start justify-content-md-start">
       <Col md={1}></Col>
-      <Col md={3} className="p-0 d-flex flex-row flex-md-column  s2_customer_col text-creme justify-content-center align-items-center">
+      <Col md={7}>
+        <div className="s2_canvas_container">
+          <Canvas dpr={1} shadows>
+            <LoadCamera url={"/glb/scene_customers.glb"} />
+              <RotateScroll target={target}>
+                <LoadMesh url={"/glb/scene_customers.glb"} />
+                <LoadLight url={"/glb/scene_customers.glb"} />
+              </RotateScroll>
+              <ambientLight intensity={0.15} />
+          </Canvas>
+        </div>
+      </Col> <Col md={4} className="p-0 d-flex flex-row flex-md-column  s2_customer_col text-creme justify-content-center align-items-center">
         <Row className="w-100 justify-content-center text-center" onClick={() => handleClick("decrease")}>
           <p className="ft1 text_grey d-none d-md-flex justify-content-center"> {customers[circular(index -1)]}</p>
           <i className="fad fa-chevron-up d-none d-md-inline"></i>
@@ -77,18 +88,7 @@ export const S2_Canvas = () => {
         </Row>
       </Col>
 
-      <Col md={8}>
-        <div className="s2_canvas_container">
-          <Canvas dpr={1} shadows>
-            <LoadCamera url={"/glb/scene_customers.glb"} />
-              <RotateScroll target={target}>
-                <LoadMesh url={"/glb/scene_customers.glb"} />
-                <LoadLight url={"/glb/scene_customers.glb"} />
-              </RotateScroll>
-              <ambientLight intensity={0.15} />
-          </Canvas>
-        </div>
-      </Col>
+     
     </Row>
   );
 };
