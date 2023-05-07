@@ -35,6 +35,8 @@ export const useValues3D = (valuesSelected, attributes, isQuadralab) => {
       }
     }, 0);
 
+    console.log(listOfValues);
+
     setValues3D(listOfv3d);
   }, [valuesSelected]);
 

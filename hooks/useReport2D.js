@@ -3,7 +3,7 @@ import { useProductStore } from "./store";
 
 export const useReport2D = (n,p, hor, vert, c, invert, start, amax, e, d) => {
   const [report2D, setReport2D] = useState(false);
-
+console.log(n,p, hor, vert, c, invert, start, amax, e, d);
   useEffect(() => {
     const report = Array(n) //cellules
       .fill("")

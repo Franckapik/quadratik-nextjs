@@ -12,7 +12,7 @@ import { Field } from "./Field";
 const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   const [mode, setMode] = useToggle(true);
   const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
-    const isNotIdValue = ["H", "V", "I"];
+    const isNotIdValue = ["W", "P"];
     if (!isNotIdValue.includes(cur.a_ref)) {
       return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(cur.values[0]?.v_id) };
     } else {
@@ -66,7 +66,7 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
           </Row>
         </Row>
       </Form.Group>
-      {mode ? (
+{/*       {mode ? (
         <Form.Group className="justify-content-center">
           {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
             const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
@@ -86,7 +86,25 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
             }
           })}
         </Form.Group>
-      )}
+      )} */}
+              <Form.Group className="" controlId="product_simple">
+          {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
+            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+            return <Field id={a[0]} type={mode ? a[1] : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+          })}
+        </Form.Group>
+
+        <Form.Group className="" controlId="product_advanced">
+          {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
+            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+            if(a[1].includes("[")) {
+              const rangeArray = a[1].replace("range", "").replace("[", "").replace("]", "").split(",");
+              return <Field id={a[0]} type={"notIdRange"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={rangeArray[0]}></Field>;
+            }
+
+            return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+          })}
+        </Form.Group>
     </Row>
   );
 };

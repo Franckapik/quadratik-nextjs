@@ -28,6 +28,7 @@ export const DiffusorTable = ({ report2D, value }) => {
 
 export const ModalReport2D = ({ sizes, area, volume, fmin, woodArea, woodVolume, report2D, show, setShow, handleClose }) => {
   const D = report2D.Cells === report2D.Type;
+  console.log(report2D);
   const hauteurs = Object.values(report2D)
     .map((a, i) => a.hauteur)
     .filter((item) => item); //no undefined
