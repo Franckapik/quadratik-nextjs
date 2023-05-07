@@ -95,12 +95,13 @@ const Quadralab = () => {
           <Layout header contact home>
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(onSubmit)}>
+              <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
+
                 {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
 
                 {!loading ? (
                   <>
                     <Col style={{ visibility: !dimensionView ? "hidden" : "visible" }} className="d-flex flex-column justify-content-evenly ps-5 pe-5 quadralab_canvas_container">
-                      <img class="quadralab_bg" src="/logo/logo.svg" alt="" />
                       <ProductCanvas></ProductCanvas>
                     </Col>
                     <Col style={{ visibility: dimensionView ? "hidden" : "visible" }} className="d-flex flex-column justify-content-center align-items-center quadralab_2d_view">
