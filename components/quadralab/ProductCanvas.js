@@ -19,11 +19,8 @@ const ProductCanvas = () => {
       {dimensions ? (
         <Canvas linear flat shadows >
           <pointLight intensity={0.5} position={[0,0,-10]} />
-          <pointLight intensity={0.5} position={[0,0,35]} />
- {/*          <pointLight intensity={0.2} position={[-5,5,-2]} /> */}
-{/*           <Box args={[0.5,0.5,0.5]} position={[0,0,5]}/>
-          <Box args={[0.5,0.5,0.5]} position={[0,0,-5]}/>
-          <Box args={[0.5,0.5,0.5]} position={[-5,5,-2]}/> */}
+          <pointLight intensity={0.5} position={[0,0,25]} />
+
         <ambientLight intensity={0.4}></ambientLight>
           <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
           <group scale={0.1}>
