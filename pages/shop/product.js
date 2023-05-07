@@ -5,7 +5,7 @@ import { Layout } from "../../components/Layout";
 import { listCategories, objectsInCategory } from "../../components/dolibarrApi/fetch";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import { ProductHud } from "../../components/product/ProductHud";
-import { ProductNavBar } from "../../components/product/ProductNavBar";
+import { ProductNavBar } from "../../components/quadralab/ProductNavBar";
 import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
@@ -24,6 +24,8 @@ const Product = () => {
   useProductStore.setState({ tag: tag }); //global state
 
   const [categories, setCategories] = useState([]);
+  const parentCategories = categories.filter((cat) => cat.fk_parent == 0).map(cat => ({...cat, ["label"] : cat.label.substring(5)}));
+console.log(parentCategories);
 
   //get all categories
   useEffect(() => {
@@ -58,7 +60,7 @@ const Product = () => {
         <div className="trait"></div>Details du modèle
       </div>
       <Row className="section flex_column">
-        <ProductNavBar categories={categories} />
+        <ProductNavBar categories={parentCategories} />
         {!error ? (
           <Row className="d-flex justify-content-evenly ft4 product_main_row ">
             <Col md={2} className="d-flex flex-column justify-content-start product_attributes_col bg_darker p-4">
