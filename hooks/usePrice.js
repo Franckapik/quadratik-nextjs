@@ -18,7 +18,7 @@ export const usePrice = (valuesSelected, defaultProduct, attributes, isQuadralab
     }, []);
 
     const optionsPrice = Object.entries(valuesSelected).reduce((acc, [i, a] = cur) => {
-      const isNotIdValue = ["H", "V", "I"];
+      const isNotIdValue = [];
       if (isQuadralab) {
         isNotIdValue.push("W")
         isNotIdValue.push("P")
@@ -40,8 +40,6 @@ export const usePrice = (valuesSelected, defaultProduct, attributes, isQuadralab
           }
         }
       } else {
-        //if H or V
-
         return acc;
       }
       return acc;

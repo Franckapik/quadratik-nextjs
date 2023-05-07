@@ -4,13 +4,14 @@ import { Controller, useFormContext } from "react-hook-form";
 
 export const Field = ({ label, id, type, values, defaultVal }) => {
   const { control, setValue } = useFormContext();
-  const [inverted, setInverted] = useState(0)
+  const [inverted, setInverted] = useState(0);
 
-  useEffect(() => { // work around to avoid false issue submitting switch
+  useEffect(() => {
+    // work around to avoid false issue submitting switch
     if (type === "switch") {
-      setValue('I', inverted ? values[1].v_id : values[0].v_id)
+      setValue("I", inverted ? values[1].v_id : values[0].v_id);
     }
-  }, [type, inverted]) 
+  }, [type, inverted]);
 
   return (
     <>
@@ -22,23 +23,23 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
         }}
         name={id}
         defaultValue={defaultVal}
-        render={({ field }) => {
+        render={({ field: { onChange, value, ref }, field }) => {
           switch (true) {
             case type === "switch":
-              return <Form.Check {...field} type={type} id={"switch" + label} label={label} onChange={() => setInverted(!inverted)} />;
+              return <Form.Check onChange={(e) => setValue(id, e.target.checked ? values[0].v_id : values[1].v_id)} ref={ref} type={type} id={"switch" + label} label={label} />;
               break;
             case type === "radio":
               return (
-                  <Form.Group {...field} className="form_radio_inline justify-content-center m-4">
-                    {Object.values(values).map((a, i) => (
-                        <Form.Check type={type} key={"radio" + i}>
-                          <Form.Check.Label className="border_creme">
-                            <Form.Check.Input type={type} value={a.v_id} checked={field.value === a.v_id} />
-                            {a.v_label}
-                          </Form.Check.Label>
-                        </Form.Check>
-                    ))}
-                  </Form.Group>
+                <Form.Group {...field} className="form_radio_inline justify-content-center m-4">
+                  {Object.values(values).map((a, i) => (
+                    <Form.Check type={type} key={"radio" + i}>
+                      <Form.Check.Label className="border_creme">
+                        <Form.Check.Input type={type} value={a.v_id} checked={field.value === a.v_id} />
+                        {a.v_label}
+                      </Form.Check.Label>
+                    </Form.Check>
+                  ))}
+                </Form.Group>
               );
 
               break;
@@ -54,12 +55,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
               );
               break;
             case type.includes("range"):
-              const rangeArray = type.replace("range", '').replace('[', '').replace(']', '').split(',');
-              return (
-                <>
-                  <Form.Range {...field} min={rangeArray[0]} max={rangeArray[1]} />
-                </>
-              );
+              return <Form.Range onChange={(e) => setValue(id, values[e.target.value].v_id)} ref={ref} min={values[0].v_3d} max={values[Object.keys(values).length - 1].v_3d} />;
               break;
 
             default:

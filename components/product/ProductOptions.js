@@ -12,7 +12,6 @@ import { useSizes } from "../../hooks/useSizes";
 
 const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   const tag = useProductStore.getState().tag;
-  const [variant, setVariant] = useState({});
   const [mode, setMode] = useToggle(true);
 
   const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
@@ -26,7 +25,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   //global states
   const nomenclature = useNomenclature(valuesSelected, tag, attributes);
   const [price, basePrice] = usePrice(valuesSelected, defaultProduct, attributes);
-  const [sizes] = useSizes(valuesSelected, attributes);
+  useSizes(valuesSelected, attributes);
 
   //render Modele after ProductOptions
   useEffect(() => {
@@ -40,7 +39,6 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   }, [valuesSelected]);
 
   const onSubmit = async (data) => {
-    console.log(data);
     const features = Object.entries(data).reduce((acc, [i, a] = cur) => {
       const getAttributeRef = Object.values(attributes).filter((val) => val.a_ref === i)[0];
       return {
@@ -48,6 +46,8 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
         [getAttributeRef.a_id]: a,
       };
     }, {});
+
+    console.log(price, basePrice);
 
     const variant = {
       weight_impact: 0,
@@ -57,6 +57,8 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
       reference: nomenclature?.complet,
       ref_ext: nomenclature?.simple,
     };
+
+    console.log(variant);
 
     variantPost(defaultProduct.id)
       .post("", variant)
@@ -80,14 +82,14 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   return (
     <FormProvider {...methods}>
       <Form onSubmit={methods.handleSubmit(onSubmit)}>
-        <Form.Group className="" >
+        <Form.Group className="">
           <Row className="justify-content-center text-center">
             <p className="text-center w-100  p-3">
               <i className="fad fa-tools  me-4"></i>OPTIONS
             </p>
 
             <Row className=" justify-content-center flex-nowrap">
-              <Col >
+              <Col>
                 <Button variant="secondary" onClick={() => setMode()}>
                   {mode ? "Mode Basique" : "Mode Avancé"}
                 </Button>
@@ -95,24 +97,25 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
             </Row>
           </Row>
         </Form.Group>
-        {mode ? (
-          <Form.Group className="product_select_options" controlId="product_simple">
-            {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
-              const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-              return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-            })}
-          </Form.Group>
-        ) : (
-          <Form.Group className="product_select_options" controlId="product_advanced">
-            {Object.entries(defaultProduct.attributes.advanced).map((a, i) => {
-              const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-              return <Field id={a[0]} type={a[1]} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-            })}
-          </Form.Group>
-        )}
-         
-        <p onClick={() => methods.reset()} className="text-center mt-4">-- Reset --</p>
-      
+
+        <Form.Group className="product_select_options" controlId="product_simple">
+          {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
+            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+            return <Field id={a[0]} type={mode ? a[1] : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+          })}
+        </Form.Group>
+
+        <Form.Group className="product_select_options" controlId="product_advanced">
+          {Object.entries(defaultProduct.attributes.advanced).map((a, i) => {
+            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+            return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+          })}
+        </Form.Group>
+
+        <p onClick={() => methods.reset()} className="text-center mt-4">
+          -- Reset --
+        </p>
+
         <Row className="product_button_add_basket justify-content-center">
           <Row className="product_ref text-center">
             <p>REF : {nomenclature?.structurel}</p>

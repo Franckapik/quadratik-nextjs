@@ -36,8 +36,9 @@ const LightenDarkenColor = (col, amt) => {
 const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const ratio = useProductStore((state) => state.ratio);
   const highlights = useProductStore((state) => state.highlights);
-
   const { E, N, W, L, P, H, V, I, C, T } = dimensions;
+  console.log(I);
+
   const e = E / 10; //epaisseur
   const p = parseInt(N); //type (type du diffuseur) Prime number (p)
   const w = parseInt(W); //largeur
@@ -46,7 +47,7 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const d = P; //profondeur
   const hor = H; //decalage horizontal
   const vert = 0; //decalage vertical NO DECALAGE FOR D1
-  const invert = I === "true"; //decalage vertical
+  const invert = I == "0"; //invert
   const n = N * L; // nb de cellules
   const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
   const a = Array(n)
