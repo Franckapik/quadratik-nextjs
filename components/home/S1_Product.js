@@ -28,12 +28,12 @@ export const S1_Product = () => {
       <Col md={5} className="s1_square"> 
         <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
           <Carousel.Item>
-            <img className="d-block w-100 s1_image_hover" src="../difrender10wrot30.png" alt="First slide" />
-            <img className="d-block w-100" src="../difrender10w.png" alt="First slide" />
+            <img className="d-block w-100 s1_image_hover" src="../difrender10w.png" alt="First slide" />
+            <img className="d-block w-100" src="../difrender10wrot30.png" alt="Présentation du produit Woodik-7" />
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100 s1_image_hover" src="../absorbeurrot30.png" alt="Second slide" />
-            <img className="d-block w-100" src="../absorbeur.png" alt="First slide" />
+            <img className="d-block w-100 s1_image_hover" src="../absorbeur.png" alt="Second slide" />
+            <img className="d-block w-100" src="../absorbeurrot30.png" alt="Présentation du produit Quadrablack" />
           </Carousel.Item>
         </Carousel>
       </Col>
@@ -63,10 +63,10 @@ export const S1_Product = () => {
             <Row className="d-none border_creme s1_product_physic bg_dark d-md-flex justify-content-start align-items-center">
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
-                  <img className="d-block w-100" src="./physic_dif.svg" alt="First slide" />
+                  <img className="d-block w-100" src="./physic_dif.svg" alt="Phenomène physique de la diffusion" />
                 </Carousel.Item>
                 <Carousel.Item>
-                  <img className="d-block w-100" src="./physic_abs.svg" alt="Second slide" />
+                  <img className="d-block w-100" src="./physic_abs.svg" alt="Phenomène physique de l'absorption" />
                 </Carousel.Item>
               </Carousel>
             </Row>
