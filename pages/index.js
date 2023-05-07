@@ -1,6 +1,6 @@
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import { useEffect, useRef } from "react";
-import { Layout } from "../components/Layout";
+import { useEffect, useRef, useState } from "react";
+import { Burger } from "../components/Burger";
 import { S0_Landing } from "../components/home/S0_Landing";
 import { S1_Product } from "../components/home/S1_Product";
 import { S2_Canvas } from "../components/home/S2_Canvas";
@@ -10,13 +10,18 @@ import { S4_Business } from "../components/home/S4_Business";
 import { S5_Contact } from "../components/home/S5_Contact";
 import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
 import { useBearStore } from "../hooks/store";
-import { Burger } from "../components/Burger";
 
 const Home = () => {
   const parallax = useRef(null);
+  const [showCanvas, setShowCanvas] = useState(false);
 
   useEffect(() => {
     const getScroll = (e) => {
+      if (e.target.scrollTop > parallax.current.space * 3 && e.target.scrollTop < parallax.current.space * 5) {
+        setShowCanvas(true);
+      } else {
+        setShowCanvas(false);
+      }
       useBearStore.setState({ scroll: e.target.scrollTop });
     };
     const container = parallax.current.container.current;
@@ -45,9 +50,7 @@ const Home = () => {
         <ParallaxLayer offset={3}>
           <S2_Customers />
         </ParallaxLayer>
-        <ParallaxLayer offset={4}>
-          <S2_Canvas />
-        </ParallaxLayer>
+        <ParallaxLayer offset={4}>{showCanvas ? <S2_Canvas /> : null}</ParallaxLayer>
         <ParallaxLayer offset={5}>
           <S3_DIY />
         </ParallaxLayer>
