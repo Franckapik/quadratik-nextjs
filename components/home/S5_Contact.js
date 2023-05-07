@@ -4,9 +4,13 @@ import { Col, Row } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
 import Moment from "react-moment";
 import Parser from "rss-parser";
-
+import { LegalMentions } from "./legal/LegalMentions";
+import { CGV } from "./legal/CGV";
 
 export const S5_Contact = () => {
+
+  const [legalshow,setLegalShow]= useState(false);
+  const [cgvShow,setCgvShow]= useState(false);
   const [flipped, set] = useState(false);
   const [rssFeed, setRssFeed] = useState([])
 
@@ -136,10 +140,14 @@ for (let i = 0; i < 5; i++) {
         </Col>
       </Row>
       <Row className="s5_legal  text-center justify-content-evenly align-items-md-end ft4 order-md-2  ">
+        <LegalMentions show={legalshow} setShow={setLegalShow}/>
+        <CGV show={cgvShow} setShow={setCgvShow}/>
+        
         <Col
           className="border_creme border-bottom-0 h-10 order-md-1 align-items-center d-flex justify-content-center bg_darker"
           md={2}
           xs={6}
+          onClick={()=> setLegalShow(!legalshow)}
         >
           Mentions légales
         </Col>
@@ -149,6 +157,8 @@ for (let i = 0; i < 5; i++) {
           className="border_creme border-bottom-0 h-10 order-md-3 align-items-center d-flex justify-content-center bg_darker"
           md={2}
           xs={6}
+          onClick={()=> setCgvShow(!cgvShow)}
+
         >
           CGV
         </Col>
