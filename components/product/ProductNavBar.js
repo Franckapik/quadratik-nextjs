@@ -10,7 +10,7 @@ export const ProductNavBar = ({categories}) => {
       <Navbar className="product_navbar_row ft2 text-uppercase align-items-center bg_dark">
       {categories.map((a, i) => (
           <Nav key={"Tag" + i} style={{backgroundColor : a.id == tag ? "#9fb07ca9" : "inherit"}}>
-            <Link href={`?TAG=${a.id}`}>{a.label}</Link>
+            <Link href={{ pathname: "/shop/product", query: {TAG : a.id} }} >{a.label}</Link>
           </Nav>
         ))}
     </Navbar>)
