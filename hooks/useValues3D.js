@@ -20,22 +20,29 @@ export const useValues3D = (valuesSelected, attributes, isQuadralab) => {
       if (!isNotIdValue.includes(i)) {
         const pickValue = listOfValues.filter((value) => value.v_id === a)[0];
         if (pickValue !== undefined) {
-          return {
+          if (i !== "F") { //add label for quadrablack name
+            return {
             ...acc,
             [i]: pickValue.v_3d,
           };
+          } else {
+            return {
+              ...acc,
+              [i]: pickValue.v_3d,
+              ["QUADRANAME"]: pickValue.v_label,
+            };
+          }
+          
         } else {
           return acc;
         }
-      } else { //if H or V
+      } else { 
         return {
           ...acc,
           [i]: a,
         };
       }
     }, 0);
-
-    console.log(listOfValues);
 
     setValues3D(listOfv3d);
   }, [valuesSelected]);

@@ -7,8 +7,7 @@ export const useNomenclature = (valuesSelected, tag, attributes, isQuadralab) =>
   const dimensions = useValues3D(valuesSelected, attributes, isQuadralab);
 
   useEffect(() => {
-    const { C, D, E, I, L, M, N, P, W, H, V, T, F } = dimensions;
-
+    const { C, D, E, I, L, M, N, P, W, H, V, T, F, QUADRANAME } = dimensions;
     let basename = "Inconnu";
     let name;
 
@@ -33,7 +32,7 @@ export const useNomenclature = (valuesSelected, tag, attributes, isQuadralab) =>
       name = {
         structurel: "A" + "W" + W + "L" + L + "P" + P + "E" + E + M,
         complet:"A" + "W" + W + "L" + L + "P" + P + "E" + E + M,
-        simple: basename + F + "-" + P + (L == "2" ? "L" : ""),
+        simple: basename + QUADRANAME + "-" + P + (L == "2" ? "L" : ""),
       };
     }
 

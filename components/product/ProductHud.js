@@ -16,10 +16,10 @@ export const ProductHud = () => {
   
   return (
     <Row className="">
-      <Col md={5} className="d-flex flex-column justify-content-evenly ps-5">
+      <Col md={4} className="d-flex flex-column justify-content-evenly ps-5">
         <Row>
-          <p className="ft05">
-            {nomenclature?.simple}  <span className="producthud_price text_green ft02 bg_darker">{price} €</span>
+          <p className="text-uppercase ft05">
+            {nomenclature?.simple}  <p className=" ft1 mt-3 text_green bg_darker">{price + " €"}</p>
           </p>
          
       </Row>
@@ -35,7 +35,7 @@ export const ProductHud = () => {
         </Row>
         <Row></Row>
       </Col>
-      <Col md={7} className="product_canvas_container">
+      <Col md={8} className="product_canvas_container">
         <ProductCanvas></ProductCanvas>
       </Col>
     </Row>

@@ -21,18 +21,18 @@ const ProductCanvas = () => {
         <Canvas linear flat shadows dpr={[1, 2]} camera={{ position: [10, 15, 10], zoom: 4 }}>
           <AccumulativeShadows
             temporal
-            frames={100}
+            frames={50}
             colorBlend={0}
             alphaTest={0.9}
             opacity={2}
             scale={10}
-            position={[0, dimensions.P / 10 - 0.1, 0]} //0.1 for shadow issue with model
+            position={[0, dimensions.P - 0.5, 0]} //0.1 for shadow issue with model
           >
             <RandomizedLight amount={8} radius={50} ambient={0.9} intensity={1} position={[0, 40, 0]} bias={0.001} />
           </AccumulativeShadows>
           <Lights />
           <OrbitControls makeDefault minAzimuthAngle={0} maxAzimuthAngle={Math.PI / 2} minPolarAngle={Math.PI / 4} maxPolarAngle={Math.PI / 4} enableZoom={false} enablePan={true} zoomSpeed={0.8} />
-          <group scale={0.1} rotation={[Math.PI / 2, 0, 0]}>
+          <group scale={0.12 / dimensions.L } rotation={[Math.PI / 2, 0, 0]}>
            {tag === 1 && dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} />: null} 
            {tag === 1 && dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} />: null} 
            {tag === 2 ? <Absorbeur dimensions={dimensions} />: null} 
