@@ -12,7 +12,6 @@ import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
 
-
 const QuadralabPerformances = ({ nomenclature, fmin, fmax, cwidth, weightPoplar, report2D, area, volume }) => (
   <Col className="flex flex-column quadralab_hud_col quadralab_params quadralab_game_border bg_darker ps-4 pe-4">
     <p className="text-center w-100 mt-4 mb-4 p-3">
@@ -101,6 +100,7 @@ const Quadralab = () => {
                 {!loading ? (
                   <>
                     <Col style={{ visibility: !dimensionView ? "hidden" : "visible" }} className="d-flex flex-column justify-content-evenly ps-5 pe-5 quadralab_canvas_container">
+                      <img class="quadralab_bg" src="/logo/logo.svg" alt="" />
                       <ProductCanvas></ProductCanvas>
                     </Col>
                     <Col style={{ visibility: dimensionView ? "hidden" : "visible" }} className="d-flex flex-column justify-content-center align-items-center quadralab_2d_view">

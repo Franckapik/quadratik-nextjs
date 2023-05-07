@@ -656,6 +656,15 @@ h2 {
   width: 100%;
 }
 
+.quadralab_bg {
+  opacity: 0.6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+}
+
 .quadralab_params_left {
   position: absolute;
   z-index: 2;
