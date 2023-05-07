@@ -1,5 +1,6 @@
 import { Col, Row } from "react-bootstrap";
 import { Burger } from "./Burger";
+import Link from "next/link";
 
 export const Layout = ({ children, header, onePage, noburger, cart, contact, shop, home, sticky }) => {
   return (
@@ -9,10 +10,10 @@ export const Layout = ({ children, header, onePage, noburger, cart, contact, sho
           {!noburger ? <Col>
             <Burger></Burger>
           </Col> : null}
-          {cart ?<Col md={1}>Panier</Col> : null}
-          {shop ?<Col md={1}>Boutique</Col> : null}
-          {home ?<Col md={1}>Accueil</Col> : null}
-          {contact ?<Col md={1}>Contact</Col> : null}
+          {cart ?<Col md={1}> <Link href={"/shop/panier"}>Panier</Link></Col> : null}
+          {shop ?<Col md={1}><Link href={"/shop"}>Boutique</Link></Col> : null}
+          {home ?<Col md={1}><Link href={"/"}>Accueil</Link></Col> : null}
+          {contact ?<Col md={1}><Link href={"/contact"}>Contact</Link></Col> : null}
           <Col md={1} className="d-none d-md-flex"></Col>
         </Row>
       ) : null}

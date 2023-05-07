@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Layout } from "../../components/Layout";
 import { listCategories, objectsInCategory, variantFetchByParentId } from "../../components/dolibarrApi/fetch";
-import { ProductNavBar } from "../../components/quadralab/ProductNavBar";
+import { ProductNavBar } from "../../components/product/ProductNavBar";
 import { useAttributes } from "../../hooks/useAttributes";
 import { CardProduct } from "../../components/shop/CardProduct";
 import { useInView } from "@react-spring/web";

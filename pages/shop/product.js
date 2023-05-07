@@ -5,7 +5,7 @@ import { Layout } from "../../components/Layout";
 import { listCategories, objectsInCategory } from "../../components/dolibarrApi/fetch";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import { ProductHud } from "../../components/product/ProductHud";
-import { ProductNavBar } from "../../components/quadralab/ProductNavBar";
+import { ProductNavBar } from "../../components/product/ProductNavBar";
 import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
