@@ -10,7 +10,7 @@ const cards = ["./carte_savoirfaire.jpg", "./carte_ecoute.jpg", "./carte_ecoresp
 
 // Initials values of cards props.  These two are just helpers, they conserve spring data, values that are later being interpolated into css
 const to = (i) => ({
-  x: 0,
+  x: 0, 
   y: i * -4,
   scale: 1,
   rot: -10 + Math.random() * 20,
