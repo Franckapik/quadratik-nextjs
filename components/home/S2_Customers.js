@@ -33,6 +33,10 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
       src: "/customers/customer6.png",
       width: 548,
       height: 478,
+    },    {
+      src: "/customers/customer7.png",
+      width: 205,
+      height: 357,
     },
   ];
 
@@ -50,9 +54,14 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
               <span className="ft2 p-4">quelles que soient les dimensions de votre espace</span>
             </Row>
             <Row className="flex-nowrap">
-            <img src="Studios1.png" alt="Image du studio" className="p-3"></img>
+              <img src="Studios1.png" alt="Image du studio" className="p-3"></img>
             </Row>
+
             <Row className="d-flex">
+              <Col className="d-block d-md-none d-flex flex-column justify-content-center">
+                
+                <Gallery id="s2_mobile_gallery" rowHeight={80} maxRows={1} images={images}/>
+              </Col>
               <Button variant="primary" className="mt-4">
                 <i className="fad fa-projector"></i>Découvrir les réalisations
               </Button>

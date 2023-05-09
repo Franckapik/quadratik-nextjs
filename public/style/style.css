@@ -180,6 +180,11 @@ p {
 .h-20 {
   height: 10vh;
 }
+
+#s2_mobile_gallery > div {
+justify-content: space-evenly;
+}
+
 .left_creme {
   border-left: solid thin #d0c3b4;
 }
