@@ -1,16 +1,8 @@
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  LineElement,
-  PointElement,
-  Title,
-  Tooltip
-} from "chart.js";
+import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from "chart.js";
 import React from "react";
 import { Line } from "react-chartjs-2";
 import dataCsv from "../../public/performances/CSV/D2N7P15W50.csv";
+import { Row } from "react-bootstrap";
 
 export const PerformanceCharts = () => {
   const options = {
@@ -21,6 +13,7 @@ export const PerformanceCharts = () => {
         radius: 0,
         backgroundColor: "rgba(0,0,0,0)",
       },
+      maintainAspectRatio: false,
     },
   };
 
@@ -51,6 +44,11 @@ export const PerformanceCharts = () => {
   ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
   return (
-    <Line options={options} data={data} />
+   <><Row className="d-none d-md-flex ft8">
+      <Line options={options} data={data}  />
+    </Row>
+    <Row className="d-md-none ft8">
+      <Line options={options} data={data} width={100} height={80}/>
+    </Row></> 
   );
 };

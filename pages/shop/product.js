@@ -9,6 +9,7 @@ import { ProductNavBar } from "../../components/product/ProductNavBar";
 import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
+import ProductCanvas from "../../components/product/ProductCanvas";
 
 const Product = () => {
   //Data
@@ -24,8 +25,7 @@ const Product = () => {
   useProductStore.setState({ tag: tag }); //global state
 
   const [categories, setCategories] = useState([]);
-  const parentCategories = categories.filter((cat) => cat.fk_parent == 0).map(cat => ({...cat, ["label"] : cat.label.substring(5)}));
-console.log(parentCategories);
+  const parentCategories = categories.filter((cat) => cat.fk_parent == 0).map((cat) => ({ ...cat, ["label"]: cat.label.substring(5) }));
 
   //get all categories
   useEffect(() => {
@@ -54,34 +54,29 @@ console.log(parentCategories);
   }, [tag]);
 
   return (
-    <Layout onePage header shop cart >
-      <div className="s0_page_index">
+    <Layout onePage header shop cart>
+      <div className="s0_page_index d-none d-md-flex">
         {defaultProduct.label}
         <div className="trait"></div>Details du modèle
       </div>
-      <Row className="section flex_column">
+      <Row className="section">
         <ProductNavBar categories={parentCategories} />
         {!error ? (
-          <Row className="d-flex justify-content-evenly ft4 product_main_row ">
-            <Col md={2} className="d-flex flex-column justify-content-start product_attributes_col bg_darker p-4">
-              {!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
-            </Col>
-            <Col md={9} className="d-flex flex-column justify-content-start ps-5 pe-5">
+          <Row className="d-flex justify-content-evenly ft4 mt-2">
+            <Col md={2}>{!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}</Col>
+            <Col md={9} className="p-2">
               <Row className="justify-content-start text-center">
-                <Col className="ft6 p-2 product_tab bg_darker text-uppercase" onClick={() => setDisplay("model")}>
+                <Col className="ft6 p-2 product_tab   me-2 bg_darker text-uppercase" style={{top : display === "model" ? "1px" : "0px" }} onClick={() => setDisplay("model")}>
                   Modele
                 </Col>
-                <Col />
-                <Col className="ft6 p-2 product_tab  text-uppercase" onClick={() => setDisplay("coefDif")}>
+                <Col className="ft6 p-2 product_tab  me-2 bg_darker text-uppercase" style={{top : display === "coefDif" ? "1px" : "0px" }} onClick={() => setDisplay("coefDif")}>
                   Performances
                 </Col>
-                <Col />
-                <Col className="ft6 p-2 product_tab text-uppercase " onClick={() => setDisplay("plot")}>
+                <Col className="ft6 p-2 product_tab bg_darker text-uppercase " style={{top : display === "plot" ? "1px" : "0px" }} onClick={() => setDisplay("plot")}>
                   Spacialisation
                 </Col>
-                <Col />
               </Row>
-              <Row className="producthud_content border_creme bg_darker">
+              <Row className="producthud_content border_creme bg_darker p-2">
                 {!loading ? (
                   <>
                     {display === "coefDif" ? <PerformanceCharts /> : null}
@@ -91,6 +86,10 @@ console.log(parentCategories);
                 ) : (
                   "Chargement du modèle"
                 )}
+              </Row>{" "}
+              {/* // only for mobile */}
+              <Row className="d-md-none border_creme  mt-4">
+                <ProductCanvas></ProductCanvas>
               </Row>
             </Col>
           </Row>

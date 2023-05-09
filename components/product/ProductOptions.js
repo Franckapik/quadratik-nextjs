@@ -1,6 +1,6 @@
 import { queryTypes, useQueryStates } from "next-usequerystate";
 import { useEffect, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Collapse, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import useToggle from "../../hooks/useToggle";
 import { variantPost } from "../dolibarrApi/post";
@@ -47,7 +47,6 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
       };
     }, {});
 
-
     const variant = {
       weight_impact: 0,
       price_impact: price - basePrice,
@@ -56,7 +55,6 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
       reference: nomenclature?.complet,
       ref_ext: nomenclature?.simple,
     };
-
 
     variantPost(defaultProduct.id)
       .post("", variant)
@@ -77,54 +75,57 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
     return () => subscription.unsubscribe();
   }, []);
 
+  const [open, setOpen] = useState(false);
+
   return (
-    <FormProvider {...methods}>
-      <Form onSubmit={methods.handleSubmit(onSubmit)}>
-        <Form.Group className="">
-          <Row className="justify-content-center text-center">
-            <p className="text-center w-100  p-3">
-              <i className="fad fa-tools  me-4"></i>OPTIONS
-            </p>
+    <Row className="product_attributes_col bg_darker m-4 m-md-0">
+      <FormProvider {...methods}>
+        <Form onSubmit={methods.handleSubmit(onSubmit)} className="justify-content-center text-center ">
+          <Form.Label onClick={() => setOpen(!open)}>
+            OPTIONS <i className="fad fa-chevron-down ft2 m-2 chevron"></i>{" "}
+          </Form.Label>{" "}
+          <Collapse in={open}>
+            <Form.Group>
+              <Button variant="secondary" onClick={() => setMode()}>
+                {mode ? "Mode Basique" : "Mode Avancé"}
+              </Button>
 
-            <Row className=" justify-content-center flex-nowrap">
-              <Col>
-                <Button variant="secondary" onClick={() => setMode()}>
-                  {mode ? "Mode Basique" : "Mode Avancé"}
-                </Button>
-              </Col>
-            </Row>
-          </Row>
-        </Form.Group>
+              <Form.Group className=" p-2" controlId="product_simple">
+                {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
+                  const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+                  return <Field id={a[0]} type={mode ? a[1] : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+                })}
+              </Form.Group>
 
-        <Form.Group className="product_select_options" controlId="product_simple">
-          {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
-            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-            return <Field id={a[0]} type={mode ? a[1] : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-          })}
-        </Form.Group>
-
-        <Form.Group className="product_select_options" controlId="product_advanced">
-          {Object.entries(defaultProduct.attributes.advanced).map((a, i) => {
-            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-            return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-          })}
-        </Form.Group>
-
+              <Form.Group className=" p-2" controlId="product_advanced">
+                {Object.entries(defaultProduct.attributes.advanced).map((a, i) => {
+                  const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+                  return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+                })}
+              </Form.Group>
+            </Form.Group>
+          </Collapse>{" "}
+        </Form>
+      </FormProvider>
+    </Row>
+  );
+};
+{
+  /* 
         <p onClick={() => methods.reset()} className="text-center mt-4">
           -- Reset --
-        </p>
-
+        </p> */
+}
+{
+  /* 
         <Row className="product_button_add_basket justify-content-center">
           <Row className="product_ref text-center">
             <p>REF : {nomenclature?.structurel}</p>
+             <p className=" ft1 mt-3 text_green bg_darker">{price + " €"}</p>
           </Row>
           <Button variant="primary" type="submit" id="product_submit" className="mt-4">
             Ajouter au panier
           </Button>
-        </Row>
-      </Form>
-    </FormProvider>
-  );
-};
-
+        </Row> */
+}
 export default ProductOptions;
