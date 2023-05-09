@@ -59,7 +59,7 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
             </Row>
           </Col>
           <Col></Col>
-          <Col md={5} className="d-none d-md-flex s2_customers_photo">
+          <Col md={5} className="d-none d-md-block s2_customers_photo">
             <Gallery rowHeight={400} maxRows={2} images={images} />
           </Col>
         </Row>
