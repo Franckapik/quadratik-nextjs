@@ -8,6 +8,7 @@ import { usePrice } from "../../hooks/usePrice";
 import { useSizes } from "../../hooks/useSizes";
 import useToggle from "../../hooks/useToggle";
 import { Field } from "./Field";
+import { CardOptions } from "../product/CardOptions";
 
 const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   const [mode, setMode] = useToggle(true);
@@ -50,44 +51,8 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   }, []);
 
   return (
-    <Row className="quadralab_params_left quadralab_game_border quadralab_params bg_darker">
-      <Form.Group className="">
-        <Row className="justify-content-center text-center">
-          <p className="text-center w-100  p-3">
-            <i className="fad fa-tools me-4"></i>PARAMETRES
-          </p>
-
-          <Row className=" justify-content-center flex-nowrap">
-          <Col >
-                <Button variant="secondary" onClick={() => setMode()}>
-                  {mode ? "Mode Basique" : "Mode Avancé"}
-                </Button>
-              </Col>
-          </Row>
-        </Row>
-      </Form.Group>
-{/*       {mode ? (
-        <Form.Group className="justify-content-center">
-          {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
-            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-            return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-          })}
-        </Form.Group>
-      ) : (
-        <Form.Group className="">
-          {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
-            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-            let rangeArray;
-            if (a[1].includes("range")) {
-              rangeArray = a[1].replace("range", "").replace("[", "").replace("]", "").split(",");
-              return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={rangeArray[0]}></Field>;
-            } else {
-              return <Field id={a[0]} type={a[1]} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-            }
-          })}
-        </Form.Group>
-      )} */}
-              <Form.Group className="" controlId="product_simple">
+      <CardOptions title="parametres" opened="0" className="quadralab_params_left ">
+        <Form.Group className="" controlId="product_simple">
           {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
             const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
             return <Field id={a[0]} type={mode ? a[1] : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
@@ -97,17 +62,15 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
         <Form.Group className="" controlId="product_advanced">
           {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
             const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-            if(a[1].includes("[")) {
+            if (a[1].includes("[")) {
               const rangeArray = a[1].replace("range", "").replace("[", "").replace("]", "").split(",");
-              return <Field id={a[0]} type={!mode ? "notIdRange": "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={rangeArray[2]}></Field>;
+              return <Field id={a[0]} type={!mode ? "notIdRange" : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={rangeArray[2]}></Field>;
             } else {
               return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-
             }
-
           })}
         </Form.Group>
-    </Row>
+      </CardOptions>
   );
 };
 

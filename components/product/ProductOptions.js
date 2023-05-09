@@ -77,7 +77,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   }, []);
 
   return (
-    <CardOptions title="options">
+    <CardOptions title="options" opened="0" >
       <FormProvider {...methods}>
         <Form onSubmit={methods.handleSubmit(onSubmit)} className="justify-content-center text-center ">
           <Collapse in={open}>

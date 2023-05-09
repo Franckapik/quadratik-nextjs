@@ -63,7 +63,7 @@ const Product = () => {
         <ProductNavBar categories={parentCategories} />
         {!error ? (
           <Row className="d-flex justify-content-evenly ft4 mt-2">
-            <Col md={2}>{!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}</Col>
+            <Col md={3}>{!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}</Col>
             <Col md={9} className="p-2">
               <Row className="justify-content-start text-center">
                 <Col className="ft6 p-2 product_tab   me-2 bg_darker text-uppercase" style={{top : display === "model" ? "1px" : "0px" }} onClick={() => setDisplay("model")}>

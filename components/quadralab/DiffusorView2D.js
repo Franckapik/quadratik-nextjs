@@ -8,7 +8,7 @@ export const DiffusorView2D = () => {
 
 
   return (
-    <Row className="w-100">
+    <Row className="">
       <Row className="bg_darker pt-2 pb-2 mb-4">
         {Array(report2D.Type)
           .fill("")
