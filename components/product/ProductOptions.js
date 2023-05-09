@@ -9,6 +9,7 @@ import { usePrice } from "../../hooks/usePrice";
 import { useNomenclature } from "../../hooks/useNomenclature";
 import { useProductStore } from "../../hooks/store";
 import { useSizes } from "../../hooks/useSizes";
+import { CardOptions } from "./CardOptions";
 
 const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   const tag = useProductStore.getState().tag;
@@ -75,15 +76,10 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const [open, setOpen] = useState(false);
-
   return (
-    <Row className="product_attributes_col bg_darker m-4 m-md-0">
+    <CardOptions title="options">
       <FormProvider {...methods}>
         <Form onSubmit={methods.handleSubmit(onSubmit)} className="justify-content-center text-center ">
-          <Form.Label onClick={() => setOpen(!open)}>
-            OPTIONS <i className="fad fa-chevron-down ft2 m-2 chevron"></i>{" "}
-          </Form.Label>{" "}
           <Collapse in={open}>
             <Form.Group>
               <Button variant="secondary" onClick={() => setMode()}>
@@ -107,7 +103,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
           </Collapse>{" "}
         </Form>
       </FormProvider>
-    </Row>
+    </CardOptions>
   );
 };
 {
