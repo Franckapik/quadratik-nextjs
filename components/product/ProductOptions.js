@@ -80,7 +80,6 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
     <CardOptions title="options" opened="0" >
       <FormProvider {...methods}>
         <Form onSubmit={methods.handleSubmit(onSubmit)} className="justify-content-center text-center ">
-          <Collapse in={open}>
             <Form.Group>
               <Button variant="secondary" onClick={() => setMode()}>
                 {mode ? "Mode Basique" : "Mode Avancé"}
@@ -100,7 +99,6 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
                 })}
               </Form.Group>
             </Form.Group>
-          </Collapse>{" "}
         </Form>
       </FormProvider>
     </CardOptions>

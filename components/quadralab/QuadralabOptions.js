@@ -51,26 +51,30 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   }, []);
 
   return (
-      <CardOptions title="parametres" opened="0" className="quadralab_params_left ">
-        <Form.Group className="" controlId="product_simple">
-          {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
-            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-            return <Field id={a[0]} type={mode ? a[1] : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-          })}
-        </Form.Group>
+    <CardOptions title="parametres" opened="0">
+      <Button variant="secondary" onClick={() => setMode()}>
+        {mode ? "Mode Basique" : "Mode Avancé"}
+      </Button>
 
-        <Form.Group className="" controlId="product_advanced">
-          {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
-            const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-            if (a[1].includes("[")) {
-              const rangeArray = a[1].replace("range", "").replace("[", "").replace("]", "").split(",");
-              return <Field id={a[0]} type={!mode ? "notIdRange" : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={rangeArray[2]}></Field>;
-            } else {
-              return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-            }
-          })}
-        </Form.Group>
-      </CardOptions>
+      <Form.Group className="" controlId="product_simple">
+        {Object.entries(defaultProduct.attributes.quadralab.simple).map((a, i) => {
+          const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+          return <Field id={a[0]} type={mode ? a[1] : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+        })}
+      </Form.Group>
+
+      <Form.Group className="" controlId="product_advanced">
+        {Object.entries(defaultProduct.attributes.quadralab.advanced).map((a, i) => {
+          const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+          if (a[1].includes("[")) {
+            const rangeArray = a[1].replace("range", "").replace("[", "").replace("]", "").split(",");
+            return <Field id={a[0]} type={!mode ? "notIdRange" : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={rangeArray[2]}></Field>;
+          } else {
+            return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+          }
+        })}
+      </Form.Group>
+    </CardOptions>
   );
 };
 
