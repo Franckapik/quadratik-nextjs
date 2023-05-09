@@ -59,8 +59,8 @@ export const S2_Canvas = () => {
 
   return (
     <Row id="S2_Canvas" {...handlers} className="section p-0 m-0 justify-content-md-start justify-content-md-start">
-      <Col md={1}></Col>
-      <Col md={4} className="p-0 d-flex flex-row flex-md-column s2_customer_col text-creme justify-content-center align-items-center order-md-last">
+      <Col md={1} className="order-md-1 d-none d-md-flex"></Col>
+      <Col md={4} className="p-0 d-flex flex-row flex-md-column s2_customer_col text-creme justify-content-center align-items-center order-md-3">
         <Row className="w-100 justify-content-center text-center" onClick={() => handleClick("decrease")}>
           <p className="ft1 text_grey d-none d-md-flex justify-content-center"> {customers[circular(index - 1)]}</p>
           <i className="fad fa-chevron-up d-none d-md-inline"></i>
@@ -73,7 +73,7 @@ export const S2_Canvas = () => {
           <p className="ft1 text_grey d-none d-md-flex justify-content-center"> {customers[circular(index + 1)]}</p>
         </Row>
       </Col>{" "}
-      <Col md={7} className="order-md-first">
+      <Col md={7} className="order-md-2">
         <div className="s2_canvas_container">
           <Canvas dpr={1} shadows>
             <LoadCamera url={"/glb/scene_customers.glb"} />

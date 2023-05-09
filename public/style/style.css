@@ -185,6 +185,14 @@ p {
 justify-content: space-evenly;
 }
 
+.s2_modal_gallery .modal-content {
+  background-color: #332d2a;
+}
+.btn-close {
+  color: #fff!important; 
+  opacity: 1;
+}
+
 .left_creme {
   border-left: solid thin #d0c3b4;
 }
@@ -537,6 +545,7 @@ justify-content: space-evenly;
 .text-creme {
   color: #d0c3b4;
 }
+
 .text-justify {
   text-align: justify !important;
 }
