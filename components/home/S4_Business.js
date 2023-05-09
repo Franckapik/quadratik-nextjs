@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
 import { useDrag } from "react-use-gesture";
-import { useSprings, animated, to as interpolate, useInView } from "@react-spring/web";
+import { useSprings, animated, to as interpolate, useInView, useSpring } from "@react-spring/web";
 import Moment from "react-moment";
 import 'moment/locale/fr';
 
@@ -86,6 +86,15 @@ const Deck = ({ setVisibleCard }) => {
 export const S4_Business = () => {
   const [visibleCard, setVisibleCard] = useState(3);
   const [ref, inView] = useInView({once : true});
+
+  const [cursorRef, springs] = useInView(
+    () => ({
+      from: { left: 0 },
+      to: { left: 200 },
+      reverse: true,
+    })
+
+  )
 
   const switchList = (visibleCard) => {
     switch (visibleCard) {
@@ -207,12 +216,15 @@ export const S4_Business = () => {
             </Col>
             <Col md={6}  className="order-md-1">
               <div className={"s4_cards_container"}>
+
                 <img
                   src="./card_table.svg"
                   alt="Table des valeurs de l'entreprise Quadratik.fr"
                   className="s4_card_table"
                 />
                 {inView ? <Deck setVisibleCard={setVisibleCard} /> : null}
+                <animated.div style={springs} ref={cursorRef} className="s4_drag_icon ft05"><i className="fad fa-hand-pointer"></i></animated.div>
+
              </div>
             </Col>
           </Row>

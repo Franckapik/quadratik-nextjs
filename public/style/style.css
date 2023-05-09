@@ -677,6 +677,7 @@
   opacity:.7
   }
   
+  
   .s3_dif_diy {
   width:calc(40vh + 5vw)
   }
@@ -743,6 +744,11 @@
   
   .s3_row_icons div {
   position:relative!important
+  }
+
+  .s4_drag_icon {
+position: absolute;
+z-index : 2;
   }
   
   .s4_card_table {
