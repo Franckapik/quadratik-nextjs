@@ -6,7 +6,7 @@ export const Layout = ({ children, header, onePage, noburger, cart, contact, sho
   return (
     <>
       {header ? (
-        <Row style={{ position: sticky ? "sticky" : "relative" }} className="s0_header text-uppercase m-0 p-0 w-100 ">
+        <Row style={{ position: sticky ? "sticky" : "inherit" }} className="s0_header text-uppercase m-0 p-0 w-100 ">
           {!noburger ? (
             <Col>
               <Burger></Burger>
