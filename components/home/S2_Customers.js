@@ -53,7 +53,7 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
             <img src="Studios1.png" alt="Image du studio" className="p-3"></img>
             </Row>
             <Row className="d-flex">
-              <Button variant="primary" className="m-2">
+              <Button variant="primary" className="mt-4">
                 <i className="fad fa-projector"></i>Découvrir les réalisations
               </Button>
             </Row>

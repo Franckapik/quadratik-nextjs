@@ -48,47 +48,43 @@ export const S2_Canvas = () => {
 
   const handlers = useSwipeable({
     onSwiped: (eventData) => {
-      if(eventData.dir === "Right") {
+      if (eventData.dir === "Right") {
         handleClick("decrease");
       } else if (eventData.dir === "Left") {
         handleClick("increase");
-
       }
-    }
+    },
     /* ...config, */
   });
 
   return (
-    <Row id="S2_Canvas"  {...handlers} className="section p-0 m-0 justify-content-md-start justify-content-md-start">
+    <Row id="S2_Canvas" {...handlers} className="section p-0 m-0 justify-content-md-start justify-content-md-start">
       <Col md={1}></Col>
-      <Col md={7}>
-        <div className="s2_canvas_container">
-          <Canvas dpr={1} shadows>
-            <LoadCamera url={"/glb/scene_customers.glb"} />
-              <RotateScroll target={target}>
-                <LoadMesh url={"/glb/scene_customers.glb"} />
-                <LoadLight url={"/glb/scene_customers.glb"} />
-              </RotateScroll>
-              <ambientLight intensity={0.15} />
-          </Canvas>
-        </div>
-      </Col> <Col md={4} className="p-0 d-flex flex-row flex-md-column  s2_customer_col text-creme justify-content-center align-items-center">
+      <Col md={4} className="p-0 d-flex flex-row flex-md-column s2_customer_col text-creme justify-content-center align-items-center order-md-last">
         <Row className="w-100 justify-content-center text-center" onClick={() => handleClick("decrease")}>
-          <p className="ft1 text_grey d-none d-md-flex justify-content-center"> {customers[circular(index -1)]}</p>
+          <p className="ft1 text_grey d-none d-md-flex justify-content-center"> {customers[circular(index - 1)]}</p>
           <i className="fad fa-chevron-up d-none d-md-inline"></i>
           <i className="fad fa-chevron-left d-md-none"></i>
         </Row>
-        <Row className="s2_customer_title_container bg_darker d-flex justify-content-center align-items-center ft05 text-center ">
-       {customers[circular(index)]}
-        </Row>
+        <Row className="s2_customer_title_container bg_darker d-flex justify-content-center align-items-center ft05 text-center ">{customers[circular(index)]}</Row>
         <Row className="w-100 justify-content-center align-items-center text-center" onClick={() => handleClick("increase")}>
           <i className="fad fa-chevron-down d-none d-md-inline"></i>
           <i className="fad fa-chevron-right d-md-none"></i>
           <p className="ft1 text_grey d-none d-md-flex justify-content-center"> {customers[circular(index + 1)]}</p>
         </Row>
-      </Col>
-
-     
+      </Col>{" "}
+      <Col md={7} className="order-md-first">
+        <div className="s2_canvas_container">
+          <Canvas dpr={1} shadows>
+            <LoadCamera url={"/glb/scene_customers.glb"} />
+            <RotateScroll target={target}>
+              <LoadMesh url={"/glb/scene_customers.glb"} />
+              <LoadLight url={"/glb/scene_customers.glb"} />
+            </RotateScroll>
+            <ambientLight intensity={0.15} />
+          </Canvas>
+        </div>
+      </Col>{" "}
     </Row>
   );
 };
