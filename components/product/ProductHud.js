@@ -1,4 +1,4 @@
-import { Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import { Button, Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { useProductStore } from "../../hooks/store";
 import ProductCanvas from "./ProductCanvas";
 
@@ -26,7 +26,7 @@ const PerformanceRow = ({ value, text, icon }) => (
 
 export const ProductHud = () => {
   //just on page render
-  const price = useProductStore.getState().price;
+  const price = useProductStore(state => state.price)
   const nomenclature = useProductStore.getState().nomenclature;
 
   //need to re-render the page
@@ -39,8 +39,9 @@ export const ProductHud = () => {
   return (
     <Row className="">
       <Col md={5} className="d-flex flex-column justify-content-evenly ps-2 ps-md-4">
-        <Row className="text-center text-md-start">
-          <p className=" text-uppercase ft05 m-md-3">{nomenclature?.simple} </p>
+        <Row className="text-center text-md-start  m-md-3">
+          <p className=" text-uppercase ft05">{nomenclature?.simple} </p>
+          <p className=" ft1 mt-3 text_green">{price + " €"}</p>
         </Row>
         <Row className="d-flex flex-md-column">
           {tag != 2 ? (
@@ -50,7 +51,16 @@ export const ProductHud = () => {
             </>
           ) : null}
           <PerformanceRow value={`${sizes.longueur} x ${sizes.largeur} x ${sizes.profondeur} cm`} text="Dimension du modèle" icon="fad fa-box-open ft2" />
-        </Row>{" "}
+        </Row>
+
+        <Row className="product_button_add_basket justify-content-center">
+          <Row className="product_ref text-center">
+            <p>REF : {nomenclature?.structurel}</p>
+          </Row>
+          <Button variant="primary" type="submit" id="product_submit" className="mt-4">
+            Ajouter au panier
+          </Button>
+        </Row>
       </Col>
       <Col md={7} className="d-none d-md-flex product_canvas_container">
         <ProductCanvas></ProductCanvas>

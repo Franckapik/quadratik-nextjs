@@ -1,15 +1,14 @@
 import { queryTypes, useQueryStates } from "next-usequerystate";
-import { useEffect, useState } from "react";
-import { Button, Col, Collapse, Form, Row } from "react-bootstrap";
-import { FormProvider, useForm, useWatch } from "react-hook-form";
-import useToggle from "../../hooks/useToggle";
-import { variantPost } from "../dolibarrApi/post";
-import { Field } from "./Field";
-import { usePrice } from "../../hooks/usePrice";
-import { useNomenclature } from "../../hooks/useNomenclature";
+import { useEffect } from "react";
+import { Button, Form } from "react-bootstrap";
+import { useFormContext } from "react-hook-form";
 import { useProductStore } from "../../hooks/store";
+import { useNomenclature } from "../../hooks/useNomenclature";
+import { usePrice } from "../../hooks/usePrice";
 import { useSizes } from "../../hooks/useSizes";
+import useToggle from "../../hooks/useToggle";
 import { CardOptions } from "./CardOptions";
+import { Field } from "./Field";
 
 const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   const tag = useProductStore.getState().tag;
@@ -19,14 +18,15 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
     return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(cur.values[0]?.v_id) };
   }, 0);
 
+
   const [valuesSelected, setValuesSelected] = useQueryStates(defaultValuesQuery, {
     history: "push",
   });
 
   //global states
-  const nomenclature = useNomenclature(valuesSelected, tag, attributes);
-  const [price, basePrice] = usePrice(valuesSelected, defaultProduct, attributes);
-  useSizes(valuesSelected, attributes);
+  const nomenclature = useNomenclature(valuesSelected, 1, attributes, true);
+  usePrice(valuesSelected, defaultProduct, attributes, true);
+  useSizes(valuesSelected, attributes, true);
 
   //render Modele after ProductOptions
   useEffect(() => {
@@ -39,35 +39,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
     useProductStore.setState({ valuesSelected: valuesSelected });
   }, [valuesSelected]);
 
-  const onSubmit = async (data) => {
-    const features = Object.entries(data).reduce((acc, [i, a] = cur) => {
-      const getAttributeRef = Object.values(attributes).filter((val) => val.a_ref === i)[0];
-      return {
-        ...acc,
-        [getAttributeRef.a_id]: a,
-      };
-    }, {});
-
-    const variant = {
-      weight_impact: 0,
-      price_impact: price - basePrice,
-      price_impact_is_percent: false,
-      features: features,
-      reference: nomenclature?.complet,
-      ref_ext: nomenclature?.simple,
-    };
-
-    variantPost(defaultProduct.id)
-      .post("", variant)
-      .then((response) => {
-        console.log("Ajout du variant [ID]:", response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const methods = useForm();
+  const methods = useFormContext();
 
   useEffect(() => {
     const subscription = methods.watch((value) => {
@@ -78,8 +50,6 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
 
   return (
     <CardOptions title="options" opened="0" >
-      <FormProvider {...methods}>
-        <Form onSubmit={methods.handleSubmit(onSubmit)} className="justify-content-center text-center ">
             <Form.Group>
               <Button variant="secondary" onClick={() => setMode()}>
                 {mode ? "Mode Basique" : "Mode Avancé"}
@@ -99,27 +69,8 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
                 })}
               </Form.Group>
             </Form.Group>
-        </Form>
-      </FormProvider>
+
     </CardOptions>
   );
 };
-{
-  /* 
-        <p onClick={() => methods.reset()} className="text-center mt-4">
-          -- Reset --
-        </p> */
-}
-{
-  /* 
-        <Row className="product_button_add_basket justify-content-center">
-          <Row className="product_ref text-center">
-            <p>REF : {nomenclature?.structurel}</p>
-             <p className=" ft1 mt-3 text_green bg_darker">{price + " €"}</p>
-          </Row>
-          <Button variant="primary" type="submit" id="product_submit" className="mt-4">
-            Ajouter au panier
-          </Button>
-        </Row> */
-}
 export default ProductOptions;

@@ -268,10 +268,8 @@
   }
   
   .product_button_add_basket {
-  bottom:3vh;
-  left:25vw;
-  position:absolute;
-  width:50vw
+  position:relative;
+  bottom : 1vh;
   }
    
   .product_list_square {
@@ -293,7 +291,7 @@
   }
   
   .product_ref {
-  bottom:-10px;
+  bottom:-2.5vh;
   position:relative
   }
   
@@ -306,12 +304,7 @@
   position:relative;
   }
 
-  
-  .producthud_content {
-  min-height:70%;
-  }
-  
- 
+   
   .quadralab_2d_view {
   left:27%;
   position:absolute;
