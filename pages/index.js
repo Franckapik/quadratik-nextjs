@@ -11,6 +11,7 @@ import { S5_Contact } from "../components/home/S5_Contact";
 import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
 import { useBearStore } from "../hooks/store";
 import { Offcanvas } from "react-bootstrap";
+import { LayoutHome } from "../components/LayoutHome";
 
 const Home = () => {
   const parallax = useRef(null);
@@ -44,16 +45,12 @@ const Home = () => {
   const toggleShow = () => setShow((s) => !s);
 
   return (
-    <>      <Offcanvas show={show} onHide={handleClose}>
-    <Offcanvas.Header closeButton>
-      <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-    </Offcanvas.Header>
-    <Offcanvas.Body>Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.</Offcanvas.Body>
-  </Offcanvas>
-      <Burger></Burger> <VerticalSideIndex></VerticalSideIndex>
+    <>     
+    <LayoutHome header />
+     <VerticalSideIndex></VerticalSideIndex>
       <Parallax pages={8} ref={parallax}>
         <ParallaxLayer offset={0}>
-          <div onClick={toggleShow}><S0_Landing /></div>
+        <S0_Landing />
         </ParallaxLayer>
         <ParallaxLayer offset={1} sticky={{ start: 1, end: 2 }}>
           <S1_Product />
