@@ -172,18 +172,17 @@
 }
  */
 .burger {
+  position: relative;
+  left : 3vw;
   z-index: 5;
 }
 
 .header {
-  height: 80px!important;
+  height: calc(8vh + 2vw);
   z-index: 5;
 }
 
-.header > div {
-  display: flex!important;
-  justify-content: center;
-}
+
 
 .col,
 .row {
@@ -1080,6 +1079,13 @@ p {
 }
 
 @media (max-width: 575.98px) {
+
+  .header {
+    background-color: #332d2a;
+    border-bottom: solid thin #d0c3b4;
+  }
+
+
   .h-20 {
     height: 5vh;
   }

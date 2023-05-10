@@ -12,7 +12,7 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
     <>
       {header ? (
         <Row className="position-absolute h-100 text-uppercase m-0 p-0 w-100 ">
-          <Row className="header justify-content-end position-absolute align-items-center w-100 ft3">
+          <Row className="header justify-content-end position-absolute align-items-center w-100 ft4">
             {!noburger ? (
               <Col  xs={4} md={1} >
                 <Burger onClick={toggleShow} toggled={show}></Burger>

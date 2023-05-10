@@ -48,7 +48,7 @@ const Home = () => {
 
   return (
     <>     
-    <LayoutHome header contact={scroll < height * 2} shop={scroll < height * 2} />
+    <LayoutHome header contact={height > 800 ? scroll < height * 2 : true} shop={height > 748 ? scroll < height * 2 : true} />
      <VerticalSideIndex></VerticalSideIndex>
       <Parallax pages={8} ref={parallax}>
         <ParallaxLayer offset={0}>
