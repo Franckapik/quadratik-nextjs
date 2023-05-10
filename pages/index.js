@@ -41,12 +41,14 @@ const Home = () => {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const toggleShow = () => setShow((s) => !s);
+  const scroll = useBearStore((state) => state.scroll)
+  const height = useBearStore((state) => state.height)
+
+
 
   return (
     <>     
-    <LayoutHome header />
+    <LayoutHome header contact={scroll < height * 2} shop={scroll < height * 2} />
      <VerticalSideIndex></VerticalSideIndex>
       <Parallax pages={8} ref={parallax}>
         <ParallaxLayer offset={0}>

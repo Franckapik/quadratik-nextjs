@@ -172,10 +172,17 @@
 }
  */
 .burger {
-  left: calc(1.5vh + 1.5vw);
-  position: fixed !important;
-  top: 3vh;
   z-index: 5;
+}
+
+.header {
+  height: 80px!important;
+  z-index: 5;
+}
+
+.header > div {
+  display: flex!important;
+  justify-content: center;
 }
 
 .col,

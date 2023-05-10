@@ -12,30 +12,31 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
     <>
       {header ? (
         <Row className="position-absolute h-100 text-uppercase m-0 p-0 w-100 ">
-          {!noburger ? (
-            <Col>
-              <Burger onClick={toggleShow} toggled={show}></Burger>
-            </Col>
-          ) : null}
-          <Row className="justify-content-end d-none d-md-flex">
+          <Row className="header justify-content-end position-absolute align-items-center w-100 ft3">
+            {!noburger ? (
+              <Col  xs={4} md={1} >
+                <Burger onClick={toggleShow} toggled={show}></Burger>
+              </Col>
+            ) : null}
+            <Col></Col>
             {cart ? (
-              <Col md={1}>
+              <Col xs={4} md={1}>
                 {" "}
                 <Link href={"/shop/panier"}>Panier</Link>
               </Col>
             ) : null}
             {shop ? (
-              <Col md={1}>
+              <Col  xs={4} md={1}>
                 <Link href={"/shop"}>Boutique</Link>
               </Col>
             ) : null}
             {home ? (
-              <Col md={1}>
+              <Col  xs={4} md={1}>
                 <Link href={"/"}>Accueil</Link>
               </Col>
             ) : null}
             {contact ? (
-              <Col md={1}>
+              <Col  xs={4} md={1}>
                 <Link href={"/contact"}>Contact</Link>
               </Col>
             ) : null}
@@ -51,11 +52,22 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
         <Offcanvas.Body>
           {" "}
           <ListGroup variant="flush">
-            <Link href="/"><ListGroup.Item className="ft2">Accueil</ListGroup.Item></Link>
-            <Link href="/shop"> <ListGroup.Item className="ft2">Boutique</ListGroup.Item></Link>
-            <Link href="/quadralab"><ListGroup.Item className="ft2">Quadralab</ListGroup.Item></Link>
-            <Link href="/"><ListGroup.Item className="ft2">Les réalisations</ListGroup.Item></Link>
-            <Link href="/contact"><ListGroup.Item className="ft2">Contact</ListGroup.Item></Link>
+            <Link href="/">
+              <ListGroup.Item className="ft2">Accueil</ListGroup.Item>
+            </Link>
+            <Link href="/shop">
+              {" "}
+              <ListGroup.Item className="ft2">Boutique</ListGroup.Item>
+            </Link>
+            <Link href="/quadralab">
+              <ListGroup.Item className="ft2">Quadralab</ListGroup.Item>
+            </Link>
+            <Link href="/">
+              <ListGroup.Item className="ft2">Les réalisations</ListGroup.Item>
+            </Link>
+            <Link href="/contact">
+              <ListGroup.Item className="ft2">Contact</ListGroup.Item>
+            </Link>
           </ListGroup>
         </Offcanvas.Body>
       </Offcanvas>
