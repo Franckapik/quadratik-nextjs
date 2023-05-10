@@ -1,7 +1,7 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Button, Col, Form, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { Layout } from "../../components/Layout";
 import { objectsInCategory } from "../../components/dolibarrApi/fetch";
@@ -11,34 +11,7 @@ import ProductCanvas from "../../components/quadralab/ProductCanvas";
 import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
-
-const QuadralabPerformances = ({ nomenclature, fmin, fmax, cwidth, weightPoplar, report2D, area, volume }) => (
-  <Col className="flex flex-column quadralab_hud_col quadralab_params quadralab_game_border bg_darker ps-4 pe-4">
-    <p className="text-center w-100 mt-4 mb-4 p-3">
-      <i className="fad fa-stream"></i> REF : {nomenclature?.structurel}
-    </p>
-    <PerformanceWidget icon="fad fa-bolt" value={`${fmin} Hz - ${fmax} Hz`} color="#f26565" performance={((fmax - fmin) * 100) / 10000} tooltip={"La plage de fréquence traitée"} /> {/* 10k audio frequency */}
-    <PerformanceWidget icon="fad fa-weight" value={`${weightPoplar} kg // ${report2D?.lengthWells?.toFixed(0)} cm`} color="#8ea65f" performance={(weightPoplar * 100) / 30} tooltip={"Le poids du diffuseur estimé si construit en peuplier. La longueur totale des hauteurs de puits du diffuseur"} />
-    <PerformanceWidget icon="fad fa-sort-size-down" value={`${(cwidth * 10).toFixed(0)} mm`} color="#f1b672" performance={100 - (cwidth * 10 * 100) / 90} tooltip={"La taille des cellules. Plus elle est petite, plus les aigus sont traités"} />
-    <PerformanceWidget icon="fad fa-box-open" value={`${area} m2 // ${volume} m3`} color="#7cb0eb" performance={(volume * 100) / 0.144} tooltip={"L'aire traitée par le diffuseur et le volume (boite) qu'il occupe"} /> {/* 120 * 60 * 20cm */}
-  </Col>
-);
-
-const PerformanceWidget = ({ icon, value, color, performance, tooltip }) => {
-  return (
-    <OverlayTrigger key={"left"} placement={"left"} overlay={<Tooltip id={`tooltip-${value}`}>{tooltip}</Tooltip>}>
-      <Row className="quadralab_performance_widget">
-        <div className="flex quadralab_round quadralab_game_border bg_dark ">
-          <i className={icon}></i>
-        </div>
-        <div className="flex quadralab_line quadralab_game_border ">
-          <div className="h-100" style={{ width: `${performance}%`, maxWidth: "100%", backgroundColor: color }}></div>
-        </div>
-        <p className="quadralab_perf_value text-end ft7">{value}</p>
-      </Row>
-    </OverlayTrigger>
-  );
-};
+import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerformances";
 
 const Quadralab = () => {
   //Data
@@ -91,56 +64,85 @@ const Quadralab = () => {
   return (
     <>
       {!error ? (
-        <Row className="quadralab_main_row justify-content-center align-items-center">
-          <Layout header contact home>
-            <FormProvider {...methods}>
-              <Form onSubmit={methods.handleSubmit(onSubmit)}>
-                <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
+        <Row className="section quadralab_main_row">
+          <FormProvider {...methods}>
+            <Form onSubmit={methods.handleSubmit(onSubmit)}>
+              <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
 
-                {!fetching ? <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}
+              {/*Canvas*/}
+              {!loading ? (
+                <Row className="quadralab_canvas_container justify-content-center align-items-center">
+                  <Col md={12} style={{ visibility: !dimensionView ? "hidden" : "visible" ,height : !dimensionView ? "1%" : "100%" }}>
+                    <ProductCanvas></ProductCanvas>
+                  </Col>
+                  <Col md={8} style={{ visibility: dimensionView ? "hidden" : "visible" }}>
+                    <DiffusorView2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} />
+                  </Col>
+                </Row>
+              ) : (
+                "Chargement du modèle"
+              )}
+              <Row className="justify-content-evenly mt-md-5">
+                {/* Options */}
 
-                {!loading ? (
-                  <>
-                    <Col style={{ visibility: !dimensionView ? "hidden" : "visible" }} className="d-flex flex-column justify-content-evenly ps-5 pe-5 quadralab_canvas_container">
-                      <ProductCanvas></ProductCanvas>
+                <>
+                  {!fetching ? (
+                    <Col md={3} className="order-md-1">
+                      <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />{" "}
                     </Col>
-                    <Col style={{ visibility: dimensionView ? "hidden" : "visible" }} className="d-flex flex-column justify-content-center align-items-center quadralab_2d_view">
-                      <DiffusorView2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} />
-                    </Col>
-                  </>
-                ) : (
-                  "Chargement du modèle"
-                )}
+                  ) : (
+                    "Chargement des options du produit"
+                  )}
 
-                <Row className="w-100 justify-content-center align-items-center quadralab_title ">
-                  <Row className="text-center">
+                  {/*Parametres*/}
+                  {!fetching ? (
+                    <Col md={3} className="order-md-3">
+                      <QuadralabPerformances nomenclature={nomenclature} fmin={fmin} fmax={fmax} cwidth={cwidth} weightPoplar={weightPoplar} report2D={report2D} area={area} volume={volume} sizes={sizes} woodArea={woodArea} woodVolume={woodVolume} />
+                    </Col>
+                  ) : (
+                    "Chargement des performances du produit"
+                  )}
+                </>
+
+                {/*Display*/}
+
+                <Col md={4} className="order-md-2 quadralab_title">
+                  <Row className="text-center mt-4">
                     <Link href={{ pathname: "/shop/product", query: valuesSelected }}>
                       <p className="ft4 mb-1">
-                        <i className="fad fa-store m-2"></i> Modèle similaire disponible : {nomenclature?.simple} ({price} €)
+                        <i className="fad fa-store m-2"></i> Modèle similaire : {nomenclature?.simple} ({price} €)
                       </p>
                     </Link>
                   </Row>
 
-                  <Row className="justify-content-center align-items-center mt-4">
-                    <Form.Check type={"switch"} id="dimension-switch" label={"3D / 2D"} onChange={(e) => setDimensionView(!dimensionView)} />
-                    <Form.Check type={"switch"} id="ratio-switch" label={"Hauteur / Ratio"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
-                    <Form.Check type={"switch"} id="highlight-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
+                  <Row className="justify-content-center align-items-center mt-4 ft4">
+                    <Col>
+                      {" "}
+                      <Form.Check type={"switch"} id="dimension-switch" label={"3D / 2D"} onChange={(e) => setDimensionView(!dimensionView)} />
+                    </Col>
+                    <Col>
+                      {" "}
+                      <Form.Check type={"switch"} id="ratio-switch" label={"Cm / %"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
+                    </Col>
+                    <Col>
+                      {" "}
+                      <Form.Check type={"switch"} id="highlight-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
+                    </Col>
                   </Row>
-                </Row>
+                </Col>
+              </Row>
 
-                <Row className="quadralab_devis_button text-center w-100 justify-content-center ">
-                  <Button variant="ternary" className="mt-4" onClick={handleShow}>
-                    Plans de fabrication
+                      <Row className="quadralab_devis_button text-center w-100 justify-content-center ">
+                  <Button variant="ternary"  onClick={handleShow}>
+                    PLANS de fabrication
                   </Button>
-                  <Button variant="primary" type="submit" className=" mt-4">
+                  <Button variant="primary" type="submit" >
                     Demander un devis
                   </Button>
-                </Row>
-                <ModalReport2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} report2D={report2D} show={show} setShow={setShow} handleClose={handleClose} />
-                <QuadralabPerformances nomenclature={nomenclature} fmin={fmin} fmax={fmax} cwidth={cwidth} weightPoplar={weightPoplar} report2D={report2D} area={area} volume={volume} sizes={sizes} woodArea={woodArea} woodVolume={woodVolume} />
-              </Form>
-            </FormProvider>
-          </Layout>
+                </Row> 
+              <ModalReport2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} report2D={report2D} show={show} setShow={setShow} handleClose={handleClose} />
+            </Form>
+          </FormProvider>
         </Row>
       ) : (
         "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire

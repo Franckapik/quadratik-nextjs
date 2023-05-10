@@ -1,7 +1,11 @@
-import { Button, Col, Row } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Col, Modal, Row } from "react-bootstrap";
 import { Gallery } from "react-grid-gallery";
+import { useBearStore } from "../../hooks/store";
 
 export const S2_Customers = ({ scroll, vh, mobile }) => {
+
+  const height = useBearStore((state) => state.height)
   const images = [
     {
       src: "/customers/customer3.png",
@@ -34,7 +38,14 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
       width: 548,
       height: 478,
     },
+    {
+      src: "/customers/customer7.png",
+      width: 205,
+      height: 357,
+    },
   ];
+
+  const [lgShow, setLgShow] = useState(false);
 
   return (
     <Row id="s2_customers " className="section p-0 m-0 bg_darker justify-content-md-start justify-content-md-start">
@@ -50,20 +61,36 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
               <span className="ft2 p-4">quelles que soient les dimensions de votre espace</span>
             </Row>
             <Row className="flex-nowrap">
-            <img src="Studios1.png" alt="Image du studio" className="p-3"></img>
+              <img src="Studios1.png" alt="Image du studio" className="p-3"></img>
             </Row>
+
             <Row className="d-flex">
-              <Button variant="primary" className="mt-4">
+              <Col className="d-block d-md-none d-flex flex-column justify-content-center">
+                <Gallery id="s2_mobile_gallery" rowHeight={80} maxRows={1} images={images} />
+              </Col>
+              <Button variant="primary" className="mt-4" onClick={() => setLgShow(true)}>
                 <i className="fad fa-projector"></i>Découvrir les réalisations
               </Button>
             </Row>
           </Col>
           <Col></Col>
-          <Col md={5} className="d-none d-md-flex s2_customers_photo">
+          <Col md={5} className="d-none d-md-block s2_customers_photo">
             <Gallery rowHeight={400} maxRows={2} images={images} />
           </Col>
         </Row>
       </Col>
+
+      <Modal show={lgShow} onHide={() => setLgShow(false)} fullscreen={true} theme>
+        <Modal.Header closeButton>
+          <Modal.Title className="text-dark">Les réalisations Quadratik</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body className="s2_modal_gallery bg_dark">
+          <Col className="s2_customers_photo">
+            <Gallery rowHeight={height/2.3} images={images} />
+          </Col>
+        </Modal.Body>
+      </Modal>
     </Row>
   );
 };

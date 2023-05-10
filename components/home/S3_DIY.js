@@ -36,10 +36,10 @@ export const S3_DIY = () => {
       <Col md={11} className="d-flex flex_column h-100 justify-content-center align-items-center">
         <Row className="s3_diy_bg justify-content-center align-items-center p-2 p-md-5">
           <Col md={6} className="d-flex flex-column s3_diy_guide_text  order-md-last ">
-            <Row className="pb-md-4">
+            <Row className="pb-md-4 d-none d-md-flex">
               <img alt="encart industriel du haut" src="./Indus_haut.svg"></img>
             </Row>
-            <Row className="justify-content-center ft4 text-uppercase text-center">Comment fonctionne un diffuseur ?</Row>
+            <Row className="justify-content-center ft4 text-uppercase text-center  mb-4">Comment fonctionne un diffuseur ?</Row>
             <Row className="d-flex s2_hor_swipe s3_diy_swipe flex-nowrap p-md-0 align-items-center text-center">
               <div className="s3_arrow d-flex d-md-none justify-content-center align-items-center h-100">
                 <i className="fad fa-chevron-left "></i>
@@ -63,18 +63,18 @@ export const S3_DIY = () => {
                 <i className="fad fa-chevron-right "></i>
               </div>
             </Row>
-            <Row className="s3_row_explanation ft4 pt-md-4">{switchExplanation(explanation)}</Row>
+            <Row className="s3_row_explanation ft4 mt-4">{switchExplanation(explanation)}</Row>
             <Row className="d-md-none pt-2 ">
-              <Button variant="primary" className="button_home m-auto" href="/quadralab">
+              <Button variant="primary" className="button_home m-auto mt-4" href="/quadralab">
                 <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
               </Button>
             </Row>
-            <Row>
+            <Row className="d-none d-md-flex">
               <img alt="encart industriel du bas" src="./Indus_bas.svg"></img>
             </Row>
           </Col>
           <Col md={6} className="d-none d-md-flex flex-column justify-content-evenly align-items-center s3_diy_draw p-0 order-md-first ">
-            <Row className="pt-2 ">
+            <Row>
               <Button variant="primary" className="button_home m-auto" href="/quadralab">
                 <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
               </Button>
@@ -86,7 +86,7 @@ export const S3_DIY = () => {
                 <span>Couleur</span>
               </div>
             </Row>
-            <Row className=" s3_dif_diy mt-4">
+            <Row className="s3_dif_diy mt-4">
               <img src="./diy_diffuseur.svg" alt="Image d'un diffuseur personnalisé" />
             </Row>
           </Col>

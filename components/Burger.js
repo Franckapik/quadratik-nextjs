@@ -1,10 +1,7 @@
 import { animated, useInView } from "@react-spring/web";
-import { Turn as Hamburger } from "hamburger-react";
-import { useState } from "react";
-import { Col } from "react-bootstrap";
+import { Spin as Hamburger } from "hamburger-react";
 
-export const Burger = () => {
-  const [isOpen, setOpen] = useState(false);
+export const Burger = ({onClick, toggled}) => {
   const [ref, springs] = useInView(
     () => ({
       from: {
@@ -18,8 +15,10 @@ export const Burger = () => {
   );
 
   return (
-    <animated.div ref={ref} style={springs} className="burger">
-        <Hamburger toggled={isOpen} toggle={setOpen} color="#FFFFFF" />
-    </animated.div>
+    <>
+      <animated.div ref={ref} style={springs} className="burger" onClick={onClick}>
+        <Hamburger direction="right" toggled={toggled}  color="#FFFFFF" />
+      </animated.div>
+    </>
   );
 };

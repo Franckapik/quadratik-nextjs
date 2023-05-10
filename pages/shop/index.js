@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
-import { Layout } from "../../components/Layout";
+import { LayoutHome } from "../../components/LayoutHome";
 import { listCategories, objectsInCategory, variantFetchByParentId } from "../../components/dolibarrApi/fetch";
 import { ProductNavBar } from "../../components/product/ProductNavBar";
 import { useAttributes } from "../../hooks/useAttributes";
@@ -137,14 +137,16 @@ const Product = () => {
   }, []);
 
   return (
-    <Layout onePage header cart contact sticky>
-      <div className="s0_page_index position-fixed">
+    <>
+      <div className="s0_page_index d-none d-md-flex position-fixed">
         {parentCategories.filter((cat) => cat.id == viewedCategory)[0]?.label}
         <div className="trait"></div>Boutique
       </div>
       <Row className="section">
-        <ProductNavBar categories={parentCategories} viewedCategory={viewedCategory} />
-        <Row className="shop_main_row">
+      <LayoutHome header cart home />
+
+{/*         <ProductNavBar categories={parentCategories} viewedCategory={viewedCategory} />
+ */}        <Row className="shop_main_row">
           <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center border_creme_light text-dark">
             <img src="/shop/Anemone-7.png" />
             <span className="shop_product_title ft2 ">Anemone-710</span>
@@ -154,8 +156,8 @@ const Product = () => {
             return <ParentCategorie firstCat={firstCat} childCategories={childCategories} attributes={attributes} setViewedCategory={setViewedCategory} />;
           })}
         </Row>
-      </Row>
-    </Layout>
+      </Row></>
+
   );
 };
 

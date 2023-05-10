@@ -10,6 +10,8 @@ import { S4_Business } from "../components/home/S4_Business";
 import { S5_Contact } from "../components/home/S5_Contact";
 import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
 import { useBearStore } from "../hooks/store";
+import { Offcanvas } from "react-bootstrap";
+import { LayoutHome } from "../components/LayoutHome";
 
 const Home = () => {
   const parallax = useRef(null);
@@ -37,12 +39,20 @@ const Home = () => {
     useBearStore.setState({ height: parallax.current.space });
   }, []);
 
+  const [show, setShow] = useState(false);
+
+  const scroll = useBearStore((state) => state.scroll)
+  const height = useBearStore((state) => state.height)
+
+
+
   return (
-    <>
-      <Burger></Burger> <VerticalSideIndex></VerticalSideIndex>
+    <>     
+    <LayoutHome header contact={height > 800 ? scroll < height * 2 : true} shop={height > 748 ? scroll < height * 2 : true} />
+     <VerticalSideIndex></VerticalSideIndex>
       <Parallax pages={8} ref={parallax}>
         <ParallaxLayer offset={0}>
-          <S0_Landing />
+        <S0_Landing />
         </ParallaxLayer>
         <ParallaxLayer offset={1} sticky={{ start: 1, end: 2 }}>
           <S1_Product />
