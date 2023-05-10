@@ -5,6 +5,7 @@ export const usePrice = (valuesSelected, defaultProduct, attributes, isQuadralab
   const [price, setPrice] = useState(0);
   const [basePrice, setBasePrice] = useState(0);
   useProductStore.setState({ price: price });
+  useProductStore.setState({ baseprice: basePrice });
 
   useEffect(() => {
     const basePrice = parseFloat(defaultProduct.price_ttc);

@@ -12,6 +12,7 @@ import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
 import { PerformanceSpatial } from "../../components/product/ParformanceSpatial";
+import {variantPost} from '../../components/dolibarrApi/post';
 
 const Product = () => {
   //Data
@@ -30,6 +31,7 @@ const Product = () => {
   const parentCategories = categories.filter((cat) => cat.fk_parent == 0).map((cat) => ({ ...cat, ["label"]: cat.label.substring(5) }));
   const nomenclature = useProductStore((state) => state.nomenclature);
   const price = useProductStore((state) => state.price);
+  const baseprice = useProductStore((state) => state.baseprice);
 
   //get all categories
   useEffect(() => {
@@ -70,7 +72,7 @@ const Product = () => {
 
     const variant = {
       weight_impact: 0,
-      price_impact: price - basePrice,
+      price_impact: price - baseprice,
       price_impact_is_percent: false,
       features: features,
       reference: nomenclature?.complet,
