@@ -13,6 +13,7 @@ import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
 import { PerformanceSpatial } from "../../components/product/ParformanceSpatial";
 import {variantPost} from '../../components/dolibarrApi/post';
+import { LayoutHome } from "../../components/LayoutHome";
 
 const Product = () => {
   //Data
@@ -90,7 +91,8 @@ const Product = () => {
   };
 
   return (
-    <Layout onePage header shop cart>
+    <>
+    <LayoutHome header shop cart />
       <div className="s0_page_index d-none d-md-flex">
         {defaultProduct.label}
         <div className="trait"></div>Details du modèle
@@ -136,8 +138,7 @@ const Product = () => {
         ) : (
           "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
         )}
-      </Row>
-    </Layout>
+      </Row></>
   );
 };
 
