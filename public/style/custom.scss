@@ -1,0 +1,69 @@
+//prendre dans variables_non_used et retirer default pour modifier une variable de bootstrap.
+
+
+$white:    #d0c3b4 ;
+$gray-100: #f8f9fa ;
+$gray-200: #e9ecef ;
+$gray-300: #dee2e6 ;
+$gray-400: #ced4da ;
+$gray-500: #adb5bd ;
+$gray-600: #6c757d ;
+$gray-700: #495057 ;
+$gray-800: #343a40 ;
+$gray-900: #212529 ;
+$black:    #2f2a28 ;
+$dark:    #2f2a28 ;
+// scss-docs-end gray-color-variables
+
+// fusv-disable
+// scss-docs-start gray-colors-map
+$grays: (
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+) ;
+// scss-docs-end gray-colors-map
+// fusv-enable
+
+// scss-docs-start color-variables
+$blue:    #b4bfd0 ;
+$indigo:  #d3b8ff ;
+$purple:  #c8b0f4 ;
+$pink:    #f8c6df ;
+$red:     #e07e7e ;
+$orange:  #fdc495 ;
+$yellow:  #f7da82 ;
+$green:   #9fb07c ;
+$teal:    #a0d1c2 ;
+$cyan:    #99cfd9 ;
+// scss-docs-end color-variables
+
+$modal-content-color:               $dark ;
+
+$body-bg:                   $dark ;
+$body-color:                $white ;
+
+$font-family-sans-serif:      futura-light ;
+$font-family-monospace:       alcubierre ;
+
+$input-btn-padding-y:         1.5rem ;
+$input-btn-padding-x:         .75rem ;
+
+$list-group-border-width:    0;
+
+
+// scss-docs-start theme-color-variables
+$primary:       $green ;
+$secondary:     $gray-600 ;
+$success:       $yellow ;
+$info:          $cyan ;
+$warning:       $orange ;
+$danger:        $red ;
+$light:         $white ;
+$dark:          $black ;

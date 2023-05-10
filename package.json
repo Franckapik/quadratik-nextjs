@@ -35,6 +35,7 @@
     "zustand": "^4.3.7"
   },
   "devDependencies": {
-    "csv-loader": "^3.0.5"
+    "csv-loader": "^3.0.5",
+    "sass": "^1.62.1"
   }
 }
