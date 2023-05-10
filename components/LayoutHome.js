@@ -1,4 +1,4 @@
-import { Col, Offcanvas, Row } from "react-bootstrap";
+import { Button, Col, ListGroup, Offcanvas, Row } from "react-bootstrap";
 import { Burger } from "./Burger";
 import Link from "next/link";
 import { useState } from "react";
@@ -14,7 +14,7 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
         <Row className="position-absolute h-100 text-uppercase m-0 p-0 w-100 ">
           {!noburger ? (
             <Col>
-              <Burger  onClick={toggleShow} toggled={show}></Burger>
+              <Burger onClick={toggleShow} toggled={show}></Burger>
             </Col>
           ) : null}
           <Row className="justify-content-end d-none d-md-flex">
@@ -46,9 +46,18 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title className="text-uppercase me-4">Quadratik</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.</Offcanvas.Body>
+        <Offcanvas.Body>
+          {" "}
+          <ListGroup variant="flush">
+            <Link href="/"><ListGroup.Item className="ft2">Accueil</ListGroup.Item></Link>
+            <Link href="/shop"> <ListGroup.Item className="ft2">Boutique</ListGroup.Item></Link>
+            <Link href="/quadralab"><ListGroup.Item className="ft2">Quadralab</ListGroup.Item></Link>
+            <Link href="/"><ListGroup.Item className="ft2">Les réalisations</ListGroup.Item></Link>
+            <Link href="/contact"><ListGroup.Item className="ft2">Contact</ListGroup.Item></Link>
+          </ListGroup>
+        </Offcanvas.Body>
       </Offcanvas>
     </>
   );
