@@ -11,20 +11,15 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
   return (
     <>
       {header ? (
-        <Row className="position-absolute h-100 text-uppercase m-0 p-0 w-100 ">
-          <Row className="header justify-content-end position-absolute align-items-center w-100 ft4">
+                <Row className="position-absolute h-100 text-uppercase m-0 p-0 w-100 ">
+          <Row className="header justify-content-end position-sticky align-items-center text-uppercase w-100 ft4">
             {!noburger ? (
               <Col  xs={4} md={1} >
                 <Burger onClick={toggleShow} toggled={show}></Burger>
               </Col>
             ) : null}
             <Col></Col>
-            {cart ? (
-              <Col xs={4} md={1}>
-                {" "}
-                <Link href={"/shop/panier"}>Panier</Link>
-              </Col>
-            ) : null}
+
             {shop ? (
               <Col  xs={4} md={1}>
                 <Link href={"/shop"}>Boutique</Link>
@@ -35,6 +30,12 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
                 <Link href={"/"}>Accueil</Link>
               </Col>
             ) : null}
+                        {cart ? (
+              <Col xs={4} md={1}>
+                {" "}
+                <Link href={"/shop/panier"}>Panier</Link>
+              </Col>
+            ) : null}
             {contact ? (
               <Col  xs={4} md={1}>
                 <Link href={"/contact"}>Contact</Link>
@@ -42,7 +43,7 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
             ) : null}
             <Col md={1} className="d-none d-md-flex"></Col>
           </Row>
-        </Row>
+                  </Row>
       ) : null}
 
       <Offcanvas show={show} onHide={handleClose}>
