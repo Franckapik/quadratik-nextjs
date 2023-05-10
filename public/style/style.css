@@ -738,7 +738,7 @@
 
 .s4_swipe_icon {
   position: absolute;
-  bottom: 10%;
+  bottom: 2vw;
   left : 35%;
   z-index: 2;
   animation-name: slidein;
