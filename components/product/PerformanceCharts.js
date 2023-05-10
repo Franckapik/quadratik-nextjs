@@ -3,42 +3,27 @@ import Papa from "papaparse";
 import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
 import { Line } from "react-chartjs-2";
-import { documentByFilename, documentByProductId } from "../dolibarrApi/fetch";
+import { documentByFilename, performancesByProductId } from "../dolibarrApi/fetch";
 
 export const PerformanceCharts = ({ nomenclature }) => {
   const [performances, setperformances] = useState({});
   const [error, setError] = useState(false);
 
-  Object.filter = (obj, predicate) =>
-    Object.keys(obj)
-      .filter((key) => predicate(obj[key]))
-      .reduce((res, key) => ((res[key] = obj[key]), res), {});
-
   useEffect(() => {
     if (nomenclature) {
-      documentByProductId(8)
-        .get()
-        .then((response) => {
-          const csvObj = Object.filter(response.data.ecmfiles_infos, (val) => val.filename.includes(nomenclature.performance));
-          if (Object.keys(csvObj).length) {
-            console.log(nomenclature.performance);
-            const filename = Object.values(csvObj)[0].filename;
-            const filepath = Object.values(csvObj)[0].filepath.replace("produit/", "");
-            documentByFilename(filepath + "/" + filename)
-              .get()
-              .then((response) => {
-                let buff = new Buffer(response.data.content, "base64");
-                let text = buff.toString("ascii");
-                let parsedCsv = Papa.parse(text).data;
-                parsedCsv.shift();
-                setperformances({
-                  labels: parsedCsv.map((a, i) => parseFloat(a[0].replace(/,/g, "."))),
-                  difCoef: parsedCsv.map((a, i) => parseFloat(a[1].replace(/,/g, "."))),
-                  scatCoef: parsedCsv.map((a, i) => parseFloat(a[2].replace(/,/g, "."))),
-                });
-              })
-          }
-        })
+      documentByFilename("Frequencies/" + nomenclature.performance +".csv")
+      .get()
+      .then((response) => {
+        let buff = new Buffer(response.data.content, "base64");
+        let text = buff.toString("ascii");
+        let parsedCsv = Papa.parse(text).data;
+        parsedCsv.shift();
+        setperformances({
+          labels: parsedCsv.map((a, i) => parseFloat(a[0].replace(/,/g, "."))),
+          difCoef: parsedCsv.map((a, i) => parseFloat(a[1].replace(/,/g, "."))),
+          scatCoef: parsedCsv.map((a, i) => parseFloat(a[2].replace(/,/g, "."))),
+        });
+      })
         .catch((error) => {
           setError(true);
           console.log(error);

@@ -11,6 +11,7 @@ import { ProductNavBar } from "../../components/product/ProductNavBar";
 import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
+import { PerformanceSpatial } from "../../components/product/ParformanceSpatial";
 
 const Product = () => {
   //Data
@@ -115,7 +116,7 @@ const Product = () => {
                   {!loading ? (
                     <>
                       {display === "coefDif" ? <PerformanceCharts nomenclature={nomenclature} /> : null}
-                      {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
+                      {display === "plot"   ? <PerformanceSpatial nomenclature={nomenclature}/> : null}
                       {display === "model" ? <ProductHud /> : null}
                     </>
                   ) : (

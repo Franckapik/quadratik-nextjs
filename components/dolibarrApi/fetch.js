@@ -52,12 +52,19 @@ const attributesAllFetch = () => axios.create({
       DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
   });
+  const performancesByProductId = (id) => axios.create({
+    baseURL: `https://shop.quadratik.fr/api/index.php/documents?modulepart=ecm&id=${id}`,
+    headers: {
+      Accept: "application/json",
+      DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
+    },
+  });
   const documentByFilename = (filename) => axios.create({
-    baseURL: `https://shop.quadratik.fr/api/index.php/documents/download?modulepart=product&&original_file=${filename}`,
+    baseURL: `https://shop.quadratik.fr/api/index.php/documents/download?modulepart=ecm&&original_file=${filename}`,
     headers: {
       Accept: "application/json",
       DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
   });
 
-  export {attributesAllFetch, productFetchById, attributesFetchById, listCategories, objectsInCategory, documentByProductId, variantFetchByParentId, documentByFilename}
+  export {attributesAllFetch, productFetchById, attributesFetchById, listCategories, objectsInCategory, documentByProductId, variantFetchByParentId, documentByFilename, performancesByProductId}
