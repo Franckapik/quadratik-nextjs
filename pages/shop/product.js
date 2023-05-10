@@ -111,10 +111,10 @@ const Product = () => {
                     Spacialisation
                   </Col>
                 </Row>
-                <Row className="producthud_content border_creme bg_darker p-2">
+                <Row className="producthud_content border_creme bg_darker">
                   {!loading ? (
                     <>
-                      {display === "coefDif" ? <PerformanceCharts /> : null}
+                      {display === "coefDif" ? <PerformanceCharts nomenclature={nomenclature} /> : null}
                       {display === "plot" ? <img src={"/performances/Spatial/D2N7P5W50.png"} style={{ height: "100%", width: "auto", margin: "auto" }} /> : null}
                       {display === "model" ? <ProductHud /> : null}
                     </>

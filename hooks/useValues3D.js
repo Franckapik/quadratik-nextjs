@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 export const useValues3D = (valuesSelected, attributes, isQuadralab) => {
   const [values3D, setValues3D] = useState(false);
-
   useEffect(() => {
     const listOfValues = Object.entries(attributes).reduce((acc, [i, a] = cur) => {
       for (let key in a.values) {
