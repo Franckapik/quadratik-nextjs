@@ -3,7 +3,7 @@ import { Burger } from "./Burger";
 import Link from "next/link";
 import { useState } from "react";
 
-export const LayoutHome = ({ children, header, onePage, noburger, cart, contact, shop, home, sticky }) => {
+export const LayoutHome = ({ children, header, onePage, noburger, cart, contact, shop, home, sticky, dark }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
@@ -11,39 +11,50 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
   return (
     <>
       {header ? (
-                <Row className="position-absolute h-100 text-uppercase w-100 pb-3">
-          <Row className="header justify-content-end position-sticky align-items-center text-uppercase w-100 ft4 ">
+        <Row className="position-absolute h-100 text-uppercase w-100 pb-3">
+          <Row className={`header justify-content-end position-sticky align-items-center text-uppercase w-100 ft4 ${dark ? "bg_dark" : "" }`}>
             {!noburger ? (
-              <Col  xs={4} md={1} >
+              <Col xs={4} md={1}>
                 <Burger onClick={toggleShow} toggled={show}></Burger>
               </Col>
             ) : null}
+
+<Col xs={4} md={1}>
+                <Link href={"/"}>Accueil</Link>
+              </Col><Col xs={4} md={1}>
+                <Link href={"/"}>Accueil</Link>
+              </Col><Col xs={4} md={1}>
+                <Link href={"/"}>Accueil</Link>
+              </Col><Col xs={4} md={1}>
+                <Link href={"/"}>Accueil</Link>
+              </Col>
+
             <Col></Col>
 
             {shop ? (
-              <Col  xs={4} md={1}>
+              <Col xs={4} md={1}>
                 <Link href={"/shop"}>Boutique</Link>
               </Col>
             ) : null}
             {home ? (
-              <Col  xs={4} md={1}>
+              <Col xs={4} md={1}>
                 <Link href={"/"}>Accueil</Link>
               </Col>
             ) : null}
-                        {cart ? (
+            {cart ? (
               <Col xs={4} md={1}>
                 {" "}
                 <Link href={"/shop/panier"}>Panier</Link>
               </Col>
             ) : null}
             {contact ? (
-              <Col  xs={4} md={1}>
+              <Col xs={4} md={1}>
                 <Link href={"/contact"}>Contact</Link>
               </Col>
             ) : null}
             <Col md={1} className="d-none d-md-flex"></Col>
           </Row>
-                  </Row>
+        </Row>
       ) : null}
 
       <Offcanvas show={show} onHide={handleClose}>

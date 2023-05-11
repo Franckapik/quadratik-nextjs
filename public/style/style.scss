@@ -21,6 +21,9 @@
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
+$header_height: calc(8vh + 2vw);
+
+
 
 .offcanvas-header {
   justify-content: center!important;
@@ -179,7 +182,7 @@
 
 .header {
   top : 0;
-  height: calc(8vh + 2vw);
+  height: $header_height;
   z-index: 5;
 }
 
@@ -892,6 +895,10 @@ padding : 10px!important;
   min-height: 100vh;
 }
 
+.shop_main_row {
+  padding-top: $header_height!important;
+}
+
 .shop_breadcrumb {
   bottom: -1vh;
   position: relative;
@@ -899,17 +906,9 @@ padding : 10px!important;
 
 .shop_card {
   border-radius: 5px;
-  height: 700px;
-  min-width: 500px;
+  height: calc(404px + 30px);
+  min-width: calc(301px + 30px);
   position: relative;
-}
-
-.shop_card_col {
-  position: relative;
-}
-
-.shop_card_col img {
-  width: 100%;
 }
 
 .shop_card_price {
@@ -918,8 +917,13 @@ padding : 10px!important;
 }
 
 .shop_categorie {
-  height: 640px;
-  width: 464px;
+  height: calc(404px + 30px);
+  width: calc(301px + 30px);
+}
+
+.shop_card img {
+  height: 404px;
+  width: 301px;
 }
 
 .shop_categorie_logo img {

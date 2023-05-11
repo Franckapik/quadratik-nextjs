@@ -5,7 +5,6 @@ import { useNomenclature } from "../../hooks/useNomenclature";
 import Link from "next/link";
 
 export const CardProduct = ({ variant, childCat, attributes }) => {
-  console.log(variant);
   const nomenclature = useNomenclature(variant.valuesSelected, childCat.fk_parent, attributes);
   const [productImg, setProductImg] = useState();
   const [error, setError] = useState(false);
@@ -26,7 +25,7 @@ export const CardProduct = ({ variant, childCat, attributes }) => {
 
   return (
     <>
-      <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center border_creme_light text_dark">
+      <Col md={3} className="shop_card d-flex flex-column justify-content-center align-items-center border_creme_light text_dark">
         <Link href={{ pathname: "/shop/product", query: variant.valuesSelected }}>
           <img src={`data:image/png;base64,${productImg}`} />
           <span className="shop_product_title ft2 ">{nomenclature.simple}</span>
