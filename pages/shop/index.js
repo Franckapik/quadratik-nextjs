@@ -1,85 +1,56 @@
+import { useInView } from "@react-spring/web";
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { LayoutHome } from "../../components/LayoutHome";
-import { listCategories, objectsInCategory, variantFetchByParentId } from "../../components/dolibarrApi/fetch";
-import { ProductNavBar } from "../../components/product/ProductNavBar";
-import { useAttributes } from "../../hooks/useAttributes";
 import { CardProduct } from "../../components/shop/CardProduct";
-import { useInView } from "@react-spring/web";
 import { useProductStore } from "../../hooks/store";
+import { useAttributes } from "../../hooks/useAttributes";
+import { useFetchCategories } from "../../hooks/useFetchCategories";
+import { useFetchProduct } from "../../hooks/useFetchProduct";
+import { useFetchVariant } from "../../hooks/useFetchVariants";
 
-const Shop_Modele = ({ childCat, firstCat, attributes }) => {
-  const [defaultProduct, setDefaultProduct] = useState(false);
-  const [variants, setVariants] = useState(false);
+const ChildCategorie = ({ childCat, attributes, variants }) => {
   const [listProducts, setListProducts] = useState(false);
+  const childProduct = useFetchProduct(childCat);
 
-  useEffect(() => {
-    objectsInCategory(firstCat.id)
-      .get()
-      .then((response) => {
-        setDefaultProduct(response.data[0]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [firstCat]);
-
-  useEffect(() => {
-    if (defaultProduct) {
-      variantFetchByParentId(defaultProduct.id)
-        .get()
-        .then((response) => {
-          setVariants(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  const addAttributes = (variants, attributes, variantId) => {
+    const variant = Object.values(variants).filter((val) => val.fk_product_child === variantId)[0];
+    if (variant !== undefined) {
+      const valuesSelected = variant.attributes.reduce((acc, cur) => {
+        let a_ref = Object.values(attributes).filter((val) => val.a_id === cur.id)[0].a_ref;
+        return { ...acc, [a_ref]: cur.fk_prod_attr_val };
+      }, {});
+      return { ...variant, valuesSelected: { ...valuesSelected } };
     }
-  }, [defaultProduct]);
+  };
 
-  //get attributes from variants and make valueSelected object
   useEffect(() => {
-    if (variants) {
-      objectsInCategory(childCat.id)
-        .get()
-        .then((response) => {
-          if (response.data.length) {
-            const pwithAttributes = Object.values(response.data).map((a, i) => {
-              const g = Object.values(variants).filter((val) => val.fk_product_child === a.id)[0];
-              const valuesSelected = g.attributes.reduce((acc, cur) => {
-                let a_ref = Object.values(attributes).filter((val) => val.a_id === cur.id)[0].a_ref;
-                return { ...acc, [a_ref]: cur.fk_prod_attr_val };
-              }, {});
-              return { ...a, valuesSelected: { ...valuesSelected } };
-            });
-            setListProducts(pwithAttributes);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          /*  setError(error); */ //waiting for work on absorbeurs
-        });
+    if (childProduct.length && variants) {
+      const variantsWithAttributes = childProduct.map((variant) => addAttributes(variants, attributes, variant));
+      setListProducts(variantsWithAttributes);
     }
-  }, [childCat, variants]);
+  }, [childProduct, variants]);
 
   return (
     <>
-      {" "}
       {listProducts &&
         listProducts.map((variant, i) => {
-          return <CardProduct product={variant} childCat={childCat} attributes={attributes} />;
+          return <CardProduct variant={variant} childCat={childCat} attributes={attributes} />;
         })}
     </>
   );
 };
 
-const ParentCategorie = ({ firstCat, childCategories, attributes, setViewedCategory }) => {
+const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => {
   const [ref, inView] = useInView();
+  const childCategories = useFetchCategories((cat) => cat.fk_parent == firstCat.id);
+  const parentProduct = useFetchProduct(firstCat, 0);
+  const variants = useFetchVariant(parentProduct);
 
   useEffect(() => {
     if (inView) {
       setViewedCategory(firstCat.id);
-      useProductStore.setState({tag : firstCat.id})
+      useProductStore.setState({ tag: firstCat.id });
     }
   }, [inView]);
 
@@ -87,66 +58,52 @@ const ParentCategorie = ({ firstCat, childCategories, attributes, setViewedCateg
     <>
       <Col ref={ref} id={firstCat.id} className="shop_card  m-2 d-flex flex-column justify-content-center align-items-center border_creme_light">
         <div className="bg_creme_light shop_categorie text-dark p-5">
-          <Row className="shop_categorie_logo">          <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" className="d-flex mt-4 mx-auto" />
-</Row>
+          <Row className="shop_categorie_logo">
+            {" "}
+            <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" className="d-flex mt-4 mx-auto" />
+          </Row>
           <p className="ft05 mt-5 text-center">{firstCat.label}</p>
-          <div className="ft4 mt-5 text-justify" dangerouslySetInnerHTML={{__html: firstCat.description}}></div>
+          <div className="ft4 mt-5 text-justify" dangerouslySetInnerHTML={{ __html: firstCat.description }}></div>
         </div>
       </Col>
       <>
-        {childCategories
-          .filter((cat) => cat.fk_parent == firstCat.id)
-          .map((childCat, childIndex) => {
-            return <Shop_Modele firstCat={firstCat} childCat={childCat} attributes={attributes} />;
-          })}
+        {childCategories.map((childCat) => {
+          return <ChildCategorie childCat={childCat} attributes={attributes} variants={variants} />;
+        })}
       </>
     </>
   );
 };
 
-const Product = () => {
+const Shop = () => {
   //Data
   const [attributes, fetching, error] = useAttributes();
 
-  const [categories, setCategories] = useState([]);
-  const parentCategories = categories.filter((cat) => cat.fk_parent == 0).map(cat => ({...cat, ["label"] : cat.label.substring(5)}));
-  const childCategories = categories.filter((cat) => cat.fk_parent !== 0);
+  const parentCategories = useFetchCategories((cat) => cat.fk_parent == 0).map((cat) => ({ ...cat, ["label"]: cat.label.substring(5) }));
   const [viewedCategory, setViewedCategory] = useState(1);
-
-  //get all categories
-  useEffect(() => {
-    listCategories()
-      .get()
-      .then((response) => {
-        function compare(a, b) {
-          if (a.label < b.label) {
-            return -1;
-          }
-          if (a.label > b.label) {
-            return 1;
-          }
-          return 0;
-        }
-
-        setCategories(response.data.sort(compare));
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error);
-      });
-  }, []);
 
   return (
     <>
+      <LayoutHome header cart home />
       <div className="s0_page_index d-none d-md-flex position-fixed">
         {parentCategories.filter((cat) => cat.id == viewedCategory)[0]?.label}
         <div className="trait"></div>Boutique
-      </div>
+      </div>{" "}
       <Row className="section">
-      <LayoutHome header cart home />
-
-{/*         <ProductNavBar categories={parentCategories} viewedCategory={viewedCategory} />
- */}        <Row className="shop_main_row">
+        <Col md={1}></Col>
+        <Col>
+          <Row>
+            {parentCategories.map((firstCat) => {
+              return <ParentCategorie firstCat={firstCat} attributes={attributes} setViewedCategory={setViewedCategory} />;
+            })}
+          </Row>
+        </Col>
+      </Row>
+      {/*     
+     
+             <ProductNavBar categories={parentCategories} viewedCategory={viewedCategory} />
+         
+        <Row className="shop_main_row">
           <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center border_creme_light text-dark">
             <img src="/shop/Anemone-7.png" />
             <span className="shop_product_title ft2 ">Anemone-710</span>
@@ -156,9 +113,9 @@ const Product = () => {
             return <ParentCategorie firstCat={firstCat} childCategories={childCategories} attributes={attributes} setViewedCategory={setViewedCategory} />;
           })}
         </Row>
-      </Row></>
-
+      */}
+    </>
   );
 };
 
-export default Product;
+export default Shop;

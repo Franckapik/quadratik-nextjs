@@ -9,8 +9,8 @@ const attributesFetchById = (id) => axios.create({
     },
   });
 
-const objectsInCategory = (id) => axios.create({
-    baseURL: `https://shop.quadratik.fr/api/index.php/categories/${id}/objects?type=product`,
+const objectsInCategory = (id, onlyId) => axios.create({
+    baseURL: `https://shop.quadratik.fr/api/index.php/categories/${id}/objects?type=product${onlyId ? '&onlyids=1' : ''}`,
     headers: {
       Accept: "application/json",
       DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
