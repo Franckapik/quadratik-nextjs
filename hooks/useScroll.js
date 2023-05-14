@@ -1,19 +1,34 @@
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
-export const useScroll = () => {
-  const [scrollY, setScrollY] = useState(0);
+import { useBearStore } from "./store";
+
+
+export const useScroll = (ref) => {
+
+  const [scroll, setScroll] = useState(false);
+  const [height, setHeight] = useState(false);
+  const [width, setWidth] = useState(false);
 
   useEffect(() => {
     const getScroll = (e) => {
-      setScrollY(e.target.scrollTop);
+      setScroll(e.target.scrollTop);
+      useBearStore.setState({ scroll: e.target.scrollTop });
     };
-
-    window.addEventListener("scroll", getScroll);
+    const container = ref.current.container.current;
+    container.addEventListener("scroll", getScroll);
 
     return () => {
-      window.removeEventListener("scroll", getScroll);
+      container.removeEventListener("scroll", getScroll);
     };
   });
 
-  return scrollY;
+  useEffect(() => {
+    setHeight(ref.current.space);
+    setWidth(ref.current.container.current.offsetWidth);
+    useBearStore.setState({ width: ref.current.container.current.offsetWidth });
+    useBearStore.setState({ height: ref.current.space });
+  }, []);
+
+
+  return [scroll, height, width];
 };

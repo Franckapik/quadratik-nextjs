@@ -12,47 +12,27 @@ import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
 import { useBearStore } from "../hooks/store";
 import { Offcanvas } from "react-bootstrap";
 import { LayoutHome } from "../components/LayoutHome";
+import { useScroll } from "../hooks/useScroll";
 
 const Home = () => {
   const parallax = useRef(null);
   const [showCanvas, setShowCanvas] = useState(false);
-
+  const [scroll, height, width] = useScroll(parallax);
   useEffect(() => {
-    const getScroll = (e) => {
-      if (e.target.scrollTop > parallax.current.space * 3 && e.target.scrollTop < parallax.current.space * 5) {
-        setShowCanvas(true);
-      } else {
-        setShowCanvas(false);
-      }
-      useBearStore.setState({ scroll: e.target.scrollTop });
-    };
-    const container = parallax.current.container.current;
-    container.addEventListener("scroll", getScroll);
-
-    return () => {
-      container.removeEventListener("scroll", getScroll);
-    };
-  });
-
-  useEffect(() => {
-    useBearStore.setState({ width: parallax.current.container.current.offsetWidth });
-    useBearStore.setState({ height: parallax.current.space });
-  }, []);
-
-  const [show, setShow] = useState(false);
-
-  const scroll = useBearStore((state) => state.scroll)
-  const height = useBearStore((state) => state.height)
-
-
+    if (scroll > height * 3 && scroll < height * 5) {
+      setShowCanvas(true);
+    } else {
+      setShowCanvas(false);
+    }
+  }, [height, scroll]);
 
   return (
-    <>     
-    <LayoutHome header contact={height > 800 ? scroll < height * 2 : true} shop={height > 748 ? scroll < height * 2 : true} />
-     <VerticalSideIndex></VerticalSideIndex>
+    <>
+      <LayoutHome header contact={height > 800 ? scroll < height * 2 : true} shop={height > 748 ? scroll < height * 2 : true} />
+      <VerticalSideIndex></VerticalSideIndex>
       <Parallax pages={8} ref={parallax}>
         <ParallaxLayer offset={0}>
-        <S0_Landing />
+          <S0_Landing />
         </ParallaxLayer>
         <ParallaxLayer offset={1} sticky={{ start: 1, end: 2 }}>
           <S1_Product />
