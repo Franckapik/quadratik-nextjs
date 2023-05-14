@@ -3,7 +3,7 @@ import { Burger } from "./Burger";
 import Link from "next/link";
 import { useState } from "react";
 
-export const LayoutHome = ({ children, header, onePage, noburger, cart, contact, shop, home, sticky, dark }) => {
+export const LayoutHome = ({ children, header, onePage, noburger, cart, contact, shop, home, sticky, dark, categories, viewedCategory }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
@@ -12,22 +12,22 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
     <>
       {header ? (
         <Row className="position-absolute h-100 text-uppercase w-100 pb-3">
-          <Row className={`header justify-content-end position-sticky align-items-center text-uppercase w-100 ft4 ${dark ? "bg_dark" : "" }`}>
+          <Row className={`header justify-content-end position-sticky align-items-center text-uppercase w-100 ft4 ${dark ? "bg_dark" : ""}`}>
             {!noburger ? (
               <Col xs={4} md={1}>
                 <Burger onClick={toggleShow} toggled={show}></Burger>
               </Col>
             ) : null}
-
-<Col xs={4} md={1}>
-                <Link href={"/"}>Accueil</Link>
-              </Col><Col xs={4} md={1}>
-                <Link href={"/"}>Accueil</Link>
-              </Col><Col xs={4} md={1}>
-                <Link href={"/"}>Accueil</Link>
-              </Col><Col xs={4} md={1}>
-                <Link href={"/"}>Accueil</Link>
-              </Col>
+            {categories ? (
+              <>
+                {console.log(categories)}
+                {categories.map((a, i) => (
+                  <Col className="text-center p-2" xs={4} md={1} style={{backgroundColor : a.id == viewedCategory ? "#9fb07ca9" : "inherit"}}>
+                    <Link href={{ pathname: "/shop", query: {TAG : a.id} }}>{a.label}</Link>
+                  </Col>
+                ))}
+              </>
+            ) : null}
 
             <Col></Col>
 
