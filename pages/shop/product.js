@@ -92,13 +92,12 @@ const Product = () => {
 
   return (
     <>
-    <LayoutHome header shop cart />
-      <div className="s0_page_index d-none d-md-flex">
+    <LayoutHome header shop cart dark />
+      <div className="s0_page_index  d-none d-md-flex">
         {defaultProduct.label}
         <div className="trait"></div>Details du modèle
       </div>
-      <Row className="">
-        <ProductNavBar categories={parentCategories} />
+      <Row className="shop_main_row">
         {!error ? (
           <Row >
           <FormProvider {...methods}>
