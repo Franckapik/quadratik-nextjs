@@ -12,6 +12,7 @@ import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
 import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerformances";
+import { LayoutHome } from "../../components/LayoutHome";
 
 const Quadralab = () => {
   //Data
@@ -63,8 +64,10 @@ const Quadralab = () => {
 
   return (
     <>
+      <LayoutHome header shop cart />
+
       {!error ? (
-        <Row className="section quadralab_main_row">
+        <Row className="section quadralab_main_row layout_space">
           <FormProvider {...methods}>
             <Form onSubmit={methods.handleSubmit(onSubmit)}>
               <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
@@ -72,7 +75,7 @@ const Quadralab = () => {
               {/*Canvas*/}
               {!loading ? (
                 <Row className="quadralab_canvas_container justify-content-center align-items-center">
-                  <Col md={12} style={{ visibility: !dimensionView ? "hidden" : "visible" ,height : !dimensionView ? "1%" : "100%" }}>
+                  <Col md={12} style={{ visibility: !dimensionView ? "hidden" : "visible", height: !dimensionView ? "1%" : "100%" }}>
                     <ProductCanvas></ProductCanvas>
                   </Col>
                   <Col md={8} style={{ visibility: dimensionView ? "hidden" : "visible" }}>
@@ -132,14 +135,14 @@ const Quadralab = () => {
                 </Col>
               </Row>
 
-                      <Row className="quadralab_devis_button text-center w-100 justify-content-center ">
-                  <Button variant="ternary"  onClick={handleShow}>
-                    PLANS de fabrication
-                  </Button>
-                  <Button variant="primary" type="submit" >
-                    Demander un devis
-                  </Button>
-                </Row> 
+              <Row className="quadralab_devis_button text-center w-100 justify-content-center ">
+                <Button variant="ternary" onClick={handleShow}>
+                  PLANS de fabrication
+                </Button>
+                <Button variant="primary" type="submit">
+                  Demander un devis
+                </Button>
+              </Row>
               <ModalReport2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} report2D={report2D} show={show} setShow={setShow} handleClose={handleClose} />
             </Form>
           </FormProvider>

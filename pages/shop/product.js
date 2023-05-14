@@ -1,19 +1,17 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
-import { Layout } from "../../components/Layout";
+import { LayoutHome } from "../../components/LayoutHome";
 import { listCategories, objectsInCategory } from "../../components/dolibarrApi/fetch";
+import { variantPost } from '../../components/dolibarrApi/post';
+import { PerformanceSpatial } from "../../components/product/ParformanceSpatial";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import ProductCanvas from "../../components/product/ProductCanvas";
 import { ProductHud } from "../../components/product/ProductHud";
-import { ProductNavBar } from "../../components/product/ProductNavBar";
 import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
-import { PerformanceSpatial } from "../../components/product/ParformanceSpatial";
-import {variantPost} from '../../components/dolibarrApi/post';
-import { LayoutHome } from "../../components/LayoutHome";
 
 const Product = () => {
   //Data
@@ -97,7 +95,7 @@ const Product = () => {
         {defaultProduct.label}
         <div className="trait"></div>Details du modèle
       </div>
-      <Row className="shop_main_row">
+      <Row className="layout_space">
         {!error ? (
           <Row >
           <FormProvider {...methods}>

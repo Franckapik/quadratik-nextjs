@@ -19,7 +19,7 @@ const Shop = () => {
         {parentCategories.filter((cat) => cat.id == viewedCategory)[0]?.label}
         <div className="trait"></div>Boutique
       </div>{" "}
-      <Row className="section shop_main_row ">
+      <Row className="section layout_space ">
         <Col md={1}></Col>
         <Col>
           <Row>
