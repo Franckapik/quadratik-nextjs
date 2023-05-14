@@ -2,8 +2,8 @@ import React from "react";
 import { Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import { CardOptions } from "../product/CardOptions";
 
-export const QuadralabPerformances = ({ nomenclature, fmin, fmax, cwidth, weightPoplar, report2D, area, volume }) => (
-  <CardOptions title="performances" opened="0">
+export const QuadralabPerformances = ({ nomenclature, fmin, fmax, cwidth, weightPoplar, report2D, area, volume, height }) => (
+  <CardOptions title="performances" opened={height > 700 ? "1" : "0"}>
     <Col className="flex flex-column ">
       <p className="text-center mb-4">
         <i className="fad fa-stream"></i> REF : {nomenclature?.structurel}

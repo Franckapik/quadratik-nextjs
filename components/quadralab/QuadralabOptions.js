@@ -10,7 +10,7 @@ import useToggle from "../../hooks/useToggle";
 import { Field } from "./Field";
 import { CardOptions } from "../product/CardOptions";
 
-const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
+const QuadralabOptions = ({ attributes, defaultProduct, setLoading, height }) => {
   const [mode, setMode] = useToggle(true);
   const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
     const isNotIdValue = ["W", "P"];
@@ -51,7 +51,7 @@ const QuadralabOptions = ({ attributes, defaultProduct, setLoading }) => {
   }, []);
 
   return (
-    <CardOptions title="parametres" opened="0">
+    <CardOptions title="parametres" opened={height > 700 ? "1" : "0"}>
       <Button variant="secondary" onClick={() => setMode()}>
         {mode ? "Mode Basique" : "Mode Avancé"}
       </Button>

@@ -1,6 +1,6 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { Layout } from "../../components/Layout";
@@ -13,10 +13,17 @@ import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
 import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerformances";
 import { LayoutHome } from "../../components/LayoutHome";
+import { useScroll } from "../../hooks/useScroll";
 
 const Quadralab = () => {
   //Data
+  const quadralabRef = useRef(null);
   const [attributes, fetching, error] = useAttributes();
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    setHeight(quadralabRef.current.clientHeight);
+  }, [quadralabRef]);
 
   const [defaultProduct, setDefaultProduct] = useState({});
   const [loading, setLoading] = useState(false);
@@ -67,7 +74,7 @@ const Quadralab = () => {
       <LayoutHome header shop cart />
 
       {!error ? (
-        <Row className="section quadralab_main_row layout_space">
+        <Row className="section quadralab_main_row layout_space" ref={quadralabRef}>
           <FormProvider {...methods}>
             <Form onSubmit={methods.handleSubmit(onSubmit)}>
               <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
@@ -91,7 +98,7 @@ const Quadralab = () => {
                 <>
                   {!fetching ? (
                     <Col md={3} className="order-md-1">
-                      <QuadralabOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />{" "}
+                      <QuadralabOptions height={height} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />{" "}
                     </Col>
                   ) : (
                     "Chargement des options du produit"
@@ -100,7 +107,7 @@ const Quadralab = () => {
                   {/*Parametres*/}
                   {!fetching ? (
                     <Col md={3} className="order-md-3">
-                      <QuadralabPerformances nomenclature={nomenclature} fmin={fmin} fmax={fmax} cwidth={cwidth} weightPoplar={weightPoplar} report2D={report2D} area={area} volume={volume} sizes={sizes} woodArea={woodArea} woodVolume={woodVolume} />
+                      <QuadralabPerformances height={height} nomenclature={nomenclature} fmin={fmin} fmax={fmax} cwidth={cwidth} weightPoplar={weightPoplar} report2D={report2D} area={area} volume={volume} sizes={sizes} woodArea={woodArea} woodVolume={woodVolume} />
                     </Col>
                   ) : (
                     "Chargement des performances du produit"
