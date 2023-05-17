@@ -6,11 +6,11 @@ export const CardOptions = ({ title, children, className, opened }) => {
       <Accordion defaultActiveKey={opened}>
         <Accordion.Item eventKey="1">
           <Accordion.Header>
-            <span className="ft6 text-uppercase">
+            <span className="text-uppercase">
               <i className="fad fa-sliders-v me-2"></i> {title}
             </span>{" "}
           </Accordion.Header>
-          <Accordion.Body>{children}</Accordion.Body>
+          <Accordion.Body className="text-center">{children}</Accordion.Body>
         </Accordion.Item>
       </Accordion>
     </Row>

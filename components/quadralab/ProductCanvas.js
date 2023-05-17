@@ -23,7 +23,7 @@ const ProductCanvas = () => {
 
         <ambientLight intensity={0.4}></ambientLight>
           <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
-          <group scale={0.1}>
+          <group scale={0.08}>
             {tag === 1 && dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} isQuadralab /> : null}
             {tag === 1 && dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} isQuadralab /> : null}
             {tag === 2 ? <Absorbeur dimensions={dimensions} /> : null}

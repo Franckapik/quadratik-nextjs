@@ -358,7 +358,7 @@ padding : 10px!important;
 .quadralab_canvas_container {
   position: relative;
   width: 100%;
-  height: fit-content;
+  height: 60vh;
   margin: auto;
 }
 
@@ -367,9 +367,11 @@ padding : 10px!important;
 }
 
 .quadralab_devis_button {
-  position: relative;
-  top: 60vh;
 
+}
+
+.accordion-header button {
+  letter-spacing: 3px;
 }
 
 .quadralab_display {
@@ -1061,7 +1063,7 @@ body {
   font-family: futura-light, sans-serif !important;
   font-weight: 300 !important;
   height: 100vh !important;
-  letter-spacing: 0.1em;
+  letter-spacing: 3px;
   line-height: 1.8em !important;
   margin: 0 auto;
   scroll-behavior: smooth;

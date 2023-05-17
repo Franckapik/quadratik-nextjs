@@ -81,7 +81,7 @@ const Quadralab = () => {
 
               {/*Canvas*/}
 
-              <Row className="justify-content-evenly mt-md-5">
+              <Row className="justify-content-center mt-md-5">
                 {/* Options */}
 
                 <>
@@ -105,10 +105,10 @@ const Quadralab = () => {
 
                 {/*Display*/}
 
-                <Col md={4} className="order-md-2 quadralab_title">
+                <Col md={5} className="order-md-2 quadralab_title p-0">
                   <Row className="text-center mt-4">
                     <Link href={{ pathname: "/shop/product", query: valuesSelected }}>
-                      <p className="ft4 mb-1">
+                      <p className="mb-1">
                         <i className="fad fa-store m-2"></i> Modèle similaire : {nomenclature?.simple} ({price} €)
                       </p>
                     </Link>
@@ -128,21 +128,22 @@ const Quadralab = () => {
                       <Form.Check type={"switch"} id="highlight-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
                     </Col>
                   </Row>
-                  <Row className="quadralab_canvas_container"> <ProductCanvas></ProductCanvas></Row>
-                 
+                  <Row className="quadralab_canvas_container">
+                    {" "}
+                    <ProductCanvas></ProductCanvas>
+                  </Row>
 
                   <Row className="quadralab_devis_button text-center w-100 justify-content-center ">
-                <Button variant="ternary" onClick={handleShow}>
-                  PLANS de fabrication
-                </Button>
-                <Button variant="primary" type="submit">
-                  Demander un devis
-                </Button>
-              </Row>
+                    <Button variant="ternary" onClick={handleShow}>
+                      PLANS de fabrication
+                    </Button>
+                    <Button variant="primary" type="submit">
+                      Demander un devis
+                    </Button>
+                  </Row>
                 </Col>
               </Row>
 
-              
               <ModalReport2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} report2D={report2D} show={show} setShow={setShow} handleClose={handleClose} />
             </Form>
           </FormProvider>
