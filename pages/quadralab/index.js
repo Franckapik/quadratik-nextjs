@@ -134,12 +134,13 @@ const Quadralab = () => {
                   </Row>
 
                   <Row className="quadralab_devis_button text-center w-100 justify-content-center ">
-                    <Button variant="ternary" onClick={handleShow}>
-                      PLANS de fabrication
+                    <Col md={8}> <Button variant="secondary m-1" onClick={handleShow}>
+                      Plans de fabrication
                     </Button>
                     <Button variant="primary" type="submit">
                       Demander un devis
-                    </Button>
+                    </Button></Col>
+                   
                   </Row>
                 </Col>
               </Row>

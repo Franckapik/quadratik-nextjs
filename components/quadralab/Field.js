@@ -30,9 +30,9 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
               break;
             case type === "radio":
               return (
-                <Form.Group {...field} className="form_radio_inline justify-content-center m-4">
+                <Form.Group {...field} className="form_radio_inline justify-content-evenly">
                   {Object.values(values).map((a, i) => (
-                    <Form.Check type={type} key={"radio" + i}>
+                    <Form.Check type={type} key={"radio" + i} className="w-100">
                       <Form.Check.Label className="border_creme">
                         <Form.Check.Input type={type} value={a.v_id} checked={field.value === a.v_id} />
                         {a.v_label}

@@ -25,7 +25,7 @@ const PerformanceWidget = ({ icon, value, color, performance, tooltip }) => {
         <div className="flex quadralab_line quadralab_game_border ">
           <div className="h-100" style={{ width: `${performance}%`, maxWidth: "100%", backgroundColor: color }}></div>
         </div>
-        <p className="quadralab_perf_value text-end ft7">{value}</p>
+        <p className="quadralab_perf_value text-end">{value}</p>
       </Row>
     </OverlayTrigger>
   );
