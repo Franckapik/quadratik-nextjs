@@ -80,18 +80,7 @@ const Quadralab = () => {
               <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
 
               {/*Canvas*/}
-              {!loading ? (
-                <Row className="quadralab_canvas_container justify-content-center align-items-center">
-                  <Col md={12} style={{ visibility: !dimensionView ? "hidden" : "visible", height: !dimensionView ? "1%" : "100%" }}>
-                    <ProductCanvas></ProductCanvas>
-                  </Col>
-                  <Col md={8} style={{ visibility: dimensionView ? "hidden" : "visible" }}>
-                    <DiffusorView2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} />
-                  </Col>
-                </Row>
-              ) : (
-                "Chargement du modèle"
-              )}
+
               <Row className="justify-content-evenly mt-md-5">
                 {/* Options */}
 
@@ -139,10 +128,10 @@ const Quadralab = () => {
                       <Form.Check type={"switch"} id="highlight-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
                     </Col>
                   </Row>
-                </Col>
-              </Row>
+                  <Row className="quadralab_canvas_container"> <ProductCanvas></ProductCanvas></Row>
+                 
 
-              <Row className="quadralab_devis_button text-center w-100 justify-content-center ">
+                  <Row className="quadralab_devis_button text-center w-100 justify-content-center ">
                 <Button variant="ternary" onClick={handleShow}>
                   PLANS de fabrication
                 </Button>
@@ -150,6 +139,10 @@ const Quadralab = () => {
                   Demander un devis
                 </Button>
               </Row>
+                </Col>
+              </Row>
+
+              
               <ModalReport2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} report2D={report2D} show={show} setShow={setShow} handleClose={handleClose} />
             </Form>
           </FormProvider>
