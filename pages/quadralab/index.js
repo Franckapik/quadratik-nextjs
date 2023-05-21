@@ -115,7 +115,7 @@ const Quadralab = () => {
                   </Row>
 
                   <Row className="justify-content-center align-items-center mt-4 ">
-{/*                     <Col>
+                    {/*                     <Col>
                       {" "}
                       <Form.Check type={"switch"} id="dimension-switch" label={"3D / 2D"} onChange={(e) => setDimensionView(!dimensionView)} />
                     </Col> */}
@@ -133,14 +133,17 @@ const Quadralab = () => {
                     <ProductCanvas></ProductCanvas>
                   </Row>
 
-                  <Row className="quadralab_devis_button text-center w-100 justify-content-center mt-3 ">
-                    <Col md={8}> <Button variant="secondary m-1" onClick={handleShow}>
-                      Plans de fabrication
-                    </Button>
-                    <Button variant="primary" type="submit">
-                      Demander un devis
-                    </Button></Col>
-                   
+                  <Row className="quadralab_devis_button text-center w-100 justify-content-center">
+                    <Col className="justify-content-evenly mt-4" md={4}>
+                      <Button variant="secondary m-1" onClick={handleShow}>
+                        Plans de fabrication
+                      </Button>
+                    </Col>
+                    <Col className="justify-content-evenly mt-4" md={4}>
+                      <Button variant="primary" type="submit">
+                        Demander un devis
+                      </Button>
+                    </Col>
                   </Row>
                 </Col>
               </Row>
