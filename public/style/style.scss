@@ -366,23 +366,42 @@ padding : 10px!important;
   position: absolute;
   top: 0px;
   right: 0px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   width: 50vw;
   height: 100%;
   min-height: 600px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
   justify-content: center;
 }
+
+.product_left {
+  left: 0px;
+  top: 0px;
+  display: flex;
+  width: 50vw;
+  height: 100%;
+  justify-content: center;
+}
+
+.product_carousel_img {
+  width: 70%;
+}
+
+.product_price_divider {
+  position: absolute;
+  bottom: 6.6vw;
+  width: 100%;
+  height: 1px;
+  background-color: #2d325b;
+}
+
+.product_right_cart {
+  position: absolute;
+  bottom: 2vh;
+  width: 100%;
+  border-top: solid thin #332d2a;
+}
+
+
 
 .quadralab_title {
   z-index: 2;
@@ -1048,7 +1067,7 @@ padding : 10px!important;
   width: 80%;
 }
 
-.text-creme {
+.text_creme {
   color: #d0c3b4;
 }
 
@@ -1057,7 +1076,15 @@ padding : 10px!important;
 }
 
 .text_dark {
-  color: #2f2a28;
+  color: #2f2a28!important;
+}
+
+.text_dark a { //product page
+  color: #2f2a28!important;
+}
+
+.text_creme a { //product page
+  color: #d0c3b4!important;
 }
 
 .text_green {

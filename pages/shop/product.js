@@ -1,10 +1,10 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
-import { Col, Form, Row } from "react-bootstrap";
+import { Carousel, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
 import { listCategories, objectsInCategory } from "../../components/dolibarrApi/fetch";
-import { variantPost } from '../../components/dolibarrApi/post';
+import { variantPost } from "../../components/dolibarrApi/post";
 import { PerformanceSpatial } from "../../components/product/ParformanceSpatial";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import ProductCanvas from "../../components/product/ProductCanvas";
@@ -20,7 +20,7 @@ const Product = () => {
   const [loading, setLoading] = useState(true);
 
   //Display
-  const [display, setDisplay] = useState("model");
+  const [display, setDisplay] = useQueryState("Display", queryTypes.integer.withDefault(0));
 
   //get default product from tag category
   const [tag, setTAG] = useQueryState("TAG", queryTypes.integer.withDefault(1));
@@ -90,13 +90,77 @@ const Product = () => {
 
   return (
     <>
-    <LayoutHome header shop cart dark />
+      <LayoutHome product={["modele", "performances", "spacialisation"]} text_dark shop cart />
       <div className="s0_page_index  d-none d-md-flex">
         {defaultProduct.label}
-        <div className="trait"></div>Details du modèle
+        <div className="trait"></div>Aperçu du modèle
       </div>
       <Row className="layout_space">
-        {!error ? (
+        <Col md={6} className="product_right bg_creme layout_space align-items-between">
+          <FormProvider {...methods}>
+            <Form onSubmit={methods.handleSubmit(onSubmit)}>
+            <ProductHud fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading}  />
+
+            </Form>
+          </FormProvider>
+        </Col>
+        <Col md={6} className="product_left flex-column">
+          <Row className="justify-content-center">
+            <Carousel activeIndex={display} controls={false}>
+              <Carousel.Item>
+                <Carousel activeIndex={0} controls={false}>
+                  <Carousel.Item>
+                    <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
+                    <Carousel.Caption>
+                      <h3>First slide label</h3>
+                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    2
+                    <Carousel.Caption>
+                      <h3>Second slide label</h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                  <Carousel.Item>
+                    3
+                    <Carousel.Caption>
+                      <h3>Third slide label</h3>
+                      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                </Carousel>
+              </Carousel.Item>
+              <Carousel.Item>
+                <PerformanceCharts nomenclature={nomenclature} />
+
+                <Carousel.Caption>
+                  <h3>Second slide label</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
+                <PerformanceSpatial nomenclature={nomenclature} />
+
+                <Carousel.Caption>
+                  <h3>Third slide label</h3>
+                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
+          </Row>
+        </Col>
+      </Row>
+    </>
+  );
+};
+
+export default Product;
+
+/*
+
+ {!error ? (
           <Row >
           <FormProvider {...methods}>
             <Form onSubmit={methods.handleSubmit(onSubmit)} className="d-flex flex-column flex-md-row justify-content-evenly ft4  ">
@@ -124,7 +188,7 @@ const Product = () => {
                     "Chargement du modèle"
                   )}
                 </Row>{" "}
-                {/* // only for mobile */}
+
                 <Row className="d-md-none border_creme  mt-4">
                   <ProductCanvas></ProductCanvas>
                 </Row>
@@ -135,8 +199,5 @@ const Product = () => {
         ) : (
           "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
         )}
-      </Row></>
-  );
-};
 
-export default Product;
+        */

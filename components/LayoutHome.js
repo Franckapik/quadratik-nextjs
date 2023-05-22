@@ -3,16 +3,16 @@ import { useState } from "react";
 import { Col, ListGroup, Offcanvas, Row } from "react-bootstrap";
 import { Burger } from "./Burger";
 
-export const LayoutHome = ({ children, header, onePage, noburger, cart, contact, shop, home, sticky, dark, categories, viewedCategory }) => {
+export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark, categories, viewedCategory, text_dark }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
 
   return (
     <>
-      {header ? (
+
         <Row className="position-absolute h-100 text-uppercase w-100 pb-3">
-          <Row className={`header justify-content-end position-sticky align-items-center text-uppercase w-100 ft4 ${dark ? "bg_dark" : ""}`}>
+          <Row className={`header justify-content-end position-sticky align-items-center text-uppercase w-100 ft4 ${dark ? "bg_dark" : ""} ${text_dark ? "text_dark" : ""}`}>
             {!noburger ? (
               <Col xs={4} md={1}>
                 <Burger onClick={toggleShow} toggled={show}></Burger>
@@ -27,11 +27,20 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
                 ))}
               </>
             ) : null}
+            {product ? (
+              <>
+                {product.map((a, i) => (
+                  <Col className="p-2 d-none d-md-flex justify-content-center text_creme m-5" xs={4} md={1} style={{ backgroundColor: a == viewedCategory ? "#9fb07ca9" : "inherit" }}>
+                    <Link href={{ pathname: "/shop/product", query: { Display: i } }}>{a}</Link>
+                  </Col>
+                ))}
+              </>
+            ) : null}
 
             <Col></Col>
-
+           
             {shop ? (
-              <Col xs={4} md={1}>
+              <Col xs={4} md={1} >
                 <Link href={"/shop"}>Boutique</Link>
               </Col>
             ) : null}
@@ -54,7 +63,7 @@ export const LayoutHome = ({ children, header, onePage, noburger, cart, contact,
             <Col md={1} className="d-none d-md-flex"></Col>
           </Row>
         </Row>
-      ) : null}
+
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
