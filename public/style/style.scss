@@ -386,17 +386,9 @@ padding : 10px!important;
   width: 70%;
 }
 
-.product_price_divider {
-  position: absolute;
-  bottom: 6.6vw;
-  width: 100%;
-  height: 1px;
-  background-color: #2d325b;
-}
 
 .product_right_cart {
-  position: absolute;
-  bottom: 2vh;
+  height: 10vh;
   width: 100%;
   border-top: solid thin #332d2a;
 }
@@ -450,7 +442,7 @@ padding : 10px!important;
 .quadralab_line {
   color: #d0c3b4;
   height: 20px !important;
-  left: 10%;
+  left: 7%;
   position: relative;
   top: -50px;
   width: 90% !important;
@@ -510,7 +502,7 @@ padding : 10px!important;
 }
 
 .quadralab_performance_widget {
-  width: 95% !important;
+  width: 80% !important;
 }
 
 .quadralab_round {

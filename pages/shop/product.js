@@ -96,61 +96,60 @@ const Product = () => {
         <div className="trait"></div>Aperçu du modèle
       </div>
       <Row className="layout_space">
-        <Col md={6} className="product_right bg_creme layout_space align-items-between">
-          <FormProvider {...methods}>
-            <Form onSubmit={methods.handleSubmit(onSubmit)}>
-            <ProductHud fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading}  />
-
-            </Form>
-          </FormProvider>
-        </Col>
-        <Col md={6} className="product_left flex-column">
-          <Row className="justify-content-center">
-            <Carousel activeIndex={display} controls={false}>
-              <Carousel.Item>
-                <Carousel activeIndex={0} controls={false}>
+        <FormProvider {...methods}>
+          <Form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Col md={6} className="product_right bg_creme layout_space">
+              <ProductHud fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />
+            </Col>
+            <Col md={6} className="product_left flex-column">
+              <Row className="justify-content-center">
+                <Carousel activeIndex={display} controls={false}>
                   <Carousel.Item>
-                    <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
-                    <Carousel.Caption>
-                      <h3>First slide label</h3>
-                      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    </Carousel.Caption>
+                    <Carousel activeIndex={0} controls={false}>
+                      <Carousel.Item>
+                        <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
+                        <Carousel.Caption>
+                          <h3>First slide label</h3>
+                          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </Carousel.Caption>
+                      </Carousel.Item>
+                      <Carousel.Item>
+                        2
+                        <Carousel.Caption>
+                          <h3>Second slide label</h3>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </Carousel.Caption>
+                      </Carousel.Item>
+                      <Carousel.Item>
+                        3
+                        <Carousel.Caption>
+                          <h3>Third slide label</h3>
+                          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        </Carousel.Caption>
+                      </Carousel.Item>
+                    </Carousel>
                   </Carousel.Item>
                   <Carousel.Item>
-                    2
+                    <PerformanceCharts nomenclature={nomenclature} />
+
                     <Carousel.Caption>
                       <h3>Second slide label</h3>
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </Carousel.Caption>
                   </Carousel.Item>
                   <Carousel.Item>
-                    3
+                    <PerformanceSpatial nomenclature={nomenclature} />
+
                     <Carousel.Caption>
                       <h3>Third slide label</h3>
                       <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                     </Carousel.Caption>
                   </Carousel.Item>
                 </Carousel>
-              </Carousel.Item>
-              <Carousel.Item>
-                <PerformanceCharts nomenclature={nomenclature} />
-
-                <Carousel.Caption>
-                  <h3>Second slide label</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item>
-                <PerformanceSpatial nomenclature={nomenclature} />
-
-                <Carousel.Caption>
-                  <h3>Third slide label</h3>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-            </Carousel>
-          </Row>
-        </Col>
+              </Row>
+            </Col>{" "}
+          </Form>
+        </FormProvider>
       </Row>
     </>
   );
