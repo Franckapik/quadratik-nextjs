@@ -1,12 +1,10 @@
+import { useState } from "react";
 import { Button, Carousel, Col, Row } from "react-bootstrap";
 import { useProductStore } from "../../hooks/store";
-import ProductCanvas from "./ProductCanvas";
-import { PerformanceRow } from "./PerformanceRow";
-import ProductOptions from "./ProductOptions";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
-import { useState } from "react";
+import ProductOptions from "./ProductOptions";
 
-export const ProductHud = ({ attributes, defaultProduct, setLoading, fetching }) => {
+export const ProductHud = ({ display, attributes, defaultProduct, setLoading, fetching }) => {
   //just on page render
   const price = useProductStore((state) => state.price);
   const nomenclature = useProductStore.getState().nomenclature;
@@ -16,22 +14,26 @@ export const ProductHud = ({ attributes, defaultProduct, setLoading, fetching })
   const fmax = useProductStore((state) => state.fmax);
   const cwidth = useProductStore((state) => state.cwidth);
   const sizes = useProductStore((state) => state.sizes);
-  const tag = useProductStore((state) => state.tag);
   const area = (sizes.longueur * sizes.largeur) / 1000;
   const volume = ((area * sizes.profondeur) / 1000).toFixed(5);
 
   const [custom, setCustom] = useState(0);
 
   return (
-    <Row className="text_dark align-items-end w-100">
-      <Row>
-        {" "}
-        <Carousel activeIndex={custom}>
+    <Row className="text_dark align-items-end w-100 ">
+      
+      <Row className="d-inline product_modele_desc">
+      <p>REF : {nomenclature?.structurel}</p>
+
+        <p className="modele_phrase">Le diffuseur acoustique <span className="text-uppercase">{nomenclature?.simple} </span> renvoie les ondes sonores dans toutes les directions.</p>
+      </Row>
+      <Row className="d-inline product_modele_desc_details">
+        <Carousel activeIndex={display}>
           <Carousel.Item>
-            <Row className="text-center text-md-start">
-              <p className=" text-uppercase ft05">{nomenclature?.simple} </p>
-              <p>REF : {nomenclature?.structurel}</p>
-            </Row>
+          Les diffuseurs acoustiques sont des pièces en bois de forme irrégulière. Les unités de différentes profondeurs reflètent les fréquences sonores dans de nombreuses directions dans la pièce.
+          </Carousel.Item>
+
+          <Carousel.Item>
             <Row>
               <Col>
                 <PerformanceWidget icon="fad fa-bolt" value={`${fmin} Hz - ${fmax} Hz`} color="#f26565" performance={((fmax - fmin) * 100) / 10000} tooltip={"La plage de fréquence traitée"} /> {/* 10k audio frequency */}
@@ -39,12 +41,10 @@ export const ProductHud = ({ attributes, defaultProduct, setLoading, fetching })
                 <PerformanceWidget icon="fad fa-box-open" value={`${area} m2 // ${volume} m3`} color="#7cb0eb" performance={(volume * 100) / 0.144} tooltip={"L'aire traitée par le diffuseur et le volume (boite) qu'il occupe"} /> {/* 120 * 60 * 20cm */}
               </Col>
             </Row>
-            <Row>
-              {" "}
-              <span onClick={() => setCustom(1)}>Personnaliser</span>
-            </Row>
           </Carousel.Item>
-          <Carousel.Item>{!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}  <Row onClick={() => setCustom(0)}>  <span >Default</span></Row></Carousel.Item>
+          <Carousel.Item>
+            {!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}{" "}
+          </Carousel.Item>
         </Carousel>
       </Row>
 

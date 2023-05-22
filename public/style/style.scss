@@ -10,6 +10,13 @@
   src: url(../fonts/Alcubierre.ttf);
 }
 
+@font-face {
+  font-family: Playfair;
+  src: url(../fonts/Alcubierre.ttf);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @import "./custom.scss";
 
 
@@ -77,6 +84,9 @@ $header_height: calc(8vh + 2vw);
 
 .border_creme {
   border: solid 1px #d0c3b482;
+}
+.border_dark {
+  border: solid 1px #332d2a;
 }
 
 .border_creme_light {
@@ -288,12 +298,35 @@ padding : 10px!important;
   width: 0;
 }
 
+.btn {
+  text-transform: uppercase !important;
+}
+
 .navbar .navbar-nav .nav-link::after {
   transition: all 0.5s;
 }
 
 .navbar .navbar-nav .nav-link:hover::after {
   width: 100%;
+}
+.product_modele_desc{
+  width: 80%;
+  padding-left: 2vw!important;
+  height : 30%;
+  margin-top : 10%!important;
+}
+.product_modele_desc_details{
+  width: 80%;
+  padding-left: 2vw!important;
+  height : 50%;
+}
+
+.product_modele_desc .modele_phrase{
+  font-size: 2.5em;
+  line-height: 1.5em;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+  font-family: 'Playfair Display';
 }
 
 .product_attributes_col {
@@ -594,6 +627,24 @@ padding : 10px!important;
   left: 3vw;
   letter-spacing: 0.25vw;
   margin: auto;
+  position: absolute;
+  text-transform: uppercase;
+  transform: rotate(180deg);
+  transform-origin: center center;
+  writing-mode: vertical-rl;
+  z-index: 2;
+}
+.product_custom {
+  color: #332d2a;
+  align-items: center;
+  display: flex;
+  font-size: 1vw !important;
+  height: 50%;
+  justify-content: center;
+  right: 0;
+  top : 25%;
+  border: solid thin  #332d2a;
+  letter-spacing: 0.25vw;
   position: absolute;
   text-transform: uppercase;
   transform: rotate(180deg);

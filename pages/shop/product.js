@@ -95,11 +95,14 @@ const Product = () => {
         {defaultProduct.label}
         <div className="trait"></div>Aperçu du modèle
       </div>
+      <div className="product_custom d-none d-md-flex p-2">
+Personnaliser le modèle  <i className="fad fa-chevron-right pt-4 "></i>
+      </div>
       <Row className="layout_space">
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
             <Col md={6} className="product_right bg_creme layout_space">
-              <ProductHud fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />
+              <ProductHud display={display} fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />
             </Col>
             <Col md={6} className="product_left flex-column">
               <Row className="justify-content-center">
@@ -109,8 +112,8 @@ const Product = () => {
                       <Carousel.Item>
                         <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
                         <Carousel.Caption>
-                          <h3>First slide label</h3>
-                          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                          <h3>{nomenclature?.simple}</h3>
+                          <p>Traite intégralement la plage de fréquences 1024 - 3542 Hz</p>
                         </Carousel.Caption>
                       </Carousel.Item>
                       <Carousel.Item>
