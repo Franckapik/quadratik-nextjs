@@ -9,7 +9,6 @@ import { CardWrap } from "../../components/shop/CardWrap";
 const Shop = () => {
   //Data
   const [attributes, fetching, error] = useAttributes();
-
   const parentCategories = useFetchCategories((cat) => cat.fk_parent == 0).map((cat) => ({ ...cat, ["label"]: cat.label.substring(5) }));
   const [viewedCategory, setViewedCategory] = useState(1);
 
@@ -21,14 +20,14 @@ const Shop = () => {
         <div className="trait"></div>Boutique
       </div>{" "}
       <Row className="layout_space bg_creme_light shop_main_row ">
-          <CardWrap>
-            <img src="/shop/Anemone-7.png" />
-            <span className="shop_product_title ft2 ">Anemone-710</span>
-            <span className="shop_product_collection ft6 text-uppercase text-nowrap">Diffuseur 2D classiques</span>
-          </CardWrap>
-            {parentCategories.map((firstCat) => {
-              return <ParentCategorie firstCat={firstCat} attributes={attributes} setViewedCategory={setViewedCategory} />;
-            })}
+        <CardWrap>
+          <img src="/shop/Anemone-7.png" />
+          <span className="shop_product_title ft2 ">Anemone-710</span>
+          <span className="shop_product_collection ft6 text-uppercase text-nowrap">Diffuseur 2D classiques</span>
+        </CardWrap>
+        {parentCategories.map((firstCat, i) => {
+          return <ParentCategorie key={"ParentCategory" + i} firstCat={firstCat} attributes={attributes} setViewedCategory={setViewedCategory} />;
+        })}
       </Row>
     </>
   );

@@ -33,8 +33,8 @@ export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => 
         </div>
       </CardWrap>
 
-      {childCategories.map((childCat) => {
-        return <ChildCategorie childCat={childCat} attributes={attributes} variants={variants} />;
+      {childCategories.map((childCat,i) => {
+        return <ChildCategorie key={"ChildCategory" + i} childCat={childCat} attributes={attributes} variants={variants} />;
       })}
     </>
   );

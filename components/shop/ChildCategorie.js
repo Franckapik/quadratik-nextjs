@@ -28,7 +28,7 @@ export const ChildCategorie = ({ childCat, attributes, variants }) => {
     <>
       {listProducts &&
         listProducts.map((variant, i) => {
-          return <CardProduct variant={variant} childCat={childCat} attributes={attributes} />;
+          return <CardProduct key={"Variant" + i} variant={variant} childCat={childCat} attributes={attributes} />;
         })}
     </>
   );

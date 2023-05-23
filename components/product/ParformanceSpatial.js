@@ -16,7 +16,6 @@ export const PerformanceSpatial = ({ nomenclature }) => {
         })
         .catch((error) => {
           setError(true);
-          console.log(error);
         });
     }
   }, [nomenclature]);
