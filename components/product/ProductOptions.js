@@ -10,36 +10,12 @@ import useToggle from "../../hooks/useToggle";
 import { CardOptions } from "./CardOptions";
 import { Field } from "./Field";
 
-const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
-  const tag = useProductStore.getState().tag;
+const ProductOptions = ({ setValuesSelected }) => {
   const [mode, setMode] = useToggle(true);
-
-  const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
-    return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(cur.values[0]?.v_id) };
-  }, 0);
-
-
-  const [valuesSelected, setValuesSelected] = useQueryStates(defaultValuesQuery, {
-    history: "push",
-  });
-
-  //global states
-  const nomenclature = useNomenclature(valuesSelected, 1, attributes, true);
-  usePrice(valuesSelected, defaultProduct, attributes, true);
-  useSizes(valuesSelected, attributes, true);
-
-  //render Modele after ProductOptions
-  useEffect(() => {
-    if (nomenclature) {
-      setLoading(false);
-    }
-  }, [nomenclature]);
-
-  useEffect(() => {
-    useProductStore.setState({ valuesSelected: valuesSelected });
-  }, [valuesSelected]);
-
   const methods = useFormContext();
+  const defaultProduct = useProductStore(state => state.defaultProduct);
+  const attributes = useProductStore(state => state.attributes);
+  const valuesSelected = useProductStore(state => state.valuesSelected);
 
   useEffect(() => {
     const subscription = methods.watch((value) => {
