@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Carousel, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
-import { listCategories } from "../../components/dolibarrApi/fetch";
 import { variantPost } from "../../components/dolibarrApi/post";
 import { PerformanceSpatial } from "../../components/product/ParformanceSpatial";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
@@ -12,6 +11,8 @@ import { ProductHud } from "../../components/product/ProductHud";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
 import { useFetchDefaultProduct } from "../../hooks/useFetchDefaultProduct";
+import { useFetchPicture } from "../../hooks/useFetchPicture";
+import { useFetchCategories } from "../../hooks/useFetchCategories";
 
 const Product = () => {
   //Data
@@ -22,6 +23,7 @@ const Product = () => {
 
   //get default product from tag category
   const [tag, setTAG] = useQueryState("TAG", queryTypes.integer.withDefault(1));
+  const [childCat, setChildCat] = useQueryState("childCat", queryTypes.integer.withDefault(1));
 
   useEffect(() => {
     useProductStore.setState({ tag: tag }); //"cannot render a component while ..."
@@ -32,6 +34,11 @@ const Product = () => {
   const nomenclature = useProductStore((state) => state.nomenclature);
   const price = useProductStore((state) => state.price);
   const baseprice = useProductStore((state) => state.baseprice);
+  const [miniature, errorImg] = useFetchPicture(nomenclature, 'Miniature');
+  const [face, errorFaceImg] = useFetchPicture(nomenclature, 'Face');
+  const [side, errorSideImg] = useFetchPicture(nomenclature, 'Side');
+
+  const childCategorie = useFetchCategories((cat) => cat.id == childCat);
 
   const [index, setIndex] = useState(0);
 
@@ -79,7 +86,7 @@ const Product = () => {
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
             <Col md={6} className="product_right bg_creme layout_space">
-              <ProductHud display={display} fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} />
+              <ProductHud childCat={childCategorie} description={defaultProduct.description} display={display} fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} />
             </Col>
             <Col md={6} className="product_left flex-column">
               <Row className="justify-content-center">
@@ -87,14 +94,14 @@ const Product = () => {
                   <Carousel.Item>
                     <Carousel indicators={false} activeIndex={index} controls={false}>
                       <Carousel.Item>
-                        <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
+                        <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${face}`} alt="Front preview of the model" />
                         <Carousel.Caption>
                           <h3>{nomenclature?.simple}</h3>
-                          <p>Traite intégralement la plage de fréquences 1024 - 3542 Hz</p>
+                          <p>Plage de fréquences 1024 - 3542 Hz</p>
                         </Carousel.Caption>
                       </Carousel.Item>
                       <Carousel.Item>
-                        <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
+                        <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${side}`} alt="Side preview of the model" />
                         <Carousel.Caption>
                           <h3>Second slide label</h3>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -109,9 +116,8 @@ const Product = () => {
                       </Carousel.Item>
                     </Carousel>{" "}
                     <div className="carousel-indicators">
-                      <img onClick={() => setIndex(0)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
-                      <img onClick={() => setIndex(1)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
-                      <img onClick={() => setIndex(2)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
+                      <img onClick={() => setIndex(0)} className="d-block product_thumbnail m-2"  src={`data:image/png;base64,${face}`} alt="First slide thumbnail" />
+                      <img onClick={() => setIndex(1)} className="d-block product_thumbnail m-2"  src={`data:image/png;base64,${side}`} alt="Second slide thumbnail" />
                     </div>
                   </Carousel.Item>
                   <Carousel.Item>

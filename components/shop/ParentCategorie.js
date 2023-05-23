@@ -25,7 +25,7 @@ export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => 
     <>
       <CardWrap categorie>
         <div className="shop_categorie text-dark">
-          <Row className="shop_categorie_logo">
+          <Row className="shop_categorie_logo justify-content-center">
             <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" />
           </Row>
           <p className="ft05 mt-5 text-center">{firstCat.label}</p>

@@ -1,35 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import { documentByFilename, documentByProductId } from "../dolibarrApi/fetch";
-import { useNomenclature } from "../../hooks/useNomenclature";
-import { useFetchDefaultProduct } from "../../hooks/useFetchDefaultProduct";
 import Link from "next/link";
-import { CardWrap } from "./CardWrap";
+import React from "react";
+import { useFetchPicture } from "../../hooks/useFetchPicture";
+import { useNomenclature } from "../../hooks/useNomenclature";
 import { usePrice } from "../../hooks/usePrice";
+import { CardWrap } from "./CardWrap";
 
 export const CardProduct = ({ variant, childCat, attributes, defaultProduct }) => {
   const nomenclature = useNomenclature(variant.valuesSelected, childCat.fk_parent, attributes);
-  const [productImg, setProductImg] = useState();
-  const [error, setError] = useState(false);
-const price =   usePrice(variant.valuesSelected,  defaultProduct, attributes);
-
-  useEffect(() => {
-    if (nomenclature) {
-      documentByFilename("Modeles/Miniature/" + nomenclature.simple + ".png")
-        .get()
-        .then((response) => {
-          setProductImg(response.data.content);
-        })
-        .catch((error) => {
-          setError(true);
-        });
-    }
-  }, [nomenclature]);
+  const price = usePrice(variant.valuesSelected, defaultProduct, attributes);
+  const [miniature, error] = useFetchPicture(nomenclature, 'Miniature');
 
   return (
     <CardWrap>
-      <Link href={{ pathname: "/shop/product", query: {"Display" : 0, "TAG" : childCat.fk_parent, ...variant.valuesSelected} }}>
-        {!error && productImg ? <img src={`data:image/png;base64,${productImg}`} /> : "Image non disponible" }
+      <Link href={{ pathname: "/shop/product", query: { Display: 0, TAG: childCat.fk_parent, childCat : childCat.id, ...variant.valuesSelected } }}>
+        {!error && miniature ? <img src={`data:image/png;base64,${miniature}`} /> : "Image non disponible"}
         <span className="shop_product_title ft2 ">{nomenclature.simple}</span>
         <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCat.label}</span>
         <span className="shop_product_price ft4 text-uppercase text-nowrap ">{Math.round(price[0])} €</span>

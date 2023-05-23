@@ -3,7 +3,7 @@ import { useProductStore } from "../../hooks/store";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 
-export const ProductHud = ({ display, attributes, defaultProduct, fetching }) => {
+export const ProductHud = ({ display, attributes, defaultProduct, fetching, description, childCat }) => {
   //just on page render
   const price = useProductStore((state) => state.price);
   const nomenclature = useProductStore((state) => state.nomenclature);
@@ -15,20 +15,20 @@ export const ProductHud = ({ display, attributes, defaultProduct, fetching }) =>
   const sizes = useProductStore((state) => state.sizes);
   const area = (sizes.longueur * sizes.largeur) / 1000;
   const volume = ((area * sizes.profondeur) / 1000).toFixed(5);
-
+console.log(childCat[0]);
   return (
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (
         <Row className="d-inline product_modele_desc">
           <p>REF : {nomenclature?.structurel}</p>
           <p className="modele_phrase">
-            Le diffuseur acoustique <span className="text-uppercase">{nomenclature?.simple} </span> renvoie les ondes sonores dans toutes les directions.
+            {childCat[0]?.description.replace('$PRODUCT', nomenclature?.simple)}
           </p>
         </Row>
       ) : null}
       <Row className="d-inline product_modele_desc_details justify-content-center">
         <Carousel activeIndex={display} controls={false}>
-          <Carousel.Item>Les diffuseurs acoustiques sont des pièces en bois de forme irrégulière. Les unités de différentes profondeurs reflètent les fréquences sonores dans de nombreuses directions dans la pièce.</Carousel.Item>
+          <Carousel.Item>{description}</Carousel.Item>
 
           <Carousel.Item>
             <Row>
