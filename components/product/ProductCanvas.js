@@ -36,9 +36,6 @@ const ProductCanvas = () => {
            {tag === 1 && dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} />: null} 
            {tag === 1 && dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} />: null} 
            {tag === 2 ? <Absorbeur dimensions={dimensions} />: null} 
-            {/*           {p3d.TAG === "Diffuseurs" && p3d.D === "D1" && <Diffuseur1D p3d={p3d} dimensions={monObj3d} />}
-          {p3d.TAG === "Diffuseurs" && p3d.D === "D2" && <Diffuseur2D p3d={p3d} />}
-          {p3d.TAG === "Absorbeurs" && <Absorbeur p3d={p3d} />} */}
           </group>
           <EffectComposer>
             <BrightnessContrast

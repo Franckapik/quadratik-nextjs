@@ -3,15 +3,18 @@ import { useProductStore } from "./store";
 import { attributesAllFetch, attributesFetchById } from "../components/dolibarrApi/fetch";
 
 export const useAttributes = () => {
-
-    const [attributes, setAttributes] = useState(false);
-    const [fetching, setFetching] = useState(true);
-    const [error, setError] = useState(false);
-
+  const store_attributes = useProductStore((state) => state.attributes);
+  const [attributes, setAttributes] = useState(false);
+  const [fetching, setFetching] = useState(true);
+  const [error, setError] = useState(false);
 
   // get attributes (ex : Width) and then values (ex: 50cm)
   useEffect(() => {
-    attributesAllFetch()
+    if (Object.keys(store_attributes).length) {
+      console.log("ici");
+      setAttributes(store_attributes);
+    } else {
+      attributesAllFetch()
       .get()
       .then((response) => {
         const attributes = response.data;
@@ -74,9 +77,9 @@ export const useAttributes = () => {
         console.log(error);
         setError(error);
       });
-  }, []);
+    }
+    
+  }, [store_attributes]);
 
   return [attributes, fetching, error];
 };
-  
-  

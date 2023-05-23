@@ -26,16 +26,11 @@ const Product = () => {
   useProductStore.setState({ tag: tag }); //global state
 
   const [categories, setCategories] = useState([]);
-  const parentCategories = categories.filter((cat) => cat.fk_parent == 0).map((cat) => ({ ...cat, ["label"]: cat.label.substring(5) }));
   const nomenclature = useProductStore((state) => state.nomenclature);
   const price = useProductStore((state) => state.price);
   const baseprice = useProductStore((state) => state.baseprice);
 
   const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
 
   //get all categories
   useEffect(() => {
@@ -153,7 +148,7 @@ const Product = () => {
                   </Carousel.Item>
                 </Carousel>
               </Row>
-            </Col>{" "}
+            </Col>
           </Form>
         </FormProvider>
       </Row>
@@ -162,47 +157,3 @@ const Product = () => {
 };
 
 export default Product;
-
-/*
-
- {!error ? (
-          <Row >
-          <FormProvider {...methods}>
-            <Form onSubmit={methods.handleSubmit(onSubmit)} className="d-flex flex-column flex-md-row justify-content-evenly ft4  ">
-              <Col md={3}>{!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}</Col>
-              <Col md={9} className="p-2">
-                <Row className="justify-content-start text-center">
-                  <Col className="ft6 p-2 product_tab   me-2 bg_darker text-uppercase" style={{ top: display === "model" ? "1px" : "0px" }} onClick={() => setDisplay("model")}>
-                    Modele
-                  </Col>
-                  <Col className="ft6 p-2 product_tab  me-2 bg_darker text-uppercase" style={{ top: display === "coefDif" ? "1px" : "0px" }} onClick={() => setDisplay("coefDif")}>
-                    Performances
-                  </Col>
-                  <Col className="ft6 p-2 product_tab bg_darker text-uppercase " style={{ top: display === "plot" ? "1px" : "0px" }} onClick={() => setDisplay("plot")}>
-                    Spacialisation
-                  </Col>
-                </Row>
-                <Row className="producthud_content border_creme bg_darker">
-                  {!loading ? (
-                    <>
-                      {display === "coefDif" ? <PerformanceCharts nomenclature={nomenclature} /> : null}
-                      {display === "plot"   ? <PerformanceSpatial nomenclature={nomenclature}/> : null}
-                      {display === "model" ? <ProductHud /> : null}
-                    </>
-                  ) : (
-                    "Chargement du modèle"
-                  )}
-                </Row>{" "}
-
-                <Row className="d-md-none border_creme  mt-4">
-                  <ProductCanvas></ProductCanvas>
-                </Row>
-              </Col>
-            </Form>
-          </FormProvider>
-          </Row>
-        ) : (
-          "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
-        )}
-
-        */
