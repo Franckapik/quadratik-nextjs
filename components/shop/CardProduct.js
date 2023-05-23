@@ -12,7 +12,7 @@ export const CardProduct = ({ variant, childCat, attributes }) => {
 
   useEffect(() => {
     if (nomenclature) {
-      documentByFilename("Modeles/" + nomenclature.simple + ".png")
+      documentByFilename("Modeles/Miniature/" + nomenclature.simple + ".png")
         .get()
         .then((response) => {
           setProductImg(response.data.content);
