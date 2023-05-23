@@ -1,4 +1,4 @@
-import { queryTypes, useQueryState, useQueryStates } from "next-usequerystate";
+import { queryTypes, useQueryState } from "next-usequerystate";
 import React, { useEffect, useState } from "react";
 import { Carousel, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
@@ -11,9 +11,6 @@ import ProductCanvas from "../../components/product/ProductCanvas";
 import { ProductHud } from "../../components/product/ProductHud";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
-import { useNomenclature } from "../../hooks/useNomenclature";
-import { usePrice } from "../../hooks/usePrice";
-import { useSizes } from "../../hooks/useSizes";
 
 const Product = () => {
   //Data
@@ -22,45 +19,18 @@ const Product = () => {
   const [loading, setLoading] = useState(true);
 
   //Display
-  const [display, setDisplay] = useQueryState("Display", queryTypes.integer.withDefault(0, {
-    history: "push",
-
-  }));
+  const [display, setDisplay] = useQueryState("Display", queryTypes.integer.withDefault(0));
 
   //get default product from tag category
   const [tag, setTAG] = useQueryState("TAG", queryTypes.integer.withDefault(1));
   useProductStore.setState({ tag: tag }); //global state
 
   const [categories, setCategories] = useState([]);
+  const nomenclature = useProductStore((state) => state.nomenclature);
   const price = useProductStore((state) => state.price);
   const baseprice = useProductStore((state) => state.baseprice);
 
   const [index, setIndex] = useState(0);
-
-  const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
-    return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(cur.values[0]?.v_id) };
-  }, 0);
-
-
-  const [valuesSelected, setValuesSelected] = useQueryStates(defaultValuesQuery, {
-    history: "push",
-  });
-
-  //global states
-  const nomenclature = useNomenclature(valuesSelected, 1, attributes, true);
-  usePrice(valuesSelected, defaultProduct, attributes, true);
-  useSizes(valuesSelected, attributes, true);
-
-  //render Modele after ProductOptions
-  useEffect(() => {
-    if (nomenclature) {
-      setLoading(false);
-    }
-  }, [nomenclature]);
-
-  useEffect(() => {
-    useProductStore.setState({ valuesSelected: valuesSelected });
-  }, [valuesSelected]);
 
   //get all categories
   useEffect(() => {
@@ -81,8 +51,6 @@ const Product = () => {
       .then((response) => {
         var attributes = JSON.parse(response.data[0].note_private);
         setDefaultProduct({ ...response.data[0], attributes: attributes });
-        useProductStore.setState({ defaultProduct: { ...response.data[0], attributes: attributes } });
-
       })
       .catch((error) => {
         console.log(error);
@@ -122,7 +90,7 @@ const Product = () => {
 
   return (
     <>
-      <LayoutHome setDisplay={setDisplay} product={["modele", "performances", "spacialisation"]} text_dark shop cart />
+      <LayoutHome product={["modele", "performances", "spacialisation"]} text_dark shop cart />
       <div className="s0_page_index  d-none d-md-flex">
         {defaultProduct.label}
         <div className="trait"></div>Aperçu du modèle
@@ -134,7 +102,7 @@ const Product = () => {
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
             <Col md={6} className="product_right bg_creme layout_space">
-              <ProductHud display={display} fetching={fetching} setValuesSelected={setValuesSelected}/>
+              <ProductHud display={display} fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />
             </Col>
             <Col md={6} className="product_left flex-column">
               <Row className="justify-content-center">

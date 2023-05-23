@@ -15,7 +15,6 @@ const useProductStore = create((set) => ({
   nomenclature: 0,
   valuesSelected: {},
   attributes: {},
-  defaultProduct: {},
   fmin: 0,
   fmax: 0,
   cwidth: 0,
