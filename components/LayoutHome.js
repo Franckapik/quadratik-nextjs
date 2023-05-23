@@ -21,7 +21,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
             {categories ? (
               <>
                 {categories.map((a, i) => (
-                  <Col className="p-2 d-none d-md-flex justify-content-center" xs={4} md={1} style={{ backgroundColor: a.id == viewedCategory ? "#9fb07ca9" : "inherit" }}>
+                  <Col key={"categoryNav" + i} className="p-2 d-none d-md-flex justify-content-center" xs={4} md={1} style={{ backgroundColor: a.id == viewedCategory ? "#9fb07ca9" : "inherit" }}>
                     <Link href={{ pathname: "/shop", query: { TAG: a.id } }}>{a.label}</Link>
                   </Col>
                 ))}
@@ -30,7 +30,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
             {product ? (
               <>
                 {product.map((a, i) => (
-                  <Col className="p-2 d-none d-md-flex justify-content-center text_creme m-5" xs={4} md={1} style={{ backgroundColor: i == viewedCategory ? "#9fb07ca9" : "inherit" }}>
+                  <Col key={"productNav" + i} className="p-2 d-none d-md-flex justify-content-center text_creme m-5" xs={4} md={1} style={{ backgroundColor: i == viewedCategory ? "#9fb07ca9" : "inherit" }}>
                     <div onClick={() => setDisplay(i)}>{a}</div>
                   </Col>
                 ))}

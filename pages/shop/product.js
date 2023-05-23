@@ -93,7 +93,7 @@ const Product = () => {
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
             <Col md={6} className="product_right bg_creme layout_space">
-              <ProductHud display={display} fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />
+              <ProductHud display={display} fetching={fetching} attributes={attributes} defaultProduct={defaultProduct}  />
             </Col>
             <Col md={6} className="product_left flex-column">
               <Row className="justify-content-center">
@@ -122,7 +122,7 @@ const Product = () => {
                         </Carousel.Caption>
                       </Carousel.Item>
                     </Carousel>{" "}
-                    <div class="carousel-indicators">
+                    <div className="carousel-indicators">
                       <img  onClick={() => setIndex(0)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
                       <img  onClick={() => setIndex(1)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
                       <img  onClick={() => setIndex(2)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />

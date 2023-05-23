@@ -203,9 +203,9 @@ export const S4_Business = () => {
             <Col md={6} className="order-md-1">
               <div className="s4_cards_container position-relative">
                 <div className="s4_swipe_icon ft05">
-                  <i class="fa fa-long-arrow-left " />
+                  <i className="fa fa-long-arrow-left " />
                   <i className="fad fa-hand-pointer" /> 
-                  <i class="fa fa-long-arrow-right" />
+                  <i className="fa fa-long-arrow-right" />
                 </div>
                 <img src="./card_table.svg" alt="Table des valeurs de l'entreprise Quadratik.fr" className="s4_card_table" />
                 {inView ? <Deck setVisibleCard={setVisibleCard} /> : null}

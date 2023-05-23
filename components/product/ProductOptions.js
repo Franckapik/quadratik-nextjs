@@ -7,10 +7,9 @@ import { useNomenclature } from "../../hooks/useNomenclature";
 import { usePrice } from "../../hooks/usePrice";
 import { useSizes } from "../../hooks/useSizes";
 import useToggle from "../../hooks/useToggle";
-import { CardOptions } from "./CardOptions";
 import { Field } from "./Field";
 
-const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
+const ProductOptions = ({ attributes, defaultProduct }) => {
   const tag = useProductStore.getState().tag;
   const [mode, setMode] = useToggle(true);
 
@@ -27,12 +26,7 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   usePrice(valuesSelected, defaultProduct, attributes, true);
   useSizes(valuesSelected, attributes, true);
 
-  //render Modele after ProductOptions
-  useEffect(() => {
-    if (nomenclature) {
-      setLoading(false);
-    }
-  }, [nomenclature]);
+
 
   useEffect(() => {
     useProductStore.setState({ valuesSelected: valuesSelected });
