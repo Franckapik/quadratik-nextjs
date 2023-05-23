@@ -25,7 +25,7 @@ const Product = () => {
 
   useEffect(() => {
     useProductStore.setState({ tag: tag }); //"cannot render a component while ..."
-  }, [tag])
+  }, [tag]);
 
   const defaultProduct = useFetchDefaultProduct(tag);
 
@@ -79,13 +79,13 @@ const Product = () => {
         <FormProvider {...methods}>
           <Form onSubmit={methods.handleSubmit(onSubmit)}>
             <Col md={6} className="product_right bg_creme layout_space">
-              <ProductHud display={display} fetching={fetching} attributes={attributes} defaultProduct={defaultProduct}  />
+              <ProductHud display={display} fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} />
             </Col>
             <Col md={6} className="product_left flex-column">
               <Row className="justify-content-center">
                 <Carousel indicators={false} activeIndex={display} controls={false}>
                   <Carousel.Item>
-                    <Carousel  indicators={false} activeIndex={index} controls={false}>
+                    <Carousel indicators={false} activeIndex={index} controls={false}>
                       <Carousel.Item>
                         <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
                         <Carousel.Caption>
@@ -94,14 +94,14 @@ const Product = () => {
                         </Carousel.Caption>
                       </Carousel.Item>
                       <Carousel.Item>
-                      <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
+                        <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
                         <Carousel.Caption>
                           <h3>Second slide label</h3>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </Carousel.Caption>
                       </Carousel.Item>
                       <Carousel.Item>
-                      <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
+                        <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
                         <Carousel.Caption>
                           <h3>Third slide label</h3>
                           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -109,9 +109,9 @@ const Product = () => {
                       </Carousel.Item>
                     </Carousel>{" "}
                     <div className="carousel-indicators">
-                      <img  onClick={() => setIndex(0)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
-                      <img  onClick={() => setIndex(1)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
-                      <img  onClick={() => setIndex(2)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
+                      <img onClick={() => setIndex(0)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
+                      <img onClick={() => setIndex(1)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
+                      <img onClick={() => setIndex(2)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
                     </div>
                   </Carousel.Item>
                   <Carousel.Item>

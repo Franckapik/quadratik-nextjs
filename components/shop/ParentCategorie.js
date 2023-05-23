@@ -13,7 +13,7 @@ export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => 
   const childCategories = useFetchCategories((cat) => cat.fk_parent == firstCat.id);
   const parentProduct = useFetchProduct(firstCat, 0);
   const variants = useFetchVariant(parentProduct);
-
+  
   useEffect(() => {
     if (inView) {
       setViewedCategory(firstCat.id);
