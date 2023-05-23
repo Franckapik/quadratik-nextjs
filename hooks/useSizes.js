@@ -7,6 +7,8 @@ export const useSizes = (valuesSelected,  attributes, isQuadralab) => {
   useProductStore.setState({ sizes: sizes });
 
   useEffect(() => {
+    if (Object.keys(valuesSelected).length) {
+
     const listOfValues = Object.entries(attributes).reduce((acc, [i, a] = cur) => {
       for (let key in a.values) {
         acc.push(a.values[key]);
@@ -20,6 +22,7 @@ export const useSizes = (valuesSelected,  attributes, isQuadralab) => {
     const profondeur =  isQuadralab ? valuesSelected.P : listOfValues.filter((value) => value.v_id === valuesSelected.P)[0].v_3d;
     
     setSizes({longueur : longueur,largeur : largeur,  profondeur : profondeur});
+  }
   }, [valuesSelected]);
 
   return [sizes, setSizes];
