@@ -23,13 +23,13 @@ export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => 
 
   return (
     <>
-      <CardWrap>
-        <div className="shop_categorie text-dark p-4">
+      <CardWrap categorie>
+        <div className="shop_categorie text-dark">
           <Row className="shop_categorie_logo">
             <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" />
           </Row>
           <p className="ft05 mt-5 text-center">{firstCat.label}</p>
-          <div className="ft4 mt-5 text-justify" dangerouslySetInnerHTML={{ __html: firstCat.description }}></div>
+          <div className="ft4 mt-5" dangerouslySetInnerHTML={{ __html: firstCat.description }}></div>
         </div>
       </CardWrap>
 

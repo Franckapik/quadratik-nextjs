@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Carousel, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
-import { listCategories, objectsInCategory } from "../../components/dolibarrApi/fetch";
+import { listCategories } from "../../components/dolibarrApi/fetch";
 import { variantPost } from "../../components/dolibarrApi/post";
 import { PerformanceSpatial } from "../../components/product/ParformanceSpatial";
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
@@ -11,11 +11,12 @@ import ProductCanvas from "../../components/product/ProductCanvas";
 import { ProductHud } from "../../components/product/ProductHud";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
+import { useFetchDefaultProduct } from "../../hooks/useFetchDefaultProduct";
 
 const Product = () => {
   //Data
   const [attributes, fetching, error] = useAttributes();
-  const [defaultProduct, setDefaultProduct] = useState({});
+
   const [loading, setLoading] = useState(true);
 
   //Display
@@ -24,6 +25,8 @@ const Product = () => {
   //get default product from tag category
   const [tag, setTAG] = useQueryState("TAG", queryTypes.integer.withDefault(1));
   useProductStore.setState({ tag: tag }); //global state
+
+  const defaultProduct = useFetchDefaultProduct(tag);
 
   const [categories, setCategories] = useState([]);
   const nomenclature = useProductStore((state) => state.nomenclature);
@@ -45,18 +48,6 @@ const Product = () => {
       });
   }, []);
 
-  useEffect(() => {
-    objectsInCategory(tag)
-      .get()
-      .then((response) => {
-        var attributes = JSON.parse(response.data[0].note_private);
-        setDefaultProduct({ ...response.data[0], attributes: attributes });
-      })
-      .catch((error) => {
-        console.log(error);
-        /*  setError(error); */ //waiting for work on absorbeurs
-      });
-  }, [tag]);
 
   const methods = useForm();
 

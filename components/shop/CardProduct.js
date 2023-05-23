@@ -25,7 +25,7 @@ export const CardProduct = ({ variant, childCat, attributes }) => {
 
   return (
     <CardWrap>
-      <Link href={{ pathname: "/shop/product", query: variant.valuesSelected }}>
+      <Link href={{ pathname: "/shop/product", query: {"Display" : 0, ...variant.valuesSelected} }}>
         <img src={`data:image/png;base64,${productImg}`} />
         <span className="shop_product_title ft2 ">{nomenclature.simple}</span>
         <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCat.label}</span>
