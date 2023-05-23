@@ -17,36 +17,33 @@ const Product = () => {
   //Data
   const [attributes, fetching, error] = useAttributes();
 
-  const [loading, setLoading] = useState(true);
-
   //Display
   const [display, setDisplay] = useQueryState("Display", queryTypes.integer.withDefault(0));
 
   //get default product from tag category
   const [tag, setTAG] = useQueryState("TAG", queryTypes.integer.withDefault(1));
-  useProductStore.setState({ tag: tag }); //global state
+
+  useEffect(() => {
+    useProductStore.setState({ tag: tag }); //"cannot render a component while ..."
+  }, [tag])
 
   const defaultProduct = useFetchDefaultProduct(tag);
 
-  const [categories, setCategories] = useState([]);
   const nomenclature = useProductStore((state) => state.nomenclature);
   const price = useProductStore((state) => state.price);
   const baseprice = useProductStore((state) => state.baseprice);
 
   const [index, setIndex] = useState(0);
 
-  //get all categories
-  useEffect(() => {
-    listCategories()
-      .get()
-      .then((response) => {
-        setCategories(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(error);
-      });
-  }, []);
+/*   //trying valuesSelected here
+
+  const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
+    return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(cur.values[0]?.v_id) };
+  }, 0);
+
+  const [valuesSelected, setValuesSelected] = useQueryStates(defaultValuesQuery, {
+    history: "push",
+  }); */
 
 
   const methods = useForm();

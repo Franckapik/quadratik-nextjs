@@ -10,7 +10,6 @@ import useToggle from "../../hooks/useToggle";
 import { Field } from "./Field";
 
 const ProductOptions = ({ attributes, defaultProduct }) => {
-  const tag = useProductStore.getState().tag;
   const [mode, setMode] = useToggle(true);
 
   const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
@@ -21,12 +20,10 @@ const ProductOptions = ({ attributes, defaultProduct }) => {
     history: "push",
   });
 
-  //global states
-  const nomenclature = useNomenclature(valuesSelected, 1, attributes, true);
+  //set global states
+  useNomenclature(valuesSelected, 1, attributes, true);
   usePrice(valuesSelected, defaultProduct, attributes, true);
-  useSizes(valuesSelected, attributes, true);
-
-
+  useSizes(valuesSelected, attributes, true); 
 
   useEffect(() => {
     useProductStore.setState({ valuesSelected: valuesSelected });
@@ -42,26 +39,30 @@ const ProductOptions = ({ attributes, defaultProduct }) => {
   }, []);
 
   return (
-   <>{defaultProduct ?  <Form.Group> <Button variant="outline-dark" size="sm" onClick={() => setMode()}>
-        {mode ? "Mode Basique" : "Mode Avancé"}
-      </Button>
-
-      <Form.Group className=" p-2" controlId="product_simple">
-        {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
-          const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-          return <Field id={a[0]} type={mode ? a[1] : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-        })}
-      </Form.Group>
-
-      <Form.Group className=" p-2" controlId="product_advanced">
-        {Object.entries(defaultProduct.attributes.advanced).map((a, i) => {
-          const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
-          return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
-        })}
-      </Form.Group></Form.Group>: "Aucun produit par default selectionné"}</>
-      
-     
-    
+    <>
+      {defaultProduct ? (
+        <Form.Group>
+          {" "}
+          <Button variant="outline-dark" size="sm" onClick={() => setMode()}>
+            {mode ? "Mode Basique" : "Mode Avancé"}
+          </Button>
+          <Form.Group className=" p-2" controlId="product_simple">
+            {Object.entries(defaultProduct.attributes.simple).map((a, i) => {
+              const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+              return <Field id={a[0]} type={mode ? a[1] : "hidden"} key={"Field" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+            })}
+          </Form.Group>
+          <Form.Group className=" p-2" controlId="product_advanced">
+            {Object.entries(defaultProduct.attributes.advanced).map((a, i) => {
+              const attribute = Object.values(attributes).filter((x) => x.a_ref === a[0])[0];
+              return <Field id={a[0]} type={!mode ? a[1] : "hidden"} key={"FieldAdvanced" + i} values={attribute.values} label={attribute.a_label} defaultVal={valuesSelected[a[0]]}></Field>;
+            })}
+          </Form.Group>
+        </Form.Group>
+      ) : (
+        "Aucun produit par default selectionné"
+      )}
+    </>
   );
 };
 export default ProductOptions;
