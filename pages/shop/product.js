@@ -90,7 +90,7 @@ const Product = () => {
 
   return (
     <>
-      <LayoutHome product={["modele", "performances", "spacialisation"]} text_dark shop cart />
+      <LayoutHome setDisplay={setDisplay} product={["modele", "performances", "spacialisation"]} text_dark shop cart />
       <div className="s0_page_index  d-none d-md-flex">
         {defaultProduct.label}
         <div className="trait"></div>Aperçu du modèle

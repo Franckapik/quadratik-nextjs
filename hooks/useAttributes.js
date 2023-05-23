@@ -11,8 +11,8 @@ export const useAttributes = () => {
   // get attributes (ex : Width) and then values (ex: 50cm)
   useEffect(() => {
     if (Object.keys(store_attributes).length) {
-      console.log("ici");
       setAttributes(store_attributes);
+      setFetching(false);
     } else {
       attributesAllFetch()
       .get()
