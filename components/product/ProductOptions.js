@@ -49,9 +49,8 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
   }, []);
 
   return (
-    <CardOptions title="options" opened="0" className={"product_options"} >
             <Form.Group>
-              <Button variant="secondary" onClick={() => setMode()}>
+              <Button  variant="outline-dark" size="sm"  onClick={() => setMode()}>
                 {mode ? "Mode Basique" : "Mode Avancé"}
               </Button>
 
@@ -70,7 +69,6 @@ const ProductOptions = ({ attributes, defaultProduct, setLoading }) => {
               </Form.Group>
             </Form.Group>
 
-    </CardOptions>
   );
 };
 export default ProductOptions;

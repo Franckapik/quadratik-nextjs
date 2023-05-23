@@ -9,7 +9,6 @@ import { PerformanceSpatial } from "../../components/product/ParformanceSpatial"
 import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import ProductCanvas from "../../components/product/ProductCanvas";
 import { ProductHud } from "../../components/product/ProductHud";
-import ProductOptions from "../../components/product/ProductOptions";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
 
@@ -31,6 +30,12 @@ const Product = () => {
   const nomenclature = useProductStore((state) => state.nomenclature);
   const price = useProductStore((state) => state.price);
   const baseprice = useProductStore((state) => state.baseprice);
+
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
   //get all categories
   useEffect(() => {
@@ -95,8 +100,8 @@ const Product = () => {
         {defaultProduct.label}
         <div className="trait"></div>Aperçu du modèle
       </div>
-      <div className="product_custom d-none d-md-flex p-2">
-Personnaliser le modèle  <i className="fad fa-chevron-right pt-4 "></i>
+      <div className="product_custom d-none d-md-flex p-2" onClick={() => setDisplay(3)}>
+        Personnaliser le modèle <i className="fad fa-chevron-right pt-4 "></i>
       </div>
       <Row className="layout_space">
         <FormProvider {...methods}>
@@ -106,9 +111,9 @@ Personnaliser le modèle  <i className="fad fa-chevron-right pt-4 "></i>
             </Col>
             <Col md={6} className="product_left flex-column">
               <Row className="justify-content-center">
-                <Carousel activeIndex={display} controls={false}>
+                <Carousel indicators={false} activeIndex={display} controls={false}>
                   <Carousel.Item>
-                    <Carousel activeIndex={0} controls={false}>
+                    <Carousel  indicators={false} activeIndex={index} controls={false}>
                       <Carousel.Item>
                         <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
                         <Carousel.Caption>
@@ -117,36 +122,34 @@ Personnaliser le modèle  <i className="fad fa-chevron-right pt-4 "></i>
                         </Carousel.Caption>
                       </Carousel.Item>
                       <Carousel.Item>
-                        2
+                      <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
                         <Carousel.Caption>
                           <h3>Second slide label</h3>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                         </Carousel.Caption>
                       </Carousel.Item>
                       <Carousel.Item>
-                        3
+                      <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
                         <Carousel.Caption>
                           <h3>Third slide label</h3>
                           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                         </Carousel.Caption>
                       </Carousel.Item>
-                    </Carousel>
+                    </Carousel>{" "}
+                    <div class="carousel-indicators">
+                      <img  onClick={() => setIndex(0)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
+                      <img  onClick={() => setIndex(1)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
+                      <img  onClick={() => setIndex(2)} className="d-block product_thumbnail m-2" src="/shop/format_product.png" alt="First slide" />
+                    </div>
                   </Carousel.Item>
                   <Carousel.Item>
                     <PerformanceCharts nomenclature={nomenclature} />
-
-                    <Carousel.Caption>
-                      <h3>Second slide label</h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </Carousel.Caption>
                   </Carousel.Item>
                   <Carousel.Item>
                     <PerformanceSpatial nomenclature={nomenclature} />
-
-                    <Carousel.Caption>
-                      <h3>Third slide label</h3>
-                      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                    </Carousel.Caption>
+                  </Carousel.Item>
+                  <Carousel.Item className="product_canvas_container">
+                    <ProductCanvas></ProductCanvas>
                   </Carousel.Item>
                 </Carousel>
               </Row>

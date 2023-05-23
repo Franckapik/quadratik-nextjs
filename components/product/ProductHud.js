@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button, Carousel, Col, Row } from "react-bootstrap";
 import { useProductStore } from "../../hooks/store";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
@@ -17,21 +16,19 @@ export const ProductHud = ({ display, attributes, defaultProduct, setLoading, fe
   const area = (sizes.longueur * sizes.largeur) / 1000;
   const volume = ((area * sizes.profondeur) / 1000).toFixed(5);
 
-  const [custom, setCustom] = useState(0);
-
   return (
-    <Row className="text_dark align-items-end w-100 ">
-      
-      <Row className="d-inline product_modele_desc">
-      <p>REF : {nomenclature?.structurel}</p>
-
-        <p className="modele_phrase">Le diffuseur acoustique <span className="text-uppercase">{nomenclature?.simple} </span> renvoie les ondes sonores dans toutes les directions.</p>
-      </Row>
-      <Row className="d-inline product_modele_desc_details">
-        <Carousel activeIndex={display}>
-          <Carousel.Item>
-          Les diffuseurs acoustiques sont des pièces en bois de forme irrégulière. Les unités de différentes profondeurs reflètent les fréquences sonores dans de nombreuses directions dans la pièce.
-          </Carousel.Item>
+    <Row className="text_dark w-100 justify-content-center ">
+      {display != 3 ? (
+        <Row className="d-inline product_modele_desc">
+          <p>REF : {nomenclature?.structurel}</p>
+          <p className="modele_phrase">
+            Le diffuseur acoustique <span className="text-uppercase">{nomenclature?.simple} </span> renvoie les ondes sonores dans toutes les directions.
+          </p>
+        </Row>
+      ) : null}
+      <Row className="d-inline product_modele_desc_details justify-content-center">
+        <Carousel activeIndex={display} controls={false}>
+          <Carousel.Item>Les diffuseurs acoustiques sont des pièces en bois de forme irrégulière. Les unités de différentes profondeurs reflètent les fréquences sonores dans de nombreuses directions dans la pièce.</Carousel.Item>
 
           <Carousel.Item>
             <Row>
@@ -42,9 +39,8 @@ export const ProductHud = ({ display, attributes, defaultProduct, setLoading, fe
               </Col>
             </Row>
           </Carousel.Item>
-          <Carousel.Item>
-            {!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"}{" "}
-          </Carousel.Item>
+          <Carousel.Item>3</Carousel.Item>
+          <Carousel.Item>{!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} /> : "Chargement des options du produit"} </Carousel.Item>
         </Carousel>
       </Row>
 
@@ -59,11 +55,3 @@ export const ProductHud = ({ display, attributes, defaultProduct, setLoading, fe
     </Row>
   );
 };
-
-{
-  /* <PerformanceRow value={`${fmin} Hz - ${fmax} Hz`} text="Spectre de fréquences traité" icon="fad fa-bolt ft2" />
-<PerformanceRow value={`${(cwidth * 10).toFixed(0)} mm`} text="Taille d'une cellule" icon="fad fa-sort-size-down ft2" />{" "}
-</>
-) : null}
-<PerformanceRow value={`${sizes.longueur} x ${sizes.largeur} x ${sizes.profondeur} cm`} text="Dimension du modèle" icon="fad fa-box-open ft2" /> */
-}

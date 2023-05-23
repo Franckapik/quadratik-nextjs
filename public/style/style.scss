@@ -312,13 +312,12 @@ padding : 10px!important;
 .product_modele_desc{
   width: 80%;
   padding-left: 2vw!important;
-  height : 30%;
+  height : 350px;
   margin-top : 10%!important;
 }
 .product_modele_desc_details{
   width: 80%;
-  padding-left: 2vw!important;
-  height : 50%;
+  height : 400px;
 }
 
 .product_modele_desc .modele_phrase{
@@ -327,6 +326,14 @@ padding : 10px!important;
   letter-spacing: 0.03em;
   font-weight: 600;
   font-family: 'Playfair Display';
+}
+
+.product_thumbnail {
+  width: 100px;
+}
+
+.product_left .carousel-caption{
+  padding-bottom: 10rem;
 }
 
 .product_attributes_col {
@@ -395,6 +402,13 @@ padding : 10px!important;
   margin: auto;
 }
 
+.product_canvas_container {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  margin: auto;
+}
+
 .product_right {
   position: absolute;
   top: 0px;
@@ -424,6 +438,8 @@ padding : 10px!important;
   height: 10vh;
   width: 100%;
   border-top: solid thin #332d2a;
+  position: absolute;
+  bottom: 0;
 }
 
 
@@ -1083,6 +1099,15 @@ padding : 10px!important;
   position: absolute;
   top: 80%;
   transform: translate(-50%, -50%);
+}
+
+.product_right .form-select {
+  background-color: inherit;
+  color: #332d2a;
+  border-top: solid #332d2a;
+  border-radius: 0;
+  margin-bottom: 2em;
+  font-size: large;
 }
 
 .shop_subcategory {
