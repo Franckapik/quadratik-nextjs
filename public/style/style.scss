@@ -1010,13 +1010,14 @@ $creme : #eee3d6;
 .shop_card {
   aspect-ratio: 4/1.5 !important;
   position: relative;
-  min-width: 24% !important;
+  min-width: 23% !important;
 }
 
 .shop_main_row {
   column-gap: 5px;
   row-gap: 5px;
-}
+/*   width: 98vw;
+ */}
 
 .shop_card_price {
   bottom: 15%;
@@ -1028,7 +1029,7 @@ padding: 2vw;
 }
 
 .shop_card img {
-  width: 95%;
+  width: fit-content;
 }
 
 .shop_categorie_logo img {
