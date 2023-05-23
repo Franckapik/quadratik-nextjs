@@ -10,6 +10,7 @@ export const useNomenclature = (valuesSelected, tag, attributes, isQuadralab) =>
     const { C, D, E, I, L, M, N, P, W, H, V, T, F, QUADRANAME } = dimensions;
     let basename = "Inconnu";
     let name;
+    console.log(tag);
 
     if (tag === 1 && D === "D1") {
       basename = "Indik";
