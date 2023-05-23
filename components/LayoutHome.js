@@ -30,7 +30,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
             {product ? (
               <>
                 {product.map((a, i) => (
-                  <Col className="p-2 d-none d-md-flex justify-content-center text_creme m-5" xs={4} md={1} style={{ backgroundColor: a == viewedCategory ? "#9fb07ca9" : "inherit" }}>
+                  <Col className="p-2 d-none d-md-flex justify-content-center text_creme m-5" xs={4} md={1} style={{ backgroundColor: i == viewedCategory ? "#9fb07ca9" : "inherit" }}>
                     <div onClick={() => setDisplay(i)}>{a}</div>
                   </Col>
                 ))}
