@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Col, ListGroup, Offcanvas, Row } from "react-bootstrap";
 import { Burger } from "./Burger";
 
-export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark, categories, viewedCategory, text_dark }) => {
+export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark, categories, viewedCategory, text_dark, setDisplay}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
@@ -31,7 +31,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
               <>
                 {product.map((a, i) => (
                   <Col className="p-2 d-none d-md-flex justify-content-center text_creme m-5" xs={4} md={1} style={{ backgroundColor: a == viewedCategory ? "#9fb07ca9" : "inherit" }}>
-                    <Link href={{ pathname: "/shop/product", query: { Display: i } }}>{a}</Link>
+                    <div onClick={() => setDisplay(i)}>{a}</div>
                   </Col>
                 ))}
               </>
