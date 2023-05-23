@@ -3,10 +3,10 @@ import { useProductStore } from "../../hooks/store";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 
-export const ProductHud = ({ display, attributes, defaultProduct,  fetching }) => {
+export const ProductHud = ({ display, attributes, defaultProduct, fetching }) => {
   //just on page render
   const price = useProductStore((state) => state.price);
-  const nomenclature = useProductStore.getState().nomenclature;
+  const nomenclature = useProductStore((state) => state.nomenclature);
 
   //need to re-render the page
   const fmin = useProductStore((state) => state.fmin);
@@ -40,7 +40,7 @@ export const ProductHud = ({ display, attributes, defaultProduct,  fetching }) =
             </Row>
           </Carousel.Item>
           <Carousel.Item>3</Carousel.Item>
-          <Carousel.Item>{!fetching ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} /> : "Chargement des options du produit"} </Carousel.Item>
+          <Carousel.Item>{!fetching && attributes && defaultProduct ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} /> : "Chargement des options du produit"} </Carousel.Item>
         </Carousel>
       </Row>
 

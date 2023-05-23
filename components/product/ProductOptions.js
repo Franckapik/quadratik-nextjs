@@ -9,7 +9,7 @@ import { useSizes } from "../../hooks/useSizes";
 import useToggle from "../../hooks/useToggle";
 import { Field } from "./Field";
 
-const ProductOptions = ({ attributes, defaultProduct }) => {
+const ProductOptions = ({ attributes, defaultProduct, }) => {
   const [mode, setMode] = useToggle(true);
 
   const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {

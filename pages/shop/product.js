@@ -35,17 +35,6 @@ const Product = () => {
 
   const [index, setIndex] = useState(0);
 
-/*   //trying valuesSelected here
-
-  const defaultValuesQuery = Object.values(attributes).reduce((prev, cur) => {
-    return { ...prev, [cur.a_ref]: queryTypes.string.withDefault(cur.values[0]?.v_id) };
-  }, 0);
-
-  const [valuesSelected, setValuesSelected] = useQueryStates(defaultValuesQuery, {
-    history: "push",
-  }); */
-
-
   const methods = useForm();
 
   const onSubmit = async (data) => {

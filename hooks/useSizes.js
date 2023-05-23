@@ -4,7 +4,9 @@ import { useProductStore } from "./store";
 
 export const useSizes = (valuesSelected,  attributes, isQuadralab) => {
   const [sizes, setSizes] = useState(false);
-  useProductStore.setState({ sizes: sizes });
+  useEffect(() => {
+    useProductStore.setState({ sizes: sizes });
+  }, [sizes])
 
   useEffect(() => {
     if (Object.keys(valuesSelected).length) {

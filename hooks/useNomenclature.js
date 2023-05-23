@@ -6,7 +6,6 @@ export const useNomenclature = (valuesSelected, tag, attributes, isQuadralab) =>
   const [nomenclature, setNomenclature] = useState(false);
   const dimensions = useValues3D(valuesSelected, attributes, false);
 
-
   useEffect(() => {
     if (dimensions) {
       const { C, D, E, I, L, M, N, P, W, H, V, T, F, QUADRANAME } = dimensions;

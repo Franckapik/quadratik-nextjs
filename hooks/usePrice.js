@@ -4,8 +4,11 @@ import { useProductStore } from "../hooks/store";
 export const usePrice = (valuesSelected, defaultProduct, attributes, isQuadralab) => {
   const [price, setPrice] = useState(0);
   const [basePrice, setBasePrice] = useState(0);
-  useProductStore.setState({ price: price });
-  useProductStore.setState({ baseprice: basePrice });
+
+  useEffect(() => {
+    useProductStore.setState({ price: price });
+    useProductStore.setState({ baseprice: basePrice });  
+  },[basePrice,price])
 
   useEffect(() => {
     if (Object.keys(valuesSelected).length) {
