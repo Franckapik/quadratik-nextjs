@@ -112,7 +112,7 @@ for (let i = 0; i < 5; i++) {
             <animated.div
               ref={ref}
               style={springs}
-              className="d-flex flex-column s5_animatedcontact bg_light align-items-center justify-content-evenly"
+              className="d-flex flex-column s5_animatedcontact bg_green_light align-items-center justify-content-evenly"
             >
               <p className=" text-center ">Contact direct avec l'artisan</p>
               <div className="text-center">

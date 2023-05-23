@@ -4,6 +4,7 @@ import { LayoutHome } from "../../components/LayoutHome";
 import { useAttributes } from "../../hooks/useAttributes";
 import { useFetchCategories } from "../../hooks/useFetchCategories";
 import { ParentCategorie } from "../../components/shop/ParentCategorie";
+import { CardWrap } from "../../components/shop/CardWrap";
 
 const Shop = () => {
   //Data
@@ -15,24 +16,19 @@ const Shop = () => {
   return (
     <>
       <LayoutHome header cart home dark categories={parentCategories} viewedCategory={viewedCategory} />
-      <div className="s0_page_index d-none d-md-flex position-fixed">
+      <div className="s0_page_index d-none d-md-flex position-fixed text_dark">
         {parentCategories.filter((cat) => cat.id == viewedCategory)[0]?.label}
         <div className="trait"></div>Boutique
       </div>{" "}
-      <Row className="section layout_space ">
-        <Col md={1}></Col>
-        <Col>
-          <Row>
-          <Col className="shop_card m-2 d-flex flex-column justify-content-center align-items-center border_creme_light text-dark">
+      <Row className="layout_space bg_creme_light shop_main_row ">
+          <CardWrap>
             <img src="/shop/Anemone-7.png" />
             <span className="shop_product_title ft2 ">Anemone-710</span>
             <span className="shop_product_collection ft6 text-uppercase text-nowrap">Diffuseur 2D classiques</span>
-          </Col>
+          </CardWrap>
             {parentCategories.map((firstCat) => {
               return <ParentCategorie firstCat={firstCat} attributes={attributes} setViewedCategory={setViewedCategory} />;
             })}
-          </Row>
-        </Col>
       </Row>
     </>
   );
