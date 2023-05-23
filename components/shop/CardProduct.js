@@ -7,14 +7,12 @@ import Link from "next/link";
 import { CardWrap } from "./CardWrap";
 import { usePrice } from "../../hooks/usePrice";
 
-export const CardProduct = ({ variant, childCat, attributes }) => {
+export const CardProduct = ({ variant, childCat, attributes, defaultProduct }) => {
   const nomenclature = useNomenclature(variant.valuesSelected, childCat.fk_parent, attributes);
   const [productImg, setProductImg] = useState();
   const [error, setError] = useState(false);
-  const defaultProduct = useFetchDefaultProduct(childCat.fk_parent);
 const price =   usePrice(variant.valuesSelected,  defaultProduct, attributes);
 
-console.log(price);
   useEffect(() => {
     if (nomenclature) {
       documentByFilename("Modeles/Miniature/" + nomenclature.simple + ".png")

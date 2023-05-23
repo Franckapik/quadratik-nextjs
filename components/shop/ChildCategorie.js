@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { CardProduct } from "./CardProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
+import { useFetchDefaultProduct } from "../../hooks/useFetchDefaultProduct";
 
 export const ChildCategorie = ({ childCat, attributes, variants }) => {
   const [listProducts, setListProducts] = useState(false);
   const childProduct = useFetchProduct(childCat);
+  const defaultProduct = useFetchDefaultProduct(childCat.fk_parent);
 
   const addAttributes = (variants, attributes, variantId) => {
     const variant = Object.values(variants).filter((val) => val.fk_product_child === variantId)[0];
@@ -28,7 +30,7 @@ export const ChildCategorie = ({ childCat, attributes, variants }) => {
     <>
       {listProducts &&
         listProducts.map((variant, i) => {
-          return <CardProduct key={"Variant" + i} variant={variant} childCat={childCat} attributes={attributes} />;
+          return <CardProduct key={"Variant" + i} defaultProduct={defaultProduct} variant={variant} childCat={childCat} attributes={attributes} />;
         })}
     </>
   );
