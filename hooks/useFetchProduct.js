@@ -5,7 +5,6 @@ export const useFetchProduct = (categorie, index) => {
   const [products, setProducts] = useState(false);
   useEffect(() => {
     objectsInCategory(categorie.id, true)
-      .get()
       .then((response) => {
         if (index !== undefined) {
           setProducts(response.data[index]);

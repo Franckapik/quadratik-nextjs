@@ -13,10 +13,15 @@ import { useAttributes } from "../../hooks/useAttributes";
 import { useFetchDefaultProduct } from "../../hooks/useFetchDefaultProduct";
 import { useFetchPicture } from "../../hooks/useFetchPicture";
 import { useFetchCategories } from "../../hooks/useFetchCategories";
+import { useQuery } from "react-query";
 
 const Product = () => {
   //Data
   const [attributes, fetching, error] = useAttributes();
+
+  const {isLoading, data, isFetching} = useQuery(['post']);
+  console.log(data);
+
 
   //Display
   const [display, setDisplay] = useQueryState("Display", queryTypes.integer.withDefault(0));
