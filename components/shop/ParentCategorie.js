@@ -1,21 +1,17 @@
 import { useInView } from "@react-spring/web";
 import React, { useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
-import { useProductStore } from "../../hooks/store";
-import { useFetchCategories } from "../../hooks/useFetchCategories";
-import { useFetchProduct } from "../../hooks/useFetchProduct";
-import { useFetchVariant } from "../../hooks/useFetchVariants";
-import { ChildCategorie } from "./ChildCategorie";
-import { CardWrap } from "./CardWrap";
+import { Row } from "react-bootstrap";
 import { useQuery } from "react-query";
+import { useProductStore } from "../../hooks/store";
 import { listCategories, objectsInCategory, variantFetchByParentId } from "../dolibarrApi/fetch";
+import { CardWrap } from "./CardWrap";
+import { ChildCategorie } from "./ChildCategorie";
 
 export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => {
   const [ref, inView] = useInView();
   const {data : childCategories, isSuccess : ChildCategoriesSucceed} = useQuery(['childCategories', {parentId : firstCat.id}], () => listCategories((cat) => cat.fk_parent == firstCat.id), {staleTime : 60_000} )
-  const {data : parentProductId, isSuccess : ParentproductSucceed} = useQuery(['parentProductId', {parentId : firstCat.id}], () => objectsInCategory(firstCat.id, true), {staleTime : 60_000} )
-  const {data : variants, isSuccess : VariantsSucceed} = useQuery(['variants', {parentProductId : parentProductId}], () => variantFetchByParentId(parentProductId), {staleTime : 60_000, enabled : parentProductId !== undefined} )
-
+  const {data : defaultProductId, isSuccess : defaultProductIdSucceed} = useQuery(['defaultProductId', {parentId : firstCat.id}], () => objectsInCategory(firstCat.id, true), {staleTime : 60_000} )
+  const {data : variants, isSuccess : VariantsSucceed} = useQuery(['variants', {defaultProductId : defaultProductId}], () => variantFetchByParentId(defaultProductId), {staleTime : 60_000, enabled : defaultProductId !== undefined && defaultProductId?.length !== 0})
   
   useEffect(() => {
     if (inView) {
@@ -36,9 +32,9 @@ export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => 
         </div>
       </CardWrap>
 
-{/*        {ChildCategoriesSucceed && VariantsSucceed && childCategories.map((childCat,i) => {
-        return <ChildCategorie key={"ChildCategory" + i} childCat={childCat} attributes={attributes} variants={variants} />;
-      })} */}
+        {ChildCategoriesSucceed && defaultProductIdSucceed && childCategories.map((childCat,i) => {
+        return <ChildCategorie key={"ChildCategory" + i} childCatId={childCat.id} childCatLabel={childCat.label} defaultProductId={defaultProductId} attributes={attributes} variants={variants} />;
+      })} 
     </>
   );
 };

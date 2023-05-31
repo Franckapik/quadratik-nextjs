@@ -31,7 +31,7 @@ const objectsInCategory = (id, onlyId) =>
       },
     })
     .get()
-    .then((response) => response.data[0])
+    .then((response) => response.data)
     .catch((error) => error);
 
 const listCategories = (filter) =>
@@ -58,7 +58,7 @@ const listCategories = (filter) =>
       return response.data
         .sort(compare)
         .filter(filter)
-        .map((cat) => ({ ...cat, ["label"]: cat.label.replace(/[0-9]{3}\s-\s*/gm, '') })); 
+        .map((cat) => ({ ...cat, ["label"]: cat.label.replace(/[0-9]{3}\s-\s*/gm, "") }));
     })
     .catch((error) => error);
 
@@ -107,12 +107,16 @@ const performancesByProductId = (id) =>
     },
   });
 const documentByFilename = (filename) =>
-  axios.create({
-    baseURL: `https://shop.quadratik.fr/api/index.php/documents/download?modulepart=ecm&&original_file=${filename}`,
-    headers: {
-      Accept: "application/json",
-      DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
-    },
-  });
+  axios
+    .create({
+      baseURL: `https://shop.quadratik.fr/api/index.php/documents/download?modulepart=ecm&&original_file=${filename}`,
+      headers: {
+        Accept: "application/json",
+        DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
+      },
+    })
+    .get()
+    .then((response) => response.data.content)
+    .catch((error) => error);
 
 export { attributesAllFetch, productFetchById, attributesFetchById, listCategories, objectsInCategory, documentByProductId, variantFetchByParentId, documentByFilename, performancesByProductId };

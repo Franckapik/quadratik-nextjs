@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { CardProduct } from "./CardProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
 import { useFetchDefaultProduct } from "../../hooks/useFetchDefaultProduct";
+import { useQuery } from "react-query";
+import { objectsInCategory } from "../dolibarrApi/fetch";
 
-export const ChildCategorie = ({ childCat, attributes, variants }) => {
+/* export const ChildCategorie = ({ childCat, attributes, variants }) => {
   const [listProducts, setListProducts] = useState(false);
   const childProduct = useFetchProduct(childCat);
+  console.log(childProduct);
   const defaultProduct = useFetchDefaultProduct(childCat.fk_parent);
 
   const addAttributes = (variants, attributes, variantId) => {
@@ -19,8 +22,9 @@ export const ChildCategorie = ({ childCat, attributes, variants }) => {
     }
   };
 
+
   useEffect(() => {
-    if (childProduct.length && variants) {
+    if (childProduct?.length && variants) {
       const variantsWithAttributes = childProduct.map((variant) => addAttributes(variants, attributes, variant));
       setListProducts(variantsWithAttributes);
     }
@@ -33,5 +37,18 @@ export const ChildCategorie = ({ childCat, attributes, variants }) => {
           return <CardProduct key={"Variant" + i} defaultProduct={defaultProduct} variant={variant} childCat={childCat} attributes={attributes} />;
         })}
     </>
+  );
+};
+ */
+
+export const ChildCategorie = ({ childCatId, defaultProductId, childCatLabel }) => {
+  const { data: variantsIds, isSuccess: variantsIdsSucceed } = useQuery(["variantsIds", { childCatId: childCatId }], () => objectsInCategory(childCatId, true), { staleTime: Infinity });
+  return (
+    <>
+     {variantsIdsSucceed &&
+        variantsIds.map((vid, i) => {
+          return <CardProduct key={"Variant" + i} variantId={vid} childCatLabel={childCatLabel} defaultProductId={defaultProductId} childCatId={childCatId} />;
+        })} 
+    </> 
   );
 };
