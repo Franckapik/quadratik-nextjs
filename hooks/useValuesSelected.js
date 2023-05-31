@@ -16,7 +16,6 @@ export const useValuesSelected = (attributes, values, key, value) => {
 
   useEffect(() => {
     if (attributes?.length && allAttributesSucceed && values && key && value) {
-      console.log(values);
       const valuesSelected = attributes.reduce((acc, cur, i, a) => ({ ...acc, [allAttributes.filter((a) => a.id == cur.id)[0][key]]: values.filter((a) => a.v_id == cur.fk_prod_attr_val)[0][value] }), {});
       setData(valuesSelected);
     }

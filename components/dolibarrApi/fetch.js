@@ -77,7 +77,11 @@ const productFetchById = (id) =>
       Accept: "application/json",
       DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
-  });
+  })    .get()
+  .then((response) => response.data)
+  .catch((error) => error);
+
+  
 const variantFetchByParentId = (id) =>
   axios
     .create({

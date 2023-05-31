@@ -30,11 +30,13 @@ export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatL
   const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId)
   const { product, setProduct } = useProduct(variantId, defaultProductId, childCatId);
 
-
   return (
     <CardWrap>
       "coucou" - {variant?.id} - {variantId} - {defaultProductId} - cat {childCatId} - {childCatLabel}
       {product.image ? <img src={`data:image/png;base64,${product.image}`} /> : "Image non disponible"}
+      <span className="shop_product_title ft2 ">{"Woodik-7"}</span>
+        <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCatLabel}</span>
+        <span className="shop_product_price ft4 text-uppercase text-nowrap ">{product.price} €</span>
     </CardWrap>
   );
 };
