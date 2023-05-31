@@ -58,7 +58,7 @@ const listCategories = (filter) =>
       return response.data
         .sort(compare)
         .filter(filter)
-        .map((cat) => ({ ...cat, ["label"]: cat.label.substring(5) })); //regex instead Try `[0-9]{3}\s-\s*`
+        .map((cat) => ({ ...cat, ["label"]: cat.label.replace(/[0-9]{3}\s-\s*/gm, '') })); 
     })
     .catch((error) => error);
 
