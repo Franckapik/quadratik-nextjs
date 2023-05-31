@@ -1,28 +1,19 @@
 import React, { useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import { useQuery } from "react-query";
 import { LayoutHome } from "../../components/LayoutHome";
-import { useAttributes } from "../../hooks/useAttributes";
-import { useFetchCategories } from "../../hooks/useFetchCategories";
-import { ParentCategorie } from "../../components/shop/ParentCategorie";
+import { attributesAllFetch, listCategories } from "../../components/dolibarrApi/fetch";
 import { CardWrap } from "../../components/shop/CardWrap";
-import { useQueries, useQuery } from "react-query";
-import { attributesAllFetch, listCategories, valuesFetchByAttributesId } from "../../components/dolibarrApi/fetch";
+import { ParentCategorie } from "../../components/shop/ParentCategorie";
+import { useAttributes } from "../../hooks/useAttributes_old";
 
 const Shop = () => {
   //Data
    const [attributesHook, fetching] = useAttributes();
   const [viewedCategory, setViewedCategory] = useState(1);
 
-  const {data : attributes} = useQuery(['attributes'], () => attributesAllFetch().get().then(response => response.data), {staleTime : 60_000} )
-  const {data : parentCategories, isSuccess : ParentCategoriesSucceed} = useQuery(['parentCategories'], () => listCategories((cat) => cat.fk_parent == 0), {staleTime : 60_000} )
-  const valuesQueries = useQueries(
-   attributes?.map((a) => {
-      return {
-        queryKey: ['values', a.id],
-        queryFn: () => valuesFetchByAttributesId(a.id),
-      }
-    }) ?? [],
-  )
+  const {data : parentCategories, isSuccess : ParentCategoriesSucceed} = useQuery(['parentCategories'], () => listCategories((cat) => cat.fk_parent == 0), {staleTime : Infinity} )
+
   return (
     <>
       <LayoutHome header cart home dark categories={parentCategories} viewedCategory={viewedCategory} />

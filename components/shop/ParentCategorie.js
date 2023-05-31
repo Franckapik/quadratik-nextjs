@@ -9,9 +9,9 @@ import { ChildCategorie } from "./ChildCategorie";
 
 export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => {
   const [ref, inView] = useInView();
-  const {data : childCategories, isSuccess : ChildCategoriesSucceed} = useQuery(['childCategories', {parentId : firstCat.id}], () => listCategories((cat) => cat.fk_parent == firstCat.id), {staleTime : 60_000} )
-  const {data : defaultProductId, isSuccess : defaultProductIdSucceed} = useQuery(['defaultProductId', {parentId : firstCat.id}], () => objectsInCategory(firstCat.id, true), {staleTime : 60_000} )
-  const {data : variants, isSuccess : VariantsSucceed} = useQuery(['variants', {defaultProductId : defaultProductId}], () => variantFetchByParentId(defaultProductId), {staleTime : 60_000, enabled : defaultProductId !== undefined && defaultProductId?.length !== 0})
+  const {data : childCategories, isSuccess : ChildCategoriesSucceed} = useQuery(['childCategories', {parentId : firstCat.id}], () => listCategories((cat) => cat.fk_parent == firstCat.id), {staleTime : Infinity} )
+  const {data : defaultProductId, isSuccess : defaultProductIdSucceed} = useQuery(['defaultProductId', {parentId : firstCat.id}], () => objectsInCategory(firstCat.id, true), {staleTime : Infinity} )
+  const {data : variants, isSuccess : VariantsSucceed} = useQuery(['variants', {defaultProductId : defaultProductId}], () => variantFetchByParentId(defaultProductId), {staleTime : Infinity, enabled : defaultProductId !== undefined && defaultProductId?.length !== 0})
   
   useEffect(() => {
     if (inView) {
