@@ -8,8 +8,9 @@ import { usePrice } from "./usePrice";
 import { useNomenclature } from "./useNomenclature";
 import { usePicture } from "./usePicture";
 import { useDescription } from "./useDescription";
+import { useDimensions } from "./useDimensions";
 
-export const useProduct = (variantId, defaultProductId, childCatId, {miniature}) => {
+export const useProduct = (variantId, defaultProductId, childCatId, { miniature }) => {
   const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId);
   const { data: noVariant, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity, enabled: !!defaultProductId?.length == 0 });
 
@@ -24,11 +25,13 @@ export const useProduct = (variantId, defaultProductId, childCatId, {miniature})
 
   const { price, basePrice, isSuccess: priceSucceed } = usePrice(product.attributes, product.values, defaultProductId);
 
-  const { nomenclature, dimensions, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId);
+  const { dimensions, isSuccess: dimensionsSucceed } = useDimensions(product.attributes, product.values);
+
+  const { nomenclature, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId, product.dimensions);
 
   const { data: description, isSuccess: descriptionSucceed } = useDescription(defaultProductId, childCatId, variantId);
 
-  const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature); 
+  const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature);
 
   useEffect(() => {
     if (variantsSucceed) {
@@ -41,10 +44,10 @@ export const useProduct = (variantId, defaultProductId, childCatId, {miniature})
       setProduct({
         prices: { price: Math.round(noVariant.price), basePrice: null },
         defaultProductId: noVariant.id,
-        attributes : null,
-        values : null,
-        valuesSelected : null,
-        nomenclature : {simple : noVariant.label, structurel : noVariant.ref },
+        attributes: null,
+        values: null,
+        valuesSelected: null,
+        nomenclature: { simple: noVariant.label, structurel: noVariant.ref },
       });
     }
   }, [noVariantSucceed]);
@@ -82,8 +85,14 @@ export const useProduct = (variantId, defaultProductId, childCatId, {miniature})
   }, [priceSucceed]);
 
   useEffect(() => {
+    if (dimensionsSucceed) {
+      setProduct((prevProduct) => ({ ...prevProduct, dimensions: dimensions }));
+    }
+  }, [dimensionsSucceed]);
+
+  useEffect(() => {
     if (nomenclatureSucceed) {
-      setProduct((prevProduct) => ({ ...prevProduct, nomenclature: nomenclature, dimensions : dimensions }));
+      setProduct((prevProduct) => ({ ...prevProduct, nomenclature: nomenclature }));
     }
   }, [nomenclatureSucceed]);
 
@@ -100,11 +109,12 @@ export const useProduct = (variantId, defaultProductId, childCatId, {miniature})
   }, [pictureSucceed]);
 
   useEffect(() => {
-    if (product && "nomenclature" in product && "prices" in product && "valuesSelected" in product && "values" in product && "defaultProductId" in product && "description" in product ) {
+    if (product && "nomenclature" in product && "prices" in product && "valuesSelected" in product && "values" in product && "defaultProductId" in product && "description" in product) {
       setSuccess(true);
     }
   }, [product]);
 
+  console.log(product);
 
   return { product: product, isSuccess: isSuccess };
 };
