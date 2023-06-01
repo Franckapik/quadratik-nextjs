@@ -10,11 +10,11 @@ import Absorbeur from "../models3D/Absorbeur";
 import { Lights } from "../models3D/parts3D/Lights";
 import { useValues3D } from "../../hooks/useValues3D";
 
-const ProductCanvas = () => {
+const ProductCanvas = ({product}) => {
   const attributes = useProductStore((state) => state.attributes);
   const valuesSelected = useProductStore((state) => state.valuesSelected);
   const tag = useProductStore.getState().tag;
-  const dimensions = useValues3D(valuesSelected, attributes);
+  const dimensions = product.dimensions;
   return (
     <>
       {dimensions ? (

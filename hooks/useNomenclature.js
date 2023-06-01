@@ -70,5 +70,5 @@ export const useNomenclature = (attributes, values, defaultProductId) => {
   }, [dimensions, defaultProduct]);
 
 
-  return {data : nomenclature, isSuccess : nomenclature && defaultProductSucceed };
+  return {nomenclature : nomenclature, dimensions : dimensions, isSuccess : nomenclature && dimensions && defaultProductSucceed };
 };

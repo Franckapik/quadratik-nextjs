@@ -28,6 +28,8 @@ const Product = () => {
     useProductStore.setState({ tag: tag }); //"cannot render a component while ..."
   }, [tag]);
 
+  console.log(product);
+
 
   const [index, setIndex] = useState(0);
 
@@ -81,14 +83,14 @@ const Product = () => {
                             <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${product.image.facePicture}`} alt="Front preview of the model" />
                             <Carousel.Caption>
                               <h3>{product.nomenclature.simple}</h3>
-                              <p>Plage de fréquences 1024 - 3542 Hz</p>
+                              <p>Plage de fréquences 1024 Hz - 3542 Hz</p>
                             </Carousel.Caption>
                           </Carousel.Item>
                           <Carousel.Item>
                             <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${product.image.sidePicture}`} alt="product.image.sidePicture preview of the model" />
                             <Carousel.Caption>
-                              <h3>Second slide label</h3>
-                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                              <h3>Dimensions du modèle</h3>
+                              <p>{product.dimensions.W} cm x {product.dimensions.L * product.dimensions.W } cm x {product.dimensions.E} cm </p>
                             </Carousel.Caption>
                           </Carousel.Item>
                           <Carousel.Item>
@@ -111,7 +113,7 @@ const Product = () => {
                         <PerformanceSpatial nomenclature={product.nomenclature} />
                       </Carousel.Item>
                       <Carousel.Item className="product_canvas_container">
-                        <ProductCanvas></ProductCanvas>
+                        <ProductCanvas product={product}></ProductCanvas>
                       </Carousel.Item>
                     </Carousel>
                   </Row>
