@@ -37,7 +37,7 @@ export const ProductHud = ({ product, display }) => {
             </Row>
           </Carousel.Item>
           <Carousel.Item>3</Carousel.Item>
-          <Carousel.Item><ProductOptions product={product} /></Carousel.Item> 
+{/*           <Carousel.Item><ProductOptions product={product} /></Carousel.Item>  */}
         </Carousel>
       </Row>
 

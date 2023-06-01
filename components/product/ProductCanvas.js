@@ -13,6 +13,8 @@ import { useValues3D } from "../../hooks/useValues3D";
 const ProductCanvas = ({product}) => {
   const tag = useProductStore.getState().tag;
   const dimensions = product.dimensions;
+
+  console.log(product);
   return (
     <>
       {dimensions ? (
@@ -31,9 +33,9 @@ const ProductCanvas = ({product}) => {
           <Lights />
           <OrbitControls makeDefault minAzimuthAngle={0} maxAzimuthAngle={Math.PI / 2} minPolarAngle={Math.PI / 4} maxPolarAngle={Math.PI / 4} enableZoom={false} enablePan={true} zoomSpeed={0.8} />
           <group scale={0.10 / dimensions.L } rotation={[Math.PI / 2, 0, 0]}>
-           {tag === 1 && dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} />: null} 
-           {tag === 1 && dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} />: null} 
-           {tag === 2 ? <Absorbeur dimensions={dimensions} />: null} 
+           {dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} />: null} 
+           {dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} />: null} 
+           {dimensions.D !== "D2" && dimensions.D !== "D1" && dimensions.F !== undefined ? <Absorbeur dimensions={dimensions} />: null} 
           </group>
           <EffectComposer>
             <BrightnessContrast
