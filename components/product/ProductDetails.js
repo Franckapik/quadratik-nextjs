@@ -1,19 +1,8 @@
 import { Button, Carousel, Col, Row } from "react-bootstrap";
-import { useProductStore } from "../../hooks/store";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 
 export const ProductDetails = ({ product, display }) => {
-  //just on page render
-
-  //need to re-render the page
-  const fmin = useProductStore((state) => state.fmin);
-  const fmax = useProductStore((state) => state.fmax);
-  const cwidth = useProductStore((state) => state.cwidth);
-  const sizes = useProductStore((state) => state.sizes);
-  const area = (sizes.longueur * sizes.largeur) / 1000;
-  const volume = ((area * sizes.profondeur) / 1000).toFixed(5);
-
   return (
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (
@@ -29,14 +18,23 @@ export const ProductDetails = ({ product, display }) => {
           <Carousel.Item>
             <Row>
               <Col>
-                <PerformanceWidget icon="fad fa-bolt" value={`${fmin} Hz - ${fmax} Hz`} color="#f26565" performance={((fmax - fmin) * 100) / 10000} tooltip={"La plage de fréquence traitée"} /> {/* 10k audio frequency */}
-                <PerformanceWidget icon="fad fa-sort-size-down" value={`${(cwidth * 10).toFixed(0)} mm`} color="#f1b672" performance={100 - (cwidth * 10 * 100) / 90} tooltip={"La taille des cellules. Plus elle est petite, plus les aigus sont traités"} />
-                <PerformanceWidget icon="fad fa-box-open" value={`${area} m2 // ${volume} m3`} color="#7cb0eb" performance={(volume * 100) / 0.144} tooltip={"L'aire traitée par le diffuseur et le volume (boite) qu'il occupe"} /> {/* 120 * 60 * 20cm */}
+                <PerformanceWidget icon="fad fa-bolt" value={`${product.dimensions.fmin} Hz - ${product.dimensions.fmax} Hz`} color="#f26565" performance={((product.dimensions.fmax - product.dimensions.fmin) * 100) / 10000} tooltip={"La plage de fréquence traitée"} />
+                <PerformanceWidget icon="fad fa-sort-size-down" value={`${(product.dimensions.c * 10).toFixed(0)} mm`} color="#f1b672" performance={100 - (product.dimensions.c * 10 * 100) / 90} tooltip={"La taille des cellules. Plus elle est petite, plus les aigus sont traités"} />
+                <PerformanceWidget
+                  icon="fad fa-box-open"
+                  value={`${product.dimensions.area / 10000} m2 // ${product.dimensions.volume / 1000000} m3`}
+                  color="#7cb0eb"
+                  performance={((product.dimensions.volume / 1000000) * 100) / 0.144}
+                  tooltip={"L'aire traitée par le diffuseur et le volume (boite) qu'il occupe"}
+                />
+
               </Col>
             </Row>
           </Carousel.Item>
-          <Carousel.Item>3</Carousel.Item>
-          {/*           <Carousel.Item><ProductOptions product={product} /></Carousel.Item>  */}
+          <Carousel.Item>Spacialisation details</Carousel.Item>
+          <Carousel.Item>
+            <ProductOptions product={product} />
+          </Carousel.Item>
         </Carousel>
       </Row>
 

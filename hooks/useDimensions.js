@@ -47,8 +47,10 @@ export const useDimensions = (attributes, values) => {
         });
 
       const lengthWells = Object.values(report).reduce((acc, val) => acc + val.hauteur, 0);
+      const area = l * W;
+      const volume = area * P ;
 
-      setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells });
+      setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells, area : area, volume : volume });
     }
 
     if (dimensions?.D === "D2") {
@@ -77,6 +79,8 @@ export const useDimensions = (attributes, values) => {
 
       const fmin = Math.round((((344 / 2 / P / 10) * amax) / N) * 1000);
       const fmax = Math.round(344 / 2 / (c / 100));
+      const area = l * W;
+      const volume = area * P ;
 
       const report = Array(n) //cellules
         .fill("")
@@ -92,7 +96,7 @@ export const useDimensions = (attributes, values) => {
 
       const lengthWells = Object.values(report).reduce((acc, val) => acc + val.hauteur, 0);
 
-      setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells });
+      setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells, area : area, volume : volume });
     }
 
     if (dimensions?.D !== "D2" && dimensions.D !== "D1" && dimensions.F !== undefined) {
@@ -101,8 +105,10 @@ export const useDimensions = (attributes, values) => {
       const w = parseInt(W); //largeur
       const l = w * L; //longueur
       const start = [-w / 2, -l / 2, P / 2];
+      const area = l * W;
+      const volume = area * P ;
 
-      setDimensionsComputed({ e: e, w: w, l: l, start: start });
+      setDimensionsComputed({ e: e, w: w, l: l, start: start, area : area, volume : volume });
     }
   }, [dimensions]);
 
