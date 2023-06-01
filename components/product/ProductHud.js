@@ -3,7 +3,6 @@ import { useProductStore } from "../../hooks/store";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 
-
 export const ProductHud = ({ product, display }) => {
   //just on page render
 
@@ -37,15 +36,18 @@ export const ProductHud = ({ product, display }) => {
             </Row>
           </Carousel.Item>
           <Carousel.Item>3</Carousel.Item>
-{/*           <Carousel.Item><ProductOptions product={product} /></Carousel.Item>  */}
+          {/*           <Carousel.Item><ProductOptions product={product} /></Carousel.Item>  */}
         </Carousel>
       </Row>
 
       <Row className="product_right_cart">
         <Col className="d-flex flex-column justify-content-center text-center align-items-center ft05">{product.prices.price + " €"}</Col>
-        <Col className="d-flex flex-column justify-content-center text-center align-items-center">
-          <Button variant="primary" type="submit" id="product_submit">
+        <Col className="d-flex  justify-content-center text-center align-items-center">
+          <Button variant="primary" type="submit" id="product_submit" className="m-2">
             Ajouter au panier
+          </Button>
+          <Button variant="secondary" className="m-2">
+            Modifier Quadralab
           </Button>
         </Col>
       </Row>
