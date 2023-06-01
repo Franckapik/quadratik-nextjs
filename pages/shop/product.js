@@ -55,7 +55,7 @@ const Product = () => {
 
   return (
     <>
-      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={["modele", "performances", "spacialisation"]} text_dark shop cart />
+      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={["modele", "performances", "spacialisation"]} text_dark shop cart fixed />
       {productSuccess ? (
         <>
           <div className="s0_page_index  d-none d-md-flex">

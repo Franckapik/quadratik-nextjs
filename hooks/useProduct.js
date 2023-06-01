@@ -27,7 +27,7 @@ export const useProduct = (variantId, defaultProductId, childCatId, {miniature})
   const { data: nomenclature, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId);
   const { data: description, isSuccess: descriptionSucceed } = useDescription(defaultProductId, childCatId, variantId);
 
-  const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature); //true for miniatures
+  const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature); 
 
   useEffect(() => {
     if (variantsSucceed) {
@@ -104,7 +104,6 @@ export const useProduct = (variantId, defaultProductId, childCatId, {miniature})
     }
   }, [product]);
 
-  console.log(product);
 
   return { product: product, isSuccess: isSuccess };
 };

@@ -3,9 +3,9 @@ import { useProductStore } from "../../hooks/store";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 
+
 export const ProductHud = ({ product, display }) => {
   //just on page render
-  const price = useProductStore((state) => state.price);
 
   //need to re-render the page
   const fmin = useProductStore((state) => state.fmin);
@@ -16,14 +16,11 @@ export const ProductHud = ({ product, display }) => {
   const volume = ((area * sizes.profondeur) / 1000).toFixed(5);
 
   return (
-
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (
         <Row className="d-inline product_modele_desc">
           <p>REF : {product.nomenclature.structurel}</p>
-          <p className="modele_phrase">
-            {product.description.category_desc.replace('$PRODUCT', product.nomenclature.simple)}
-          </p>
+          <p className="modele_phrase">{product.description.category_desc.replace("$PRODUCT", product.nomenclature.simple)}</p>
         </Row>
       ) : null}
       <Row className="d-inline product_modele_desc_details justify-content-center">
@@ -40,12 +37,12 @@ export const ProductHud = ({ product, display }) => {
             </Row>
           </Carousel.Item>
           <Carousel.Item>3</Carousel.Item>
-{/*           <Carousel.Item>{!fetching && attributes && defaultProduct ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} /> : "Chargement des options du produit"} </Carousel.Item>
- */}        </Carousel>
+          <Carousel.Item><ProductOptions product={product} /></Carousel.Item> //productOptions here
+        </Carousel>
       </Row>
 
       <Row className="product_right_cart">
-        <Col className="d-flex flex-column justify-content-center text-center align-items-center ft05">{price + " €"}</Col>
+        <Col className="d-flex flex-column justify-content-center text-center align-items-center ft05">{product.prices.price + " €"}</Col>
         <Col className="d-flex flex-column justify-content-center text-center align-items-center">
           <Button variant="primary" type="submit" id="product_submit">
             Ajouter au panier

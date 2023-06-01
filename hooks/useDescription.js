@@ -7,8 +7,6 @@ export const useDescription = (defaultProductId, childCatId, variantId) => {
   const { data: defaultProduct, isSuccess: defaultProductSucceed } = useQuery(["defaultProduct", { defaultProductId: defaultProductId?.length ? defaultProductId : [variantId], onlyId: false }], () => productFetchById([defaultProductId?.length ? defaultProductId : [variantId]]), { staleTime: Infinity});
   const { data: category, isSuccess: categorySucceed } = useQuery(["category", { childCatId: childCatId}], () => CategoryFetchById(childCatId), { staleTime: Infinity, enabled: !!childCatId });
 
-  console.log(defaultProduct);
-
   useEffect(() => {
     if(defaultProductSucceed && categorySucceed) {
       setDescription({
