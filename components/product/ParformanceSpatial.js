@@ -11,7 +11,7 @@ export const PerformanceSpatial = ({ nomenclature }) => {
     if (nomenclature) {
       documentByFilename("Polar/" + nomenclature.performance + ".png")
         .then((response) => {
-          setPolarImg(response.data.content);
+          setPolarImg(response);
         })
         .catch((error) => {
           setError(true);
