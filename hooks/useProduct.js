@@ -32,6 +32,7 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
   const { data: description, isSuccess: descriptionSucceed } = useDescription(defaultProductId, childCatId, variantId);
 
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature);
+  
 
   useEffect(() => {
     if (variantsSucceed) {
