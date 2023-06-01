@@ -58,7 +58,6 @@ export const useNomenclature = (attributes, values, defaultProductId) => {
           break;
         case "Quadra":
           name = nomAbsorbeur(basename, dimensions, labels);
-          console.log(name);
           break;
 
         default:
@@ -69,5 +68,5 @@ export const useNomenclature = (attributes, values, defaultProductId) => {
     }
   }, [dimensions, defaultProduct]);
 
-  return {nomenclature : nomenclature};
+  return {data : nomenclature, isSuccess : nomenclature && defaultProductSucceed };
 };

@@ -38,8 +38,9 @@ export const usePrice = (attributes, values, defaultProductId) => {
       }, basePrice)
 
       setPrice(Math.round(price));
+
     }
   }, [valuesFactor, valuesOperator, basePrice]);
 
-  return {price : price, basePrice : basePrice};
+  return {price : price, basePrice : basePrice, isSuccess : basePrice && price && price !== NaN};
 };

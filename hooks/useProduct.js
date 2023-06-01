@@ -18,60 +18,69 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
 
   const { data: valuesSelected } = useValuesSelected(product.attributes, product.values, "ref", "v_id");
 
-  const { price, basePrice } = usePrice(product.attributes, product.values, defaultProductId);
+  const { price, basePrice, isSuccess : priceSucceed } = usePrice(product.attributes, product.values, defaultProductId);
 
-  const { nomenclature } = useNomenclature(product.attributes, product.values, defaultProductId, childCatId);
+  const { data : nomenclature, isSuccess : nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId, childCatId);
 
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, true); //true for miniatures
 
 
   useEffect(() => {
     if (variantsSucceed) {
-      setProduct({ ...product, attributes: variant.attributes, variantId: variantId });
+      setProduct(prevProduct => ({...prevProduct, attributes: variant.attributes, variantId: variantId }));
     }
   }, [variantsSucceed]);
 
   useEffect(() => {
     if (defaultProductId) {
-      setProduct({ ...product, defaultProductId: defaultProductId });
+      setProduct(prevProduct => ({...prevProduct, defaultProductId: defaultProductId }));
     }
   }, [defaultProductId]);
 
   useEffect(() => {
     if (valuesSucceed) {
-      setProduct({ ...product, values: allValues });
+      setProduct(prevProduct => ({...prevProduct, values: allValues }));
     }
   }, [valuesSucceed]);
 
   useEffect(() => {
     if (valuesSelected) {
-      setProduct({ ...product, valuesSelected: valuesSelected });
+      setProduct(prevProduct => ({...prevProduct, valuesSelected: valuesSelected }));
     }
   }, [valuesSelected]);
 
+
+
+  useEffect(() => {
+    if (priceSucceed) {
+      setProduct(prevProduct => ({...prevProduct, prices : {price: price, basePrice: basePrice}  }));
+      console.log(product);
+    }
+  }, [priceSucceed]);
+
+
+
+  useEffect(() => {
+    if (nomenclatureSucceed) {
+      setProduct(prevProduct => ({...prevProduct, nomenclature: nomenclature }));
+    }
+  }, [nomenclatureSucceed]);
+
   useEffect(() => {
     if (pictureSucceed) {
-      setProduct({ ...product, image: {facePicture : facePicture, sidePicture : sidePicture} });
+      console.log(pictureSucceed);
+      setProduct(prevProduct => ({...prevProduct, image: {facePicture : facePicture, sidePicture : sidePicture} }));
     }
   }, [pictureSucceed]);
 
   useEffect(() => {
-    if (price && basePrice) {
-      setProduct({ ...product, price: price, basePrice: basePrice });
-    }
-  }, [price, basePrice]);
-
-  useEffect(() => {
-    if (nomenclature) {
-      setProduct({ ...product, nomenclature: nomenclature });
-    }
-  }, [nomenclature]);
-
-  useEffect(() => {
-    if (Object.keys(product).length > 6 ) {
+    if (Object.keys(product).length > 7 ) {
       setSuccess(true);
     }
   }, [product]);
+
+  console.log(product);
+
 
   return { product: product, isSuccess: isSuccess };
 };
