@@ -14,7 +14,7 @@ export const useDescription = (defaultProductId, childCatId, variantId) => {
         parent_description : defaultProduct.description,
         date_creation : defaultProduct.date_creation,
         date_modification : defaultProduct.date_modification,
-        attributes_options : defaultProduct.note_private && JSON.parse(defaultProduct.note_private),
+        attributes_options : defaultProduct.note_private,
         category_label : category.label,
         category_desc : category.description,
         category_id : category.id,

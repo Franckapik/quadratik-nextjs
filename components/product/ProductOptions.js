@@ -26,6 +26,8 @@ const ProductOptions = ({ product }) => {
     return () => subscription.unsubscribe();
   }, []);
 
+  const options = JSON.parse(product.description.attributes_options);
+
   return (
     <>
       <Form.Group>
@@ -34,7 +36,7 @@ const ProductOptions = ({ product }) => {
           {mode ? "Mode Basique" : "Mode Avancé"}
         </Button>
         <Form.Group className=" p-2" controlId="product_simple">
-          {Object.entries(product.description.attributes_options.simple).map((a, i) => {
+          {Object.entries(options.simple).map((a, i) => {
             const id = a[0];
             const type = a[1];
             const att = Object.values(allAttributes).filter((x) => x.ref === a[0])[0];
@@ -43,7 +45,7 @@ const ProductOptions = ({ product }) => {
           })}
         </Form.Group>
         <Form.Group className=" p-2" controlId="product_advanced">
-          {Object.entries(product.description.attributes_options.advanced).map((a, i) => {
+          {Object.entries(options.advanced).map((a, i) => {
             const id = a[0];
             const type = a[1];
             const att = Object.values(allAttributes).filter((x) => x.ref === a[0])[0];
