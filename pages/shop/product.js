@@ -20,18 +20,16 @@ import { useProduct } from "../../hooks/useProduct";
 const Product = () => {
   //Data
   const [attributes, fetching, error] = useAttributes();
-
-  const {isLoading, data, isFetching} = useQuery(['post']);
+  console.log(attributes);
 
   const router = useRouter();
 
-  const { product, isSuccess } = useProduct(router.query.vid, router.query.dpid, router.query.childCat);
+  const { product, isSuccess: productSuccess } = useProduct(router.query.vid, router.query.dpid, router.query.childCat);
 
   console.log(product);
 
-
   //Display
-  const [display, setDisplay] = useQueryState("Display", queryTypes.integer.withDefault(0));
+  const [display, setDisplay] = useQueryState("display", queryTypes.integer.withDefault(0));
 
   //get default product from tag category
   const [tag, setTAG] = useQueryState("TAG", queryTypes.integer.withDefault(1));
@@ -46,9 +44,7 @@ const Product = () => {
   const nomenclature = useProductStore((state) => state.nomenclature);
   const price = useProductStore((state) => state.price);
   const baseprice = useProductStore((state) => state.baseprice);
-  const [miniature, errorImg] = useFetchPicture(nomenclature, 'Miniature');
-  const [face, errorFaceImg] = useFetchPicture(nomenclature, 'Face');
-  const [side, errorSideImg] = useFetchPicture(nomenclature, 'Side');
+
 
   const childCategorie = useFetchCategories((cat) => cat.id == childCat);
 
@@ -64,6 +60,8 @@ const Product = () => {
         [getAttributeRef.a_id]: a,
       };
     }, {});
+
+    console.log(features);
 
     const variant = {
       weight_impact: 0,
@@ -87,66 +85,73 @@ const Product = () => {
   return (
     <>
       <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={["modele", "performances", "spacialisation"]} text_dark shop cart />
-      <div className="s0_page_index  d-none d-md-flex">
-        {defaultProduct.label}
-        <div className="trait"></div>Aperçu du modèle 
-      </div>
-      <div className="product_custom d-none d-md-flex p-2" onClick={() => setDisplay(3)}>
-        Personnaliser le modèle <i className="fad fa-chevron-right pt-4 "></i>
-      </div>
-      <Row className="layout_space">
-        <FormProvider {...methods}>
-          <Form onSubmit={methods.handleSubmit(onSubmit)}>
-            <Col md={6} className="product_right bg_creme layout_space">
-              <ProductHud childCat={childCategorie} description={defaultProduct.description} display={display} fetching={fetching} attributes={attributes} defaultProduct={defaultProduct} />
-            </Col>
-            <Col md={6} className="product_left flex-column">
-              <Row className="justify-content-center">
-                <Carousel indicators={false} activeIndex={display} controls={false}>
-                  <Carousel.Item>
-                    <Carousel indicators={false} activeIndex={index} controls={false}>
+      {productSuccess ? (
+        <>
+          <div className="s0_page_index  d-none d-md-flex">
+            {product.description.parent_label}
+            <div className="trait"></div>Aperçu du modèle
+          </div>
+          <div className="product_custom d-none d-md-flex p-2" onClick={() => setDisplay(3)}>
+            Personnaliser le modèle <i className="fad fa-chevron-right pt-4 "></i>
+          </div>
+          <Row className="layout_space">
+            <FormProvider {...methods}>
+              <Form onSubmit={methods.handleSubmit(onSubmit)}>
+                <Col md={6} className="product_right bg_creme layout_space">
+                  <ProductHud product={product} display={display} />
+                </Col>
+                <Col md={6} className="product_left flex-column">
+                  <Row className="justify-content-center">
+                    <Carousel indicators={false} activeIndex={display} controls={false}>
+                      { product.image ?<Carousel.Item>
+                      
+                        <Carousel indicators={false} activeIndex={index} controls={false}>
+                          <Carousel.Item>
+                            <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${product.image.facePicture}`} alt="Front preview of the model" />
+                            <Carousel.Caption>
+                              <h3>{product.nomenclature.simple}</h3>
+                              <p>Plage de fréquences 1024 - 3542 Hz</p>
+                            </Carousel.Caption>
+                          </Carousel.Item>
+                          <Carousel.Item>
+                            <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${product.image.sidePicture}`} alt="product.image.sidePicture preview of the model" />
+                            <Carousel.Caption>
+                              <h3>Second slide label</h3>
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            </Carousel.Caption>
+                          </Carousel.Item>
+                          <Carousel.Item>
+                            <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
+                            <Carousel.Caption>
+                              <h3>Third slide label</h3>
+                              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                            </Carousel.Caption>
+                          </Carousel.Item>
+                        </Carousel>
+                        <div className="carousel-indicators">
+                          <img onClick={() => setIndex(0)} className="d-block product_thumbnail m-2" src={`data:image/png;base64,${product.image.facePicture}`} alt="First slide thumbnail" />
+                          <img onClick={() => setIndex(1)} className="d-block product_thumbnail m-2" src={`data:image/png;base64,${product.image.sidePicture}`} alt="Second slide thumbnail" />
+                        </div>
+                      </Carousel.Item> : "Aperçu non disponible"}
                       <Carousel.Item>
-                        <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${face}`} alt="Front preview of the model" />
-                        <Carousel.Caption>
-                          <h3>{nomenclature?.simple}</h3>
-                          <p>Plage de fréquences 1024 - 3542 Hz</p>
-                        </Carousel.Caption>
+                        <PerformanceCharts nomenclature={product.nomenclature} />
                       </Carousel.Item>
                       <Carousel.Item>
-                        <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${side}`} alt="Side preview of the model" />
-                        <Carousel.Caption>
-                          <h3>Second slide label</h3>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </Carousel.Caption>
+                        <PerformanceSpatial nomenclature={product.nomenclature} />
                       </Carousel.Item>
-                      <Carousel.Item>
-                        <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
-                        <Carousel.Caption>
-                          <h3>Third slide label</h3>
-                          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                        </Carousel.Caption>
+                      <Carousel.Item className="product_canvas_container">
+                        <ProductCanvas></ProductCanvas>
                       </Carousel.Item>
-                    </Carousel>{" "}
-                    <div className="carousel-indicators">
-                      <img onClick={() => setIndex(0)} className="d-block product_thumbnail m-2"  src={`data:image/png;base64,${face}`} alt="First slide thumbnail" />
-                      <img onClick={() => setIndex(1)} className="d-block product_thumbnail m-2"  src={`data:image/png;base64,${side}`} alt="Second slide thumbnail" />
-                    </div>
-                  </Carousel.Item>
-                  <Carousel.Item>
-                    <PerformanceCharts nomenclature={nomenclature} />
-                  </Carousel.Item>
-                  <Carousel.Item>
-                    <PerformanceSpatial nomenclature={nomenclature} />
-                  </Carousel.Item>
-                  <Carousel.Item className="product_canvas_container">
-                    <ProductCanvas></ProductCanvas>
-                  </Carousel.Item>
-                </Carousel>
-              </Row>
-            </Col>
-          </Form>
-        </FormProvider>
-      </Row>
+                    </Carousel>
+                  </Row>
+                </Col>
+              </Form>
+            </FormProvider>
+          </Row>
+        </>
+      ) : (
+        "Chargement du produit"
+      )}
     </>
   );
 };

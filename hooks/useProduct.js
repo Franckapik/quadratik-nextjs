@@ -47,7 +47,7 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
   }, [noVariantSucceed]);
 
   useEffect(() => {
-    if (defaultProductId.length) {
+    if (defaultProductId?.length) {
       setProduct((prevProduct) => ({ ...prevProduct, defaultProductId: defaultProductId }));
     } else {
       setProduct((prevProduct) => ({ ...prevProduct, defaultProductId: variantId }));
@@ -91,7 +91,7 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
   }, [pictureSucceed]);
 
   useEffect(() => {
-    if (product && "nomenclature" in product && "prices" in product && "valuesSelected" in product && "values" in product && "defaultProductId" in product ) {
+    if (product && "nomenclature" in product && "prices" in product && "valuesSelected" in product && "values" in product && "defaultProductId" in product && "description" in product ) {
       setSuccess(true);
     }
   }, [product]);

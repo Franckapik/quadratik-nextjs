@@ -3,10 +3,9 @@ import { useProductStore } from "../../hooks/store";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 
-export const ProductHud = ({ display, attributes, defaultProduct, fetching, description, childCat }) => {
+export const ProductHud = ({ product, display }) => {
   //just on page render
   const price = useProductStore((state) => state.price);
-  const nomenclature = useProductStore((state) => state.nomenclature);
 
   //need to re-render the page
   const fmin = useProductStore((state) => state.fmin);
@@ -15,19 +14,21 @@ export const ProductHud = ({ display, attributes, defaultProduct, fetching, desc
   const sizes = useProductStore((state) => state.sizes);
   const area = (sizes.longueur * sizes.largeur) / 1000;
   const volume = ((area * sizes.profondeur) / 1000).toFixed(5);
+
   return (
+
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (
         <Row className="d-inline product_modele_desc">
-          <p>REF : {nomenclature?.structurel}</p>
+          <p>REF : {product.nomenclature.structurel}</p>
           <p className="modele_phrase">
-            {childCat[0]?.description.replace('$PRODUCT', nomenclature?.simple)}
+            {product.description.category_desc.replace('$PRODUCT', product.nomenclature.simple)}
           </p>
         </Row>
       ) : null}
       <Row className="d-inline product_modele_desc_details justify-content-center">
-        <Carousel activeIndex={display} controls={false}>
-          <Carousel.Item>{description}</Carousel.Item>
+        <Carousel activeIndex={display} controls={false} indicators={false}>
+          <Carousel.Item>{product.description.parent_description}</Carousel.Item>
 
           <Carousel.Item>
             <Row>
@@ -39,8 +40,8 @@ export const ProductHud = ({ display, attributes, defaultProduct, fetching, desc
             </Row>
           </Carousel.Item>
           <Carousel.Item>3</Carousel.Item>
-          <Carousel.Item>{!fetching && attributes && defaultProduct ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} /> : "Chargement des options du produit"} </Carousel.Item>
-        </Carousel>
+{/*           <Carousel.Item>{!fetching && attributes && defaultProduct ? <ProductOptions attributes={attributes} defaultProduct={defaultProduct} /> : "Chargement des options du produit"} </Carousel.Item>
+ */}        </Carousel>
       </Row>
 
       <Row className="product_right_cart">

@@ -10,7 +10,6 @@ export const PerformanceSpatial = ({ nomenclature }) => {
   useEffect(() => {
     if (nomenclature) {
       documentByFilename("Polar/" + nomenclature.performance + ".png")
-        .get()
         .then((response) => {
           setPolarImg(response.data.content);
         })

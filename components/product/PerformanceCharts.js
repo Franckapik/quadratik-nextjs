@@ -12,7 +12,6 @@ export const PerformanceCharts = ({ nomenclature }) => {
   useEffect(() => {
     if (nomenclature) {
       documentByFilename("Frequencies/" + nomenclature.performance +".csv")
-      .get()
       .then((response) => {
         let buff = new Buffer(response.data.content, "base64");
         let text = buff.toString("ascii");
