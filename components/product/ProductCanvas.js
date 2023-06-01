@@ -1,20 +1,15 @@
-import { AccumulativeShadows, OrbitControls, RandomizedLight } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { BrightnessContrast, EffectComposer, SSAO, ToneMapping } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
 import React from "react";
-import { useProductStore } from "../../hooks/store";
 import Diffuseur1D from "../models3D/Diffuseur1D";
 import Diffuseur2D from "../models3D/Diffuseur2D";
 import Absorbeur from "../models3D/Absorbeur";
 import { Lights } from "../models3D/parts3D/Lights";
-import { useValues3D } from "../../hooks/useValues3D";
+import { AccumulativeShadows, OrbitControls, RandomizedLight } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { BrightnessContrast, EffectComposer, SSAO, ToneMapping } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
-const ProductCanvas = ({product}) => {
-  const tag = useProductStore.getState().tag;
+const ProductCanvas = ({ product }) => {
   const dimensions = product.dimensions;
-
-  console.log(product);
   return (
     <>
       {dimensions ? (
@@ -32,10 +27,10 @@ const ProductCanvas = ({product}) => {
           </AccumulativeShadows>
           <Lights />
           <OrbitControls makeDefault minAzimuthAngle={0} maxAzimuthAngle={Math.PI / 2} minPolarAngle={Math.PI / 4} maxPolarAngle={Math.PI / 4} enableZoom={false} enablePan={true} zoomSpeed={0.8} />
-          <group scale={0.10 / dimensions.L } rotation={[Math.PI / 2, 0, 0]}>
-           {dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} />: null} 
-           {dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} />: null} 
-           {dimensions.D !== "D2" && dimensions.D !== "D1" && dimensions.F !== undefined ? <Absorbeur dimensions={dimensions} />: null} 
+          <group scale={0.1 / dimensions.L} rotation={[Math.PI / 2, 0, 0]}>
+            {dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} /> : null}
+            {dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} /> : null}
+            {dimensions.D !== "D2" && dimensions.D !== "D1" && dimensions.F !== undefined ? <Absorbeur dimensions={dimensions} /> : null}
           </group>
           <EffectComposer>
             <BrightnessContrast

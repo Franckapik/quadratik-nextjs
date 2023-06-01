@@ -93,17 +93,18 @@ const Product = () => {
                               <p>{product.dimensions.W} cm x {product.dimensions.L * product.dimensions.W } cm x {product.dimensions.E} cm </p>
                             </Carousel.Caption>
                           </Carousel.Item>
-                          <Carousel.Item>
-                            <img className="d-block product_carousel_img m-auto" src="/shop/format_product.png" alt="First slide" />
-                            <Carousel.Caption>
-                              <h3>Third slide label</h3>
-                              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                          <Carousel.Item className="product_canvas_container">
+                        <ProductCanvas product={product}></ProductCanvas>
+                        <Carousel.Caption>
+                              <h3>Vue 3D</h3>
+                              <p>blabka</p>
                             </Carousel.Caption>
-                          </Carousel.Item>
+                      </Carousel.Item>
                         </Carousel>
                         <div className="carousel-indicators">
-                          <img onClick={() => setIndex(0)} className="d-block product_thumbnail m-2" src={`data:image/png;base64,${product.image.facePicture}`} alt="First slide thumbnail" />
-                          <img onClick={() => setIndex(1)} className="d-block product_thumbnail m-2" src={`data:image/png;base64,${product.image.sidePicture}`} alt="Second slide thumbnail" />
+                          <img onClick={() => setIndex(0)} className={`d-block product_thumbnail m-2 ${index === 0 ? 'border_creme' : ''}`} src={`data:image/png;base64,${product.image.facePicture}`} alt="First slide thumbnail" />
+                          <img onClick={() => setIndex(1)} className={`d-block product_thumbnail m-2 ${index === 1 ? 'border_creme' : ''}`} src={`data:image/png;base64,${product.image.sidePicture}`} alt="Second slide thumbnail" />
+                         <div onClick={() =>  setIndex(2)}  className={`d-block product_thumbnail m-2 ${index === 2 ? 'border_creme' : ''}`}><i className="fal fa-cube fa-4x mt-4"></i></div> 
                         </div>
                       </Carousel.Item> : "Aperçu non disponible"}
                       <Carousel.Item>
