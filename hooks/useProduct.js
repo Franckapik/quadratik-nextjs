@@ -20,6 +20,8 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
 
   const { data: valuesSelected } = useValuesSelected(product.attributes, product.values, "ref", "v_id");
 
+  const { data: features } = useValuesSelected(product.attributes, product.values, "id", "v_id");
+
   const { price, basePrice, isSuccess: priceSucceed } = usePrice(product.attributes, product.values, defaultProductId);
 
   const { data: nomenclature, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId);
@@ -65,6 +67,12 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
       setProduct((prevProduct) => ({ ...prevProduct, valuesSelected: valuesSelected }));
     }
   }, [valuesSelected]);
+
+  useEffect(() => {
+    if (features) {
+      setProduct((prevProduct) => ({ ...prevProduct, features: features }));
+    }
+  }, [features]);
 
   useEffect(() => {
     if (priceSucceed) {

@@ -53,26 +53,16 @@ const Product = () => {
   const methods = useForm();
 
   const onSubmit = async (data) => {
-    const features = Object.entries(data).reduce((acc, [i, a] = cur) => {
-      const getAttributeRef = Object.values(attributes).filter((val) => val.a_ref === i)[0];
-      return {
-        ...acc,
-        [getAttributeRef.a_id]: a,
-      };
-    }, {});
-
-    console.log(features);
-
     const variant = {
       weight_impact: 0,
-      price_impact: price - baseprice,
+      price_impact: product.prices.price - product.prices.basePrice,
       price_impact_is_percent: false,
-      features: features,
-      reference: nomenclature?.complet,
-      ref_ext: nomenclature?.simple,
+      features: product.features,
+      reference: product.nomenclature?.complet,
+      ref_ext: product.nomenclature?.simple,
     };
 
-    variantPost(defaultProduct.id)
+    variantPost(product.defaultProductId)
       .post("", variant)
       .then((response) => {
         console.log("Ajout du variant [ID]:", response.data);
