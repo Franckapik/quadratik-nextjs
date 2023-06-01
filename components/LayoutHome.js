@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Col, ListGroup, Offcanvas, Row } from "react-bootstrap";
 import { Burger } from "./Burger";
 
-export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark, categories, viewedCategory, text_dark, setDisplay}) => {
+export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark, categories, viewedCategory, text_dark, fixed, setDisplay}) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
@@ -12,7 +12,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
     <>
 
         <Row className="position-absolute h-100 text-uppercase w-100 pb-3">
-          <Row className={`header justify-content-end position-sticky align-items-center text-uppercase w-100 ft4 ${dark ? "bg_dark" : ""} ${text_dark ? "text_dark" : ""}`}>
+          <Row className={`header justify-content-end align-items-center text-uppercase w-100 ft4 ${dark ? "bg_dark" : ""} ${fixed ? "position-fixed" : "position-sticky"} ${text_dark ? "text_dark" : ""}`}>
             {!noburger ? (
               <Col xs={4} md={1}>
                 <Burger onClick={toggleShow} toggled={show}></Burger>

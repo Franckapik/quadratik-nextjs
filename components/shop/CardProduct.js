@@ -36,7 +36,7 @@ export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatL
       {product.image ? <img src={`data:image/png;base64,${product.image}`} /> : "Image non disponible"}
       <span className="shop_product_title ft2 ">{"Woodik-7"}</span>
         <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCatLabel}</span>
-        <span className="shop_product_price ft4 text-uppercase text-nowrap ">{product.price} €</span>
+        <span className="shop_product_price ft4  text-nowrap ">{product.price ? product.price + " €" : "Prix non disponible" } </span>
     </CardWrap>
   );
 };
