@@ -9,7 +9,7 @@ import { useNomenclature } from "./useNomenclature";
 import { usePicture } from "./usePicture";
 import { useDescription } from "./useDescription";
 
-export const useProduct = (variantId, defaultProductId, childCatId) => {
+export const useProduct = (variantId, defaultProductId, childCatId, {miniature}) => {
   const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId);
   const { data: noVariant, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity, enabled: !!defaultProductId?.length == 0 });
 
@@ -27,7 +27,7 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
   const { data: nomenclature, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId);
   const { data: description, isSuccess: descriptionSucceed } = useDescription(defaultProductId, childCatId, variantId);
 
-  const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, true); //true for miniatures
+  const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature); //true for miniatures
 
   useEffect(() => {
     if (variantsSucceed) {

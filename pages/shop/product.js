@@ -15,7 +15,7 @@ import { useProduct } from "../../hooks/useProduct";
 const Product = () => {
   //Data
   const router = useRouter();
-  const { product, isSuccess: productSuccess } = useProduct(router.query.vid, router.query.dpid, router.query.childCat);
+  const { product, isSuccess: productSuccess } = useProduct(router.query.vid, router.query.dpid, router.query.childCat, {miniature : false}); 
 
   //Display
   const [display, setDisplay] = useQueryState("display", queryTypes.integer.withDefault(0));

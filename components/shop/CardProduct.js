@@ -4,7 +4,7 @@ import { CardWrap } from "./CardWrap";
 import Link from "next/link";
 
 export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatLabel }) => {
-  const { product, isSuccess } = useProduct(variantId, defaultProductId, childCatId);
+  const { product, isSuccess } = useProduct(variantId, defaultProductId, childCatId, {miniature : true});
   return (
     <>
       {isSuccess ? (
