@@ -6,6 +6,7 @@ import { Line } from "react-chartjs-2";
 import { documentByFilename } from "../dolibarrApi/fetch";
 
 export const PerformanceCharts = ({ nomenclature }) => {
+
   const [performances, setperformances] = useState({});
   const [error, setError] = useState(false);
 
@@ -13,7 +14,7 @@ export const PerformanceCharts = ({ nomenclature }) => {
     if (nomenclature) {
       documentByFilename("Frequencies/" + nomenclature.performance +".csv")
       .then((response) => {
-        let buff = new Buffer(response.data.content, "base64");
+        let buff = new Buffer(response, "base64");
         let text = buff.toString("ascii");
         let parsedCsv = Papa.parse(text).data;
         parsedCsv.shift();
