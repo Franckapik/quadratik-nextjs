@@ -25,6 +25,7 @@ export const useProduct = (variantId, defaultProductId, childCatId, {miniature})
   const { price, basePrice, isSuccess: priceSucceed } = usePrice(product.attributes, product.values, defaultProductId);
 
   const { data: nomenclature, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId);
+  
   const { data: description, isSuccess: descriptionSucceed } = useDescription(defaultProductId, childCatId, variantId);
 
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature); 

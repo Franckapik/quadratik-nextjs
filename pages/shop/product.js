@@ -62,7 +62,7 @@ const Product = () => {
             {product.description.parent_label}
             <div className="trait"></div>Aperçu du modèle
           </div>
-          <div className="product_custom d-none d-md-flex p-2" onClick={() => setDisplay(3)}>
+          <div className="product_custom d-none d-md-flex p-2" onClick={() => setDisplay(display !== 3 ? 3 : 0)}>
             Personnaliser le modèle <i className="fad fa-chevron-right pt-4 "></i>
           </div>
           <Row className="layout_space">
