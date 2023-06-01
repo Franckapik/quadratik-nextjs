@@ -27,7 +27,7 @@ export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => 
           <Row className="shop_categorie_logo justify-content-center">
             <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" />
           </Row>
-          <p className="ft05 mt-5 text-center">{firstCat.label}</p>
+          <p className="ft05 mt-5 text-center" ref={ref}>{firstCat.label}</p>
           <div className="ft4 mt-5" dangerouslySetInnerHTML={{ __html: firstCat.description }}></div>
         </div>
       </CardWrap>
