@@ -1,4 +1,5 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Carousel, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
@@ -9,24 +10,12 @@ import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import ProductCanvas from "../../components/product/ProductCanvas";
 import { ProductHud } from "../../components/product/ProductHud";
 import { useProductStore } from "../../hooks/store";
-import { useAttributes } from "../../hooks/useAttributes_old";
-import { useFetchDefaultProduct } from "../../hooks/useFetchDefaultProduct";
-import { useFetchPicture } from "../../hooks/useFetchPicture";
-import { useFetchCategories } from "../../hooks/useFetchCategories";
-import { useQuery } from "react-query";
-import { useRouter } from "next/router";
 import { useProduct } from "../../hooks/useProduct";
 
 const Product = () => {
   //Data
-  const [attributes, fetching, error] = useAttributes();
-  console.log(attributes);
-
   const router = useRouter();
-
   const { product, isSuccess: productSuccess } = useProduct(router.query.vid, router.query.dpid, router.query.childCat);
-
-  console.log(product);
 
   //Display
   const [display, setDisplay] = useQueryState("display", queryTypes.integer.withDefault(0));
@@ -39,14 +28,6 @@ const Product = () => {
     useProductStore.setState({ tag: tag }); //"cannot render a component while ..."
   }, [tag]);
 
-  const defaultProduct = useFetchDefaultProduct(tag);
-
-  const nomenclature = useProductStore((state) => state.nomenclature);
-  const price = useProductStore((state) => state.price);
-  const baseprice = useProductStore((state) => state.baseprice);
-
-
-  const childCategorie = useFetchCategories((cat) => cat.id == childCat);
 
   const [index, setIndex] = useState(0);
 
