@@ -5,10 +5,13 @@ import { useVariant } from "./useVariant";
 import { useQuery } from "react-query";
 import { documentByFilename } from "../components/dolibarrApi/fetch";
 import { usePrice } from "./usePrice";
+import { useNomenclature } from "./useNomenclature";
 
 export const useProduct = (variantId, defaultProductId, childCatId) => {
   const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId);
+
   const [product, setProduct] = useState(false);
+  const [isSuccess, setSuccess] = useState(false);
 
   const { data: allValues, isSuccess: valuesSucceed } = useValues(product.attributes);
 
@@ -18,9 +21,11 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
 
   const { price, basePrice } = usePrice(product.attributes, product.values, defaultProductId);
 
+  const { nomenclature } = useNomenclature(product.attributes, product.values, defaultProductId, childCatId);
+
   useEffect(() => {
     if (variantsSucceed) {
-      setProduct({ ...product, attributes: variant.attributes, variantId : variantId  });
+      setProduct({ ...product, attributes: variant.attributes, variantId: variantId });
     }
   }, [variantsSucceed]);
 
@@ -54,7 +59,19 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
     }
   }, [price, basePrice]);
 
+  useEffect(() => {
+    if (nomenclature) {
+      setProduct({ ...product, nomenclature: nomenclature });
+    }
+  }, [nomenclature]);
+
+  useEffect(() => {
+    if (Object.keys(product).length > 6 ) {
+      setSuccess(true);
+    }
+  }, [product]);
+
   console.log(product);
 
-  return { product: product, setProduct: setProduct };
+  return { product: product, isSuccess: isSuccess };
 };
