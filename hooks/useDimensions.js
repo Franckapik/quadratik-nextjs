@@ -9,7 +9,7 @@ export const useDimensions = (attributes, values) => {
 
   useEffect(() => {
     if (dimensions?.D === "D1") {
-      const { E, N, W, L, P, I } = dimensions;
+      const { E, N, W, L, P, I, H } = dimensions;
 
       const e = E / 10; //epaisseur
       const p = parseInt(N); //type (type du diffuseur) Prime number (p)
@@ -32,12 +32,27 @@ export const useDimensions = (attributes, values) => {
       const amax = Math.max(...a);
       const amin = Math.min(...a);
       const start = [-w / 2, -l / 2, P / 2];
+      const fmin = Math.round((((344 / 2 / P / 10) * amax) / N) * 1000);
+      const fmax = Math.round(344 / 2 / (c / 100));
+      const report = Array(n) //cellules
+        .fill("")
+        .map((a, i) => {
+          const n = i % p;
+          const m = Math.floor(i / p);
+          const o = (Math.pow(n + H, 2) + Math.pow(m + V, 2)) % p;
+          const x = start[0] + c / 2 + n * (c + e);
+          const z = start[1] + c / 2 + e + m * (c + e);
+          const y = invert ? P - (o * P) / amax : (o * P) / amax;
+          return { ratio: Math.round((y / P) * amax), hauteur: Math.round(y * 100) / 100 };
+        });
 
-      setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start });
+      const lengthWells = Object.values(report).reduce((acc, val) => acc + val.hauteur, 0);
+
+      setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells });
     }
 
     if (dimensions?.D === "D2") {
-      const { E, N, W, L, P, V, I } = dimensions;
+      const { E, N, W, L, P, V, I, H } = dimensions;
       const e = E / 10; //epaisseur
       const p = parseInt(N); //type (type du diffuseur) Prime number (p)
       const w = parseInt(W); //largeur
@@ -60,7 +75,24 @@ export const useDimensions = (attributes, values) => {
       const amin = Math.min(...a);
       const start = [-w / 2, -l / 2, P / 2];
 
-      setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start });
+      const fmin = Math.round((((344 / 2 / P / 10) * amax) / N) * 1000);
+      const fmax = Math.round(344 / 2 / (c / 100));
+
+      const report = Array(n) //cellules
+        .fill("")
+        .map((a, i) => {
+          const n = i % p;
+          const m = Math.floor(i / p);
+          const o = (Math.pow(n + H, 2) + Math.pow(m + V, 2)) % p;
+          const x = start[0] + c / 2 + n * (c + e);
+          const z = start[1] + c / 2 + e + m * (c + e);
+          const y = invert ? P - (o * P) / amax : (o * P) / amax;
+          return { ratio: Math.round((y / P) * amax), hauteur: Math.round(y * 100) / 100 };
+        });
+
+      const lengthWells = Object.values(report).reduce((acc, val) => acc + val.hauteur, 0);
+
+      setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells });
     }
 
     if (dimensions?.D !== "D2" && dimensions.D !== "D1" && dimensions.F !== undefined) {
@@ -74,5 +106,5 @@ export const useDimensions = (attributes, values) => {
     }
   }, [dimensions]);
 
-  return { dimensions: { ...dimensions, ...dimensionsComputed }, isSuccess : isSuccess && dimensions && dimensionsComputed };
+  return { dimensions: { ...dimensions, ...dimensionsComputed }, isSuccess: isSuccess && dimensions && dimensionsComputed };
 };

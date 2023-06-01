@@ -38,9 +38,6 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
   const highlights = useProductStore((state) => state.highlights);
   const { E, N, W, L, P, H, I, C, T, e, p, w, V, invert, c, l, n, n2, a, amax, amin, start } = dimensions;
 
-  useReport2D(n, p, H, V, c, invert, start, amax, e, P, amin);
-
-  usePerformances(amax, c, P, N);
   return (
     <>
       {isQuadralab ? (
