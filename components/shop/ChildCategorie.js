@@ -5,6 +5,7 @@ import { CardProduct } from "./CardProduct";
 
 export const ChildCategorie = ({ childCatId, defaultProductId, childCatLabel }) => {
   const { data: variantsIds, isSuccess: variantsIdsSucceed } = useQuery(["variantsIds", { childCatId: childCatId }], () => objectsInCategory(childCatId, true), { staleTime: Infinity });
+
   return (
     <>
      {variantsIdsSucceed &&

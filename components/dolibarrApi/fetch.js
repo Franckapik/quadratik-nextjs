@@ -19,7 +19,7 @@ export const valuesFetchByAttributesId = (id) =>
     })
     .get()
     .then((response) => response.data)
-    .catch((error) => error);
+    .catch((error) => Promise.reject(error));
 
 const objectsInCategory = (id, onlyId) =>
   axios
@@ -32,7 +32,7 @@ const objectsInCategory = (id, onlyId) =>
     })
     .get()
     .then((response) => response.data)
-    .catch((error) => error);
+    .catch((error) => Promise.reject(error));
 
 const listCategories = (filter) =>
   axios
@@ -60,7 +60,7 @@ const listCategories = (filter) =>
         .filter(filter)
         .map((cat) => ({ ...cat, ["label"]: cat.label.replace(/[0-9]{3}\s-\s*/gm, "") }));
     })
-    .catch((error) => error);
+    .catch((error) => Promise.reject(error));
 
 const attributesAllFetch = () =>
   axios.create({
@@ -79,7 +79,7 @@ const productFetchById = (id) =>
     },
   })    .get()
   .then((response) => response.data)
-  .catch((error) => error);
+  .catch((error) => Promise.reject(error));
 
   
 const variantFetchByParentId = (id) =>
@@ -93,7 +93,7 @@ const variantFetchByParentId = (id) =>
     })
     .get()
     .then((response) => response.data)
-    .catch((error) => error);
+    .catch((error) => Promise.reject(error));
 const documentByProductId = (id) =>
   axios.create({
     baseURL: `https://shop.quadratik.fr/api/index.php/documents?modulepart=product&id=${id}`,
@@ -121,6 +121,6 @@ const documentByFilename = (filename) =>
     })
     .get()
     .then((response) => response.data.content)
-    .catch((error) => error);
+    .catch((error) => Promise.reject(error));
 
 export { attributesAllFetch, productFetchById, attributesFetchById, listCategories, objectsInCategory, documentByProductId, variantFetchByParentId, documentByFilename, performancesByProductId };

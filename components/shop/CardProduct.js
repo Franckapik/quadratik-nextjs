@@ -8,7 +8,7 @@ export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatL
     <>
       {isSuccess ? (
         <CardWrap>
-          <img src={`data:image/png;base64,${product.image.facePicture}`} />
+{    product?.image?.facePicture ?      <img src={`data:image/png;base64,${product.image.facePicture}`} /> : "Image non disponible"}
           <span className="shop_product_title ft2 ">{product.nomenclature.simple}</span>
           <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCatLabel}</span>
           <span className="shop_product_price ft4  text-nowrap ">{product.prices ? product.prices.price + " €" : "Prix non disponible"} </span>
