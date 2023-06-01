@@ -3,7 +3,7 @@ import { useProductStore } from "../../hooks/store";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 
-export const ProductHud = ({ product, display }) => {
+export const ProductDetails = ({ product, display }) => {
   //just on page render
 
   //need to re-render the page

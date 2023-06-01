@@ -1,9 +1,7 @@
-import Part from "./parts3D/Part";
-import Cell from "./parts3D/Cell";
-import { usePerformances } from "../../hooks/usePerformances";
-import { useProductStore } from "../../hooks/store";
 import { Text } from "@react-three/drei";
-import { useReport2D } from "../../hooks/useReport2D";
+import { useProductStore } from "../../hooks/store";
+import Cell from "./parts3D/Cell";
+import Part from "./parts3D/Part";
 
 const LightenDarkenColor = (col, amt) => {
   var usePound = false;
