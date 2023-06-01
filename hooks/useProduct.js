@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { productFetchById } from "../components/dolibarrApi/fetch";
+import { useDescription } from "./useDescription";
+import { useDimensions } from "./useDimensions";
+import { useNomenclature } from "./useNomenclature";
+import { usePicture } from "./usePicture";
+import { usePrice } from "./usePrice";
 import { useValues } from "./useValues";
 import { useValuesSelected } from "./useValuesSelected";
 import { useVariant } from "./useVariant";
-import { useQuery } from "react-query";
-import { documentByFilename, productFetchById } from "../components/dolibarrApi/fetch";
-import { usePrice } from "./usePrice";
-import { useNomenclature } from "./useNomenclature";
-import { usePicture } from "./usePicture";
-import { useDescription } from "./useDescription";
-import { useDimensions } from "./useDimensions";
 
-export const useProduct = (variantId, defaultProductId, childCatId, { miniature }) => {
+export const useProduct = (variantId, defaultProductId, childCatId, { miniature }, reload) => {
   const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId);
   const { data: noVariant, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity, enabled: !!defaultProductId?.length == 0 });
 
@@ -33,7 +33,6 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
 
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature);
   
-
   useEffect(() => {
     if (variantsSucceed) {
       setProduct((prevProduct) => ({ ...prevProduct, attributes: variant.attributes, variantId: variantId }));
@@ -65,7 +64,7 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
     if (valuesSucceed) {
       setProduct((prevProduct) => ({ ...prevProduct, values: allValues }));
     }
-  }, [valuesSucceed]);
+  }, [valuesSucceed, reload]);
 
   useEffect(() => {
     if (valuesSelected) {
@@ -100,9 +99,9 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
   useEffect(() => {
     if (descriptionSucceed) {
       setProduct((prevProduct) => ({ ...prevProduct, description: description }));
-    }
+    } 
   }, [descriptionSucceed]);
-
+ 
   useEffect(() => {
     if (pictureSucceed) {
       setProduct((prevProduct) => ({ ...prevProduct, image: { facePicture: facePicture, sidePicture: sidePicture } }));
@@ -115,7 +114,6 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
     }
   }, [product]);
 
-  console.log(product);
 
-  return { product: product, isSuccess: isSuccess };
+  return { product: product, isSuccess: isSuccess, setProduct, reload };
 };

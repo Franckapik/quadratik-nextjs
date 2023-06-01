@@ -21,5 +21,5 @@ export const useValuesSelected = (attributes, values, key, value) => {
     }
   }, [attributes, values, allAttributesSucceed]);
 
-  return { data: data, isSuccess : allAttributesSucceed && data };
+  return { data: data, isSuccess : allAttributesSucceed && data  };
 };

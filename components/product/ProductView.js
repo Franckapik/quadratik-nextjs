@@ -20,7 +20,7 @@ export const ProductView = ({product, display}) => {
                   </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
-                  <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${product.image.sidePicture}`} alt="product.image.sidePicture preview of the model" />
+                  <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${product.image.sidePicture}`} alt="Side Picture preview of the model" />
                   <Carousel.Caption>
                     <h3>Dimensions du modèle</h3>
                     <p>
@@ -32,13 +32,12 @@ export const ProductView = ({product, display}) => {
                   <ProductCanvas product={product}></ProductCanvas>
                   <Carousel.Caption>
                     <h3>Vue 3D</h3>
-                    <p>blabka</p>
                   </Carousel.Caption>
                 </Carousel.Item>
               </Carousel>
               <div className="carousel-indicators">
-                <img onClick={() => setIndex(0)} className={`d-block product_thumbnail m-2 ${index === 0 ? "border_creme" : ""}`} src={`data:image/png;base64,${product.image.facePicture}`} alt="First slide thumbnail" />
-                <img onClick={() => setIndex(1)} className={`d-block product_thumbnail m-2 ${index === 1 ? "border_creme" : ""}`} src={`data:image/png;base64,${product.image.sidePicture}`} alt="Second slide thumbnail" />
+                <img onClick={() => setIndex(0)} className={`d-block product_thumbnail m-2 ${index === 0 ? "border_creme" : ""}`} src={`data:image/png;base64,${product.image.facePicture}`} alt="Image miniature du modèle de face" />
+                <img onClick={() => setIndex(1)} className={`d-block product_thumbnail m-2 ${index === 1 ? "border_creme" : ""}`} src={`data:image/png;base64,${product.image.sidePicture}`} alt="Image miniature du modèle de coté" />
                 <div onClick={() => setIndex(2)} className={`d-block product_thumbnail m-2 ${index === 2 ? "border_creme" : ""}`}>
                   <i className="fal fa-cube fa-4x mt-4"></i>
                 </div>

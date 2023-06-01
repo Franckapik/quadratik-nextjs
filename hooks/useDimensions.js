@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { useValuesSelected } from "./useValuesSelected";
 
 export const useDimensions = (attributes, values) => {
@@ -110,7 +109,8 @@ export const useDimensions = (attributes, values) => {
 
       setDimensionsComputed({ e: e, w: w, l: l, start: start, area : area, volume : volume });
     }
-  }, [dimensions]);
+  }, [isSuccess]);
 
-  return { dimensions: { ...dimensions, ...dimensionsComputed }, isSuccess: isSuccess && dimensions && dimensionsComputed };
+
+  return { dimensions: { ...dimensions, ...dimensionsComputed }, isSuccess: isSuccess && dimensionsComputed };
 };

@@ -2,7 +2,7 @@ import { Button, Carousel, Col, Row } from "react-bootstrap";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 
-export const ProductDetails = ({ product, display }) => {
+export const ProductDetails = ({ product, display, setProduct }) => {
   return (
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (
@@ -33,7 +33,7 @@ export const ProductDetails = ({ product, display }) => {
           </Carousel.Item>
           <Carousel.Item>Spacialisation details</Carousel.Item>
           <Carousel.Item>
-            <ProductOptions product={product} />
+            <ProductOptions product={product} setProduct={setProduct} />
           </Carousel.Item>
         </Carousel>
       </Row>
