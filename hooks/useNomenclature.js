@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useValuesSelected } from "./useValuesSelected";
 import { useQuery } from "react-query";
 
-export const useNomenclature = (attributes, values, defaultProductId, childCatId) => {
+export const useNomenclature = (attributes, values, defaultProductId) => {
   const [nomenclature, setNomenclature] = useState(false);
 
   const { data: dimensions } = useValuesSelected(attributes, values, "ref", "v_3d");

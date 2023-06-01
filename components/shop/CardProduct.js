@@ -1,36 +1,15 @@
 import React from "react";
 import { useProduct } from "../../hooks/useProduct";
-import { useVariant } from "../../hooks/useVariant";
 import { CardWrap } from "./CardWrap";
 
-/* export const CardProduct = ({ variant, childCat, attributes, defaultProduct }) => {
-  const nomenclature = useNomenclature(variant.valuesSelected, childCat.fk_parent, attributes);
-  const price = usePrice(variant.valuesSelected, defaultProduct, attributes);
-  const [miniature, error] = useFetchPicture(nomenclature, 'Miniature');
-
-  return (
-    <CardWrap>
-      <Link href={{ pathname: "/shop/product", query: { Display: 0, TAG: childCat.fk_parent, childCat : childCat.id, ...variant.valuesSelected } }}>
-        {!error && miniature ? <img src={`data:image/png;base64,${miniature}`} /> : "Image non disponible"}
-        <span className="shop_product_title ft2 ">{nomenclature.simple}</span>
-        <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCat.label}</span>
-        <span className="shop_product_price ft4 text-uppercase text-nowrap ">{Math.round(price[0])} €</span>
-      </Link>
-    </CardWrap>
-  );
-}; */
-
 export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatLabel }) => {
-  const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId);
   const { product, isSuccess } = useProduct(variantId, defaultProductId, childCatId);
-
   return (
     <>
       {isSuccess ? (
         <CardWrap>
-          "coucou" - {variant?.id} - {variantId} - {defaultProductId} - cat {childCatId} - {childCatLabel}
-          {product.image ? <img src={`data:image/png;base64,${product.image}`} /> : "Image non disponible"}
-          <span className="shop_product_title ft2 ">{"Woodik-7"}</span>
+          <img src={`data:image/png;base64,${product.image.facePicture}`} />
+          <span className="shop_product_title ft2 ">{product.nomenclature.simple}</span>
           <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCatLabel}</span>
           <span className="shop_product_price ft4  text-nowrap ">{product.price ? product.price + " €" : "Prix non disponible"} </span>
         </CardWrap>

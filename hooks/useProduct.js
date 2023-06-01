@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { documentByFilename } from "../components/dolibarrApi/fetch";
 import { usePrice } from "./usePrice";
 import { useNomenclature } from "./useNomenclature";
+import { usePicture } from "./usePicture";
 
 export const useProduct = (variantId, defaultProductId, childCatId) => {
   const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId);
@@ -17,11 +18,12 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
 
   const { data: valuesSelected } = useValuesSelected(product.attributes, product.values, "ref", "v_id");
 
-  const { data: pictureOfVariant, isSuccess: pictureOfVariantSucceed } = useQuery(["pictureOfVariant", { variantId: variantId }], () => documentByFilename("Modeles/Miniature/" + "Woodik-710.png"), { staleTime: Infinity });
-
   const { price, basePrice } = usePrice(product.attributes, product.values, defaultProductId);
 
   const { nomenclature } = useNomenclature(product.attributes, product.values, defaultProductId, childCatId);
+
+  const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, true); //true for miniatures
+
 
   useEffect(() => {
     if (variantsSucceed) {
@@ -48,10 +50,10 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
   }, [valuesSelected]);
 
   useEffect(() => {
-    if (pictureOfVariantSucceed) {
-      setProduct({ ...product, image: pictureOfVariant });
+    if (pictureSucceed) {
+      setProduct({ ...product, image: {facePicture : facePicture, sidePicture : sidePicture} });
     }
-  }, [pictureOfVariantSucceed]);
+  }, [pictureSucceed]);
 
   useEffect(() => {
     if (price && basePrice) {
@@ -70,8 +72,6 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
       setSuccess(true);
     }
   }, [product]);
-
-  console.log(product);
 
   return { product: product, isSuccess: isSuccess };
 };
