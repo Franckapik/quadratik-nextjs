@@ -34,6 +34,19 @@ const objectsInCategory = (id, onlyId) =>
     .then((response) => response.data)
     .catch((error) => Promise.reject(error));
 
+export const CategoryFetchById = (id) =>
+  axios
+    .create({
+      baseURL: `https://shop.quadratik.fr/api/index.php/categories/${id}`,
+      headers: {
+        Accept: "application/json",
+        DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
+      },
+    })
+    .get()
+    .then((response) => response.data)
+    .catch((error) => Promise.reject(error));
+
 const listCategories = (filter) =>
   axios
     .create({
@@ -71,17 +84,18 @@ const attributesAllFetch = () =>
     },
   });
 const productFetchById = (id) =>
-  axios.create({
-    baseURL: `https://shop.quadratik.fr/api/index.php/products/${id}?includeparentid=true`,
-    headers: {
-      Accept: "application/json",
-      DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
-    },
-  })    .get()
-  .then((response) => response.data)
-  .catch((error) => Promise.reject(error));
+  axios
+    .create({
+      baseURL: `https://shop.quadratik.fr/api/index.php/products/${id}?includeparentid=true`,
+      headers: {
+        Accept: "application/json",
+        DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
+      },
+    })
+    .get()
+    .then((response) => response.data)
+    .catch((error) => Promise.reject(error));
 
-  
 const variantFetchByParentId = (id) =>
   axios
     .create({

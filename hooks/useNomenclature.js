@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useValuesSelected } from "./useValuesSelected";
 import { useQuery } from "react-query";
+import { useValuesSelected } from "./useValuesSelected";
 
 export const useNomenclature = (attributes, values, defaultProductId) => {
   const [nomenclature, setNomenclature] = useState(false);
+
 
   const { data: dimensions } = useValuesSelected(attributes, values, "ref", "v_3d");
   const { data: labels } = useValuesSelected(attributes, values, "ref", "v_label");
@@ -67,6 +68,7 @@ export const useNomenclature = (attributes, values, defaultProductId) => {
       setNomenclature(name);
     }
   }, [dimensions, defaultProduct]);
+
 
   return {data : nomenclature, isSuccess : nomenclature && defaultProductSucceed };
 };

@@ -7,6 +7,7 @@ import { documentByFilename, productFetchById } from "../components/dolibarrApi/
 import { usePrice } from "./usePrice";
 import { useNomenclature } from "./useNomenclature";
 import { usePicture } from "./usePicture";
+import { useDescription } from "./useDescription";
 
 export const useProduct = (variantId, defaultProductId, childCatId) => {
   const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId);
@@ -21,7 +22,8 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
 
   const { price, basePrice, isSuccess: priceSucceed } = usePrice(product.attributes, product.values, defaultProductId);
 
-  const { data: nomenclature, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId, childCatId);
+  const { data: nomenclature, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId);
+  const { data: description, isSuccess: descriptionSucceed } = useDescription(defaultProductId, childCatId, variantId);
 
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, true); //true for miniatures
 
@@ -77,6 +79,12 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
   }, [nomenclatureSucceed]);
 
   useEffect(() => {
+    if (descriptionSucceed) {
+      setProduct((prevProduct) => ({ ...prevProduct, description: description }));
+    }
+  }, [descriptionSucceed]);
+
+  useEffect(() => {
     if (pictureSucceed) {
       setProduct((prevProduct) => ({ ...prevProduct, image: { facePicture: facePicture, sidePicture: sidePicture } }));
     }
@@ -87,6 +95,8 @@ export const useProduct = (variantId, defaultProductId, childCatId) => {
       setSuccess(true);
     }
   }, [product]);
+
+  console.log(product);
 
   return { product: product, isSuccess: isSuccess };
 };

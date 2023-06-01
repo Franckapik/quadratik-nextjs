@@ -9,18 +9,25 @@ import { PerformanceCharts } from "../../components/product/PerformanceCharts";
 import ProductCanvas from "../../components/product/ProductCanvas";
 import { ProductHud } from "../../components/product/ProductHud";
 import { useProductStore } from "../../hooks/store";
-import { useAttributes } from "../../hooks/useAttributes";
+import { useAttributes } from "../../hooks/useAttributes_old";
 import { useFetchDefaultProduct } from "../../hooks/useFetchDefaultProduct";
 import { useFetchPicture } from "../../hooks/useFetchPicture";
 import { useFetchCategories } from "../../hooks/useFetchCategories";
 import { useQuery } from "react-query";
+import { useRouter } from "next/router";
+import { useProduct } from "../../hooks/useProduct";
 
 const Product = () => {
   //Data
   const [attributes, fetching, error] = useAttributes();
 
   const {isLoading, data, isFetching} = useQuery(['post']);
-  console.log(data);
+
+  const router = useRouter();
+
+  const { product, isSuccess } = useProduct(router.query.vid, router.query.dpid, router.query.childCat);
+
+  console.log(product);
 
 
   //Display
@@ -82,7 +89,7 @@ const Product = () => {
       <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={["modele", "performances", "spacialisation"]} text_dark shop cart />
       <div className="s0_page_index  d-none d-md-flex">
         {defaultProduct.label}
-        <div className="trait"></div>Aperçu du modèle
+        <div className="trait"></div>Aperçu du modèle 
       </div>
       <div className="product_custom d-none d-md-flex p-2" onClick={() => setDisplay(3)}>
         Personnaliser le modèle <i className="fad fa-chevron-right pt-4 "></i>

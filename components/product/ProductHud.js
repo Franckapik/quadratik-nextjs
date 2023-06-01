@@ -15,7 +15,6 @@ export const ProductHud = ({ display, attributes, defaultProduct, fetching, desc
   const sizes = useProductStore((state) => state.sizes);
   const area = (sizes.longueur * sizes.largeur) / 1000;
   const volume = ((area * sizes.profondeur) / 1000).toFixed(5);
-console.log(childCat[0]);
   return (
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (
