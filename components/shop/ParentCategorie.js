@@ -11,7 +11,6 @@ export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => 
   const [ref, inView] = useInView();
   const {data : childCategories, isSuccess : ChildCategoriesSucceed} = useQuery(['childCategories', {parentId : firstCat.id}], () => listCategories((cat) => cat.fk_parent == firstCat.id), {staleTime : Infinity} )
   const {data : defaultProductId, isSuccess : defaultProductIdSucceed} = useQuery(['defaultProductId', {parentId : firstCat.id}], () => objectsInCategory(firstCat.id, true), {staleTime : Infinity} )
-  const {data : variants, isSuccess : VariantsSucceed} = useQuery(['variants', {defaultProductId : defaultProductId}], () => variantFetchByParentId(defaultProductId), {staleTime : Infinity, enabled : defaultProductId !== undefined && defaultProductId?.length !== 0})
   
   useEffect(() => {
     if (inView) {
@@ -33,7 +32,7 @@ export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => 
       </CardWrap>
 
         {ChildCategoriesSucceed && defaultProductIdSucceed && childCategories.map((childCat,i) => {
-        return <ChildCategorie key={"ChildCategory" + i} childCatId={childCat.id} childCatLabel={childCat.label} defaultProductId={defaultProductId} attributes={attributes} variants={variants} />;
+        return <ChildCategorie key={"ChildCategory" + i} childCatId={childCat.id} childCatLabel={childCat.label} defaultProductId={defaultProductId} />;
       })} 
     </>
   );
