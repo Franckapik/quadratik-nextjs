@@ -22,7 +22,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
               <>
                 {categories.map((a, i) => (
                   <Col key={"categoryNav" + i} className="p-2 d-none d-md-flex justify-content-center" xs={4} md={1} style={{ backgroundColor: a.id == viewedCategory ? "#9fb07ca9" : "inherit" }}>
-                    <Link href={{ pathname: "/shop", query: { TAG: a.id } }}>{a.label}</Link>
+                    <Link href={'#tag' + a.id} /* href={{ pathname: "/shop", query: { TAG: a.id } }} */>{a.label}</Link>
                   </Col>
                 ))}
               </>

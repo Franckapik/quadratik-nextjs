@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Row } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { LayoutHome } from "../../components/LayoutHome";
-import { attributesAllFetch, listCategories } from "../../components/dolibarrApi/fetch";
+import { listCategories } from "../../components/dolibarrApi/fetch";
 import { CardWrap } from "../../components/shop/CardWrap";
 import { ParentCategorie } from "../../components/shop/ParentCategorie";
 import { useAttributes } from "../../hooks/useAttributes_old";
