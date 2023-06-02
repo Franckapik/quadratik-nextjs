@@ -11,26 +11,22 @@ import { useValuesSelected } from "./useValuesSelected";
 import { useVariant } from "./useVariant";
 
 export const useProduct = (variantId, defaultProductId, childCatId, { miniature }, reload) => {
-  const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId);
-  const { data: noVariant, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity, enabled: !!defaultProductId?.length == 0 });
+
+  //on first render
 
   const [product, setProduct] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
-
-  const { data: allValues, isSuccess: valuesSucceed } = useValues(product.attributes);
-
-  const { data: valuesSelected } = useValuesSelected(product.attributes, product.values, "ref", "v_id");
-
-  const { data: features } = useValuesSelected(product.attributes, product.values, "id", "v_id");
-
-  const { price, basePrice, isSuccess: priceSucceed } = usePrice(product.attributes, product.values, defaultProductId);
-
-  const { dimensions, isSuccess: dimensionsSucceed } = useDimensions(product.attributes, product.values);
-
-  const { nomenclature, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId, product.dimensions);
-
+  const { data: variant, isSuccess: variantsSucceed } = useVariant(defaultProductId, variantId);
+  const { data: noVariant, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity, enabled: !!defaultProductId?.length == 0 });
   const { data: description, isSuccess: descriptionSucceed } = useDescription(defaultProductId, childCatId, variantId);
 
+//depending on product changes
+  const { data: allValues, isSuccess: valuesSucceed } = useValues(product.attributes);
+  const { data: valuesSelected } = useValuesSelected(product.attributes, product.values, "ref", "v_id");
+  const { data: features } = useValuesSelected(product.attributes, product.values, "id", "v_id");
+  const { price, basePrice, isSuccess: priceSucceed } = usePrice(product.attributes, product.values, defaultProductId);
+  const { dimensions, isSuccess: dimensionsSucceed } = useDimensions(product.attributes, product.values, setProduct, product);
+  const { nomenclature, isSuccess: nomenclatureSucceed } = useNomenclature(product.attributes, product.values, defaultProductId, product.dimensions);
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature);
   
   
@@ -116,6 +112,7 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
   useEffect(() => {
     if (product && "nomenclature" in product && "prices" in product && "valuesSelected" in product && "values" in product && "defaultProductId" in product && "description" in product) {
       setSuccess(true);
+      console.log("product change");
     }
   }, [product]);
 
