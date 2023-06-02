@@ -10,6 +10,9 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
   const [isSuccess, setSuccess] = useState(false);
   const [attributes, setAttributes] = useState(false);
 
+console.log(variantAttributes);
+  console.count();
+
   const changeAttributes = (value, name) => {
     console.log("Changement id : " + name +" avec la valeur " + value[name]);
     setAttributes((previsousAttribute) => {
@@ -25,7 +28,9 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
   
 
   useEffect(() => {
-    setAttributes(variantAttributes) 
+    if (variantAttributes !== undefined) {
+      setAttributes(variantAttributes) 
+    }
   }), [variantAttributes] 
 
   const valuesSelected = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_id");
@@ -42,9 +47,6 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
   useEffect(() => {
     //calculate
  
-
-    console.log(attributes);
-
     if (isAllSucess) {
       setProduct((previousProduct) => ({
         ...previousProduct,
@@ -61,7 +63,7 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
       }));
       setSuccess(true); 
     } 
-  }, [attributes]);
+  }, [attributes, isAllSucess]);
 
 
 
