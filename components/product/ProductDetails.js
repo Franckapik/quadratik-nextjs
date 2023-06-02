@@ -3,11 +3,7 @@ import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 import { useRef } from "react";
 
-export const ProductDetails = ({ product, display }) => {
-  const countRefresh = useRef(0);
-  countRefresh.current = countRefresh.current + 1;
-  console.log("ProductDetails : " + countRefresh.current);
-
+export const ProductDetails = ({ product, display, changeAttributes }) => {
   return (
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (
@@ -38,7 +34,7 @@ export const ProductDetails = ({ product, display }) => {
           </Carousel.Item>
           <Carousel.Item>Spacialisation details</Carousel.Item>
           <Carousel.Item>
-            <ProductOptions product={product} />
+            <ProductOptions product={product} changeAttributes={changeAttributes} />
           </Carousel.Item>
         </Carousel>
       </Row>

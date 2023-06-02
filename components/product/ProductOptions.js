@@ -3,21 +3,17 @@ import { Button, Form } from "react-bootstrap";
 import { useFormContext } from "react-hook-form";
 import useToggle from "../../hooks/useToggle";
 import { Field } from "./Field";
-import { useQuery } from "react-query";
-import { attributesAllFetch } from "../dolibarrApi/fetch";
 
-const ProductOptions = ({ product, setProduct }) => {
+const ProductOptions = ({ product, changeAttributes }) => {
   const [mode, setMode] = useToggle(true);
   const methods = useFormContext();
 
   useEffect(() => {
     const subscription = methods.watch((value, {name}) => {
-      const newAttributes = product.attributes;
-      const objIndex = newAttributes.findIndex((obj => obj.id == name));
-      newAttributes[objIndex].fk_prod_attr_val = value[name];
+      changeAttributes(value, name);
     });
     return () => subscription.unsubscribe();
-  }, []);
+  }, [methods.watch]);
 
   const options = JSON.parse(product.description.attributes_options);
 

@@ -1,13 +1,14 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
 import { variantPost } from "../../components/dolibarrApi/post";
 import { ProductDetails } from "../../components/product/ProductDetails";
 import { ProductView } from "../../components/product/ProductView";
-import { useProduct } from "../../hooks/useProduct";
+import { fetchProduct } from "../../hooks/fetchProduct";
+import { useComputeProduct } from "../../hooks/useComputeProduct";
 
 const Product = () => {
 
@@ -19,7 +20,9 @@ const Product = () => {
 
   //Data
   const router = useRouter();
-  const { product, isSuccess: productSuccess } = useProduct(router.query.vid, router.query.dpid, router.query.childCat, { miniature: false });
+
+  const { allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues } = fetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
+  const { product, isSuccess : productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSucess, router.query.vid);
   //Display
   const [display, setDisplay] = useQueryState("display", queryTypes.integer.withDefault(0));
 
@@ -61,7 +64,7 @@ const Product = () => {
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(onSubmit)}>
                 <Col md={6} className="product_right bg_creme layout_space">
-                  <ProductDetails product={product} display={display} />
+                  <ProductDetails product={product} display={display} changeAttributes={changeAttributes} />
                 </Col>
                 <Col md={6} className="product_left flex-column">
                   <ProductView product={product} display={display} />

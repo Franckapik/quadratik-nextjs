@@ -4,41 +4,31 @@ import { productFetchById } from "../components/dolibarrApi/fetch";
 import { useQuery } from "react-query";
 
 export const usePrice = (defaultProduct, valuesFactor, valuesOperator) => {
-  const [price, setPrice] = useState(false);
-  const [basePrice, setBasePrice] = useState(false);
 
 
+  if (valuesFactor && valuesOperator) {
 
+    const basePrice = Number(defaultProduct?.price);
+   const price = Object.entries(valuesOperator).reduce((acc, [i, a] = cur) => {
+      switch (a) {
+        case "multiplication":
+          acc += (Number(valuesFactor[i]) - 1) * basePrice;
+          break;
 
-  useEffect(() => {
-    if (defaultProduct) {
-      setBasePrice(Number(defaultProduct.price));
-    }
-  }, [defaultProduct]);
+        case "addition":
+          acc += Number(valuesFactor[i]) * basePrice;
+          break;
 
-  useEffect(() => {
-    if (valuesFactor && valuesOperator && basePrice) {
-      const price = Object.entries(valuesOperator).reduce((acc, [i, a] = cur) => {
-        switch (a) {
-          case "multiplication":
-            acc += (Number(valuesFactor[i]) - 1) * basePrice;
-            break;
+        default:
+          console.log("Strategie de calcul de prix non repertoriée : ", a);
+      }
 
-          case "addition":
-            acc += (Number(valuesFactor[i])) * basePrice;
-            break;
+      return acc;
+    }, basePrice);
 
-          default:
-            console.log("Strategie de calcul de prix non repertoriée : ", a);
-        }
-
-        return acc
-      }, basePrice)
-
-      setPrice(Math.round(price));
-
-    }
-  }, [valuesFactor, valuesOperator, basePrice]);
-
-  return {price : price, basePrice : basePrice};
+    return {price : Math.round(price), basePrice: basePrice};
+  } else {
+    return {price : 3, basePrice: 5};
+  }
+  
 };
