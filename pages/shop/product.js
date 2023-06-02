@@ -12,12 +12,6 @@ import { useComputeProduct } from "../../hooks/useComputeProduct";
 
 const Product = () => {
 
-/*   const countRefresh = useRef(0);
-  countRefresh.current = countRefresh.current + 1;
-  console.log("Product : " + countRefresh.current); */
-
-
-
   //Data
   const router = useRouter();
 

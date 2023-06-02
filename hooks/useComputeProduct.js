@@ -19,7 +19,7 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
       return newAttributes;
     })
 
-    setAttributes(false);
+    setAttributes(false); //magical cmd to refresh component
   } 
   
 
