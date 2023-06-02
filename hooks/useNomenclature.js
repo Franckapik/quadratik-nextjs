@@ -1,10 +1,5 @@
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { useValuesSelected } from "./useValuesSelected";
 
 export const useNomenclature = (defaultProduct, labels, dimensions) => {
-  const [nomenclature, setNomenclature] = useState(false);
-
   const nomDiffuseur = (basename, dimensions) => {
     const { C, D, E, I, L, M, N, P, W, H, V, T } = dimensions;
     return {
@@ -25,10 +20,9 @@ export const useNomenclature = (defaultProduct, labels, dimensions) => {
     };
   };
 
-  useEffect(() => {
     if (dimensions && defaultProduct?.label) {
       let basename;
-      let name;
+      let nomenclature;
       switch (true) {
         case defaultProduct.label.includes("Diffuseur") && dimensions.D === "D1":
           basename = "Indik";
@@ -47,22 +41,21 @@ export const useNomenclature = (defaultProduct, labels, dimensions) => {
 
       switch (basename) {
         case "Indik":
-          name = nomDiffuseur(basename, dimensions);
+          nomenclature = nomDiffuseur(basename, dimensions);
           break;
         case "Woodik":
-          name = nomDiffuseur(basename, dimensions);
+          nomenclature = nomDiffuseur(basename, dimensions);
           break;
         case "Quadra":
-          name = nomAbsorbeur(basename, dimensions, labels);
+          nomenclature = nomAbsorbeur(basename, dimensions, labels);
           break;
 
         default:
           break;
       }
 
-      setNomenclature(name);
+      return nomenclature;
     }
-  }, [dimensions, defaultProduct]);
 
-  return nomenclature
+
 };

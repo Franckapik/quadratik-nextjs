@@ -19,7 +19,7 @@ const Product = () => {
 
   //Data
   const router = useRouter();
-  const { product, isSuccess: productSuccess, setProduct } = useProduct(router.query.vid, router.query.dpid, router.query.childCat, { miniature: false });
+  const { product, isSuccess: productSuccess } = useProduct(router.query.vid, router.query.dpid, router.query.childCat, { miniature: false });
   //Display
   const [display, setDisplay] = useQueryState("display", queryTypes.integer.withDefault(0));
 
@@ -61,7 +61,7 @@ const Product = () => {
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(onSubmit)}>
                 <Col md={6} className="product_right bg_creme layout_space">
-                  <ProductDetails product={product} display={display} setProduct={setProduct} />
+                  <ProductDetails product={product} display={display} />
                 </Col>
                 <Col md={6} className="product_left flex-column">
                   <ProductView product={product} display={display} />
