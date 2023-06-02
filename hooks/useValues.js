@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 export const useValues = (attributes) => {
   const [data, setData] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
-  console.log(attributes);
 
   const allValues = useQueries(
     attributes?.map((a) => {
@@ -16,7 +15,7 @@ export const useValues = (attributes) => {
     }) ?? []
   );
 
-  const isSuccess2 = allValues && allValues.every((result) => result.isSuccess);
+  const isSuccess2 = allValues.every((result) => result.isSuccess);
   const valuesData = isSuccess2 && allValues.map((a) => a.data.map((b) => ({ a_id : b.fk_product_attribute, v_id: b.id, v_ref: b.ref, v_3d: b.value?.split(",")[0], v_label: b.value?.split(",")[1], v_operator: b.value?.split(",")[3], v_factor: b.value?.split(",")[2] }))).flat();
 
   useEffect(() => {

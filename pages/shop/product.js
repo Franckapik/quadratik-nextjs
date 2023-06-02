@@ -1,6 +1,6 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
@@ -8,9 +8,6 @@ import { variantPost } from "../../components/dolibarrApi/post";
 import { ProductDetails } from "../../components/product/ProductDetails";
 import { ProductView } from "../../components/product/ProductView";
 import { useProduct } from "../../hooks/useProduct";
-import { useQuery } from "react-query";
-import { variantFetchByParentId } from "../../components/dolibarrApi/fetch";
-import { useEffect } from "react";
 
 const Product = () => {
 
@@ -22,22 +19,7 @@ const Product = () => {
 
   //Data
   const router = useRouter();
-  const { data: variantAttributes, isSuccess: variantsAttributesSucceed } = useQuery(["variants", { defaultProductId: router.query.dpid }], () => variantFetchByParentId(router.query.dpid), {
-    select: (data) => data.find((v) => v.fk_product_child === router.query.vid).attributes,
-    staleTime: Infinity,
-    enabled: router.query.dpid !== undefined && router.query.dpid?.length !== 0,
-  });
-
-    const [attributes, setAttributes] = useState([1,2]);
-
-
-  useEffect(() => {
-    console.log(variantAttributes);
-    setAttributes(variantAttributes)
-  }, [variantsAttributesSucceed])
-
-
-  const { product, isSuccess: productSuccess, setProduct } = useProduct(router.query.vid, attributes, router.query.dpid, router.query.childCat, { miniature: false });
+  const { product, isSuccess: productSuccess } = useProduct(router.query.vid, router.query.dpid, router.query.childCat, { miniature: false });
   //Display
   const [display, setDisplay] = useQueryState("display", queryTypes.integer.withDefault(0));
 
@@ -79,7 +61,7 @@ const Product = () => {
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(onSubmit)}>
                 <Col md={6} className="product_right bg_creme layout_space">
-                  <ProductDetails product={product} display={display} setAttributes={setAttributes} />
+                  <ProductDetails product={product} display={display} />
                 </Col>
                 <Col md={6} className="product_left flex-column">
                   <ProductView product={product} display={display} />

@@ -5,6 +5,7 @@ import { PerformanceCharts } from "./PerformanceCharts";
 import { PerformanceSpatial } from "./ParformanceSpatial";
 
 export const ProductView = ({product, display}) => {
+  
     const [index, setIndex] = useState(0);
     return(
         <Row className="justify-content-center">
