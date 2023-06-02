@@ -6,7 +6,7 @@ import { usePicture } from "../../hooks/usePicture";
 
 export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatLabel }) => {
   const { product, isSuccess } = useProduct(variantId, defaultProductId, childCatId);
-  const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature.simple, true); //true for miniature
+  const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature?.simple, true); //true for miniature
 
   return (
     <>

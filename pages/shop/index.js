@@ -5,11 +5,9 @@ import { LayoutHome } from "../../components/LayoutHome";
 import { listCategories } from "../../components/dolibarrApi/fetch";
 import { CardWrap } from "../../components/shop/CardWrap";
 import { ParentCategorie } from "../../components/shop/ParentCategorie";
-import { useAttributes } from "../../hooks/useAttributes_old";
 
 const Shop = () => {
   //Data
-   const [attributesHook, fetching] = useAttributes();
   const [viewedCategory, setViewedCategory] = useState(1);
 
   const {data : parentCategories, isSuccess : ParentCategoriesSucceed} = useQuery(['parentCategories'], () => listCategories((cat) => cat.fk_parent == 0), {staleTime : Infinity} )
@@ -28,7 +26,7 @@ const Shop = () => {
           <span className="shop_product_collection ft6 text-uppercase text-nowrap">Diffuseur 2D classiques</span>
         </CardWrap>
         {ParentCategoriesSucceed && parentCategories.map((firstCat, i) => {
-          return <ParentCategorie key={"ParentCategory" + i} firstCat={firstCat} attributes={attributesHook} setViewedCategory={setViewedCategory} />;
+          return <ParentCategorie key={"ParentCategory" + i} firstCat={firstCat} setViewedCategory={setViewedCategory} />;
         })}
       </Row>
     </>

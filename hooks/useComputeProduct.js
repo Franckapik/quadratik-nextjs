@@ -10,16 +10,12 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
   const [isSuccess, setSuccess] = useState(false);
   const [attributes, setAttributes] = useState(false);
 
-console.log(variantAttributes);
-  console.count();
 
   const changeAttributes = (value, name) => {
-    console.log("Changement id : " + name +" avec la valeur " + value[name]);
-    setAttributes((previsousAttribute) => {
-      let newAttributes = previsousAttribute;
+    setAttributes((previousAttributes) => {
+      let newAttributes = previousAttributes;
       const i = newAttributes.findIndex((obj => obj.id == name));
       newAttributes[i].fk_prod_attr_val = value[name];
-      console.log(newAttributes);
       return newAttributes;
     })
 

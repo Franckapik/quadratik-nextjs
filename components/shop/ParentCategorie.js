@@ -7,7 +7,7 @@ import { listCategories, objectsInCategory, variantFetchByParentId } from "../do
 import { CardWrap } from "./CardWrap";
 import { ChildCategorie } from "./ChildCategorie";
 
-export const ParentCategorie = ({ firstCat, attributes, setViewedCategory }) => {
+export const ParentCategorie = ({ firstCat, setViewedCategory }) => {
   const [ref, inView] = useInView();
   const {data : childCategories, isSuccess : ChildCategoriesSucceed} = useQuery(['childCategories', {parentId : firstCat.id}], () => listCategories((cat) => cat.fk_parent == firstCat.id), {staleTime : Infinity} )
   const {data : defaultProductId, isSuccess : defaultProductIdSucceed} = useQuery(['defaultProductId', {parentId : firstCat.id}], () => objectsInCategory(firstCat.id, true), {staleTime : Infinity} )

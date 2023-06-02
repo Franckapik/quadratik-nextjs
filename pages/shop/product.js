@@ -28,6 +28,9 @@ const Product = () => {
 
   const methods = useForm();
 
+  console.count();
+
+
   const onSubmit = async () => {
     const variant = {
       weight_impact: 0,
