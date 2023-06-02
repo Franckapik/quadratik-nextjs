@@ -44,7 +44,7 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
 
   //fetching again
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(nomenclature, miniature);
-  const isAllSucess = variantsAttributesSucceed && allAttributesSucceed && defaultProductSucceed && categorySucceed && allValuesSucceed && pictureSucceed;
+  const isAllSucess = variantsAttributesSucceed && allAttributesSucceed && defaultProductSucceed && categorySucceed && allValuesSucceed;
 
   useEffect(() => {
     console.log(isAllSucess);
