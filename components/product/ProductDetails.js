@@ -1,8 +1,13 @@
 import { Button, Carousel, Col, Row } from "react-bootstrap";
 import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
+import { useRef } from "react";
 
 export const ProductDetails = ({ product, display, setProduct }) => {
+  const countRefresh = useRef(0);
+  countRefresh.current = countRefresh.current + 1;
+  console.log("ProductDetails : " + countRefresh.current);
+
   return (
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (

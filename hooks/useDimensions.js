@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useValuesSelected } from "./useValuesSelected";
 
 export const useDimensions = (attributes, values) => {
   const [dimensionsComputed, setDimensionsComputed] = useState(false);
 
   const { data: dimensions, isSuccess } = useValuesSelected(attributes, values, "ref", "v_3d");
+
+  const countRefresh = useRef(0);
+  countRefresh.current = countRefresh.current + 1;
+  console.log("Dimensions : " + countRefresh.current);
 
   useEffect(() => {
     if (dimensions?.D === "D1") {

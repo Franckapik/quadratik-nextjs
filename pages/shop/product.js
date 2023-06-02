@@ -1,6 +1,6 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useRef } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
@@ -10,6 +10,13 @@ import { ProductView } from "../../components/product/ProductView";
 import { useProduct } from "../../hooks/useProduct";
 
 const Product = () => {
+
+  const countRefresh = useRef(0);
+  countRefresh.current = countRefresh.current + 1;
+  console.log("Product : " + countRefresh.current);
+
+
+
   //Data
   const router = useRouter();
   const { product, isSuccess: productSuccess, setProduct } = useProduct(router.query.vid, router.query.dpid, router.query.childCat, { miniature: false });

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { productFetchById } from "../components/dolibarrApi/fetch";
 import { useDescription } from "./useDescription";
@@ -33,6 +33,11 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
 
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature, miniature);
   
+  
+  const countRefresh = useRef(0);
+  countRefresh.current = countRefresh.current + 1;
+  console.log("useProduct : " + countRefresh.current);
+
   useEffect(() => {
     if (variantsSucceed) {
       setProduct((prevProduct) => ({ ...prevProduct, attributes: variant.attributes, variantId: variantId }));
@@ -99,9 +104,9 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
   useEffect(() => {
     if (descriptionSucceed) {
       setProduct((prevProduct) => ({ ...prevProduct, description: description }));
-    } 
+    }
   }, [descriptionSucceed]);
- 
+
   useEffect(() => {
     if (pictureSucceed) {
       setProduct((prevProduct) => ({ ...prevProduct, image: { facePicture: facePicture, sidePicture: sidePicture } }));
@@ -113,7 +118,6 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
       setSuccess(true);
     }
   }, [product]);
-
 
   return { product: product, isSuccess: isSuccess, setProduct, reload };
 };
