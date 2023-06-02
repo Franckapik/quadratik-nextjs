@@ -28,18 +28,20 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
     setAttributes(variantAttributes) 
   }), [variantAttributes] 
 
+  const valuesSelected = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_id");
+  const values3D = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_3d");
+  const valuesLabels = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_label");
+  const valuesFactor = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_factor");
+  const valuesOperator = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_operator");
+  const features = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "id", "v_id");
+  const description = useDescription(category, defaultProduct);
+  const { price: price, basePrice: basePrice } = usePrice(defaultProduct, valuesFactor, valuesOperator);
+  const dimensions = useDimensions(values3D);
+  const nomenclature = useNomenclature(defaultProduct, valuesLabels, dimensions);
+
   useEffect(() => {
     //calculate
-    const valuesSelected = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_id");
-    const values3D = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_3d");
-    const valuesLabels = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_label");
-    const valuesFactor = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_factor");
-    const valuesOperator = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_operator");
-    const features = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "id", "v_id");
-    const description = useDescription(category, defaultProduct);
-    const { price: price, basePrice: basePrice } = usePrice(defaultProduct, valuesFactor, valuesOperator);
-    const dimensions = useDimensions(values3D);
-    const nomenclature = useNomenclature(defaultProduct, valuesLabels, dimensions);
+ 
 
     console.log(attributes);
 
