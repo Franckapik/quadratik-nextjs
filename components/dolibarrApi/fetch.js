@@ -76,13 +76,18 @@ const listCategories = (filter) =>
     .catch((error) => Promise.reject(error));
 
 const attributesAllFetch = () =>
-  axios.create({
-    baseURL: `https://shop.quadratik.fr/api/index.php/products/attributes?sortfield=t.ref&sortorder=ASC&limit=100`,
-    headers: {
-      Accept: "application/json",
-      DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
-    },
-  });
+  axios
+    .create({
+      baseURL: `https://shop.quadratik.fr/api/index.php/products/attributes?sortfield=t.ref&sortorder=ASC&limit=100`,
+      headers: {
+        Accept: "application/json",
+        DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
+      },
+    })
+    .get()
+    .then((response) => response.data)
+    .catch((error) => Promise.reject(error));
+
 const productFetchById = (id) =>
   axios
     .create({

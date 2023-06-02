@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useValuesSelected } from "./useValuesSelected";
 
-export const useNomenclature = (attributes, values, defaultProductId, dimensions) => {
+export const useNomenclature = (defaultProduct, labels, dimensions) => {
   const [nomenclature, setNomenclature] = useState(false);
-  const { data: labels } = useValuesSelected(attributes, values, "ref", "v_label");
-  const { data: defaultProduct, isSuccess: defaultProductSucceed } = useQuery(["defaultProduct", { defaultProductId: defaultProductId, onlyId: false }], () => productFetchById(defaultProductId), { staleTime: Infinity, enabled: defaultProductId !== undefined && defaultProductId?.length !== 0 });
 
   const nomDiffuseur = (basename, dimensions) => {
     const { C, D, E, I, L, M, N, P, W, H, V, T } = dimensions;
@@ -66,5 +64,5 @@ export const useNomenclature = (attributes, values, defaultProductId, dimensions
     }
   }, [dimensions, defaultProduct]);
 
-  return { nomenclature: nomenclature, isSuccess: nomenclature  && defaultProductSucceed };
+  return nomenclature
 };

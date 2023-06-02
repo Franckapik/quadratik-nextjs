@@ -3,14 +3,12 @@ import { useValuesSelected } from "./useValuesSelected";
 import { productFetchById } from "../components/dolibarrApi/fetch";
 import { useQuery } from "react-query";
 
-export const usePrice = (attributes, values, defaultProductId) => {
+export const usePrice = (defaultProduct, valuesFactor, valuesOperator) => {
   const [price, setPrice] = useState(false);
   const [basePrice, setBasePrice] = useState(false);
 
-  const { data: valuesFactor } = useValuesSelected(attributes, values, "ref", "v_factor");
-  const { data: valuesOperator } = useValuesSelected(attributes, values, "ref", "v_operator");
 
-  const { data: defaultProduct, isSuccess: defaultProductSucceed } = useQuery(["defaultProduct", { defaultProductId: defaultProductId, onlyId: false }], () => productFetchById(defaultProductId), { staleTime: Infinity, enabled: defaultProductId !== undefined && defaultProductId?.length !== 0 });
+
 
   useEffect(() => {
     if (defaultProduct) {
@@ -42,5 +40,5 @@ export const usePrice = (attributes, values, defaultProductId) => {
     }
   }, [valuesFactor, valuesOperator, basePrice]);
 
-  return {price : price, basePrice : basePrice, isSuccess : basePrice && price && price !== NaN};
+  return {price : price, basePrice : basePrice};
 };

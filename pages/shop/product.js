@@ -11,9 +11,9 @@ import { useProduct } from "../../hooks/useProduct";
 
 const Product = () => {
 
-  const countRefresh = useRef(0);
+/*   const countRefresh = useRef(0);
   countRefresh.current = countRefresh.current + 1;
-  console.log("Product : " + countRefresh.current);
+  console.log("Product : " + countRefresh.current); */
 
 
 

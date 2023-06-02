@@ -9,7 +9,13 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import {ReactQueryDevtools} from 'react-query/devtools';
 
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions : {
+    queries : {
+      refetchOnWindowFocus: false,
+    }
+  }
+});
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {

@@ -1,18 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { useValuesSelected } from "./useValuesSelected";
 
-export const useDimensions = (attributes, values) => {
+export const useDimensions = (values3D) => {
   const [dimensionsComputed, setDimensionsComputed] = useState(false);
 
-  const { data: dimensions, isSuccess } = useValuesSelected(attributes, values, "ref", "v_3d");
-
-  const countRefresh = useRef(0);
+/*   const countRefresh = useRef(0);
   countRefresh.current = countRefresh.current + 1;
-  console.log("Dimensions : " + countRefresh.current);
+  console.log("Dimensions : " + countRefresh.current); */
 
   useEffect(() => {
-    if (dimensions?.D === "D1") {
-      const { E, N, W, L, P, I, H } = dimensions;
+    if (values3D?.D === "D1") {
+      const { E, N, W, L, P, I, H } = values3D;
 
       const e = E / 10; //epaisseur
       const p = parseInt(N); //type (type du diffuseur) Prime number (p)
@@ -56,8 +53,8 @@ export const useDimensions = (attributes, values) => {
       setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells, area : area, volume : volume });
     }
 
-    if (dimensions?.D === "D2") {
-      const { E, N, W, L, P, V, I, H } = dimensions;
+    if (values3D?.D === "D2") {
+      const { E, N, W, L, P, V, I, H } = values3D;
       const e = E / 10; //epaisseur
       const p = parseInt(N); //type (type du diffuseur) Prime number (p)
       const w = parseInt(W); //largeur
@@ -102,8 +99,8 @@ export const useDimensions = (attributes, values) => {
       setDimensionsComputed({ e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells, area : area, volume : volume });
     }
 
-    if (dimensions?.D !== "D2" && dimensions.D !== "D1" && dimensions.F !== undefined) {
-      const { E, W, L, P, F } = dimensions;
+    if (values3D?.D !== "D2" && values3D?.D !== "D1" && values3D?.F !== undefined) {
+      const { E, W, L, P, F } = values3D;
       const e = E / 10; //epaisseur
       const w = parseInt(W); //largeur
       const l = w * L; //longueur
@@ -113,8 +110,8 @@ export const useDimensions = (attributes, values) => {
 
       setDimensionsComputed({ e: e, w: w, l: l, start: start, area : area, volume : volume });
     }
-  }, [isSuccess]);
+  }, [values3D]);
 
 
-  return { dimensions: { ...dimensions, ...dimensionsComputed }, isSuccess: isSuccess && dimensionsComputed };
+  return { dimensions: { ...values3D, ...dimensionsComputed }};
 };
