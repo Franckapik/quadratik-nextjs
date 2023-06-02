@@ -1,5 +1,5 @@
 
-export const useDescription = (category, defaultProduct) => ({
+export const useDescription = (category, defaultProduct) => (defaultProduct && category && {
   parent_label : defaultProduct.label,
   parent_description : defaultProduct.description,
   date_creation : defaultProduct.date_creation,

@@ -60,121 +60,14 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
         features: features,
         valuesSelected: valuesSelected,
         values: allValues,
-        variantId: variantId
+        variantId: variantId,
+        image: { facePicture: facePicture, sidePicture: sidePicture }
       }));
       setSuccess(true);
     }
   }, [isAllSucess]);
 
-  console.log(product);
-
-  /*   const countRefresh = useRef(0);
-  countRefresh.current = countRefresh.current + 1;
-  console.log("useProduct : " + countRefresh.current); */
-
-  /*   useEffect(() => {
-    if (variantsAttributesSucceed) {
-      setProduct((prevProduct) => ({ ...prevProduct, attributes: variantAttributes }));
-    }
-  }, [variantsAttributesSucceed]);
-
-  useEffect(() => {
-    if (variantId) {
-      setProduct((prevProduct) => ({ ...prevProduct, variantId: variantId }));
-    }
-  }, [variantId]);
-
-  useEffect(() => {
-    if (noVariantSucceed) {
-      setProduct({
-        prices: { price: Math.round(noVariant.price), basePrice: null },
-        defaultProductId: noVariant.id,
-        attributes: null,
-        values: null,
-        valuesSelected: null,
-        nomenclature: { simple: noVariant.label, structurel: noVariant.ref },
-      });
-    }
-  }, [noVariantSucceed]);
-
-  useEffect(() => {
-    if (defaultProductId?.length) {
-      setProduct((prevProduct) => ({ ...prevProduct, defaultProductId: defaultProductId }));
-    } else {
-      setProduct((prevProduct) => ({ ...prevProduct, defaultProductId: variantId }));
-    }
-  }, [defaultProductId]);
-
-  useEffect(() => {
-    if (allValuesSucceed) {
-      setProduct((prevProduct) => ({ ...prevProduct, values: allValues }));
-    }
-  }, [allValuesSucceed]);
-
-  useEffect(() => {
-    if (allAttributesSucceed) {
-      setProduct((prevProduct) => ({ ...prevProduct, allAttributes: allAttributes }));
-    }
-  }, [allAttributesSucceed]);
-
-  useEffect(() => {
-    if (isAllSucess) {
-      setProduct((prevProduct) => ({ ...prevProduct, valuesSelected: valuesSelected }));
-    }
-  }, [isAllSucess]);
-
- useEffect(() => {
-    if (isAllSucess) {
-      setProduct((prevProduct) => ({ ...prevProduct, features: features }));
-    }
-  }, [isAllSucess]);
-
-   useEffect(() => {
-    if (isAllSucess) {
-      setProduct((prevProduct) => ({ ...prevProduct, prices: { price: price, basePrice: basePrice } }));
-    }
-  }, [isAllSucess]);
-
-   useEffect(() => {
-    if (isAllSucess) {
-      setProduct((prevProduct) => ({ ...prevProduct, dimensions: dimensions }));
-    }
-  }, [isAllSucess,values3D ]);
-
-  useEffect(() => {
-    if (isAllSucess) {
-      setProduct((prevProduct) => ({ ...prevProduct, nomenclature: nomenclature }));
-    }
-  }, [isAllSucess, dimensions ]); 
-
-  useEffect(() => {
-    if (isAllSucess) {
-      setProduct((prevProduct) => ({ ...prevProduct, description: {
-        parent_label : defaultProduct.label,
-        parent_description : defaultProduct.description,
-        date_creation : defaultProduct.date_creation,
-        date_modification : defaultProduct.date_modification,
-        attributes_options : defaultProduct.note_private,
-        category_label : category.label,
-        category_desc : category.description,
-        category_id : category.id,
-        category_entity : category.entity,
-        category_parent : category.fk_parent
-    }})); 
-    }
-  }, [isAllSucess]);
-
-  useEffect(() => {
-    if (pictureSucceed) {
-      setProduct((prevProduct) => ({ ...prevProduct, image: { facePicture: facePicture, sidePicture: sidePicture } }));
-    }
-  }, [isAllSucess]);
-
- useEffect(() => {
-    if (product && "nomenclature" in product && "prices" in product && "valuesSelected" in product && "values" in product && "defaultProductId" in product && "description" in product) {
-      setSuccess(true);
-    }
-  }, [product]); */
+console.log(product);
 
   return { product: product, isSuccess: isSuccess };
 };
