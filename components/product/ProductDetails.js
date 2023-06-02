@@ -3,7 +3,7 @@ import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 import { useRef } from "react";
 
-export const ProductDetails = ({ product, display }) => {
+export const ProductDetails = ({ product, display, setAttributes }) => {
   const countRefresh = useRef(0);
   countRefresh.current = countRefresh.current + 1;
   console.log("ProductDetails : " + countRefresh.current);
@@ -38,7 +38,7 @@ export const ProductDetails = ({ product, display }) => {
           </Carousel.Item>
           <Carousel.Item>Spacialisation details</Carousel.Item>
           <Carousel.Item>
-            <ProductOptions product={product} />
+            <ProductOptions product={product} setAttributes={setAttributes} />
           </Carousel.Item>
         </Carousel>
       </Row>

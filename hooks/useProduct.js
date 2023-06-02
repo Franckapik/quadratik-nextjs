@@ -9,18 +9,18 @@ import { usePrice } from "./usePrice";
 import { useValues } from "./useValues";
 import { useValuesSelected } from "./useValuesSelected";
 
-export const useProduct = (variantId, defaultProductId, childCatId, { miniature }) => {
+export const useProduct = (variantId, variantAttributes, defaultProductId, childCatId, { miniature }) => {
   //on first render
-
+console.log(variantAttributes);
   const [product, setProduct] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
 
   //fetching at start
-  const { data: variantAttributes, isSuccess: variantsAttributesSucceed } = useQuery(["variants", { defaultProductId: defaultProductId }], () => variantFetchByParentId(defaultProductId), {
+/*   const { data: variantAttributes, isSuccess: variantsAttributesSucceed } = useQuery(["variants", { defaultProductId: defaultProductId }], () => variantFetchByParentId(defaultProductId), {
     select: (data) => data.find((v) => v.fk_product_child === variantId).attributes,
     staleTime: Infinity,
     enabled: defaultProductId !== undefined && defaultProductId?.length !== 0,
-  });
+  }); */
   const { data: noVariant, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity, enabled: !!defaultProductId?.length == 0 });
   const { data: allAttributes, isSuccess: allAttributesSucceed } = useQuery(["allAttributes"], () => attributesAllFetch(), { staleTime: Infinity });
   const { data: defaultProduct, isSuccess: defaultProductSucceed } = useQuery(["defaultProduct", { defaultProductId: defaultProductId, onlyId: false }], () => productFetchById(defaultProductId), { staleTime: Infinity, enabled: defaultProductId !== undefined && defaultProductId?.length !== 0 });
@@ -44,10 +44,9 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
 
   //fetching again
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(nomenclature, miniature);
-  const isAllSucess = variantsAttributesSucceed && allAttributesSucceed && defaultProductSucceed && categorySucceed && allValuesSucceed && pictureSucceed;
+  const isAllSucess = allAttributesSucceed && defaultProductSucceed && categorySucceed && allValuesSucceed && pictureSucceed;
 
   useEffect(() => {
-    console.log(isAllSucess);
     if (isAllSucess) {
       setProduct((previousProduct) => ({
         ...previousProduct,
@@ -69,5 +68,5 @@ export const useProduct = (variantId, defaultProductId, childCatId, { miniature 
 
 console.log(product);
 
-  return { product: product, isSuccess: isSuccess };
+  return { product: product, isSuccess: isSuccess, setProduct };
 };

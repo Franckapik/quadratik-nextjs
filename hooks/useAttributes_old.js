@@ -15,7 +15,6 @@ export const useAttributes = () => {
       setFetching(false);
     } else {
       attributesAllFetch()
-      .get()
       .then((response) => {
         const attributes = response.data;
         if (attributes.length) {

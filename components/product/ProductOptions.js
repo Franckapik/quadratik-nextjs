@@ -6,15 +6,21 @@ import { Field } from "./Field";
 import { useQuery } from "react-query";
 import { attributesAllFetch } from "../dolibarrApi/fetch";
 
-const ProductOptions = ({ product, setProduct }) => {
+const ProductOptions = ({ product, setAttributes }) => {
   const [mode, setMode] = useToggle(true);
   const methods = useFormContext();
 
   useEffect(() => {
     const subscription = methods.watch((value, {name}) => {
-      const newAttributes = product.attributes;
-      const objIndex = newAttributes.findIndex((obj => obj.id == name));
-      newAttributes[objIndex].fk_prod_attr_val = value[name];
+      console.log(value);
+      const v = Object.entries(value).map((a,i) => ({
+        id : a[0],
+        fk_prod_attr : a[0],
+        fk_prod_attr_val : a[1]
+      }))
+      console.log(v);
+      setAttributes(v);
+      
     });
     return () => subscription.unsubscribe();
   }, []);
