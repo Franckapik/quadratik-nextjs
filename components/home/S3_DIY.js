@@ -75,7 +75,7 @@ export const S3_DIY = () => {
           </Col>
           <Col md={6} className="d-none d-md-flex flex-column justify-content-evenly align-items-center s3_diy_draw p-0 order-md-first ">
             <Row>
-              <Button variant="primary" className="button_home m-auto" href="/quadralab">
+              <Button variant="primary" className="button_home m-auto" href="/quadralab?childCat=6&vid=146&dpid=8">
                 <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
               </Button>
             </Row>
