@@ -55,15 +55,15 @@ const Diffuseur2D = ({ dimensions, isQuadralab }) => {
       {Array(p + 1) //peignes longs
         .fill("")
         .map((a, i) => (
-          <Part args={[e, l - e, P]} position={[start[0] + (c + e) * i, 0, start[2]]} rotation={[0, 0, 0]} />
+          <Part key={"PartLong" + i} args={[e, l - e, P]} position={[start[0] + (c + e) * i, 0, start[2]]} rotation={[0, 0, 0]} />
         ))}
       {Array(n2) //peignes courts
         .fill("")
         .map((a, i) => {
           if (i === 0 || i === n2 - 1) {
-            return <Part args={[w - e, e, P]} position={[0, start[1] + e + (c + e) * i, start[2]]} rotation={[0, 0, 0]} />;
+            return <Part  key={"PartShorts" + i} args={[w - e, e, P]} position={[0, start[1] + e + (c + e) * i, start[2]]} rotation={[0, 0, 0]} />;
           } else {
-            return <Part args={[w - 2 * e, e, P]} position={[0, start[1] + e + (c + e) * i, start[2]]} rotation={[0, 0, 0]} />;
+            return <Part  key={"PartShorts" + i} args={[w - 2 * e, e, P]} position={[0, start[1] + e + (c + e) * i, start[2]]} rotation={[0, 0, 0]} />;
           }
         })}
       {Array(n) //cellules
@@ -77,7 +77,7 @@ const Diffuseur2D = ({ dimensions, isQuadralab }) => {
           const y = invert ? P - (o * P) / amax : (o * P) / amax;
 
           return (
-            <group>
+            <group key={"groupCells" + i}>
               <Cell key={"Cell" + i} args={[c + e, c, e]} position={[x, z, y === P ? y - e : y + e]} rotation={[0, 0, 0]} index={i} motif={C} color={y === 0 ? "blue" : LightenDarkenColor("#012000", (y * 355) / P)} highlights={highlights} teinte={T} />
               <Text
                 color="black" // default
