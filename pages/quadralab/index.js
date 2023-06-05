@@ -84,7 +84,7 @@ const Quadralab = () => {
     
 
                     <Col md={3} className="order-md-3">
-                      <QuadralabPerformances height={height} nomenclature={nomenclature} fmin={fmin} fmax={fmax} cwidth={cwidth} weightPoplar={weightPoplar} report2D={report2D} area={area} volume={volume} sizes={sizes} woodArea={woodArea} woodVolume={woodVolume} />
+                      <QuadralabPerformances product={product} />
                     </Col>
 
                 </>

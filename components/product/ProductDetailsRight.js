@@ -1,5 +1,5 @@
 import { Button, Carousel, Col, Row } from "react-bootstrap";
-import { PerformanceWidget } from "../quadralab/PerformanceWidget";
+import { PerformanceWidget } from "../PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 import { useRef } from "react";
 
@@ -33,9 +33,6 @@ export const ProductDetailsRight = ({ product, display, changeAttributes }) => {
             </Row>
           </Carousel.Item>
           <Carousel.Item>Spacialisation details</Carousel.Item>
-          <Carousel.Item>
-            <ProductOptions product={product} changeAttributes={changeAttributes} />
-          </Carousel.Item>
         </Carousel>
       </Row>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Col } from "react-bootstrap";
 import { CardOptions } from "../product/CardOptions";
-import { PerformanceWidget } from "./PerformanceWidget";
+import { PerformanceWidget } from "../PerformanceWidget";
 
 export const QuadralabPerformances = ({ nomenclature, fmin, fmax, cwidth, weightPoplar, report2D, area, volume, height }) => (
   <CardOptions title="performances" opened={height > 700 ? "1" : "0"}>
