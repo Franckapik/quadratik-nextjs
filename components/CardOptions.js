@@ -1,8 +1,8 @@
 import { Accordion, Col, Row } from "react-bootstrap";
 
-export const CardOptions = ({ title, children, className, opened }) => {
+export const CardOptions = ({ title, children, opened }) => {
   return (
-    <Row className={className}>
+    <Row className="card_options" >
       <Accordion defaultActiveKey={opened}>
         <Accordion.Item eventKey="1">
           <Accordion.Header>

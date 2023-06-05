@@ -104,6 +104,11 @@ $creme : #eee3d6;
   opacity: 1;
 }
 
+.card_options {
+  position: relative;
+  z-index: 5;
+}
+
 /* .btn-primary {
   align-items: center !important;
   background-color: #8ea65f !important;

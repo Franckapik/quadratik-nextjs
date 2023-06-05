@@ -20,7 +20,7 @@ const ProductOptions = ({ product, changeAttributes }) => {
   return (
     <>
       <Form.Group>
-        <Button variant="outline-dark" size="sm" onClick={() => setMode()}>
+        <Button variant="outline-light" size="sm" onClick={() => setMode()}>
           {mode ? "Mode Basique" : "Mode Avancé"}
         </Button>
         <Form.Group className=" p-2" controlId="product_simple">
