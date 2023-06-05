@@ -5,7 +5,7 @@ import { PerformanceCharts } from "./PerformanceCharts";
 import { PerformanceSpatial } from "./ParformanceSpatial";
 import { usePicture } from "../../hooks/usePicture";
 
-export const ProductView = ({ product, display }) => {
+export const ProductViewLeft = ({ product, display }) => {
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature.simple, false); //true for miniature
   const [index, setIndex] = useState(0);
   return (

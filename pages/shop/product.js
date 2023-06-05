@@ -5,25 +5,23 @@ import { Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
 import { variantPost } from "../../components/dolibarrApi/post";
-import { ProductDetails } from "../../components/product/ProductDetails";
-import { ProductView } from "../../components/product/ProductView";
+import { ProductDetailsRight } from "../../components/product/ProductDetailsRight";
+import { ProductViewLeft } from "../../components/product/ProductViewLeft";
 import { fetchProduct } from "../../hooks/fetchProduct";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 
 const Product = () => {
-
   //Data
   const router = useRouter();
 
   const { allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues } = fetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
-  const { product, isSuccess : productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSucess, router.query.vid);
+  const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSucess, router.query.vid);
   //Display
   const [display, setDisplay] = useQueryState("display", queryTypes.integer.withDefault(0));
 
   const methods = useForm();
 
   console.count();
-
 
   const onSubmit = async () => {
     const variant = {
@@ -60,11 +58,11 @@ const Product = () => {
           <Row className="layout_space">
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(onSubmit)}>
-                <Col md={6} className="product_right bg_creme layout_space">
-                  <ProductDetails product={product} display={display} changeAttributes={changeAttributes} />
-                </Col>
                 <Col md={6} className="product_left flex-column">
-                  <ProductView product={product} display={display} />
+                  <ProductViewLeft product={product} display={display} />
+                </Col>
+                <Col md={6} className="product_right bg_creme layout_space">
+                  <ProductDetailsRight product={product} display={display} changeAttributes={changeAttributes} />
                 </Col>
               </Form>
             </FormProvider>

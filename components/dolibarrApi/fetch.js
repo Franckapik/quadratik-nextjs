@@ -8,6 +8,7 @@ const attributesFetchById = (id) =>
       DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
   });
+
 export const valuesFetchByAttributesId = (id) =>
   axios
     .create({
@@ -113,6 +114,7 @@ const variantFetchByParentId = (id) =>
     .get()
     .then((response) => response.data)
     .catch((error) => Promise.reject(error));
+
 const documentByProductId = (id) =>
   axios.create({
     baseURL: `https://shop.quadratik.fr/api/index.php/documents?modulepart=product&id=${id}`,
@@ -121,6 +123,7 @@ const documentByProductId = (id) =>
       DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
   });
+
 const performancesByProductId = (id) =>
   axios.create({
     baseURL: `https://shop.quadratik.fr/api/index.php/documents?modulepart=ecm&id=${id}`,
@@ -129,6 +132,7 @@ const performancesByProductId = (id) =>
       DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
   });
+  
 const documentByFilename = (filename) =>
   axios
     .create({

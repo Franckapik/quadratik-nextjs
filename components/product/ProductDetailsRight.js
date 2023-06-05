@@ -3,7 +3,7 @@ import { PerformanceWidget } from "../quadralab/PerformanceWidget";
 import ProductOptions from "./ProductOptions";
 import { useRef } from "react";
 
-export const ProductDetails = ({ product, display, changeAttributes }) => {
+export const ProductDetailsRight = ({ product, display, changeAttributes }) => {
   return (
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (

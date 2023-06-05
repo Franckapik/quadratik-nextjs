@@ -10,6 +10,7 @@ import { BlendFunction } from "postprocessing";
 
 const ProductCanvas = ({ product }) => {
   const dimensions = product.dimensions;
+  console.count();
   return (
     <>
       {dimensions ? (
