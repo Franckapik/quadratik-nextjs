@@ -22,6 +22,8 @@ const Quadralab = () => {
   const { allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
   const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSucess, router.query.vid);
 
+
+  console.log(product);
   const quadralabRef = useRef(null);
   const [height, setHeight] = useState(0);
 
@@ -52,8 +54,7 @@ const Quadralab = () => {
   const weightPoplar = (woodVolume * 530).toFixed(2); //kg pour le peuplier;
   const price = useProductStore.getState().price;
   const nomenclature = useProductStore.getState().nomenclature;
-  const fmin = useProductStore((state) => state.fmin);
-  const fmax = useProductStore((state) => state.fmax);
+
   const valuesSelected = useProductStore((state) => state.valuesSelected);
 
   const [dimensionView, setDimensionView] = useState(true);
@@ -134,8 +135,8 @@ const Quadralab = () => {
                 </Col>
               </Row>
 
-              <ModalReport2D sizes={sizes} area={area} volume={volume} fmin={fmin} woodArea={woodArea} woodVolume={woodVolume} report2D={report2D} show={show} setShow={setShow} handleClose={handleClose} />
-            </Form>
+{/*               <ModalReport2D sizes={sizes} area={area} volume={volume} product.dimensions.fmin={product.dimensions.fmin} woodArea={woodArea} woodVolume={woodVolume} report2D={report2D} show={show} setShow={setShow} handleClose={handleClose} />
+ */}            </Form>
           </FormProvider>
         </Row>
       ) : (
