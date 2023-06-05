@@ -1,21 +1,21 @@
 import React from "react";
 import { Button, Col, ListGroup, Modal, Row, Table } from "react-bootstrap";
 
-export const DiffusorTable = ({ report2D, value }) => {
+export const DiffusorTable = ({ dimensions, value }) => {
   return (
     <Table striped bordered hover className="text-center">
       <tbody>
-        {Array(report2D.Cells) //cellules
+        {Array(dimensions.report.length) //cellules
           .fill("")
           .map((a, index) => {
-            const n = index % report2D.Type;
+            const n = index % dimensions.p;
             if (n === 0) {
               return (
                 <tr>
-                  {Array(report2D.Type) //cellules
+                  {Array(dimensions.p) //cellules
                     .fill("")
                     .map((a, i) => {
-                      return <td>{report2D[Math.floor(index / report2D.Type) * report2D.Type + i][value]}</td>;
+                      return <td>{dimensions.report[Math.floor(index / dimensions.p) * dimensions.p + i][value]}</td>;
                     })}
                 </tr>
               );
@@ -26,10 +26,11 @@ export const DiffusorTable = ({ report2D, value }) => {
   );
 };
 
-export const ModalReport2D = ({ sizes, area, volume, fmin, woodArea, woodVolume, report2D, show, setShow, handleClose }) => {
-  const D = report2D.Cells === report2D.Type;
-  console.log(report2D);
-  const hauteurs = Object.values(report2D)
+export const ModalReport2D = ({product, show, setShow, handleClose }) => {
+console.log(product);
+  const dimensions = product.dimensions;
+
+  const hauteurs = Object.values(dimensions.report)
     .map((a, i) => a.hauteur)
     .filter((item) => item); //no undefined
   const hauteurCount = {};
@@ -48,56 +49,56 @@ export const ModalReport2D = ({ sizes, area, volume, fmin, woodArea, woodVolume,
           <ListGroup.Item>
             Dimensions du diffuseur (l x L x P) :
             <span className="ft2">
-              {sizes?.largeur} cm x {sizes?.longueur} cm x {sizes?.profondeur} cm
+              {dimensions.w} cm x {dimensions.l} cm x {dimensions.P} cm
             </span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Aire du diffuseur : <span className="ft2">{area} m2</span>
+            Aire du diffuseur : <span className="ft2">{dimensions.area} m2</span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Volume du diffuseur : <span className="ft2">{volume} m3</span>
+            Volume du diffuseur : <span className="ft2">{dimensions.volume} m3</span>
           </ListGroup.Item>
           <ListGroup.Item>
             Type de diffuseur :
             <span className="ft2">
-              N{report2D.Type} - {D ? "1D" : "2D"}
+              N{dimensions.N} - {dimensions.D === "D1" ? "1D" : "2D"}
             </span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Fréquence de design : <span className="ft2">{fmin} Hz</span>
+            Fréquence de design : <span className="ft2">{dimensions.fmin} Hz</span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Nombre de puits/cellules : <span className="ft2">{report2D.Cells}</span>
+            Nombre de puits/cellules : <span className="ft2">{dimensions.report.length}</span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Epaisseur des parois : <span className="ft2">{report2D.Thickness * 10} mm</span>
+            Epaisseur des parois : <span className="ft2">{dimensions.E} mm</span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Décalage de cellules en vertical : <span className="ft2">{report2D.ShiftVert}</span>
+            Décalage de cellules en vertical : <span className="ft2">{dimensions.V}</span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Décalage de cellules en horizontal : <span className="ft2">{report2D.ShiftHor}</span>
+            Décalage de cellules en horizontal : <span className="ft2">{dimensions.H}</span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Nombre de hauteur de cellules différentes: <span className="ft2">{report2D.MaxDepth}</span>
+            Nombre de hauteur de cellules différentes: <span className="ft2">{dimensions.amax}</span>
           </ListGroup.Item>
         </ListGroup>
         <Row className="align-items-end">
-          <p>{D ? "Rangée du diffuseur 1D" : "1ere rangée du diffuseur 2D"}</p>
-          {Array(report2D.Type)
+          <p>{dimensions.D === "D1" ? "Rangée du diffuseur 1D" : "1ere rangée du diffuseur 2D"}</p>
+          {Array(dimensions.p)
             .fill("")
             .map((a, i) => {
-              return <Col className="border_creme" style={{ height: report2D[i]?.ratio * 10 }}></Col>;
+              return <Col className="border_creme" style={{ height: dimensions.report[i]?.ratio * 10 }}></Col>;
             })}
           <p>Ratio</p>
-          <DiffusorTable report2D={report2D} value="ratio" />
+          <DiffusorTable dimensions={dimensions} value="ratio" />
           <p>Hauteur</p>
-          <DiffusorTable report2D={report2D} value="hauteur" />
+          <DiffusorTable dimensions={dimensions} value="hauteur" />
         </Row>
         <Row>
           <ListGroup>
             <ListGroup.Item>
-              Nombre de puits vides :<span className="ft2">{Object.values(report2D).filter((val) => val.hauteur === 0).length}</span>
+              Nombre de puits vides :<span className="ft2">{Object.values(dimensions.report).filter((val) => val.hauteur === 0).length}</span>
             </ListGroup.Item>
             {Object.entries(hauteurCount)
               .sort((a, b) => a[0] - b[0])
@@ -110,18 +111,18 @@ export const ModalReport2D = ({ sizes, area, volume, fmin, woodArea, woodVolume,
               })}
             <ListGroup.Item>
               Longueur totale des blocs:
-              <span className="ft2"> {report2D.lengthWells?.toFixed(2)} cm</span>
+              <span className="ft2"> {dimensions.report.lengthWells?.toFixed(2)} cm</span>
             </ListGroup.Item>
           </ListGroup>
           <p>Travail du bois</p>
           <ListGroup>
             <ListGroup.Item>
               Surface de bois découpée:
-              <span className="ft2"> {woodArea?.toFixed(4)} m2</span>
+              <span className="ft2"> {dimensions.woodArea?.toFixed(4)} m2</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Volume de bois découpé:
-              <span className="ft2"> {woodVolume?.toFixed(4)} m3</span>
+              <span className="ft2"> {dimensions.woodVolume?.toFixed(4)} m3</span>
             </ListGroup.Item>
           </ListGroup>
 
@@ -129,59 +130,59 @@ export const ModalReport2D = ({ sizes, area, volume, fmin, woodArea, woodVolume,
           <ListGroup>
             <ListGroup.Item>
               MDF:
-              <span className="ft2"> {(woodVolume * 700).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 700).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Bois de pin:
-              <span className="ft2"> {(woodVolume * 550).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 550).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Bois de Cedre:
-              <span className="ft2"> {(woodVolume * 380).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 380).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Mousse Styrofoam:
-              <span className="ft2"> {(woodVolume * 90).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 90).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Bois de Balsa:
-              <span className="ft2"> {(woodVolume * 120).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 120).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Contreplaqué ordinaire:
-              <span className="ft2"> {(woodVolume * 580).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 580).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Contreplaqué bouleau:
-              <span className="ft2"> {(woodVolume * 700).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 700).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Contreplaqué peuplier:
-              <span className="ft2"> {(woodVolume * 530).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 530).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Plâtre:
-              <span className="ft2"> {(woodVolume * 850).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 850).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Bois d'Eucalyptus:
-              <span className="ft2"> {(woodVolume * 900).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 900).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Verre:
-              <span className="ft2"> {(woodVolume * 252).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 252).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Granite:
-              <span className="ft2"> {(woodVolume * 270).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 270).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Aluminium:
-              <span className="ft2"> {(woodVolume * 280).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 280).toFixed(2)} kg</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Acier:
-              <span className="ft2"> {(woodVolume * 800).toFixed(2)} kg</span>
+              <span className="ft2"> {(dimensions.woodVolume * 800).toFixed(2)} kg</span>
             </ListGroup.Item>
           </ListGroup>
         </Row>

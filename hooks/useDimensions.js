@@ -47,8 +47,35 @@ export const useDimensions = (values3D) =>
       const lengthWells = Object.values(report).reduce((acc, val) => acc + val.hauteur, 0);
       const area = l * W;
       const volume = area * P;
+      const woodArea = (l * P * (p + 1) + w * P * (p + 1) + report.length * c * c) / 1000; //cm2
+      const woodVolume = (woodArea * e) / 1000; //m3
+      const weightPoplar = (woodVolume * 530).toFixed(2); //kg pour le peuplier;
 
-      return { ...values3D, e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells, area: area, volume: volume };
+      return {
+        ...values3D,
+        e: e,
+        p: p,
+        w: w,
+        V: V,
+        invert: invert,
+        c: c,
+        l: l,
+        n: n,
+        n2: n2,
+        a: a,
+        amax: amax,
+        amin: amin,
+        start: start,
+        fmin: fmin,
+        fmax: fmax,
+        report: report,
+        lengthWells: lengthWells,
+        area: area,
+        volume: volume,
+        woodArea: woodArea,
+        woodVolume: woodVolume,
+        weightPoplar: weightPoplar,
+      };
     } else if (values3D?.D === "D2") {
       const { E, N, W, L, P, V, I, H } = values3D;
       const e = E / 10; //epaisseur
@@ -73,26 +100,55 @@ export const useDimensions = (values3D) =>
       const amin = Math.min(...a);
       const start = [-w / 2, -l / 2, P / 2];
 
+      const report = Array(n) //cellules
+      .fill("")
+      .map((a, i) => {
+        const n = i % p;
+        const m = Math.floor(i / p);
+        const o = (Math.pow(n + H, 2) + Math.pow(m + V, 2)) % p;
+        const x = start[0] + c / 2 + n * (c + e);
+        const z = start[1] + c / 2 + e + m * (c + e);
+        const y = invert ? P - (o * P) / amax : (o * P) / amax;
+        return { ratio: Math.round((y / P) * amax), hauteur: Math.round(y * 100) / 100 };
+      });
+      
       const fmin = Math.round((((344 / 2 / P / 10) * amax) / N) * 1000);
       const fmax = Math.round(344 / 2 / (c / 100));
       const area = l * W;
       const volume = area * P;
+      const woodArea = (l * P * (p + 1) + w * P * (p + 1) + report.length * c * c) / 1000; //cm2
+      const woodVolume = (woodArea * e) / 1000; //m3
+      const weightPoplar = (woodVolume * 530).toFixed(2); //kg pour le peuplier;
 
-      const report = Array(n) //cellules
-        .fill("")
-        .map((a, i) => {
-          const n = i % p;
-          const m = Math.floor(i / p);
-          const o = (Math.pow(n + H, 2) + Math.pow(m + V, 2)) % p;
-          const x = start[0] + c / 2 + n * (c + e);
-          const z = start[1] + c / 2 + e + m * (c + e);
-          const y = invert ? P - (o * P) / amax : (o * P) / amax;
-          return { ratio: Math.round((y / P) * amax), hauteur: Math.round(y * 100) / 100 };
-        });
+
 
       const lengthWells = Object.values(report).reduce((acc, val) => acc + val.hauteur, 0);
 
-      return { ...values3D, e: e, p: p, w: w, V: V, invert: invert, c: c, l: l, n: n, n2: n2, a: a, amax: amax, amin: amin, start: start, fmin: fmin, fmax: fmax, report: report, lengthWells: lengthWells, area: area, volume: volume };
+      return {
+        ...values3D,
+        e: e,
+        p: p,
+        w: w,
+        V: V,
+        invert: invert,
+        c: c,
+        l: l,
+        n: n,
+        n2: n2,
+        a: a,
+        amax: amax,
+        amin: amin,
+        start: start,
+        fmin: fmin,
+        fmax: fmax,
+        report: report,
+        lengthWells: lengthWells,
+        area: area,
+        volume: volume,
+        woodArea: woodArea,
+        woodVolume: woodVolume,
+        weightPoplar: weightPoplar,
+      };
     } else if (values3D?.D !== "D2" && values3D?.D !== "D1" && values3D?.F !== undefined) {
       const { E, W, L, P, F } = values3D;
       const e = E / 10; //epaisseur

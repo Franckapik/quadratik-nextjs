@@ -11,6 +11,7 @@ import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerfo
 import { useProductStore } from "../../hooks/store";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
+import {ModalReport2D} from '../../components/quadralab/ModalReport2D';
 
 const Quadralab = () => {
   //Data
@@ -19,8 +20,6 @@ const Quadralab = () => {
   const { allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
   const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSucess, router.query.vid);
 
-
-  console.log(product);
   const quadralabRef = useRef(null);
   const [height, setHeight] = useState(0);
 
@@ -35,12 +34,7 @@ const Quadralab = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  //get default product from tag category
-  const [tag, setCategories] = useQueryState("TAG", queryTypes.integer.withDefault(1));
-  useProductStore.setState({ tag: tag }); //global state
   const methods = useForm();
-
-
 
   const [dimensionView, setDimensionView] = useState(true);
 
@@ -120,8 +114,8 @@ const Quadralab = () => {
                 </Col>
               </Row>
 
-{/*               <ModalReport2D sizes={sizes} area={area} volume={volume} product.dimensions.fmin={product.dimensions.fmin} woodArea={woodArea} woodVolume={woodVolume} report2D={report2D} show={show} setShow={setShow} handleClose={handleClose} />
- */}            </Form>
+              <ModalReport2D product={product} show={show} setShow={setShow} handleClose={handleClose} />
+            </Form>
           </FormProvider>
         </Row>
       ) : (
