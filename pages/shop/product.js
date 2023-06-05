@@ -7,21 +7,17 @@ import { LayoutHome } from "../../components/LayoutHome";
 import { variantPost } from "../../components/dolibarrApi/post";
 import { ProductDetailsRight } from "../../components/product/ProductDetailsRight";
 import { ProductViewLeft } from "../../components/product/ProductViewLeft";
-import { fetchProduct } from "../../hooks/fetchProduct";
+import { useFetchProduct } from "../../hooks/useFetchProduct";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 
 const Product = () => {
   //Data
   const router = useRouter();
-
-  const { allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues } = fetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
+  const { allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
   const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSucess, router.query.vid);
   //Display
   const [display, setDisplay] = useQueryState("display", queryTypes.integer.withDefault(0));
-
   const methods = useForm();
-
-  console.count();
 
   const onSubmit = async () => {
     const variant = {

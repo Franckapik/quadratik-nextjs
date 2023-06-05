@@ -57,9 +57,6 @@ export const ProductViewLeft = ({ product, display }) => {
         <Carousel.Item>
           <PerformanceSpatial nomenclature={product.nomenclature} />
         </Carousel.Item>
-        <Carousel.Item className="product_canvas_container">
-          <ProductCanvas product={product}></ProductCanvas>
-        </Carousel.Item>
       </Carousel>
     </Row>
   );
