@@ -65,7 +65,7 @@ export const S3_DIY = () => {
             </Row>
             <Row className="s3_row_explanation ft4 mt-4">{switchExplanation(explanation)}</Row>
             <Row className="d-md-none pt-2 ">
-              <Button variant="primary" className="button_home m-auto mt-4" href="/quadralab">
+              <Button variant="primary" className="button_home m-auto mt-4" href="/quadralab?childCat=6&vid=146&dpid=8">
                 <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
               </Button>
             </Row>
