@@ -45,9 +45,6 @@ export const ProductDetailsRight = ({ product, display, changeAttributes }) => {
           <Button variant="primary" type="submit" id="product_submit" className="m-2">
             Ajouter au panier
           </Button>
-          <Button variant="secondary" className="m-2">
-            Modifier Quadralab
-          </Button>
         </Col>
       </Row>
     </Row>
