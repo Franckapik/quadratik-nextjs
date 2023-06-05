@@ -9,8 +9,8 @@ export const useFetchProduct = (variantId, defaultProductId, childCatId) => {
     staleTime: Infinity,
     enabled: defaultProductId !== undefined && defaultProductId?.length !== 0,
   });
-  const { data: noVariant, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity, enabled: !!defaultProductId?.length == 0 });
-  const { data: allAttributes, isSuccess: allAttributesSucceed } = useQuery(["allAttributes"], () => attributesAllFetch(), { staleTime: Infinity });
+/*   const { data: noVariant, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity, enabled: !!defaultProductId?.length == 0 });
+ */  const { data: allAttributes, isSuccess: allAttributesSucceed } = useQuery(["allAttributes"], () => attributesAllFetch(), { staleTime: Infinity });
   const { data: defaultProduct, isSuccess: defaultProductSucceed } = useQuery(["defaultProduct", { defaultProductId: defaultProductId, onlyId: false }], () => productFetchById(defaultProductId), { staleTime: Infinity, enabled: defaultProductId !== undefined && defaultProductId?.length !== 0 });
   const { data: category, isSuccess: categorySucceed } = useQuery(["category", { childCatId: childCatId }], () => CategoryFetchById(childCatId), { staleTime: Infinity, enabled: !!childCatId });
 
@@ -18,5 +18,5 @@ export const useFetchProduct = (variantId, defaultProductId, childCatId) => {
 
   const isAllSucess = variantsAttributesSucceed && allAttributesSucceed && defaultProductSucceed && categorySucceed && allValuesSucceed;
 
-  return { noVariant, allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues };
+  return { allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues };
 };

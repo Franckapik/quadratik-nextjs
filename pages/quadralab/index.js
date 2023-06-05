@@ -1,19 +1,16 @@
 import { queryTypes, useQueryState } from "next-usequerystate";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
-import { objectsInCategory } from "../../components/dolibarrApi/fetch";
-import { ModalReport2D } from "../../components/quadralab/ModalReport2D";
 import ProductCanvas from "../../components/quadralab/QuadralabCanvas";
 import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
 import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerformances";
 import { useProductStore } from "../../hooks/store";
-import { useAttributes } from "../../hooks/useAttributes";
-import { useRouter } from "next/router";
-import { useFetchProduct } from "../../hooks/useFetchProduct";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
+import { useFetchProduct } from "../../hooks/useFetchProduct";
 
 const Quadralab = () => {
   //Data

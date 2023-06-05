@@ -1,7 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-import { useValuesSelected } from "./useValuesSelected";
-import { productFetchById } from "../components/dolibarrApi/fetch";
-import { useQuery } from "react-query";
+import { useMemo } from "react";
 
 export const usePrice = (defaultProduct, valuesFactor, valuesOperator) =>
   useMemo(() => {
