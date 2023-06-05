@@ -10,24 +10,25 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
   const [isSuccess, setSuccess] = useState(false);
   const [attributes, setAttributes] = useState(false);
 
-
   const changeAttributes = (value, name) => {
     setAttributes((previousAttributes) => {
       let newAttributes = previousAttributes;
-      const i = newAttributes.findIndex((obj => obj.id == name));
-      newAttributes[i].fk_prod_attr_val = value[name];
+      const i = newAttributes.findIndex((obj) => obj.id == name);
+      if (newAttributes[i] !== undefined) {
+        newAttributes[i].fk_prod_attr_val = value[name];
+      }
       return newAttributes;
-    })
+    });
 
     setAttributes(false); //magical cmd to refresh component
-  } 
-  
+  };
 
   useEffect(() => {
     if (variantAttributes !== undefined) {
-      setAttributes(variantAttributes) 
+      setAttributes(variantAttributes);
     }
-  }), [variantAttributes] 
+  }),
+    [variantAttributes];
 
   const valuesSelected = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_id");
   const values3D = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_3d");
@@ -42,7 +43,7 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
 
   useEffect(() => {
     //calculate
- 
+
     if (isAllSucess) {
       setProduct((previousProduct) => ({
         ...previousProduct,
@@ -57,11 +58,9 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
         values: allValues,
         variantId: variantId,
       }));
-      setSuccess(true); 
-    } 
+      setSuccess(true);
+    }
   }, [attributes, isAllSucess]);
-
-
 
   return { product, isSuccess, changeAttributes };
 };
