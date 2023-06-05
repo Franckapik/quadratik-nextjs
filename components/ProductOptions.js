@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useFormContext } from "react-hook-form";
-import useToggle from "../../hooks/useToggle";
-import { Field } from "./Field";
+import useToggle from "../hooks/useToggle";
+import { Field } from "./product/Field";
 
 const ProductOptions = ({ product, changeAttributes }) => {
   const [mode, setMode] = useToggle(true);
@@ -20,7 +20,6 @@ const ProductOptions = ({ product, changeAttributes }) => {
   return (
     <>
       <Form.Group>
-        {" "}
         <Button variant="outline-dark" size="sm" onClick={() => setMode()}>
           {mode ? "Mode Basique" : "Mode Avancé"}
         </Button>

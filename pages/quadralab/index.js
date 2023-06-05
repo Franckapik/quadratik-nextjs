@@ -80,8 +80,8 @@ const Quadralab = () => {
                 <>
 
                     <Col md={3} className="order-md-1">
-{/*                       <QuadralabOptions height={height} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />{" "}
- */}                    </Col>
+                      <QuadralabOptions height={height} product={product} changeAttributes={changeAttributes} />
+                    </Col>
     
 
                     <Col md={3} className="order-md-3">

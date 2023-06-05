@@ -1,9 +1,9 @@
 import { Button, Carousel, Col, Row } from "react-bootstrap";
 import { PerformanceWidget } from "../PerformanceWidget";
-import ProductOptions from "./ProductOptions";
+import ProductOptions from "../ProductOptions";
 import { useRef } from "react";
 
-export const ProductDetailsRight = ({ product, display, changeAttributes }) => {
+export const ProductDetailsRight = ({ product, display }) => {
   return (
     <Row className="text_dark w-100 justify-content-center ">
       {display != 3 ? (

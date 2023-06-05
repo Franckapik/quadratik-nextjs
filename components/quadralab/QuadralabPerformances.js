@@ -1,6 +1,6 @@
 import React from "react";
 import { Col } from "react-bootstrap";
-import { CardOptions } from "../product/CardOptions";
+import { CardOptions } from "../CardOptions";
 import { PerformanceWidget } from "../PerformanceWidget";
 
 export const QuadralabPerformances = ({ product, height }) => (
