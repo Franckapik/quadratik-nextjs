@@ -3,17 +3,13 @@ import { Canvas } from "@react-three/fiber";
 import { BrightnessContrast, EffectComposer, SSAO, ToneMapping } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
 import React from "react";
-import { useProductStore } from "../../hooks/store";
-import { useValues3D } from "../../hooks/useValues3D";
 import Absorbeur from "../models3D/Absorbeur";
 import Diffuseur1D from "../models3D/Diffuseur1D";
 import Diffuseur2D from "../models3D/Diffuseur2D";
 
-const ProductCanvas = () => {
-  const attributes = useProductStore((state) => state.attributes);
-  const valuesSelected = useProductStore((state) => state.valuesSelected);
-  const tag = useProductStore.getState().tag;
-  const dimensions = useValues3D(valuesSelected, attributes, true);
+const ProductCanvas = ({product}) => {
+  const dimensions = product.dimensions;
+
   return (
     <>
       {dimensions ? (
@@ -24,9 +20,9 @@ const ProductCanvas = () => {
         <ambientLight intensity={0.4}></ambientLight>
           <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
           <group scale={0.08}>
-            {tag === 1 && dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} isQuadralab /> : null}
-            {tag === 1 && dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} isQuadralab /> : null}
-            {tag === 2 ? <Absorbeur dimensions={dimensions} /> : null}
+          {dimensions.D === "D1" ? <Diffuseur1D dimensions={dimensions} isQuadralab /> : null}
+            {dimensions.D === "D2" ? <Diffuseur2D dimensions={dimensions} isQuadralab /> : null}
+            {dimensions.D !== "D2" && dimensions.D !== "D1" && dimensions.F !== undefined ? <Absorbeur dimensions={dimensions} isQuadralab /> : null}
           </group>
           <EffectComposer>
             <BrightnessContrast

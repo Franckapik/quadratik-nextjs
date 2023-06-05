@@ -3,29 +3,32 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
-import { Layout } from "../../components/Layout";
+import { LayoutHome } from "../../components/LayoutHome";
 import { objectsInCategory } from "../../components/dolibarrApi/fetch";
-import { DiffusorView2D } from "../../components/quadralab/DiffusorView2D";
 import { ModalReport2D } from "../../components/quadralab/ModalReport2D";
-import ProductCanvas from "../../components/quadralab/ProductCanvas";
+import ProductCanvas from "../../components/quadralab/QuadralabCanvas";
 import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
+import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerformances";
 import { useProductStore } from "../../hooks/store";
 import { useAttributes } from "../../hooks/useAttributes";
-import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerformances";
-import { LayoutHome } from "../../components/LayoutHome";
-import { useScroll } from "../../hooks/useScroll";
+import { useRouter } from "next/router";
+import { useFetchProduct } from "../../hooks/useFetchProduct";
+import { useComputeProduct } from "../../hooks/useComputeProduct";
 
 const Quadralab = () => {
   //Data
+
+  const router = useRouter();
+  const { allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
+  const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSucess, router.query.vid);
+
   const quadralabRef = useRef(null);
-  const [attributes, fetching, error] = useAttributes();
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    setHeight(quadralabRef.current.clientHeight);
+    setHeight(quadralabRef.current?.clientHeight);
   }, [quadralabRef]);
 
-  const [defaultProduct, setDefaultProduct] = useState({});
   const [loading, setLoading] = useState(false);
 
   //Modal
@@ -57,23 +60,12 @@ const Quadralab = () => {
 
   const onSubmit = (data) => console.log(data);
 
-  useEffect(() => {
-    objectsInCategory(tag)
-      .get()
-      .then((response) => {
-        var attributes = JSON.parse(response.data[0].note_private);
-        setDefaultProduct({ ...response.data[0], attributes: attributes });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [tag]);
 
   return (
     <>
       <LayoutHome header shop cart />
 
-      {!error ? (
+      {productSuccess ? (
         <Row className="section quadralab_main_row layout_space" ref={quadralabRef}>
           <FormProvider {...methods}>
             <Form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -85,22 +77,16 @@ const Quadralab = () => {
                 {/* Options */}
 
                 <>
-                  {!fetching ? (
-                    <Col md={3} className="order-md-1">
-                      <QuadralabOptions height={height} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />{" "}
-                    </Col>
-                  ) : (
-                    "Chargement des options du produit"
-                  )}
 
-                  {/*Parametres*/}
-                  {!fetching ? (
+                    <Col md={3} className="order-md-1">
+{/*                       <QuadralabOptions height={height} attributes={attributes} defaultProduct={defaultProduct} setLoading={setLoading} />{" "}
+ */}                    </Col>
+    
+
                     <Col md={3} className="order-md-3">
                       <QuadralabPerformances height={height} nomenclature={nomenclature} fmin={fmin} fmax={fmax} cwidth={cwidth} weightPoplar={weightPoplar} report2D={report2D} area={area} volume={volume} sizes={sizes} woodArea={woodArea} woodVolume={woodVolume} />
                     </Col>
-                  ) : (
-                    "Chargement des performances du produit"
-                  )}
+
                 </>
 
                 {/*Display*/}
@@ -130,7 +116,7 @@ const Quadralab = () => {
                   </Row>
                   <Row className="quadralab_canvas_container">
                     {" "}
-                    <ProductCanvas></ProductCanvas>
+                    <ProductCanvas product={product}></ProductCanvas>
                   </Row>
 
                   <Row className="quadralab_devis_button text-center w-100 justify-content-center">
@@ -153,7 +139,7 @@ const Quadralab = () => {
           </FormProvider>
         </Row>
       ) : (
-        "Le produit ne semble pas exister en boutique" + error.message //layout page d'erreur a  faire
+        "Le produit ne semble pas exister en boutique"  //layout page d'erreur a  faire
       )}
     </>
   );
