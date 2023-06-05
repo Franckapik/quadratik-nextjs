@@ -37,17 +37,17 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
             ) : null}
 
             <Col></Col>
-           
-            {shop ? (
-              <Col xs={4} md={1} >
-                <Link href={"/shop"}>Boutique</Link>
-              </Col>
-            ) : null}
             {home ? (
               <Col xs={4} md={1}>
                 <Link href={"/"}>Accueil</Link>
               </Col>
             ) : null}
+            {shop ? (
+              <Col xs={4} md={1} >
+                <Link href={"/shop"}>Boutique</Link>
+              </Col>
+            ) : null}
+
             {cart ? (
               <Col xs={4} md={1}>
                 {" "}

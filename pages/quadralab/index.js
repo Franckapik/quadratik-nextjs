@@ -31,7 +31,6 @@ const Quadralab = () => {
     setHeight(quadralabRef.current?.clientHeight);
   }, [quadralabRef]);
 
-  const [loading, setLoading] = useState(false);
 
   //Modal
   const [show, setShow] = useState(false);
@@ -44,18 +43,7 @@ const Quadralab = () => {
   useProductStore.setState({ tag: tag }); //global state
   const methods = useForm();
 
-  const report2D = useProductStore((state) => state.report2D);
-  const sizes = useProductStore((state) => state.sizes);
-  const cwidth = useProductStore((state) => state.cwidth);
-  const area = (sizes.longueur * sizes.largeur) / 1000;
-  const volume = ((area * sizes.profondeur) / 1000).toFixed(5);
-  const woodArea = (sizes.longueur * sizes.profondeur * (report2D.Type + 1) + sizes.largeur * sizes.profondeur * (report2D.Type + 1) + report2D.Cells * cwidth * cwidth) / 1000; //cm2
-  const woodVolume = (woodArea * report2D.Thickness) / 1000; //m3
-  const weightPoplar = (woodVolume * 530).toFixed(2); //kg pour le peuplier;
-  const price = useProductStore.getState().price;
-  const nomenclature = useProductStore.getState().nomenclature;
 
-  const valuesSelected = useProductStore((state) => state.valuesSelected);
 
   const [dimensionView, setDimensionView] = useState(true);
 
@@ -64,7 +52,7 @@ const Quadralab = () => {
 
   return (
     <>
-      <LayoutHome header shop cart />
+      <LayoutHome header home shop />
 
       {productSuccess ? (
         <Row className="section quadralab_main_row layout_space" ref={quadralabRef}>
@@ -94,9 +82,9 @@ const Quadralab = () => {
 
                 <Col md={5} className="order-md-2 quadralab_title p-0">
                   <Row className="text-center mt-4">
-                    <Link href={{ pathname: "/shop/product", query: valuesSelected }}>
+                    <Link href={{ pathname: "/shop/product" }}>
                       <p className="mb-1">
-                        <i className="fad fa-store m-2"></i> Modèle similaire : {nomenclature?.simple} ({price} €)
+                        <i className="fad fa-store m-2"></i> Modèle similaire : {product.nomenclature?.simple} ({product.prices.price} €)
                       </p>
                     </Link>
                   </Row>
