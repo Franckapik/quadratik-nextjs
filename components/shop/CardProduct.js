@@ -14,7 +14,7 @@ export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatL
     <>
       {productSuccess ? (
         <CardWrap>
-          <Link href={{ pathname: "/shop/product", query: { display: 0, childCat: childCatId, vid: variantId, dpid: defaultProductId } }}>
+          <Link href={{ pathname: "/shop/product", query: { display: 0, childCat: childCatId, vid: variantId, dpid: defaultProduct.id } }}>
             {pictureSucceed ? <img src={`data:image/png;base64,${facePicture}`} /> : <i className="fas fa-spinner fa-spin"></i>}
             <span className="shop_product_title ft2 ">{product.nomenclature.simple}</span>
             <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCatLabel}</span>

@@ -19,10 +19,10 @@ export const useFetchProduct = (variantId, defaultProductId, childCatId) => {
 
   if (defaultProductId == 0) {
     // is not a variant
-    const isAllSuccess = noVariantSucceed && categorySucceed;
-    console.log(isAllSuccess);
 
-    return { allAttributes: null, defaultProduct: false, category: category, productAttributes: noVariantAttributes, isAllSuccess: isAllSuccess, allValues: null, isVariant: false };
+    const isAllSuccess = noVariantSucceed && categorySucceed;
+
+    return { allAttributes: null, defaultProduct: { id: noVariantAttributes?.fk_product_parent || 0 }, category: category, productAttributes: noVariantAttributes, isAllSuccess: isAllSuccess, allValues: null, isVariant: false };
   } else if (defaultProductId != undefined) {
     // is a variant
 
