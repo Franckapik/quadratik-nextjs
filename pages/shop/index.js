@@ -20,11 +20,6 @@ const Shop = () => {
         <div className="trait"></div>Boutique
       </div>{" "}
       <Row className="layout_space bg_creme_light shop_main_row ">
-        <CardWrap>
-          <img src="/shop/Anemone-7.png" />
-          <span className="shop_product_title ft2 ">Anemone-710</span>
-          <span className="shop_product_collection ft6 text-uppercase text-nowrap">Diffuseur 2D classiques</span>
-        </CardWrap>
         {ParentCategoriesSucceed && parentCategories.map((firstCat, i) => {
           return <ParentCategorie key={"ParentCategory" + i} firstCat={firstCat} setViewedCategory={setViewedCategory} />;
         })}
