@@ -47,10 +47,10 @@ export const ProductViewLeft = ({ product, display }) => {
         </Carousel.Item> : <Carousel.Item>Chargement du modèle</Carousel.Item> }
 
         <Carousel.Item>
-          <PerformanceCharts nomenclature={product.nomenclature} />
+          <PerformanceCharts nom={product.nomenclature.performance} />
         </Carousel.Item>
         <Carousel.Item>
-          <PerformanceSpatial nomenclature={product.nomenclature} />
+          <PerformanceSpatial nom={product.nomenclature.performance} />
         </Carousel.Item>
       </Carousel>
     </Row>

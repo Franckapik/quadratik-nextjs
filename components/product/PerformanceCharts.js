@@ -4,32 +4,25 @@ import React, { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
 import { Line } from "react-chartjs-2";
 import { documentByFilename } from "../dolibarrApi/fetch";
+import { useQuery } from "react-query";
 
-export const PerformanceCharts = ({ nomenclature }) => {
-
+export const PerformanceCharts = ({ nom }) => {
   const [performances, setperformances] = useState({});
-  const [error, setError] = useState(false);
+  const { data: chart, isSuccess: chartSucceed } = useQuery(["chart", { name: nom }], () => documentByFilename("Frequencies/" + nom +".csv"), { staleTime: Infinity, enabled: !!nom && nom != undefined });
 
   useEffect(() => {
-    if (nomenclature) {
-      documentByFilename("Frequencies/" + nomenclature.performance +".csv")
-      .then((response) => {
-        let buff = new Buffer(response, "base64");
-        let text = buff.toString("ascii");
-        let parsedCsv = Papa.parse(text).data;
-        parsedCsv.shift();
-        setperformances({
-          labels: parsedCsv.map((a, i) => parseFloat(a[0].replace(/,/g, "."))),
-          difCoef: parsedCsv.map((a, i) => parseFloat(a[1].replace(/,/g, "."))),
-          scatCoef: parsedCsv.map((a, i) => parseFloat(a[2].replace(/,/g, "."))),
-        });
-      })
-        .catch((error) => {
-          setError(true);
-          console.log(error);
-        });
+    if (chartSucceed) {
+      let buff = new Buffer(chart, "base64");
+      let text = buff.toString("ascii");
+      let parsedCsv = Papa.parse(text).data;
+      parsedCsv.shift();
+      setperformances({
+        labels: parsedCsv.map((a, i) => parseFloat(a[0].replace(/,/g, "."))),
+        difCoef: parsedCsv.map((a, i) => parseFloat(a[1].replace(/,/g, "."))),
+        scatCoef: parsedCsv.map((a, i) => parseFloat(a[2].replace(/,/g, "."))),
+      });
     }
-  }, [nomenclature]);
+  }, [chartSucceed]);
 
   const options = {
     //no points on line
@@ -68,10 +61,10 @@ export const PerformanceCharts = ({ nomenclature }) => {
   return (
     <>
       <Row className="d-none d-md-flex ft8"> {/*Mobile and desktop version*/}
-      {!error ? <Line options={options} data={data} /> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact " } 
+      {chartSucceed ? <Line options={options} data={data} /> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact " } 
       </Row>
       <Row className="d-md-none ft8">
-       {!error ? <Line options={options} data={data} width={100} height={80} /> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact " } 
+       {chartSucceed ? <Line options={options} data={data} width={100} height={80} /> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact " } 
       </Row>
     </>
   );
