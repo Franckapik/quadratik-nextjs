@@ -11,10 +11,9 @@ export const ProductViewLeft = ({ product, display }) => {
   return (
     <Row className="justify-content-center">
       <Carousel indicators={false} activeIndex={display} controls={false}>
-        <Carousel.Item>
+        {pictureSucceed ? <Carousel.Item>
           <Carousel indicators={false} activeIndex={index} controls={false}>
-            {pictureSucceed ? (
-              <>
+
                 <Carousel.Item>
                   <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${facePicture}`} alt="Front preview of the model" />
                   <Carousel.Caption>
@@ -37,19 +36,15 @@ export const ProductViewLeft = ({ product, display }) => {
                     <h3>Vue 3D</h3>
                   </Carousel.Caption>
                 </Carousel.Item>
-              </>
-            ) : (
-              "Aperçu non disponible"
-            )}
           </Carousel>
-          <div className="carousel-indicators">
+         <div className="carousel-indicators">
             <img onClick={() => setIndex(0)} className={`d-block product_thumbnail m-2 ${index === 0 ? "border_creme" : ""}`} src={`data:image/png;base64,${facePicture}`} alt="Image miniature du modèle de face" />
             <img onClick={() => setIndex(1)} className={`d-block product_thumbnail m-2 ${index === 1 ? "border_creme" : ""}`} src={`data:image/png;base64,${sidePicture}`} alt="Image miniature du modèle de coté" />
             <div onClick={() => setIndex(2)} className={`d-block product_thumbnail m-2 ${index === 2 ? "border_creme" : ""}`}>
               <i className="fal fa-cube fa-4x mt-4"></i>
-            </div> 
-          </div>
-        </Carousel.Item>
+            </div>  </div>
+         
+        </Carousel.Item> : <Carousel.Item>Chargement du modèle</Carousel.Item> }
 
         <Carousel.Item>
           <PerformanceCharts nomenclature={product.nomenclature} />

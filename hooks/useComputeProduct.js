@@ -10,9 +10,6 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
   const [isSuccess, setSuccess] = useState(false);
   const [attributes, setAttributes] = useState(false);
 
-  if (isVariant) {
-
-    console.log("isVariant");
     const changeAttributes = (value, name) => {
       setAttributes((previousAttributes) => {
         let newAttributes = previousAttributes;
@@ -66,8 +63,8 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
     }, [attributes, isAllSuccess]);
 
     return { product, isSuccess, changeAttributes };
-  } else {
-    console.log("isNOVariant");
+  
+/*     console.log("isNOVariant");
 
     const description = useDescription(category, productAttributes);
 
@@ -92,6 +89,6 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
       }
     }, [isAllSuccess]);
 
-    return { product, isSuccess };
-  }
+    return { product, isSuccess }; */
+  
 };

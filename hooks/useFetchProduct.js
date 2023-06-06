@@ -6,7 +6,7 @@ export const useFetchProduct = (variantId, defaultProductId, childCatId) => {
 
   console.log(defaultProductId);
 
-  const { data: noVariantAttributes, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity });
+  const { data: noVariantAttributes, isSuccess: noVariantSucceed } = useQuery(["noVariant", { id: variantId, onlyId: false }], () => productFetchById(variantId), { staleTime: Infinity,  enabled: defaultProductId != undefined });
   const { data: category, isSuccess: categorySucceed } = useQuery(["category", { childCatId: childCatId }], () => CategoryFetchById(childCatId), { staleTime: Infinity, enabled: !!childCatId });
   const { data: productAttributes, isSuccess: variantsAttributesSucceed } = useQuery(["variants", { defaultProductId: defaultProductId }], () => variantFetchByParentId(defaultProductId), {
     select: (data) => data.find((v) => v.fk_product_child === variantId).attributes,
