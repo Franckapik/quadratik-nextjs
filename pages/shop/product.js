@@ -68,7 +68,7 @@ const Product = () => {
           </Row>
         </>
       ) : (
-        "Chargement du produit"
+       <> <i className="fas fa-spinner fa-spin"></i> "Chargement du produit"</>
       )}
     </>
   );

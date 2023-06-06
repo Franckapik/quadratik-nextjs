@@ -44,7 +44,7 @@ export const ProductViewLeft = ({ product, display }) => {
               <i className="fal fa-cube fa-4x mt-4"></i>
             </div>  </div>
          
-        </Carousel.Item> : <Carousel.Item>Chargement du modèle</Carousel.Item> }
+        </Carousel.Item> : <Carousel.Item><> <i className="fas fa-spinner fa-spin"></i> "Chargement du modèle"</></Carousel.Item> }
 
         <Carousel.Item>
           <PerformanceCharts nom={product.nomenclature.performance} />
