@@ -17,8 +17,8 @@ const Quadralab = () => {
   //Data
 
   const router = useRouter();
-  const { allAttributes, defaultProduct, category, variantAttributes, isAllSucess, allValues } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
-  const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSucess, router.query.vid);
+  const { allAttributes, defaultProduct, category, variantAttributes, isAllSuccess, allValues } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
+  const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSuccess, router.query.vid);
 
   const quadralabRef = useRef(null);
   const [height, setHeight] = useState(0);
