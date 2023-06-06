@@ -6,8 +6,8 @@ import { useFetchProduct } from "../../hooks/useFetchProduct";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 
 export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatLabel }) => {
-  const { allAttributes, defaultProduct, category, variantAttributes, isAllSuccess, allValues, isVariant } = useFetchProduct(variantId, defaultProductId, childCatId);
-  const { product, isSuccess: productSuccess } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSuccess, variantId, isVariant);
+  const { allAttributes, defaultProduct, category, productAttributes, isAllSuccess, allValues, isVariant } = useFetchProduct(variantId, defaultProductId, childCatId);
+  const { product, isSuccess:  productSuccess } = useComputeProduct(allAttributes, productAttributes, allValues, category, defaultProduct, isAllSuccess, variantId, isVariant);
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed } = usePicture(product.nomenclature?.simple, true); //true for miniature
 
   return (

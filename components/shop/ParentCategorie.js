@@ -32,7 +32,7 @@ export const ParentCategorie = ({ firstCat, setViewedCategory }) => {
       </CardWrap>
 
         {ChildCategoriesSucceed && defaultProductIdSucceed && childCategories.map((childCat,i) => {
-        return <ChildCategorie key={"ChildCategory" + i} childCatId={childCat.id} childCatLabel={childCat.label} defaultProductId={defaultProductId} />;
+        return <ChildCategorie key={"ChildCategory" + i} childCatId={childCat.id} childCatLabel={childCat.label} defaultProductId={defaultProductId.length ? defaultProductId : 0} />;
       })} 
     </>
   );

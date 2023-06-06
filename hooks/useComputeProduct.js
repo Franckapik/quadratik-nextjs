@@ -5,12 +5,14 @@ import { useNomenclature } from "./useNomenclature";
 import { usePrice } from "./usePrice";
 import { useValuesSelected } from "./useValuesSelected";
 
-export const useComputeProduct = (allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSuccess, variantId, isVariant) => {
+export const useComputeProduct = (allAttributes, productAttributes, allValues, category, defaultProduct, isAllSuccess, variantId, isVariant) => {
   const [product, setProduct] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const [attributes, setAttributes] = useState(false);
 
   if (isVariant) {
+
+    console.log("isVariant");
     const changeAttributes = (value, name) => {
       setAttributes((previousAttributes) => {
         let newAttributes = previousAttributes;
@@ -25,18 +27,18 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
     };
 
     useEffect(() => {
-      if (variantAttributes !== undefined) {
-        setAttributes(variantAttributes);
+      if (productAttributes !== undefined) {
+        setAttributes(productAttributes);
       }
     }),
-      [variantAttributes];
+      [productAttributes];
 
-    const valuesSelected = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_id");
-    const values3D = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_3d");
-    const valuesLabels = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_label");
-    const valuesFactor = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_factor");
-    const valuesOperator = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "ref", "v_operator");
-    const features = useValuesSelected(allAttributes, attributes ? attributes : variantAttributes, allValues, "id", "v_id");
+    const valuesSelected = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_id");
+    const values3D = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_3d");
+    const valuesLabels = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_label");
+    const valuesFactor = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_factor");
+    const valuesOperator = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_operator");
+    const features = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "id", "v_id");
     const description = useDescription(category, defaultProduct);
     const { price: price, basePrice: basePrice } = usePrice(defaultProduct, valuesFactor, valuesOperator);
     const dimensions = useDimensions(values3D);
@@ -48,7 +50,7 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
       if (isAllSuccess) {
         setProduct((previousProduct) => ({
           ...previousProduct,
-          attributes: attributes ? attributes : variantAttributes,
+          attributes: attributes ? attributes : productAttributes,
           allAttributes: allAttributes,
           description: description,
           dimensions: dimensions,
@@ -65,6 +67,10 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
 
     return { product, isSuccess, changeAttributes };
   } else {
+    console.log("isNOVariant");
+
+    const description = useDescription(category, productAttributes);
+
     useEffect(() => {
       //calculate
 
@@ -73,10 +79,10 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
           ...previousProduct,
           attributes: {},
           allAttributes: {},
-          description: {},
+          description: description,
           dimensions: {},
-          nomenclature: {},
-          prices: {},
+          nomenclature : {simple : productAttributes.label, structurel : productAttributes.ref },
+          prices: { price: Math.round(productAttributes.price), basePrice: null },
           features: {},
           valuesSelected: {},
           values: {},
@@ -84,7 +90,7 @@ export const useComputeProduct = (allAttributes, variantAttributes, allValues, c
         }));
         setSuccess(true);
       }
-    }, [attributes, isAllSuccess]);
+    }, [isAllSuccess]);
 
     return { product, isSuccess };
   }

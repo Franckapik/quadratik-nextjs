@@ -14,8 +14,8 @@ import Link from "next/link";
 const Product = () => {
   //Data
   const router = useRouter();
-  const { allAttributes, defaultProduct, category, variantAttributes, isAllSuccess, allValues } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
-  const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, variantAttributes, allValues, category, defaultProduct, isAllSuccess, router.query.vid);
+  const { allAttributes, defaultProduct, category, productAttributes, isAllSuccess, allValues, isVariant } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
+  const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, productAttributes, allValues, category, defaultProduct, isAllSuccess, router.query.vid, isVariant);
   //Display
   const [display, setDisplay] = useQueryState("display", queryTypes.integer.withDefault(0));
   const methods = useForm();
@@ -50,9 +50,10 @@ const Product = () => {
             <div className="trait"></div>Aperçu du modèle
           </div>
           <Link href={{ pathname: "/quadralab", query: { childCat: router.query.childCat, vid: router.query.vid, dpid: router.query.dpid } }}>
-          <div className="product_custom d-none d-md-flex p-2">
-            Modifier dans le quadralab <i className="fad fa-th pt-4 "></i>
-          </div></Link>
+            <div className="product_custom d-none d-md-flex p-2">
+              Modifier dans le quadralab <i className="fad fa-th pt-4 "></i>
+            </div>
+          </Link>
           <Row className="layout_space">
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(onSubmit)}>
