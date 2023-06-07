@@ -10,7 +10,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
 
   return (
     <>
-      <Row className="position-absolute h-100 text-uppercase w-100 pb-3">
+      <Row className="position-absolute h-100 text-uppercase w-100 pb-3 layout_home">
         <Row className={`header justify-content-end align-items-center text-uppercase w-100 ft4 ${dark ? "bg_dark" : ""} ${fixed ? "position-fixed" : "position-sticky"} ${text_dark ? "text_dark" : ""}`}>
           {!noburger ? (
             <Col xs={4} md={1}>
@@ -20,7 +20,8 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
           {categories ? (
             <>
               {categories.map((a, i) => {
-                if (!a.label.includes('Top')) { //no Top 3
+                if (!a.label.includes("Top")) {
+                  //no Top 3
                   return (
                     <Col key={"categoryNav" + i} className="p-2 d-none d-md-flex justify-content-center" xs={4} md={1} style={{ backgroundColor: a.id == viewedCategory ? "#9fb07ca9" : "inherit" }}>
                       <Link href={"#tag" + a.id} className="cursor">

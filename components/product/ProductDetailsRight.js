@@ -36,14 +36,14 @@ export const ProductDetailsRight = ({ product, display }) => {
         </Carousel>
       </Row>
 
-      <Row className="product_right_cart">
+{/*       <Row className="product_right_cart">
         <Col className="d-flex flex-column justify-content-center text-center align-items-center ft05">{product.prices.price + " €"}</Col>
         <Col className="d-flex  justify-content-center text-center align-items-center">
           <Button variant="primary" type="submit" id="product_submit" className="m-2">
             Ajouter au panier
           </Button>
         </Col>
-      </Row>
+      </Row> */}
     </Row>
   );
 };

@@ -42,33 +42,41 @@ const Product = () => {
 
   return (
     <>
-      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={router.query.dpid != 0 ? ["modele", "performances", "spacialisation"] : ["modele"]} text_dark shop cart fixed />
+      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={router.query.dpid != 0 ? ["modele", "performances", "spacialisation"] : ["modele"]}  text_dark shop cart fixed />
       {productSuccess ? (
         <>
           <div className="s0_page_index  d-none d-md-flex">
             {product.description.parent_label || product.nomenclature.simple}
             <div className="trait"></div>Aperçu du modèle
           </div>
-         { router.query.dpid != 0 ? <Link href={{ pathname: "/quadralab", query: {  vid: router.query.vid, dpid: router.query.dpid, childCat: router.query.childCat, } }}>
-            <div className="product_custom d-none d-md-flex p-2">
-              Modifier dans le quadralab <i className="fad fa-th pt-4 "></i>
-            </div>
-          </Link> : null}
-          <Row className="layout_space">
-            <FormProvider {...methods}>
-              <Form onSubmit={methods.handleSubmit(onSubmit)}>
+          {router.query.dpid != 0 ? (
+            <Link href={{ pathname: "/quadralab", query: { vid: router.query.vid, dpid: router.query.dpid, childCat: router.query.childCat } }}>
+              <div className="product_custom d-none d-md-flex p-2">
+                Modifier dans le quadralab <i className="fad fa-th pt-4 "></i>
+              </div>
+            </Link>
+          ) : null}
+
+          <FormProvider {...methods}>
+            <Form onSubmit={methods.handleSubmit(onSubmit)}>
+              <Row className="layout_space ">
                 <Col md={6} className="product_left flex-column">
-                  <ProductViewLeft product={product} display={display} />
+                  <ProductViewLeft product={product} display={display} setDisplay={setDisplay} />
                 </Col>
-                <Col md={6} className="product_right bg_creme layout_space">
+                <Col md={6} className="product_right bg_creme">
                   <ProductDetailsRight product={product} display={display} changeAttributes={changeAttributes} />
                 </Col>
-              </Form>
-            </FormProvider>
-          </Row>
+                <Col md={6} className=" d-none d-md-flex product_right_bg bg_creme">
+                </Col>
+              </Row>
+            </Form>
+          </FormProvider>
         </>
       ) : (
-       <> <i className="fas fa-spinner fa-spin"></i> "Chargement du produit"</>
+        <>
+          {" "}
+          <i className="fas fa-spinner fa-spin"></i> "Chargement du produit"
+        </>
       )}
     </>
   );

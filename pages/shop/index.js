@@ -14,7 +14,7 @@ const Shop = () => {
 
   return (
     <>
-      <LayoutHome header cart home fixed dark categories={parentCategories} viewedCategory={viewedCategory} />
+      <LayoutHome cart home fixed dark categories={parentCategories} viewedCategory={viewedCategory} />
       <div className="s0_page_index d-none d-md-flex position-fixed text_dark">
         {ParentCategoriesSucceed && parentCategories.filter((cat) => cat.id == viewedCategory)[0]?.label}
         <div className="trait"></div>Boutique

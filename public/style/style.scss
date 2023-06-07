@@ -27,7 +27,7 @@
 
 $header_height: calc(8vh + 2vw);
 /* $creme : #d0c3b4; */
-$creme : #eee3d6;
+$creme: #eee3d6;
 
 .offcanvas-header {
   justify-content: center !important;
@@ -333,13 +333,12 @@ $creme : #eee3d6;
 }
 
 .product_thumbnail {
-  width: 100px;
-text-align: center;}
-
-
+  width: 80px;
+  text-align: center;
+}
 
 .product_left .carousel-caption {
-  padding-bottom: 10rem;
+  bottom: 12rem;
 }
 
 .product_attributes_col {
@@ -416,27 +415,26 @@ text-align: center;}
 }
 
 .product_right {
-  position: absolute;
-  top: 0px;
-  right: 0px;
   display: flex;
-  width: 50vw;
   height: 100%;
-  min-height: 600px;
-  justify-content: center;
+}
+.product_right_bg {
+  position: absolute;
+  top : 0px;
+  right: 0px;
+  height: 100%;
+  z-index: -2;
 }
 
 .product_left {
-  left: 0px;
-  top: 0px;
-  display: flex;
-  width: 50vw;
   height: 100%;
-  justify-content: center;
+  min-height: 600px;
 }
 
+
+
 .product_carousel_img {
-  width: 70%;
+  width: 65%;
 }
 
 .product_right_cart {
@@ -671,6 +669,14 @@ text-align: center;}
   transform-origin: center center;
   writing-mode: vertical-rl;
   z-index: 2;
+}
+
+.product_left .carousel-indicators {
+  position: relative!important;
+}
+.product_left .carousel-indicators {
+  position: relative!important;
+  bottom: 80px;
 }
 
 .s0_quadratik_text {
@@ -1015,16 +1021,17 @@ text-align: center;}
 }
 
 .shop_card {
-height: 65vh;  
-position: relative;
+  height: 65vh;
+  position: relative;
   min-width: 23% !important;
 }
 
 .shop_main_row {
   column-gap: 5px;
   row-gap: 5px;
-/*   width: 98vw;
- */}
+  /*   width: 98vw;
+ */
+}
 
 .shop_card_price {
   bottom: 15%;
@@ -1032,7 +1039,7 @@ position: relative;
 }
 
 .shop_categorie {
-padding: 2vw;
+  padding: 2vw;
 }
 
 .shop_card img {
@@ -1223,6 +1230,21 @@ p {
 
   .h-20 {
     height: 5vh;
+  }
+
+  .product_carousel_img {
+    width: 85%;
+    padding-top: 20px;
+    position: relative;
+    bottom: 40px;
+  }
+
+  .product_left .carousel-caption {
+    bottom: 5rem!important;
+  }
+
+  .layout_home .text_dark a {
+    color: $creme!important;
   }
 
   .row > * {
