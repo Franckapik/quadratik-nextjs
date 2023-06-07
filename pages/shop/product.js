@@ -40,8 +40,6 @@ const Product = () => {
       });
   };
 
-  console.log(product);
-
   return (
     <>
       <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={router.query.dpid != 0 ? ["modele", "performances", "spacialisation"] : ["modele"]} text_dark shop cart fixed />
