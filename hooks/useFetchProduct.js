@@ -28,6 +28,7 @@ export const useFetchProduct = (variantId, defaultProductId, childCatId) => {
 
     const isAllSuccess = variantsAttributesSucceed && allAttributesSucceed && categorySucceed && allValuesSucceed && defaultProductSucceed;
 
+
     return { allAttributes, defaultProduct, category, productAttributes, isAllSuccess, allValues, isVariant: true };
   } else {
     return { allAttributes: null, defaultProduct: null, category: null, productAttributes: null, isAllSuccess: false, allValues: null, isVariant: null };

@@ -49,7 +49,7 @@ const Product = () => {
             {product.description.parent_label}
             <div className="trait"></div>Aperçu du modèle
           </div>
-          <Link href={{ pathname: "/quadralab", query: { childCat: router.query.childCat, vid: router.query.vid, dpid: router.query.dpid } }}>
+          <Link href={{ pathname: "/quadralab", query: {  vid: router.query.vid, dpid: router.query.dpid, childCat: router.query.childCat, } }}>
             <div className="product_custom d-none d-md-flex p-2">
               Modifier dans le quadralab <i className="fad fa-th pt-4 "></i>
             </div>
