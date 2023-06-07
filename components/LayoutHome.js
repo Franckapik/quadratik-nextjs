@@ -86,7 +86,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
               {" "}
               <ListGroup.Item className="ft2">Boutique</ListGroup.Item>
             </Link>
-            <Link href="/quadralab">
+            <Link href="/quadralab?childCat=6&vid=146&dpid=8">
               <ListGroup.Item className="ft2">Quadralab</ListGroup.Item>
             </Link>
             <Link href="/">
