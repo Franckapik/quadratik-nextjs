@@ -9,7 +9,6 @@ export const PerformanceSpatial = ({ nom }) => {
 
   const { data: polar, isSuccess: polarSucceed } = useQuery(["polar", { name: nom }], () => documentByFilename("Polar/" + nom + ".png"), { staleTime: Infinity, enabled: !!nom && nom != undefined });
 
-console.log(nom);
   useEffect(() => {
     if (polarSucceed) {
       setPolarImg(polar);

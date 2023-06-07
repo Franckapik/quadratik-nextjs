@@ -40,20 +40,22 @@ const Product = () => {
       });
   };
 
+  console.log(product);
+
   return (
     <>
-      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={["modele", "performances", "spacialisation"]} text_dark shop cart fixed />
+      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={router.query.dpid != 0 ? ["modele", "performances", "spacialisation"] : ["modele"]} text_dark shop cart fixed />
       {productSuccess ? (
         <>
           <div className="s0_page_index  d-none d-md-flex">
-            {product.description.parent_label}
+            {product.description.parent_label || product.nomenclature.simple}
             <div className="trait"></div>Aperçu du modèle
           </div>
-          <Link href={{ pathname: "/quadralab", query: {  vid: router.query.vid, dpid: router.query.dpid, childCat: router.query.childCat, } }}>
+         { router.query.dpid != 0 ? <Link href={{ pathname: "/quadralab", query: {  vid: router.query.vid, dpid: router.query.dpid, childCat: router.query.childCat, } }}>
             <div className="product_custom d-none d-md-flex p-2">
               Modifier dans le quadralab <i className="fad fa-th pt-4 "></i>
             </div>
-          </Link>
+          </Link> : null}
           <Row className="layout_space">
             <FormProvider {...methods}>
               <Form onSubmit={methods.handleSubmit(onSubmit)}>
