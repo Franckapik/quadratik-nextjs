@@ -15,7 +15,7 @@ const ProductOptions = ({ product, changeAttributes }) => {
     return () => subscription.unsubscribe();
   }, [methods.watch]);
 
-  const options = JSON.parse(product.description.attributes_options);
+  const options = product.description && JSON.parse(product.description?.attributes_options);
 
   return (
     <>

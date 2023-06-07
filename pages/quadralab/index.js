@@ -1,28 +1,27 @@
-import { queryTypes, useQueryState } from "next-usequerystate";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
+import { ModalReport2D } from '../../components/quadralab/ModalReport2D';
 import ProductCanvas from "../../components/quadralab/QuadralabCanvas";
 import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
 import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerformances";
 import { useProductStore } from "../../hooks/store";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
-import {ModalReport2D} from '../../components/quadralab/ModalReport2D';
 
 const Quadralab = () => {
   //Data
 
   const router = useRouter();
-  const { allAttributes, defaultProduct, category, productAttributes, isAllSuccess, allValues } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
-  const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, productAttributes, allValues, category, defaultProduct, isAllSuccess, router.query.vid);
-
+  const { allAttributes, defaultProduct, category, productAttributes, isAllSuccess, allValues, isVariant } = useFetchProduct(router.query.vid, router.query.dpid, router.query.childCat);
+  const { product, isSuccess: productSuccess, changeAttributes } = useComputeProduct(allAttributes, productAttributes, allValues, category, defaultProduct, isAllSuccess, router.query.vid, isVariant);
   const quadralabRef = useRef(null);
   const [height, setHeight] = useState(0);
 
+  
   useEffect(() => {
     setHeight(quadralabRef.current?.clientHeight);
   }, [quadralabRef]);
@@ -119,8 +118,8 @@ const Quadralab = () => {
           </FormProvider>
         </Row>
       ) : (
-        "Le produit ne semble pas exister en boutique"  //layout page d'erreur a  faire
-      )}
+        <> <i className="fas fa-spinner fa-spin"></i> "Chargement du modèle"</>
+       )}
     </>
   );
 };

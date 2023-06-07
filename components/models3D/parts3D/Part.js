@@ -9,7 +9,7 @@ const Part = (props) => {
 
   return (
     <mesh castShadow position={props.position} rotation={props.rotation}>
-      <boxGeometry args={props.args} /> {/*x z y */}
+      <boxGeometry args={props.args} />
       <meshStandardMaterial map={colorMap} normalMap={normalMap} />
     </mesh>
   );

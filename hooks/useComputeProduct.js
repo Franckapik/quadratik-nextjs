@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDescription } from "./useDescription";
 import { useDimensions } from "./useDimensions";
 import { useNomenclature } from "./useNomenclature";
@@ -30,16 +30,17 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
   }),
     [productAttributes];
 
-  const valuesSelected = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_id");
-  const values3D = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_3d");
-  const valuesLabels = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_label");
-  const valuesFactor = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_factor");
-  const valuesOperator = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_operator");
-  const features = useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "id", "v_id");
-  const description = useDescription(category, defaultProduct || productAttributes);
-  const { price: price, basePrice: basePrice } = usePrice(defaultProduct, valuesFactor, valuesOperator);
-  const dimensions = useDimensions(values3D);
-  const nomenclature = useNomenclature(defaultProduct, valuesLabels, dimensions);
+
+  const valuesSelected = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_id"));
+  const values3D = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_3d"));
+  const valuesLabels = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_label"));
+  const valuesFactor =useMemo(() =>  useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_factor"));
+  const valuesOperator = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_operator"));
+  const features =useMemo(() =>  useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "id", "v_id"));
+  const description =useMemo(() =>  useDescription(category, defaultProduct || productAttributes));
+  const { price: price, basePrice: basePrice } = useMemo(() => usePrice(defaultProduct, valuesFactor, valuesOperator));
+  const dimensions = useMemo(() => useDimensions(values3D));
+  const nomenclature = useMemo(() => useNomenclature(defaultProduct, valuesLabels, dimensions));
 
   useEffect(() => {
     //calculate

@@ -24,7 +24,7 @@ const Cell = ({ position, rotation, args, index, motif, color, highlights, teint
 
   return (
     <mesh castShadow position={position} rotation={rotation}>
-      <boxGeometry args={args} /> {/*x z y */}
+      <boxGeometry args={args} />
       {highlights ? (
         <meshStandardMaterial color={color} />
       ) : (

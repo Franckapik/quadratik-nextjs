@@ -27,7 +27,6 @@ export const DiffusorTable = ({ dimensions, value }) => {
 };
 
 export const ModalReport2D = ({product, show, setShow, handleClose }) => {
-console.log(product);
   const dimensions = product.dimensions;
 
   const hauteurs = Object.values(dimensions.report)
@@ -88,7 +87,7 @@ console.log(product);
           {Array(dimensions.p)
             .fill("")
             .map((a, i) => {
-              return <Col className="border_creme" style={{ height: dimensions.report[i]?.ratio * 10 }}></Col>;
+              return <Col key={"rangée" + i} className="border_creme" style={{ height: dimensions.report[i]?.ratio * 10 }}></Col>;
             })}
           <p>Ratio</p>
           <DiffusorTable dimensions={dimensions} value="ratio" />
@@ -104,7 +103,7 @@ console.log(product);
               .sort((a, b) => a[0] - b[0])
               .map((a, i) => {
                 return (
-                  <ListGroup.Item>
+                  <ListGroup.Item key={"blocs" + i}>
                     {a[1]} bloc(s) de ratio {i + 1} ou hauteur {a[0]} cm
                   </ListGroup.Item>
                 );
