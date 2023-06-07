@@ -25,8 +25,8 @@ export default function MyApp({ Component, pageProps }) {
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
         </Head>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <Component {...pageProps} />
+{/*         <ReactQueryDevtools initialIsOpen={false} />
+ */}        <Component {...pageProps} />
       </QueryClientProvider>
     </SSRProvider>
   );
