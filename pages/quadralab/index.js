@@ -12,6 +12,7 @@ import { useProductStore } from "../../hooks/store";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
 import { CardOptions } from "../../components/CardOptions";
+import { QuadralabView1D } from "../../components/quadralab/QuadralabView1D";
 
 const Quadralab = () => {
   //Data
@@ -24,10 +25,9 @@ const Quadralab = () => {
 
   useEffect(() => {
     if (quadralabRef != undefined && quadralabRef.current != null) {
-      console.log(quadralabRef);
       setHeight(quadralabRef.current?.clientHeight);
     }
-  }, [quadralabRef]); 
+  }, [quadralabRef]);
 
   //Modal
   const [show, setShow] = useState(false);
@@ -51,28 +51,21 @@ const Quadralab = () => {
             <Form onSubmit={methods.handleSubmit(onSubmit)}>
               <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
               <Row className="justify-content-center mt-md-5">
-                {/* Options */}
-
                 <>
                   <Col md={3} className="order-md-1">
                     <QuadralabOptions height={height} product={product} changeAttributes={changeAttributes} />
                   </Col>
 
                   <Col md={3} className="order-md-3">
-                    {console.log(height)}
                     <QuadralabPerformances height={height} product={product} />
                   </Col>
                 </>
-
-                {/*Display*/}
-
                 <Col md={5} className="order-md-2 quadralab_title p-0">
                   <CardOptions title="Visualisation 3D" opened={"1"} transparent>
                     <Row className="justify-content-center align-items-center mt-4 ">
-                      {/*                     <Col>
-                     
-                      <Form.Check type={"switch"} id="dimension-switch" label={"3D / 2D"} onChange={(e) => setDimensionView(!dimensionView)} />
-                    </Col> */}
+                      <Col>
+                        <Form.Check type={"switch"} id="dimension-switch" label={"3D / 2D"} onChange={(e) => setDimensionView(!dimensionView)} />
+                      </Col>
                       <Col className="d-flex flex-column align-items-center">
                         <Form.Check type={"switch"} id="ratio-switch" label={"Cm / %"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
                       </Col>
@@ -81,7 +74,7 @@ const Quadralab = () => {
                       </Col>
                     </Row>
                     <Row className="quadralab_canvas_container">
-                      <ProductCanvas product={product}></ProductCanvas>{" "}
+                     {dimensionView ? <ProductCanvas product={product}></ProductCanvas> : <QuadralabView1D product={product} />} 
                     </Row>
                   </CardOptions>
 
