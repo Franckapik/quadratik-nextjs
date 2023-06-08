@@ -8,7 +8,6 @@ export const useScroll = (ref) => {
   const [width, setWidth] = useState(false);
 
   useEffect(() => {
-    console.log(ref.current.clientHeight);
     if (ref.current != null) {
       const getScroll = (e) => {
         setScroll(e.target.scrollTop);

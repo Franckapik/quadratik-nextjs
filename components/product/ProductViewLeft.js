@@ -41,7 +41,7 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
                 <Carousel.Caption>
                   <h3>Dimensions du modèle</h3>
                   <p>
-                    {product.dimensions.W} cm x {product.dimensions.L * product.dimensions.W} cm x {product.dimensions.E} cm{" "}
+                    {product.dimensions.W} cm x {product.dimensions.L * product.dimensions.W} cm x {product.dimensions.E} cm
                   </p>
                 </Carousel.Caption>
               </Carousel.Item>

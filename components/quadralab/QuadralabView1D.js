@@ -4,7 +4,6 @@ import { useProductStore } from "../../hooks/store";
 
 export const QuadralabView1D = ({product}) => {
   const ratio = useProductStore((state) => state.ratio);
-  console.log();
   return (
     <Col className="quadralab_view1d_main ">
       <Row className="bg_darker values">

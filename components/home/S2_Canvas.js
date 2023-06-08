@@ -72,7 +72,7 @@ export const S2_Canvas = () => {
           <i className="fad fa-chevron-right d-md-none"></i>
           <p className="ft1 text_grey d-none d-md-flex justify-content-center"> {customers[circular(index + 1)]}</p>
         </Row>
-      </Col>{" "}
+      </Col>
       <Col md={7} className="order-md-2">
         <div className="s2_canvas_container">
           <Canvas dpr={1} shadows>
@@ -84,7 +84,7 @@ export const S2_Canvas = () => {
             <ambientLight intensity={0.15} />
           </Canvas>
         </div>
-      </Col>{" "}
+      </Col>
     </Row>
   );
 };

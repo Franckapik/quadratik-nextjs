@@ -18,7 +18,7 @@ const Shop = () => {
       <div className="s0_page_index d-none d-md-flex position-fixed text_dark">
         {ParentCategoriesSucceed && parentCategories.filter((cat) => cat.id == viewedCategory)[0]?.label}
         <div className="trait"></div>Boutique
-      </div>{" "}
+      </div>
       <Row className="layout_space bg_creme_light shop_main_row ">
         {ParentCategoriesSucceed && parentCategories.map((firstCat, i) => {
           return <ParentCategorie key={"ParentCategory" + i} firstCat={firstCat} setViewedCategory={setViewedCategory} />;

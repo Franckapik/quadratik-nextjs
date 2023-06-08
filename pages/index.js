@@ -1,6 +1,6 @@
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { useEffect, useRef, useState } from "react";
-import { Burger } from "../components/Burger";
+import { LayoutHome } from "../components/LayoutHome";
 import { S0_Landing } from "../components/home/S0_Landing";
 import { S1_Product } from "../components/home/S1_Product";
 import { S2_Canvas } from "../components/home/S2_Canvas";
@@ -9,9 +9,6 @@ import { S3_DIY } from "../components/home/S3_DIY";
 import { S4_Business } from "../components/home/S4_Business";
 import { S5_Contact } from "../components/home/S5_Contact";
 import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
-import { useBearStore } from "../hooks/store";
-import { Offcanvas } from "react-bootstrap";
-import { LayoutHome } from "../components/LayoutHome";
 import { useScroll } from "../hooks/useScroll";
 
 const Home = () => {

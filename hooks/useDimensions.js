@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export const useDimensions = (values3D) => {
-  /*   const countRefresh = useRef(0);
-  countRefresh.current = countRefresh.current + 1;
-  console.log("Dimensions : " + countRefresh.current); */
 
   if (values3D?.D === "D1") {
     const { E, N, W, L, P, I, H } = values3D;
