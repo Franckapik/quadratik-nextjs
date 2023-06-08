@@ -26,6 +26,8 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
       <Carousel indicators={false} activeIndex={display} controls={false}>
         {pictureSucceed ? (
           <Carousel.Item>
+                        <div className="loading bg_red">Modèle non disponible</div>
+
             <Carousel indicators={false} activeIndex={index} controls={false}>
               <Carousel.Item>
                 <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${facePicture}`} alt="Front preview of the model" />
