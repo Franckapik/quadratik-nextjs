@@ -9,7 +9,7 @@ export const Loader = ({ text, open }) => {
 
   return (
     <Modal centered show={open} onHide={handleClose} backdrop={false}>
-      <Modal.Body className="text-center">{text}</Modal.Body>
+      <Modal.Body className="text-center"><div>{text}</div></Modal.Body>
     </Modal>
   );
 };

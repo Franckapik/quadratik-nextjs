@@ -13,6 +13,8 @@ import { useComputeProduct } from "../../hooks/useComputeProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
 import { CardOptions } from "../../components/CardOptions";
 import { QuadralabView1D } from "../../components/quadralab/QuadralabView1D";
+import { Loader } from "../../components/Loader";
+
 
 const Quadralab = () => {
   //Data
@@ -42,7 +44,7 @@ const Quadralab = () => {
   const onSubmit = (data) => console.log(data);
 
   return (
-    <>
+    <Row>
       <LayoutHome header home shop />
 
       {productSuccess ? (
@@ -64,19 +66,19 @@ const Quadralab = () => {
                   <CardOptions title="Visualisation 3D" opened={"1"} transparent>
                     <Row className="justify-content-center align-items-center mt-4 ">
                       <Col>
-                        <Form.Check type={"switch"} id="dimension-switch"  onChange={(e) => setDimensionView(!dimensionView)} />
-                        <p>3D / 2D</p></Col>
+                        <Form.Check type={"switch"} id="dimension-switch" onChange={(e) => setDimensionView(!dimensionView)} />
+                        <p>3D / 2D</p>
+                      </Col>
                       <Col className="d-flex flex-column align-items-center">
                         <Form.Check type={"switch"} id="ratio-switch" onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
-                        <p>Cm / %</p>                      </Col>
+                        <p>Cm / %</p>{" "}
+                      </Col>
                       <Col className="d-flex flex-column align-items-center">
                         <Form.Check type={"switch"} id="highlight-switch" onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
                         <p>Surbrillance</p>
                       </Col>
                     </Row>
-                    <Row className="quadralab_canvas_container">
-                     {dimensionView ? <ProductCanvas product={product}></ProductCanvas> : <QuadralabView1D product={product} />} 
-                    </Row>
+                    <Row className="quadralab_canvas_container">{dimensionView ? <ProductCanvas product={product}></ProductCanvas> : <QuadralabView1D product={product} />}</Row>
                   </CardOptions>
 
                   <Row className="quadralab_devis_button text-center w-100 justify-content-center">
@@ -98,12 +100,9 @@ const Quadralab = () => {
             </Form>
           </FormProvider>
         </Row>
-      ) : (
-        <>
-          <i className="fas fa-spinner fa-spin"></i> "Chargement du modèle"
-        </>
-      )}
-    </>
+      ) : null}
+
+    </Row>
   );
 };
 

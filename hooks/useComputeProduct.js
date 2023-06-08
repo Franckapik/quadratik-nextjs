@@ -79,5 +79,5 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
   }, [attributes, isAllSuccess]);
 
 
-  return { product, isSuccess, changeAttributes };
+  return { product, isSuccess : isSuccess, changeAttributes };
 };
