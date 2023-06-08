@@ -1,20 +1,17 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
+import { CardOptions } from "../../components/CardOptions";
 import { LayoutHome } from "../../components/LayoutHome";
+import { PerformancesCard } from "../../components/PerformancesCard";
 import { ModalReport2D } from "../../components/quadralab/ModalReport2D";
 import ProductCanvas from "../../components/quadralab/QuadralabCanvas";
 import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
-import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerformances";
+import { QuadralabView1D } from "../../components/quadralab/QuadralabView1D";
 import { useProductStore } from "../../hooks/store";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
-import { CardOptions } from "../../components/CardOptions";
-import { QuadralabView1D } from "../../components/quadralab/QuadralabView1D";
-import { Loader } from "../../components/Loader";
-
 
 const Quadralab = () => {
   //Data
@@ -59,7 +56,12 @@ const Quadralab = () => {
                   </Col>
 
                   <Col md={3} className="order-md-3">
-                    <QuadralabPerformances height={height} product={product} />
+                    <CardOptions title="performances" opened={height > 700 ? "1" : "0"}>
+                    <p className="text-center mb-4">
+        <i className="fad fa-stream"></i> REF : {product.nomenclature?.structurel}
+      </p>
+                      <PerformancesCard product={product} />
+                    </CardOptions>
                   </Col>
                 </>
                 <Col md={5} className="order-md-2 quadralab_title p-0">
@@ -101,7 +103,6 @@ const Quadralab = () => {
           </FormProvider>
         </Row>
       ) : null}
-
     </Row>
   );
 };

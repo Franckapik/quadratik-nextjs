@@ -478,10 +478,7 @@ min-height: 20%;
   position: absolute;
 }
 
-.performance_border {
-  border: solid 1px #1f1d1c;
-  box-shadow: inset 0 2px 2px 2px#00000025;
-}
+
 
 .accordion-header {
   font-family: futura-light !important;
@@ -551,6 +548,11 @@ min-height: 20%;
   width: 1.5rem;
 }
 
+.performance_border {
+  border: solid 1px #1f1d1c;
+  box-shadow: inset 0 2px 2px 2px#00000025;
+}
+
 .performance_value {
   position: relative;
   top: -40px;
@@ -582,10 +584,8 @@ font-size: 	0.625em;
 .performance_line {
   color: $creme;
   height: 1rem !important;
-  left: 7%;
   position: relative;
   top: -2.5rem;
-  width: 90% !important;
 }
 
 
