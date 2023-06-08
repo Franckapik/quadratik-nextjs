@@ -36,7 +36,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
           {product ? (
             <>
               {product.map((a, i) => (
-                <Col key={"productNav" + i} className="p-2 d-none d-md-flex justify-content-center text_creme m-5" xs={4} md={1} style={{ backgroundColor: i == viewedCategory ? "#9fb07ca9" : "inherit" }}>
+                <Col key={"productNav" + i} className="p-2 d-none d-md-flex justify-content-center text_creme ms-5 me-5" xs={4} md={1} style={{ backgroundColor: i == viewedCategory ? "#9fb07ca9" : "inherit" }}>
                   <div onClick={() => setDisplay(i)} className="cursor">
                     {a}
                   </div>
@@ -59,8 +59,9 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
 
           {cart ? (
             <Col xs={4} md={1} className="text-center">
-             
-              <Link href={"/shop/cart"}><i className="fad fa-shopping-cart fa-2x"></i></Link>
+              <Link href={"/shop/cart"}>
+                <i className="fad fa-shopping-cart fa-2x"></i>
+              </Link>
             </Col>
           ) : null}
           {contact ? (
@@ -77,13 +78,11 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
           <Offcanvas.Title className="text-uppercase me-4">Quadratik</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-         
           <ListGroup variant="flush">
             <Link href="/">
               <ListGroup.Item className="ft2">Accueil</ListGroup.Item>
             </Link>
             <Link href="/shop">
-             
               <ListGroup.Item className="ft2">Boutique</ListGroup.Item>
             </Link>
             <Link href="/quadralab?childCat=6&vid=146&dpid=8">

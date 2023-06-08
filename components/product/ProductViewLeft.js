@@ -63,10 +63,11 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
         ) : null}
 
         <Carousel.Item>
-          <PerformanceCharts nom={product.nomenclature.performance} />
+          <div className="m-4">  <PerformanceCharts nom={product.nomenclature.performance} /></div>
+        
         </Carousel.Item>
         <Carousel.Item>
-          <PerformanceSpatial nom={product.nomenclature.performance} />
+        <div className="m-4"><PerformanceSpatial nom={product.nomenclature.performance} /></div>
         </Carousel.Item>
       </Carousel>
 <Loader text={!pictureError ? <><i className="fas fa-spinner fa-spin"></i> Chargement du modèle</>  : "Modèle non disponible"} open={!pictureSucceed} />
