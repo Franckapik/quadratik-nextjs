@@ -47,24 +47,24 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
 
           <Col></Col>
           {home ? (
-            <Col xs={4} md={1}>
+            <Col xs={4} md={1} className="text-center">
               <Link href={"/"}>Accueil</Link>
             </Col>
           ) : null}
           {shop ? (
-            <Col xs={4} md={1}>
+            <Col xs={4} md={1} className="text-center">
               <Link href={"/shop"}>Boutique</Link>
             </Col>
           ) : null}
 
           {cart ? (
-            <Col xs={4} md={1}>
+            <Col xs={4} md={1} className="text-center">
              
-              <Link href={"/shop/panier"}>Panier</Link>
+              <Link href={"/shop/cart"}><i className="fad fa-shopping-cart fa-2x"></i></Link>
             </Col>
           ) : null}
           {contact ? (
-            <Col xs={4} md={1}>
+            <Col xs={4} md={1} className="text-center">
               <Link href={"/contact"}>Contact</Link>
             </Col>
           ) : null}

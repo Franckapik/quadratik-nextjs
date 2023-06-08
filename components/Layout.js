@@ -16,7 +16,7 @@ export const Layout = ({ children, header, onePage, noburger, cart, contact, sho
           {cart ? (
             <Col md={1}>
              
-              <Link href={"/shop/panier"}>Panier</Link>
+              <Link href={"/shop/cart"}>Panier</Link>
             </Col>
           ) : null}
           {shop ? (
