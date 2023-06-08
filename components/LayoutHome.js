@@ -66,7 +66,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
           ) : null}
           {contact ? (
             <Col xs={4} md={1} className="text-center">
-              <Link href={"/contact"}>Contact</Link>
+              <Link href={"/#s5_contact"}>Contact</Link>
             </Col>
           ) : null}
           <Col md={1} className="d-none d-md-flex me-4"></Col>
@@ -91,7 +91,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
             <Link href="/">
               <ListGroup.Item className="ft2">Les réalisations</ListGroup.Item>
             </Link>
-            <Link href="/contact">
+            <Link href="/#s5_contact">
               <ListGroup.Item className="ft2">Contact</ListGroup.Item>
             </Link>
           </ListGroup>
