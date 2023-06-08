@@ -11,6 +11,7 @@ import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerfo
 import { useProductStore } from "../../hooks/store";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
+import { CardOptions } from "../../components/CardOptions";
 
 const Quadralab = () => {
   //Data
@@ -22,8 +23,11 @@ const Quadralab = () => {
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    setHeight(quadralabRef.current?.clientHeight);
-  }, [quadralabRef]);
+    if (quadralabRef != undefined && quadralabRef.current != null) {
+      console.log(quadralabRef);
+      setHeight(quadralabRef.current?.clientHeight);
+    }
+  }, [quadralabRef]); 
 
   //Modal
   const [show, setShow] = useState(false);
@@ -46,9 +50,6 @@ const Quadralab = () => {
           <FormProvider {...methods}>
             <Form onSubmit={methods.handleSubmit(onSubmit)}>
               <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
-
-              {/*Canvas*/}
-
               <Row className="justify-content-center mt-md-5">
                 {/* Options */}
 
@@ -58,39 +59,31 @@ const Quadralab = () => {
                   </Col>
 
                   <Col md={3} className="order-md-3">
-                    <QuadralabPerformances product={product} />
+                    {console.log(height)}
+                    <QuadralabPerformances height={height} product={product} />
                   </Col>
                 </>
 
                 {/*Display*/}
 
                 <Col md={5} className="order-md-2 quadralab_title p-0">
-                  <Row className="text-center mt-4">
-                    <Link href={{ pathname: "/shop/product" }}>
-                      <p className="mb-1">
-                        <i className="fad fa-store m-2"></i> Modèle similaire : {product.nomenclature?.simple} ({product.prices.price} €)
-                      </p>
-                    </Link>
-                  </Row>
-
-                  <Row className="justify-content-center align-items-center mt-4 ">
-                    {/*                     <Col>
+                  <CardOptions title="Visualisation 3D" opened={"1"} transparent>
+                    <Row className="justify-content-center align-items-center mt-4 ">
+                      {/*                     <Col>
                      
                       <Form.Check type={"switch"} id="dimension-switch" label={"3D / 2D"} onChange={(e) => setDimensionView(!dimensionView)} />
                     </Col> */}
-                    <Col>
-                     
-                      <Form.Check type={"switch"} id="ratio-switch" label={"Cm / %"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
-                    </Col>
-                    <Col>
-                     
-                      <Form.Check type={"switch"} id="highlight-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
-                    </Col>
-                  </Row>
-                  <Row className="quadralab_canvas_container">
-                   
-                    <ProductCanvas product={product}></ProductCanvas>
-                  </Row>
+                      <Col className="d-flex flex-column align-items-center">
+                        <Form.Check type={"switch"} id="ratio-switch" label={"Cm / %"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
+                      </Col>
+                      <Col className="d-flex flex-column align-items-center">
+                        <Form.Check type={"switch"} id="highlight-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
+                      </Col>
+                    </Row>
+                    <Row className="quadralab_canvas_container">
+                      <ProductCanvas product={product}></ProductCanvas>{" "}
+                    </Row>
+                  </CardOptions>
 
                   <Row className="quadralab_devis_button text-center w-100 justify-content-center">
                     <Col className="justify-content-evenly mt-4" md={4}>
@@ -113,7 +106,6 @@ const Quadralab = () => {
         </Row>
       ) : (
         <>
-         
           <i className="fas fa-spinner fa-spin"></i> "Chargement du modèle"
         </>
       )}
