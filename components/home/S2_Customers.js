@@ -8,38 +8,38 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
   const height = useBearStore((state) => state.height)
   const images = [
     {
-      src: "/customers/customer3.png",
+      src: "/customers/customer3.jpg",
       width: 205,
       height: 357,
     },
     {
-      src: "/customers/customer1.png",
+      src: "/customers/customer1.jpg",
       width: 548,
       height: 478,
     },
     {
-      src: "/customers/customer2.png",
+      src: "/customers/customer2.jpg",
       width: 548,
       height: 478,
     },
 
     {
-      src: "/customers/customer4.png",
+      src: "/customers/customer4.jpg",
       width: 548,
       height: 478,
     },
     {
-      src: "/customers/customer5.png",
+      src: "/customers/customer5.jpg",
       width: 548,
       height: 478,
     },
     {
-      src: "/customers/customer6.png",
+      src: "/customers/customer6.jpg",
       width: 548,
       height: 478,
     },
     {
-      src: "/customers/customer7.png",
+      src: "/customers/customer7.jpg",
       width: 205,
       height: 357,
     },

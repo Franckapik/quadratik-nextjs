@@ -28,12 +28,12 @@ export const S1_Product = () => {
       <Col md={5} className="s1_square"> 
         <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
           <Carousel.Item>
-            <img className="d-block w-100 s1_image_hover" src="../difrender10w.png" alt="First slide" />
-            <img className="d-block w-100" src="../difrender10wrot30.png" alt="Présentation du produit Woodik-7" />
+            <img className="d-block w-100 s1_image_hover" src="../difrender10w.jpg" alt="First slide" />
+            <img className="d-block w-100" src="../difrender10wrot30.jpg" alt="Présentation du produit Woodik-7" />
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100 s1_image_hover" src="../absorbeur.png" alt="Second slide" />
-            <img className="d-block w-100" src="../absorbeurrot30.png" alt="Présentation du produit Quadrablack" />
+            <img className="d-block w-100 s1_image_hover" src="../absorbeur.jpg" alt="Second slide" />
+            <img className="d-block w-100" src="../absorbeurrot30.jpg" alt="Présentation du produit Quadrablack" />
           </Carousel.Item>
         </Carousel>
       </Col>
