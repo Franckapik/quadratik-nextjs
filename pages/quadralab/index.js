@@ -57,9 +57,9 @@ const Quadralab = () => {
 
                   <Col md={3} className="order-md-3">
                     <CardOptions title="performances" opened={height > 700 ? "1" : "0"}>
-                    <p className="text-center mb-4">
-        <i className="fad fa-stream"></i> REF : {product.nomenclature?.structurel}
-      </p>
+                      <p className="text-center mb-4">
+                        <i className="fad fa-stream"></i> REF : {product.nomenclature?.structurel}
+                      </p>
                       <PerformancesCard product={product} />
                     </CardOptions>
                   </Col>

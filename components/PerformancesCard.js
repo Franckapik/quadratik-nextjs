@@ -18,13 +18,15 @@ export const PerformancesCard = ({ product }) => {
           <PerformanceWidget icon="fad fa-sort-size-down fa-xs" value={`${(product.dimensions.c * 10).toFixed(0)} mm`} color="#f1b672" performance={100 - (product.dimensions.c * 10 * 100) / 90} tooltip={"La taille des cellules. Plus elle est petite, plus les aigus sont traités"} />
           <PerformanceWidget
             icon="fad fa-box-open fa-xs"
-            value={`${product.dimensions.area /10000} m2 // ${product.dimensions.volume/1000000} m3`}
+            value={`${product.dimensions.area / 10000} m2 // ${product.dimensions.volume / 1000000} m3`}
             color="#7cb0eb"
             performance={(product.dimensions.volume * 100) / 0.144}
             tooltip={"L'aire traitée par le diffuseur et le product.dimensions.volume (boite) qu'il occupe"}
           />
         </Col>
-      ) : null}
+      ) : (
+        "Les données techniques de ce modèle ne sont pas encore disponibles"
+      )}
       {product.dimensions.D !== "D2" && product.dimensions.D !== "D1" && product.dimensions.F !== undefined ? "ici" : null}
     </>
   );

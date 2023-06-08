@@ -33,7 +33,7 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
                 <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${facePicture}`} alt="Front preview of the model" />
                 <Carousel.Caption>
                   <h3>{product.nomenclature.simple}</h3>
-                  <p>1024 Hz - 3542 Hz</p>
+                  <p>{product.dimensions.fmin} Hz - {product.dimensions.fmax} Hz</p>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
@@ -57,7 +57,7 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
               <img onClick={() => setIndex(1)} className={`d-block product_thumbnail m-2 `} src={`data:image/png;base64,${sidePicture}`} alt="Image miniature du modèle de coté" />
               <div onClick={() => setIndex(2)} className={`d-block product_thumbnail m-2 `}>
                 <i className="fal fa-cube fa-3x mt-4"></i> 3D
-              </div>{" "}
+              </div>
             </div>
           </Carousel.Item>
         ) : null}

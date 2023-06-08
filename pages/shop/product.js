@@ -42,7 +42,7 @@ const Product = () => {
 
   return (
     <>
-      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={router.query.dpid != 0 ? ["modele", "performances", "spacialisation"] : ["modele"]} text_dark shop cart fixed />
+      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={router.query.dpid != 0 && (product?.dimensions?.D === "D1" || product?.dimensions?.D === "D2")  ? ["modele", "performances", "spacialisation"] : ["modele"]} text_dark shop cart fixed />
       {productSuccess ? (
         <>
           <div className="s0_page_index  d-none d-md-flex">
