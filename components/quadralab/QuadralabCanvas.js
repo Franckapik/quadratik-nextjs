@@ -1,12 +1,11 @@
 import { OrbitControls, useProgress } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { BrightnessContrast, EffectComposer, SSAO, ToneMapping } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
+import { BrightnessContrast, EffectComposer, SSAO } from "@react-three/postprocessing";
 import React, { Suspense } from "react";
+import { Loader } from "../Loader";
 import Absorbeur from "../models3D/Absorbeur";
 import Diffuseur1D from "../models3D/Diffuseur1D";
 import Diffuseur2D from "../models3D/Diffuseur2D";
-import { Loader } from "../Loader";
 
 const ProductCanvas = ({ product }) => {
   const dimensions = product.dimensions;
@@ -34,15 +33,6 @@ const ProductCanvas = ({ product }) => {
                 contrast={0.2}
               />
               <SSAO />
-              <ToneMapping
-                blendFunction={BlendFunction.NORMAL} // blend mode
-                adaptive={true} // toggle adaptive luminance map usage
-                resolution={256} // texture resolution of the luminance map
-                middleGrey={0.6} // middle grey factor
-                maxLuminance={16.0} // maximum luminance
-                averageLuminance={1.0} // average luminance
-                adaptationRate={1.0} // luminance adaptation rate
-              />
             </EffectComposer>
           </Canvas>
         </>

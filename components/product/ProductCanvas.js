@@ -1,12 +1,11 @@
-import React from "react";
-import Diffuseur1D from "../models3D/Diffuseur1D";
-import Diffuseur2D from "../models3D/Diffuseur2D";
-import Absorbeur from "../models3D/Absorbeur";
-import { Lights } from "../models3D/parts3D/Lights";
 import { AccumulativeShadows, OrbitControls, RandomizedLight } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { BrightnessContrast, EffectComposer, SSAO, ToneMapping } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
+import { BrightnessContrast, EffectComposer, SSAO } from "@react-three/postprocessing";
+import React from "react";
+import Absorbeur from "../models3D/Absorbeur";
+import Diffuseur1D from "../models3D/Diffuseur1D";
+import Diffuseur2D from "../models3D/Diffuseur2D";
+import { Lights } from "../models3D/parts3D/Lights";
 
 const ProductCanvas = ({ product }) => {
   const dimensions = product.dimensions;
@@ -38,15 +37,7 @@ const ProductCanvas = ({ product }) => {
               contrast={0.2}
             />
             <SSAO />
-            <ToneMapping
-              blendFunction={BlendFunction.NORMAL} // blend mode
-              adaptive={true} // toggle adaptive luminance map usage
-              resolution={256} // texture resolution of the luminance map
-              middleGrey={0.6} // middle grey factor
-              maxLuminance={16.0} // maximum luminance
-              averageLuminance={1.0} // average luminance
-              adaptationRate={1.0} // luminance adaptation rate
-            />
+
           </EffectComposer>
         </Canvas>
       ) : (
