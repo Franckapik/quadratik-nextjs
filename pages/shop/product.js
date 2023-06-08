@@ -50,7 +50,7 @@ const Product = () => {
             <div className="trait"></div>Aperçu du modèle
           </div>
           {router.query.dpid != 0 && router.query.dpid != 0 && (product?.dimensions?.D === "D1" || product?.dimensions?.D === "D2") ? (
-            <Link href={{ pathname: "/quadralab?childCat=6&vid=146&dpid=8", query: { vid: router.query.vid, dpid: router.query.dpid, childCat: router.query.childCat } }}>
+            <Link href={{ pathname: "/quadralab", query: { vid: router.query.vid, dpid: router.query.dpid, childCat: router.query.childCat } }}>
               <div className="product_custom d-none d-md-flex p-2">
                 Modifier dans le quadralab <i className="fad fa-th pt-4 "></i>
               </div>
