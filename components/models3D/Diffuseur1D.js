@@ -40,13 +40,13 @@ const Diffuseur1D = ({ dimensions, isQuadralab }) => {
     <>
       {isQuadralab ? (
         <>
-          <Text color="d0c3b4" scale={w / 10} position={[0, -l + l / 4, P / 2]}>
+          <Text  scale={w / 10} position={[0, -l + l / 4, P / 2]}>
             {w} cm
           </Text>
-          <Text color="d0c3b4" scale={w / 10} position={[-w + w / 4, 0, P / 2]} rotation={[0, 0, Math.PI / 2]}>
+          <Text  scale={w / 10} position={[-w + w / 4, 0, P / 2]} rotation={[0, 0, Math.PI / 2]}>
             {l} cm
           </Text>
-          <Text color="d0c3b4" scale={w / 10} position={[w - w / 4, 0, P / 2]} rotation={[0, Math.PI / 2, 0]}>
+          <Text  scale={w / 10} position={[w - w / 4, 0, P / 2]} rotation={[0, Math.PI / 2, 0]}>
             {P} cm
           </Text>
         </>

@@ -1,11 +1,8 @@
-import { easings, useSpring, animated } from "@react-spring/web";
-import { BakeShadows, ContactShadows, ScrollControls, Stage, Stats } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useSwipeable } from "react-swipeable";
 import { MathUtils } from "three";
-import { useBearStore } from "../../hooks/store";
 import { LoadCamera } from "./canvas_components/loadCamera";
 import { LoadLight } from "./canvas_components/loadLight";
 import { LoadMesh } from "./canvas_components/loadMesh";

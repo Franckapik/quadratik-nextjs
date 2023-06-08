@@ -56,7 +56,7 @@ export const S5_Contact = () => {
       <Row className="p-0 m-2">
         <Marquee pauseOnHover gradient={false} speed={40} className="s4_marquee ft1">
           {rssFeed.map((a, i) => (
-            <>
+            <div key={"marquee_actu" + i}>
               <span className="p-5">Actualites musicales</span>
               <img src="./logo/logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
               <span className="p-5">
@@ -64,7 +64,7 @@ export const S5_Contact = () => {
                 <a href={a.link}>{a.title}</a>
               </span>
               <img src="./logo/logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
-            </>
+            </div>
           ))}
         </Marquee>
       </Row>

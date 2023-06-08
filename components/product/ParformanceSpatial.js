@@ -17,7 +17,7 @@ export const PerformanceSpatial = ({ nom }) => {
 
   return (
       <Row className="">
-        {polarSucceed ? <img src={`data:image/jpeg;base64,${polarImg}`}></img> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact "}
+        {polarSucceed && polarImg? <img src={`data:image/jpeg;base64,${polarImg}`}></img> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact "}
       </Row>
   );
 };
