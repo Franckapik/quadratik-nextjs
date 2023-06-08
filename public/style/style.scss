@@ -1041,7 +1041,7 @@ font-size: 	0.625em;
 }
 
 .shop_card {
-  height: 65vh;
+  height: 75vh;
   position: relative;
   min-width: 23% !important;
 }
@@ -1112,7 +1112,7 @@ font-size: 	0.625em;
   letter-spacing: 0.3rem !important;
   opacity: 0.7;
   position: absolute;
-  top: 90%;
+  top: 95%;
   transform: translate(-50%, -50%);
 }
 
@@ -1121,7 +1121,7 @@ font-size: 	0.625em;
   letter-spacing: 0.3rem !important;
   opacity: 0.7;
   position: absolute;
-  top: 70%;
+  top: 87%;
   transform: translate(-50%, -50%);
 }
 
@@ -1131,8 +1131,9 @@ font-size: 	0.625em;
   left: 50%;
   letter-spacing: 0.4rem !important;
   position: absolute;
-  top: 80%;
+  top: 82%;
   transform: translate(-50%, -50%);
+  word-break: keep-all;
 }
 
 /* .product_right .form-select {

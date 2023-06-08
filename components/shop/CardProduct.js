@@ -16,8 +16,8 @@ export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatL
         <CardWrap>
           <Link href={{ pathname: "/shop/product", query: { display: 0, childCat: childCatId, vid: variantId, dpid: defaultProduct.id } }}>
             {pictureSucceed ? <img src={`data:image/png;base64,${facePicture}`} /> : <i className="fas fa-spinner fa-spin"></i>}
-            <span className="shop_product_title ft2 ">{product.nomenclature.simple}</span>
-            <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCatLabel}</span>
+            <span className="shop_product_title ft2 text-nowrap ">{product.nomenclature.simple}</span>
+            <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCatLabel.replace(/[0-9]{1}\s-\s*/gm, "")}</span>
             <span className="shop_product_price ft4  text-nowrap ">{product.prices ? product.prices.price + " €" : "Prix non disponible"} </span>
           </Link>
         </CardWrap>
