@@ -68,7 +68,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
               <Link href={"/contact"}>Contact</Link>
             </Col>
           ) : null}
-          <Col md={1} className="d-none d-md-flex"></Col>
+          <Col md={1} className="d-none d-md-flex me-4"></Col>
         </Row>
       </Row>
 
