@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
-import { CardOptions } from "../CardOptions";
-import ProductOptions from "../ProductOptions";
+import { CardOptions } from "../../components/shared/CardOptions";
+import ProductOptions from "../../components/shared/ProductOptions";
 
 const QuadralabOptions = ({ product, height, changeAttributes }) => {
   return (
