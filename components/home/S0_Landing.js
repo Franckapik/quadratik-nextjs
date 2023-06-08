@@ -1,10 +1,9 @@
+import { animated, useSpring } from "@react-spring/web";
 import { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
-import { useSpring, animated } from "@react-spring/web";
 import { AnimatedLogo } from "./landing_logo/AnimatedLogo";
 import { AnimatedLogo2 } from "./landing_logo/AnimatedLogo2";
 import { AnimatedSquare } from "./landing_logo/AnimatedSquare";
-import { Layout } from "../Layout";
 
 export const S0_Landing = () => {
   const [toggle, setToggle] = useState(false);
@@ -37,7 +36,6 @@ export const S0_Landing = () => {
   }, [loaded]);
 
   return (
-    <Layout header={loaded} noburger>
       <Row id="s0_landing" className="section">
         <div className="d-none d-md-block m-0 p-0 ">{loaded ? <animated.div style={goRight} className="border_creme s0_cadre_home_gauche"></animated.div> : null}</div>
         <div className="d-flex flex-wrap justify-content-center align-items-center">
@@ -61,6 +59,5 @@ export const S0_Landing = () => {
         </div>
         <div className="d-none d-md-block p-0">{loaded ? <animated.div style={goLeft} className="border_creme s0_cadre_home_droit "></animated.div> : null}</div>
       </Row>
-    </Layout>
   );
 };

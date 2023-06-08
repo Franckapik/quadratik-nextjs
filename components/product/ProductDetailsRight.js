@@ -1,8 +1,8 @@
 import { Button, Carousel, Col, Row } from "react-bootstrap";
-import { PerformanceWidget } from "../PerformanceWidget";
-import ProductOptions from "../ProductOptions";
+import { PerformanceWidget } from "../shared/PerformanceWidget";
+import ProductOptions from "../shared/ProductOptions";
 import { useRef } from "react";
-import { PerformancesCard } from "../PerformancesCard";
+import { PerformancesCard } from "../shared/PerformancesCard";
 
 export const ProductDetailsRight = ({ product, display }) => {
   return (
