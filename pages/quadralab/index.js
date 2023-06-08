@@ -64,13 +64,14 @@ const Quadralab = () => {
                   <CardOptions title="Visualisation 3D" opened={"1"} transparent>
                     <Row className="justify-content-center align-items-center mt-4 ">
                       <Col>
-                        <Form.Check type={"switch"} id="dimension-switch" label={"3D / 2D"} onChange={(e) => setDimensionView(!dimensionView)} />
-                      </Col>
+                        <Form.Check type={"switch"} id="dimension-switch"  onChange={(e) => setDimensionView(!dimensionView)} />
+                        <p>3D / 2D</p></Col>
                       <Col className="d-flex flex-column align-items-center">
-                        <Form.Check type={"switch"} id="ratio-switch" label={"Cm / %"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
-                      </Col>
+                        <Form.Check type={"switch"} id="ratio-switch" onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
+                        <p>Cm / %</p>                      </Col>
                       <Col className="d-flex flex-column align-items-center">
-                        <Form.Check type={"switch"} id="highlight-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
+                        <Form.Check type={"switch"} id="highlight-switch" onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
+                        <p>Surbrillance</p>
                       </Col>
                     </Row>
                     <Row className="quadralab_canvas_container">
