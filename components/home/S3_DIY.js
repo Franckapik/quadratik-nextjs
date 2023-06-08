@@ -64,11 +64,11 @@ export const S3_DIY = () => {
               </div>
             </Row>
             <Row className="s3_row_explanation ft4 mt-4">{switchExplanation(explanation)}</Row>
-            <Row className="d-md-none pt-2 ">
-              <Button variant="primary" className="button_home m-auto mt-4" href="/quadralab?childCat=6&vid=146&dpid=8">
-                <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
-              </Button>
-            </Row>
+            <div className="d-flex d-md-none justify-content-center w-100 mt-4">
+            <Button variant="primary" className="">
+              <i className="fad fa-id-badge"></i> Dessiner votre diffuseur
+            </Button>
+          </div>
             <Row className="d-none d-md-flex">
               <img alt="encart industriel du bas" src="./Indus_bas.svg"></img>
             </Row>
