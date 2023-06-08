@@ -109,24 +109,24 @@ export const CGV = ({ show, setShow }) => {
             de droits de propriété intellectuelle n’est réalisée au travers des présentes CGV. Toute reproduction totale ou partielle, modification ou utilisation de ces biens pour quelque motif que ce soit est strictement interdite.
           </p>
           <p>
-            {" "}
+           
             <strong>Article 14 : Force majeure</strong> L’exécution des obligations du vendeur au terme des présentes est suspendue en cas de survenance d’un cas fortuit ou de force majeure qui en empêcherait l’exécution. Le vendeur avisera le client de la survenance d’un tel évènement dès que
             possible.
           </p>
           <p>
-            {" "}
+           
             <strong>Article 15 : Nullité et modification du contrat</strong> Si l’une des stipulations du présent contrat était annulée, cette nullité n’entraînerait pas la nullité des autres stipulations qui demeureront en vigueur entre les parties. Toute modification contractuelle n’est valable
             qu’après un accord écrit et signé des parties.
           </p>
           <p>
-            {" "}
+           
             <strong>Article 16 : Protection des données personnelles</strong> Conformément à la Loi Informatique et Libertés du 6 janvier 1978, vous disposez des droits d’interrogation, d’accès, de modification, d’opposition et de rectification sur les données personnelles vous concernant. En
             adhérant à ces conditions générales de vente, vous consentez à ce que nous collections et utilisions ces données pour la réalisation du présent contrat. En saisissant votre adresse email sur l’un des sites de notre réseau, vous pouvez recevoir des mails contenant des informations et des
             offres promotionnelles concernant uniquement des produits de l'entreprise quadratik.fr. Vous pouvez vous désinscrire à tout instant. Il vous suffit pour cela de cliquer sur le lien présent à la fin de nos emails ou de contacter le responsable du traitement (la Société) par lettre RAR.
             Nous effectuons sur l’ensemble de nos sites un suivi de la fréquentation. Pour cela, nous avons recours à des outils tels que Google Analytics.
           </p>
           <p>
-            {" "}
+           
             <strong>Article 17 : Droit applicable</strong> Toutes les clauses figurant dans les présentes conditions générales de vente, ainsi que toutes les opérations d’achat et de vente qui y sont visées, seront soumises au droit français.
           </p>
       </Modal.Body>

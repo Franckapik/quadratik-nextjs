@@ -26,7 +26,7 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
         render={({ field: { onChange, value, ref }, field }) => {
           switch (true) {
             case type === "switch":
-              return <Form.Check onChange={(e) => setValue(id, e.target.checked ? values[0].v_id : values[1].v_id)} ref={ref} type={type} id={"switch" + label} label={label} />;
+              return <Form.Check checked={false} onChange={(e) => setValue(id, e.target.checked ? values[0].v_id : values[1].v_id)} ref={ref} type={type} id={"switch" + label} label={label} />;
               break;
             case type === "radio":
               return (

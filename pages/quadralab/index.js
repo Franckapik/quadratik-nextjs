@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormProvider, useForm } from "react-hook-form";
 import { LayoutHome } from "../../components/LayoutHome";
-import { ModalReport2D } from '../../components/quadralab/ModalReport2D';
+import { ModalReport2D } from "../../components/quadralab/ModalReport2D";
 import ProductCanvas from "../../components/quadralab/QuadralabCanvas";
 import QuadralabOptions from "../../components/quadralab/QuadralabOptions";
 import { QuadralabPerformances } from "../../components/quadralab/QuadralabPerformances";
@@ -21,11 +21,9 @@ const Quadralab = () => {
   const quadralabRef = useRef(null);
   const [height, setHeight] = useState(0);
 
-  
   useEffect(() => {
     setHeight(quadralabRef.current?.clientHeight);
   }, [quadralabRef]);
-
 
   //Modal
   const [show, setShow] = useState(false);
@@ -38,7 +36,6 @@ const Quadralab = () => {
   const [dimensionView, setDimensionView] = useState(true);
 
   const onSubmit = (data) => console.log(data);
-
 
   return (
     <>
@@ -56,16 +53,13 @@ const Quadralab = () => {
                 {/* Options */}
 
                 <>
+                  <Col md={3} className="order-md-1">
+                    <QuadralabOptions height={height} product={product} changeAttributes={changeAttributes} />
+                  </Col>
 
-                    <Col md={3} className="order-md-1">
-                      <QuadralabOptions height={height} product={product} changeAttributes={changeAttributes} />
-                    </Col>
-    
-
-                    <Col md={3} className="order-md-3">
-                      <QuadralabPerformances product={product} />
-                    </Col>
-
+                  <Col md={3} className="order-md-3">
+                    <QuadralabPerformances product={product} />
+                  </Col>
                 </>
 
                 {/*Display*/}
@@ -81,20 +75,20 @@ const Quadralab = () => {
 
                   <Row className="justify-content-center align-items-center mt-4 ">
                     {/*                     <Col>
-                      {" "}
+                     
                       <Form.Check type={"switch"} id="dimension-switch" label={"3D / 2D"} onChange={(e) => setDimensionView(!dimensionView)} />
                     </Col> */}
                     <Col>
-                      {" "}
+                     
                       <Form.Check type={"switch"} id="ratio-switch" label={"Cm / %"} onChange={(e) => useProductStore.setState({ ratio: e.target.checked })} />
                     </Col>
                     <Col>
-                      {" "}
+                     
                       <Form.Check type={"switch"} id="highlight-switch" label={"Surbrillance"} onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
                     </Col>
                   </Row>
                   <Row className="quadralab_canvas_container">
-                    {" "}
+                   
                     <ProductCanvas product={product}></ProductCanvas>
                   </Row>
 
@@ -118,8 +112,11 @@ const Quadralab = () => {
           </FormProvider>
         </Row>
       ) : (
-        <> <i className="fas fa-spinner fa-spin"></i> "Chargement du modèle"</>
-       )}
+        <>
+         
+          <i className="fas fa-spinner fa-spin"></i> "Chargement du modèle"
+        </>
+      )}
     </>
   );
 };

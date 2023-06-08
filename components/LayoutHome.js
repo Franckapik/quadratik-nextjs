@@ -59,7 +59,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
 
           {cart ? (
             <Col xs={4} md={1}>
-              {" "}
+             
               <Link href={"/shop/panier"}>Panier</Link>
             </Col>
           ) : null}
@@ -77,13 +77,13 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
           <Offcanvas.Title className="text-uppercase me-4">Quadratik</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {" "}
+         
           <ListGroup variant="flush">
             <Link href="/">
               <ListGroup.Item className="ft2">Accueil</ListGroup.Item>
             </Link>
             <Link href="/shop">
-              {" "}
+             
               <ListGroup.Item className="ft2">Boutique</ListGroup.Item>
             </Link>
             <Link href="/quadralab?childCat=6&vid=146&dpid=8">

@@ -53,7 +53,7 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
 
       <Col md={10} className="d-flex flex-column justify-content-start justify-content-md-evenly ">
         <Row>
-          {" "}
+         
           <Col md={6} className="d-flex flex-column justify-content-evenly align-items-center">
             <Row className="text-center p-2 mt-4">
               <span className="ft5 text-uppercase pb-2">Vous etes</span>

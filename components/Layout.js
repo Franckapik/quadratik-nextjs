@@ -15,7 +15,7 @@ export const Layout = ({ children, header, onePage, noburger, cart, contact, sho
           <Row className="justify-content-end d-none d-md-flex">
           {cart ? (
             <Col md={1}>
-              {" "}
+             
               <Link href={"/shop/panier"}>Panier</Link>
             </Col>
           ) : null}
