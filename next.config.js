@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  transpilePackages: ['three'],
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
