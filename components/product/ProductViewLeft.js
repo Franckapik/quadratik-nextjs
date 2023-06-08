@@ -4,12 +4,14 @@ import ProductCanvas from "./ProductCanvas";
 import { PerformanceCharts } from "./PerformanceCharts";
 import { PerformanceSpatial } from "./ParformanceSpatial";
 import { usePicture } from "../../hooks/usePicture";
+import { Loader } from "../Loader";
 
 export const ProductViewLeft = ({ product, display, setDisplay }) => {
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed, isError: pictureError } = usePicture(product.nomenclature.simple, false); //true for miniature
   const [index, setIndex] = useState(0);
   const circular = (i) => ((i % 3) + 3) % 3;
   const view = ["Modele", "Performances", "Spacialisation"];
+
   return (
     <Col >
       <Col className="p-0 d-flex d-md-none text-creme justify-content-center align-items-center">
@@ -26,8 +28,6 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
       <Carousel indicators={false} activeIndex={display} controls={false}>
         {pictureSucceed ? (
           <Carousel.Item>
-                        <div className="loading bg_red">Modèle non disponible</div>
-
             <Carousel indicators={false} activeIndex={index} controls={false}>
               <Carousel.Item>
                 <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${facePicture}`} alt="Front preview of the model" />
@@ -60,17 +60,7 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
               </div>{" "}
             </div>
           </Carousel.Item>
-        ) : (
-          <Carousel.Item>
-            {!pictureError ? (
-              <>
-                <i className="fas fa-spinner fa-spin"></i> "Chargement du modèle"
-              </>
-            ) : (
-              <>Modèle non disponible</>
-            )}
-          </Carousel.Item>
-        )}
+        ) : null}
 
         <Carousel.Item>
           <PerformanceCharts nom={product.nomenclature.performance} />
@@ -79,6 +69,8 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
           <PerformanceSpatial nom={product.nomenclature.performance} />
         </Carousel.Item>
       </Carousel>
+<Loader text={!pictureError ? <><i className="fas fa-spinner fa-spin"></i> Chargement du modèle</>  : "Modèle non disponible"} open={!pictureSucceed} />
+
     </Col>
   );
 };

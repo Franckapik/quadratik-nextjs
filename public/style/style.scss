@@ -447,21 +447,6 @@ min-height: 20%;
   bottom: 0;
 }
 
-.loading {
-  position: absolute;
-  width: 50vw;
-  height: 20vh;
-  z-index: 1000;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 15px!important;
-
-}
-
-.carousel , .carousel-inner , .carousel-item {
-  position: unset;
-}
 
 .quadralab_title {
   z-index: 2;

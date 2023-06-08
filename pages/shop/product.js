@@ -71,12 +71,7 @@ const Product = () => {
             </Form>
           </FormProvider>
         </>
-      ) : (
-        <>
-         
-          <i className="fas fa-spinner fa-spin"></i> "Chargement du produit"
-        </>
-      )}
+      ) : null}
     </>
   );
 };
