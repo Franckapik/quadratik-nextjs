@@ -149,7 +149,7 @@ export const S4_Business = () => {
     switch (visibleCard) {
       case 3:
         return (
-          <div className="m-md-5">
+          <div className="">
             <p className="ft1 pt-4">Ecoresponsabilité</p>
             L'intégralité des matières premières est issue du territoire Français. Les livraisons sont assurées uniquement en France afin de garantir une empreinte carbone réduite. Le choix du bois contribue à assurer la pérennité et le renouvellement des forêts. La colle et les peintures utilisées
             sont garanties sans solvant et faibles emissions COV. Les emballages sont emmenés systématiquement en déchetterie. A l’exception de la mélamine, aucun produit issu de la famille des plastiques est proposé en boutique de l’entreprise. Les matériaux d’emballage et de calage sont garantis
@@ -158,7 +158,7 @@ export const S4_Business = () => {
         );
       case 1:
         return (
-          <div className="m-md-5">
+          <div className="">
             <p className=" ft1 pt-4">A votre écoute</p>
             Du début à la fin, vos interrogations et votre projet sont confiés à un seul artisan responsable de la construction des solutions Quadratik. Les différentes expériences reçues depuis plus de 10 ans dans le domaine du son permettent de répondre à vos questions et de faire correspondre au
             mieux votre situation à vos envies. Le traitement acoustique d'une pièce, dans la plupart des cas déjà existante, demande une reflexion qui est unique à chaque environnement. Une discussion avec vous sera alors une nouvelle aventure avec son lot de défi et d'adaptation.
@@ -166,7 +166,7 @@ export const S4_Business = () => {
         );
       case 2:
         return (
-          <div className="m-md-5">
+          <div className="">
             <p className=" ft1 pt-4">Un savoir-faire</p>
             L’essentiel de la transformation, du conditionnement et de son contrôle est réalisé à la main. Les solutions acoustiques Quadratik ne sont pas issues d'un procédé industriel et se dispensent ainsi des erreurs liées au commerce de masse. La qualité esthetique des produits est fondamentale
             avant l'envoi vers une nouvelle destination. La fabrication artisanale permet également d'adapter les finitions de nos solutions acoustiques selon vos conditions. La marque Quadratik continue chaque jour d'être fière de valoriser son savoir-faire à travers ses produits.
@@ -178,7 +178,7 @@ export const S4_Business = () => {
   };
 
   return (
-    <Row id="s4_business" className="section p-0 h-100">
+    <Row id="s4_business" className="section p-0 h-100 justify-content-center">
       <Row className="p-0 m-0 mt-2 mb-2">
         <Marquee pauseOnHover gradient={false} speed={70} className="s4_marquee ft1">
           <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>
@@ -186,7 +186,7 @@ export const S4_Business = () => {
         </Marquee>
       </Row>
       <Row className="s4_row_business_values p-2">
-        <Col md={8} className="d-flex flex-column justify-content-center p-0">
+        <Col md={8} className="d-flex flex-column p-0">
           <Row>
             <Col md={2} className="d-none d-md-flex"></Col>
             <Col md={4} className="s4_values_text text-center text-md-start order-md-2 p-md-2 ">
@@ -212,20 +212,20 @@ export const S4_Business = () => {
               </div>
             </Col>
           </Row>
-          <Row className="d-md-none justify-content-center w-100 mt-2">
+          <div className="d-flex d-md-none justify-content-center w-100 mt-4">
             <Button variant="primary" className="">
               <i className="fad fa-id-badge"></i> En savoir plus
             </Button>
-          </Row>
+          </div>
         </Col>
 
-        <Col md={4} className="d-none d-md-flex flex-column justify-content-center">
+        <Col md={4} className="d-none d-md-flex flex-column ">
           <Row>
             <Col md={1}></Col>
-            <Col md={9} className="text-justify text-md-end ft4">
+            <Col md={10} className="text-justify text-md-end ft4">
               {switchText(visibleCard)}
             </Col>
-            <Col md={2} className="d-none d-md-flex"></Col>
+            <Col md={1} className="d-none d-md-flex"></Col>
           </Row>
         </Col>
       </Row>
