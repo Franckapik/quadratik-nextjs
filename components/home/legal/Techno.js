@@ -1,45 +1,55 @@
 import Image from "next/image";
 import { Col, Modal, Row } from "react-bootstrap";
+import reactImg from "../../../public/images/techno/react.svg"
+import threejsImg from "../../../public/images/techno/threejs.svg"
+import chartjsImg from "../../../public/images/techno/chartjs.svg"
+import bootstrapÎmg from "../../../public/images/techno/bootstrap.svg"
+import nextjsImg from "../../../public/images/techno/nextjs.svg"
+import dolibarrImg from "../../../public/images/techno/dolibarr.png"
+import reactHookFormImg from "../../../public/images/techno/reacthookform.jpg"
+import dreiImg from "../../../public/images/techno/drei.jpeg"
+import zustandImg from "../../../public/images/techno/zustand.png"
+
 
 export const Techno = ({ show, setShow }) => {
   return (
-    <Modal show={show} onHide={() => setShow(!show)} className="text_dark" size="lg">
+    <Modal show={show} onHide={() => setShow(!show)}  size="lg">
       <Modal.Header closeButton>
-        <Modal.Title>Technologies Webdesign de Quadratik.fr</Modal.Title>
+        <Modal.Title className="text_creme">Technologies Webdesign de Quadratik.fr</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Row className="techno_main_row  ">
+        <Row className="techno_main_row bg_creme ">
           <Row>
             <Col>
-              <img src="techno/react.svg" alt="Logo du framework React" />
+              <Image style={{ objectFit: 'contain' }} src={reactImg} alt="Logo du framework React" />
             </Col>
             <Col>
-              <img src="techno/bootstrap.svg" alt="Logo du framework Bootstrap" />
+              <Image style={{ objectFit: 'contain' }} src={bootstrapÎmg} alt="Logo du framework Bootstrap" />
             </Col>
             <Col>
-              <img src="techno/nextjs.svg" alt="Logo du framework Nextjs" />
+              <Image style={{ objectFit: 'contain' }} src={nextjsImg} alt="Logo du framework Nextjs" />
             </Col>
           </Row>
           <Row>
             <Col>
-              <img src="techno/drei.jpeg" alt="Logo du threejs helper Drei" />
+              <Image style={{ objectFit: 'contain' }} src={dreiImg} alt="Logo du threejs helper Drei" />
             </Col>
             <Col>
-              <img src="techno/chartjs.svg" alt="Logo de Chartjs" />
+              <Image style={{ objectFit: 'contain' }} src={chartjsImg} alt="Logo de Chartjs" />
             </Col>
             <Col>
-              <img src="techno/reacthookform.jpg" alt="Logo de react Hook Form" />
+              <Image style={{ objectFit: 'contain' }} src={reactHookFormImg} alt="Logo de react Hook Form" />
             </Col>
           </Row>
           <Row>
             <Col>
-              <img src="techno/threejs.svg" alt="Logo de Threejs" />
+              <Image style={{ objectFit: 'contain' }} src={threejsImg} alt="Logo de Threejs" />
             </Col>
             <Col>
-              <img src="techno/zustand.png" alt="Logo du manager de store Zustand" />
+              <Image style={{ objectFit: 'contain' }} src={zustandImg} alt="Logo du manager de store Zustand" />
             </Col>
             <Col>
-              <img src="techno/dolibarr.png" alt="Logo du programme libre ERM Dolibarr" />
+              <Image style={{ objectFit: 'contain' }} src={dolibarrImg} alt="Logo du programme libre ERM Dolibarr" />
             </Col>
           </Row>
         </Row>

@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import { useBearStore } from "../../hooks/store";
+import Image from "next/image";
+import diffuseurFaceImg from "../../public/images/home/difrender10w.jpg";
+import diffuseurSideImg from "../../public/images/home/difrender10wrot30.jpg";
+import absorbeurFaceImg from "../../public/images/home/absorbeur.jpg";
+import absorbeurSideImg from "../../public/images/home/absorbeurrot30.jpg";
+import physicDifImg from "../../public/images/home/physic_dif.png";
+import physicAbsImg from "../../public/images/home/physic_abs.png";
 
 export const S1_Product = () => {
   const [index, setIndex] = useState(0);
@@ -28,12 +35,12 @@ export const S1_Product = () => {
       <Col md={5} className="s1_square"> 
         <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
           <Carousel.Item>
-            <img className="d-block w-100 s1_image_hover" src="../difrender10w.jpg" alt="First slide" />
-            <img className="d-block w-100" src="../difrender10wrot30.jpg" alt="Présentation du produit Woodik-7" />
+            <Image  className="d-block w-100 s1_image_hover" src={diffuseurFaceImg} alt="First slide" style={{objectFit: "contain"}} />
+            <Image  className="d-block w-100" src={diffuseurSideImg} alt="Présentation du produit Woodik-7" style={{objectFit: "contain"}} />
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100 s1_image_hover" src="../absorbeur.jpg" alt="Second slide" />
-            <img className="d-block w-100" src="../absorbeurrot30.jpg" alt="Présentation du produit Quadrablack" />
+            <Image  className="d-block w-100 s1_image_hover" src={absorbeurFaceImg} alt="Second slide" style={{objectFit: "contain"}}/>
+            <Image  className="d-block w-100" src={absorbeurSideImg} alt="Présentation du produit Quadrablack" style={{objectFit: "contain"}} />
           </Carousel.Item>
         </Carousel>
       </Col>
@@ -63,11 +70,11 @@ export const S1_Product = () => {
             <Row className="d-none border_creme s1_product_physic bg_dark d-md-flex justify-content-start align-items-center">
               <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
                 <Carousel.Item>
-                  <img className="d-block w-100" src="./physic_dif.svg" alt="Phenomène physique de la diffusion" />
+                  <Image  className="d-block w-100" src={physicDifImg} alt="Phenomène physique de la diffusion" style={{objectFit: "contain"}} />
                 </Carousel.Item>
                 <Carousel.Item>
-                  <img className="d-block w-100" src="./physic_abs.svg" alt="Phenomène physique de l'absorption" />
-                </Carousel.Item>
+                <Image  className="d-block w-100" src={physicAbsImg} alt="Phenomène physique de l'absorption" style={{objectFit: "contain"}} />
+              </Carousel.Item>
               </Carousel>
             </Row>
             <Row className="text-uppercase text-center justify-content-center">

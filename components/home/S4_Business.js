@@ -5,8 +5,22 @@ import { useDrag } from "react-use-gesture";
 import { useSprings, animated, to as interpolate, useInView, useSpring } from "@react-spring/web";
 import Moment from "react-moment";
 import "moment/locale/fr";
+import Image from "next/image";
+import finitionsImg from "../../public/images/icones/finition.png"
+import controleImg from "../../public/images/icones/controle.png"
+import plastiqueImg from "../../public/images/icones/plastique.png"
+import enceinteImg from "../../public/images/icones/enceinte.png"
+import hacheImg from "../../public/images/icones/hache.png"
+import boisImg from "../../public/images/icones/bois.png"
+import kmImg from "../../public/images/icones/1380.png"
+import interlocuteurImg from "../../public/images/icones/interlocuteur.png"
+import singulariteImg from "../../public/images/icones/singularite.png"
+import cardTableImg from "../../public/images/home/card_table.png"
+import logoMarqueeImg from "../../public/images/logo/logo_marquee.svg"
 
-const cards = ["./carte_savoirfaire.jpg", "./carte_ecoute.jpg", "./carte_ecoresponsable.jpg"];
+
+
+const cards = ["/images/home/carte_savoirfaire.webp", "/images/home/carte_ecoute.webp", "/images/home/carte_ecoresponsable.webp"];
 
 // Initials values of cards props.  These two are just helpers, they conserve spring data, values that are later being interpolated into css
 const to = (i) => ({
@@ -102,13 +116,13 @@ export const S4_Business = () => {
         return (
           <Row className=" flex-md-column justify-content-center align-items-center">
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/interlocuteur.svg" className="s4_list_icon me-md-5 m-2" /> Unique contact
+              <Image style={{ objectFit: 'contain' }} src={interlocuteurImg} className="s4_list_icon me-md-5 m-2" /> Unique contact
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/enceinte.svg" className="s4_list_icon me-md-5 m-2" /> La passion du son
+              <Image style={{ objectFit: 'contain' }} src={enceinteImg} className="s4_list_icon me-md-5 m-2" /> La passion du son
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/singularite.svg" className="s4_list_icon me-md-5 m-2" /> Singularité
+              <Image style={{ objectFit: 'contain' }} src={singulariteImg} className="s4_list_icon me-md-5 m-2" /> Singularité
             </Col>
           </Row>
         );
@@ -116,13 +130,13 @@ export const S4_Business = () => {
         return (
           <Row className=" flex-md-column justify-content-center align-items-center ">
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0 bg">
-              <img src="./icones/bois.svg" className="s4_list_icon me-md-5 m-2" /> Bois PEFC/FSC
+              <Image style={{ objectFit: 'contain' }} src={boisImg} className="s4_list_icon me-md-5 m-2" /> Bois PEFC/FSC
             </Col>
             <Col className="d-flex align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/1380.svg" className="s4_list_icon me-md-5 m-2" /> 1380km maximum
+              <Image style={{ objectFit: 'contain' }} src={kmImg} className="s4_list_icon me-md-5 m-2" /> 1380km maximum
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/plastique.svg" className="s4_list_icon me-md-5 m-2" /> Zero plastique
+              <Image style={{ objectFit: 'contain' }} src={plastiqueImg} className="s4_list_icon me-md-5 m-2" /> Zero plastique
             </Col>
           </Row>
         );
@@ -130,13 +144,13 @@ export const S4_Business = () => {
         return (
           <Row className=" flex-md-column justify-content-center align-items-center">
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/hache.svg" className="s4_list_icon me-md-5 m-2" /> Travail manuel
+              <Image style={{ objectFit: 'contain' }} src={hacheImg} className="s4_list_icon me-md-5 m-2" /> Travail manuel
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/controle.svg" className="s4_list_icon me-md-5 m-2" /> Contrôle intégral
+              <Image style={{ objectFit: 'contain' }} src={controleImg} className="s4_list_icon me-md-5 m-2" /> Contrôle intégral
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <img src="./icones/finition.svg" className="s4_list_icon me-md-5 m-2" /> Finitions
+              <Image style={{ objectFit: 'contain' }} src={finitionsImg} className="s4_list_icon me-md-5 m-2" /> Finitions
             </Col>
           </Row>
         );
@@ -182,7 +196,7 @@ export const S4_Business = () => {
       <Row className="p-0 m-0 mt-2 mb-2">
         <Marquee pauseOnHover gradient={false} speed={70} className="s4_marquee ft1">
           <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>
-          <img src="./logo/logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" />
+          <Image style={{ objectFit: 'contain' }} src={logoMarqueeImg} alt="Miniature du logo de l'entreprise Quadratik" />
         </Marquee>
       </Row>
       <Row className="s4_row_business_values p-2">
@@ -207,7 +221,7 @@ export const S4_Business = () => {
                   <i className="fad fa-hand-pointer" /> 
                   <i className="fa fa-long-arrow-right" />
                 </div>
-                <img src="./card_table.svg" alt="Table des valeurs de l'entreprise Quadratik.fr" className="s4_card_table" />
+                <Image style={{ objectFit: 'contain' }} src={cardTableImg} alt="Table des valeurs de l'entreprise Quadratik.fr" className="s4_card_table" />
                 {inView ? <Deck setVisibleCard={setVisibleCard} /> : null}
               </div>
             </Col>

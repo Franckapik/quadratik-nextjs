@@ -7,6 +7,12 @@ import Parser from "rss-parser";
 import { LegalMentions } from "./legal/LegalMentions";
 import { CGV } from "./legal/CGV";
 import { Techno } from "./legal/Techno";
+import Image from "next/image";
+import logoMarqueeImg from "../../public/images/logo/logo_marquee.svg"
+import logoOrientationImg from "../../public/images/logo/logo_orientation.svg"
+import ekleoImg from "../../public/images/logo/ekleo_logo.png"
+
+
 
 export const S5_Contact = () => {
   const [legalshow, setLegalShow] = useState(false);
@@ -58,12 +64,12 @@ export const S5_Contact = () => {
           {rssFeed.map((a, i) => (
             <div key={"marquee_actu" + i}>
               <span className="p-5">Actualites musicales</span>
-              <img src="./logo/logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
+              <Image style={{ objectFit: 'contain' }} src={logoMarqueeImg} alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
               <span className="p-5">
                 
                 <a href={a.link}>{a.title}</a>
               </span>
-              <img src="./logo/logo_marquee.svg" alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
+              <Image style={{ objectFit: 'contain' }} src={logoMarqueeImg} alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
             </div>
           ))}
         </Marquee>
@@ -72,7 +78,7 @@ export const S5_Contact = () => {
         <Col sm={1} className=" d-none d-md-flex align-items-center justify-content-center"></Col>
         <Col sm={4} className=" d-none d-md-flex flex-column  align-items-center justify-content-center text-uppercase">
           Besoin d'être orienté dans votre projet ?
-          <img src="/logo/logo_orientation.svg" alt="Image illustrant un choix à réaliser à partir du logo de Quadratik.fr" className="s5_logo_orientation" />
+          <Image style={{ objectFit: 'contain' }} src={logoOrientationImg} alt="Image illustrant un choix à réaliser à partir du logo de Quadratik.fr" className="s5_logo_orientation" />
         </Col>
         <Col sm={3} className=" d-flex flex-row flex-md-column align-items-center justify-content-start p-0 m-0">
           <Row className="text-uppercase  h-50 w-100 align-items-center justify-content-center text-center">Recevoir des bonnes ondes</Row>
@@ -96,7 +102,7 @@ export const S5_Contact = () => {
           </Row>
           <div className="d-flex flex-column justify-content-evenly align-items-center h-50 text-center w-100">
             Partenaire d'étude acoustique
-            <img src="./logo/ekleo_logo.png" className="s5_ekleo_logo m-2" alt="Logo du partenaire principal de Quadratik.fr pour les etudes acoustiques" />
+            <Image style={{ objectFit: 'contain' }} src={ekleoImg} className="s5_ekleo_logo m-2" alt="Logo du partenaire principal de Quadratik.fr pour les etudes acoustiques" />
           </div>
         </Col>
         <Col sm={1} className="d-none d-md-flex flex-md-column align-items-center justify-content-evenly s5_social">

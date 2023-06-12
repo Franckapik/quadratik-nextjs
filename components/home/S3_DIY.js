@@ -1,6 +1,15 @@
 import { animated, useInView } from "@react-spring/web";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
+import encartHautImg from "../../public/images/home/Indus_haut.png"
+import encartBasImg from "../../public/images/home/Indus_bas.png"
+import guide1Img from "../../public/images/home/s3_guide_i1.png"
+import guide2Img from "../../public/images/home/s3_guide_i2.png"
+import guide3Img from "../../public/images/home/s3_guide_i3.png"
+import guide4Img from "../../public/images/home/s3_guide_i4.png"
+import diffusorDiyImg from "../../public/images/home/diy_diffuseur.png"
+
 
 export const S3_DIY = () => {
   const switchExplanation = (explanation) => {
@@ -37,7 +46,7 @@ export const S3_DIY = () => {
         <Row className="s3_diy_bg justify-content-center align-items-center p-2 p-md-5">
           <Col md={6} className="d-flex flex-column s3_diy_guide_text  order-md-last ">
             <Row className="pb-md-4 d-none d-md-flex">
-              <img alt="encart industriel du haut" src="./Indus_haut.svg"></img>
+            <Image  className="d-block w-100" src={encartHautImg} alt="Encart industriel du haut" style={{objectFit: "contain"}} />
             </Row>
             <Row className="justify-content-center ft4 text-uppercase text-center  mb-4">Comment fonctionne un diffuseur ?</Row>
             <Row className="d-flex s2_hor_swipe s3_diy_swipe flex-nowrap p-md-0 align-items-center text-center">
@@ -45,19 +54,19 @@ export const S3_DIY = () => {
                 <i className="fad fa-chevron-left "></i>
               </div>
               <Col>
-                <img onMouseOver={() => setExplanation(0)} src="./s3_guide_i1.png" style={{ opacity: explanation === 0 ? 1 : 0.1 }}></img>
+                <Image  onMouseOver={() => setExplanation(0)} src={guide1Img} style={{ opacity: explanation === 0 ? 1 : 0.1, objectFit: "contain" }}></Image>
               </Col>
 
               <Col>
-                <img onMouseOver={() => setExplanation(1)} src="./s3_guide_i2.png" style={{ opacity: explanation === 1 ? 1 : 0.1 }}></img>
+                <Image  onMouseOver={() => setExplanation(1)} src={guide2Img}style={{ opacity: explanation === 1 ? 1 : 0.1, objectFit: "contain" }}></Image>
               </Col>
 
               <Col>
-                <img onMouseOver={() => setExplanation(2)} src="./s3_guide_i3.png" style={{ opacity: explanation === 2 ? 1 : 0.1 }}></img>
+                <Image  onMouseOver={() => setExplanation(2)} src={guide3Img} style={{ opacity: explanation === 2 ? 1 : 0.1, objectFit: "contain" }}></Image>
               </Col>
 
               <Col>
-                <img onMouseOver={() => setExplanation(3)} src="./s3_guide_i4.png" style={{ opacity: explanation === 3 ? 1 : 0.1 }}></img>
+                <Image  onMouseOver={() => setExplanation(3)} src={guide4Img} style={{ opacity: explanation === 3 ? 1 : 0.1, objectFit: "contain" }}></Image>
               </Col>
               <div className="s3_arrow d-flex d-md-none justify-content-center align-items-center h-100">
                 <i className="fad fa-chevron-right "></i>
@@ -70,7 +79,7 @@ export const S3_DIY = () => {
             </Button>
           </div>
             <Row className="d-none d-md-flex">
-              <img alt="encart industriel du bas" src="./Indus_bas.svg"></img>
+              <Image style={{objectFit: "contain"}} alt="Encart industriel du bas" src={encartBasImg}></Image>
             </Row>
           </Col>
           <Col md={6} className="d-none d-md-flex flex-column justify-content-evenly align-items-center s3_diy_draw p-0 order-md-first ">
@@ -87,7 +96,7 @@ export const S3_DIY = () => {
               </div>
             </Row>
             <Row className="s3_dif_diy mt-4">
-              <img src="./diy_diffuseur.svg" alt="Image d'un diffuseur personnalisé" />
+              <Image style={{objectFit: "contain"}} src={diffusorDiyImg} alt="Image d'un diffuseur personnalisé" />
             </Row>
           </Col>
         </Row>
