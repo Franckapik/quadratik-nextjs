@@ -17,7 +17,7 @@ export const Burger = ({onClick, toggled}) => {
   return (
     <>
       <animated.div ref={ref} style={springs} className="burger" onClick={onClick}>
-        <Hamburger direction="right" toggled={toggled}  color="#FFFFFF" />
+        <Hamburger label="Quadratik_Menu" direction="right" toggled={toggled}  color="#FFFFFF" />
       </animated.div>
     </>
   );

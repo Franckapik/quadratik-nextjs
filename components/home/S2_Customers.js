@@ -12,37 +12,50 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
       src: "/images/customers/customer3.webp",
       width: 205,
       height: 357,
+      alt: "Diffuseur 1D avec finition huile"
     },
     {
       src: "/images/customers/customer1.webp",
       width: 548,
       height: 478,
+      alt: "Modèles présentés depuis le studio d'enregistrement Disco Casino Rennes"
+
     },
     {
       src: "/images/customers/customer2.webp",
       width: 548,
       height: 478,
+      alt: "Salle de régie et d'enregistrement Auray"
+
     },
 
     {
       src: "/images/customers/customer4.webp",
       width: 548,
       height: 478,
+      alt: "Diffuseur 1D et 2D en peuplier clair"
+
     },
     {
       src: "/images/customers/customer5.webp",
       width: 548,
       height: 478,
+      alt: "Diffuseurs 2D dans un salon HIFI Home cinéma"
+
     },
     {
       src: "/images/customers/customer6.webp",
       width: 548,
       height: 478,
+      alt: "Diffuseur 2D en peuplier dans une salle d'essai de fabrication de bombardes"
+
     },
     {
       src: "/images/customers/customer7.webp",
       width: 205,
       height: 357,
+      alt: "Diffuseur 2D présenté sur un piano Rhodes"
+
     },
   ];
 
