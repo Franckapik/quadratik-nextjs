@@ -23,8 +23,9 @@ export default function MyApp({ Component, pageProps }) {
     <SSRProvider>
       <QueryClientProvider client={queryClient}>
         <Head>
-        <title>Traitement acoustique 100% Français et Éco-responsable - Quadratik</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0" />
+          <title>Traitement acoustique 100% Français et Éco-responsable - Quadratik</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />{" "}
+          <meta name="description" content="Améliorez le confort acoustique de votre pièce avec des produits issus de l'artisanat 100% français garantissant un moindre impact environemental par l'utilisation de matériaux naturels performants." />
         </Head>
         {/*         <ReactQueryDevtools initialIsOpen={false} />
          */}
