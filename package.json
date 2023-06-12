@@ -38,6 +38,8 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^13.4.5",
+    "cross-env": "^7.0.3",
     "csv-loader": "^3.0.5",
     "sass": "^1.63.2"
   }

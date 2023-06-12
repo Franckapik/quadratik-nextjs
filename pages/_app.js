@@ -1,7 +1,7 @@
 import "../public/style/style.scss";
 import "../public/style/all.min.css";
-
 import Head from "next/head";
+import { Krub } from "next/font/google";
 
 //auto-generated ids are consistent between the server and client.
 import SSRProvider from "react-bootstrap/SSRProvider";
@@ -17,6 +17,8 @@ const queryClient = new QueryClient({
   },
 });
 
+const font = Krub({ subsets: ["latin"], weight : ['400'] });
+
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -30,7 +32,9 @@ export default function MyApp({ Component, pageProps }) {
         {/*         <ReactQueryDevtools initialIsOpen={false} />
          */}
         <GoogleAnalytics trackPageViews />
-        <Component {...pageProps} />
+        <main className={font.className}>
+          <Component {...pageProps} />
+        </main>
       </QueryClientProvider>
     </SSRProvider>
   );

@@ -31,8 +31,8 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
 
     {
       src: "/images/customers/customer4.webp",
-      width: 548,
-      height: 478,
+      width: 268,
+      height: 400,
       alt: "Diffuseur 1D et 2D en peuplier clair"
 
     },
