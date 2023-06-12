@@ -18,7 +18,7 @@ export const PerformanceSpatial = ({ nom }) => {
 
   return (
       <Row className="">
-        {polarSucceed && polarImg? <Image style={{objectFit: "contain"}} src={`data:image/jpeg;base64,${polarImg}`} width={887} height={627} /> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact "}
+        {polarSucceed && polarImg? <Image style={{objectFit: "contain"}} src={`data:image/jpeg;base64,${polarImg}`} width={887} height={627} alt='Graphique de répartition spatiale du son diffusé au contact d un diffuseur acoustique Quadratik /> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact "}
       </Row>
   );
 };

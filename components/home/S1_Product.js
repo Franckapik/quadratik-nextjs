@@ -35,12 +35,12 @@ export const S1_Product = () => {
       <Col md={5} className="s1_square"> 
         <Carousel activeIndex={index} onSelect={handleSelect} indicators={false} controls={false} interval={null}>
           <Carousel.Item>
-            <Image  className="d-block w-100 s1_image_hover" src={diffuseurFaceImg} alt="First slide" style={{objectFit: "contain"}} />
-            <Image  className="d-block w-100" src={diffuseurSideImg} alt="Présentation du produit Woodik-7" style={{objectFit: "contain"}} />
+            <Image  className="d-block w-100 s1_image_hover" src={diffuseurFaceImg} alt="Présentation du diffuseur Woodik-7 de face" style={{objectFit: "contain"}} />
+            <Image  className="d-block w-100" src={diffuseurSideImg} alt="Présentation du diffuseur Woodik-7 de coté" style={{objectFit: "contain"}} />
           </Carousel.Item>
           <Carousel.Item>
-            <Image  className="d-block w-100 s1_image_hover" src={absorbeurFaceImg} alt="Second slide" style={{objectFit: "contain"}}/>
-            <Image  className="d-block w-100" src={absorbeurSideImg} alt="Présentation du produit Quadrablack" style={{objectFit: "contain"}} />
+            <Image  className="d-block w-100 s1_image_hover" src={absorbeurFaceImg} alt="Présentation de l'absorbeur Quadrablack-10 de face" style={{objectFit: "contain"}}/>
+            <Image  className="d-block w-100" src={absorbeurSideImg} alt="Présentation de l'absorbeur Quadrablack-10 de coté" style={{objectFit: "contain"}} />
           </Carousel.Item>
         </Carousel>
       </Col>

@@ -54,19 +54,19 @@ export const S3_DIY = () => {
                 <i className="fad fa-chevron-left "></i>
               </div>
               <Col>
-                <Image  onMouseOver={() => setExplanation(0)} src={guide1Img} style={{ opacity: explanation === 0 ? 1 : 0.1, objectFit: "contain" }}></Image>
+                <Image alt="Une onde sonore en contact avec une cellule de diffuseur acoustique"  onMouseOver={() => setExplanation(0)} src={guide1Img} style={{ opacity: explanation === 0 ? 1 : 0.1, objectFit: "contain" }}></Image>
               </Col>
 
               <Col>
-                <Image  onMouseOver={() => setExplanation(1)} src={guide2Img}style={{ opacity: explanation === 1 ? 1 : 0.1, objectFit: "contain" }}></Image>
+                <Image alt="La profondeur des cellule d'un diffuseur acoustique influence le traitement des basses fréquences"  onMouseOver={() => setExplanation(1)} src={guide2Img}style={{ opacity: explanation === 1 ? 1 : 0.1, objectFit: "contain" }}></Image>
               </Col>
 
               <Col>
-                <Image  onMouseOver={() => setExplanation(2)} src={guide3Img} style={{ opacity: explanation === 2 ? 1 : 0.1, objectFit: "contain" }}></Image>
+                <Image alt="La largeur des cellules d'un diffuseur acoustique conditionne le traitement dans les aigus"  onMouseOver={() => setExplanation(2)} src={guide3Img} style={{ opacity: explanation === 2 ? 1 : 0.1, objectFit: "contain" }}></Image>
               </Col>
 
               <Col>
-                <Image  onMouseOver={() => setExplanation(3)} src={guide4Img} style={{ opacity: explanation === 3 ? 1 : 0.1, objectFit: "contain" }}></Image>
+                <Image alt="L'efficacité du traitement dépend du nombre de cellules d'un diffuseur acoustique" onMouseOver={() => setExplanation(3)} src={guide4Img} style={{ opacity: explanation === 3 ? 1 : 0.1, objectFit: "contain" }}></Image>
               </Col>
               <div className="s3_arrow d-flex d-md-none justify-content-center align-items-center h-100">
                 <i className="fad fa-chevron-right "></i>

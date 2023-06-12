@@ -61,7 +61,7 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
               <span className="ft2 p-4">quelles que soient les dimensions de votre espace</span>
             </Row>
             <Row className="flex-nowrap">
-              <Image src={studioImg} alt="Image du studio" className="p-3" style={{ objectFit: 'contain' }} />
+              <Image src={studioImg} alt="Image d'un studio d'enregistrement équipé de modèles Quadratik" className="p-3" style={{ objectFit: 'contain' }} />
             </Row>
 
             <Row className="d-flex">

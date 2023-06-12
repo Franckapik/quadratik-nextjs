@@ -116,13 +116,13 @@ export const S4_Business = () => {
         return (
           <Row className=" flex-md-column justify-content-center align-items-center">
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <Image style={{ objectFit: 'contain' }} src={interlocuteurImg} className="s4_list_icon me-md-5 m-2" /> Unique contact
+              <Image style={{ objectFit: 'contain' }} src={interlocuteurImg} className="s4_list_icon me-md-5 m-2" alt="Une icone illustrant un interlocuteur unique lors de la prise contact" /> Unique contact
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <Image style={{ objectFit: 'contain' }} src={enceinteImg} className="s4_list_icon me-md-5 m-2" /> La passion du son
+              <Image style={{ objectFit: 'contain' }} src={enceinteImg} className="s4_list_icon me-md-5 m-2" alt="Une icone illustrant une enceinte hi-fi"/> La passion du son
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <Image style={{ objectFit: 'contain' }} src={singulariteImg} className="s4_list_icon me-md-5 m-2" /> Singularité
+              <Image style={{ objectFit: 'contain' }} src={singulariteImg} className="s4_list_icon me-md-5 m-2" alt="Une icone illustrant la singularité de chaque projet"/> Singularité
             </Col>
           </Row>
         );
@@ -130,13 +130,13 @@ export const S4_Business = () => {
         return (
           <Row className=" flex-md-column justify-content-center align-items-center ">
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0 bg">
-              <Image style={{ objectFit: 'contain' }} src={boisImg} className="s4_list_icon me-md-5 m-2" /> Bois PEFC/FSC
+              <Image style={{ objectFit: 'contain' }} src={boisImg} className="s4_list_icon me-md-5 m-2" alt="Une icone illustrant le label du bois issu de forêt gérée de manière ecoresponsable"/> Bois PEFC/FSC
             </Col>
             <Col className="d-flex align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <Image style={{ objectFit: 'contain' }} src={kmImg} className="s4_list_icon me-md-5 m-2" /> 1380km maximum
+              <Image style={{ objectFit: 'contain' }} src={kmImg} className="s4_list_icon me-md-5 m-2" alt="Une icone illustrant la France et les limites de livraisons de Quadratik.fr"/> 1380km maximum
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <Image style={{ objectFit: 'contain' }} src={plastiqueImg} className="s4_list_icon me-md-5 m-2" /> Zero plastique
+              <Image style={{ objectFit: 'contain' }} src={plastiqueImg} className="s4_list_icon me-md-5 m-2" alt="Une icone illustrant un colis avec embaalage sans plastiques"/> Zero plastique
             </Col>
           </Row>
         );
@@ -144,13 +144,13 @@ export const S4_Business = () => {
         return (
           <Row className=" flex-md-column justify-content-center align-items-center">
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <Image style={{ objectFit: 'contain' }} src={hacheImg} className="s4_list_icon me-md-5 m-2" /> Travail manuel
+              <Image style={{ objectFit: 'contain' }} src={hacheImg} className="s4_list_icon me-md-5 m-2"alt="Une icone illustrant une hache pour définir le travail manuel de l'artisan" /> Travail manuel
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <Image style={{ objectFit: 'contain' }} src={controleImg} className="s4_list_icon me-md-5 m-2" /> Contrôle intégral
+              <Image style={{ objectFit: 'contain' }} src={controleImg} className="s4_list_icon me-md-5 m-2" alt="Une icone illustrant une checkliste pour le contrôle intégral de chaque produit vendu"/> Contrôle intégral
             </Col>
             <Col className="align-items-center d-flex flex-column flex-md-row p-md-4 ps-0">
-              <Image style={{ objectFit: 'contain' }} src={finitionsImg} className="s4_list_icon me-md-5 m-2" /> Finitions
+              <Image style={{ objectFit: 'contain' }} src={finitionsImg} className="s4_list_icon me-md-5 m-2" alt="Une icone illustrant un pinceau caractérisant les finitions personnalisées de chaque produit Quadratik "/> Finitions
             </Col>
           </Row>
         );
