@@ -6,6 +6,9 @@ import { useProductStore } from "../../hooks/store";
 import { listCategories, objectsInCategory, variantFetchByParentId } from "../dolibarrApi/fetch";
 import { CardWrap } from "./CardWrap";
 import { ChildCategorie } from "./ChildCategorie";
+import Image from "next/image";
+import logoImg from "../../public/images/logo/logo.svg"
+
 
 export const ParentCategorie = ({ firstCat, setViewedCategory }) => {
   const [ref, inView] = useInView();
@@ -24,7 +27,7 @@ export const ParentCategorie = ({ firstCat, setViewedCategory }) => {
       <CardWrap categorie >
         <div className="shop_categorie text-dark" id={"tag" + firstCat.id} >
           <Row className="shop_categorie_logo justify-content-center">
-            <img src="/logo/logo.svg" alt="Image du logo Quadratik dans la boutique" />
+            <Image style={{objectFit : "contain"}} src={logoImg} alt="Image du logo Quadratik dans la boutique" />
           </Row>
           <p className="ft05 mt-5 text-center" ref={ref}>{firstCat.label}</p>
           <div className="ft4 mt-5" dangerouslySetInnerHTML={{ __html: firstCat.description }}></div>

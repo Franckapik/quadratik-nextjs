@@ -1,7 +1,7 @@
 import { useTexture } from "@react-three/drei";
 
 const Part = (props) => {
-  const [colorMap, normalMap, roughnessMap] = useTexture(["/textures_wood/plywood.jpg", "/textures_wood/norm.jpg", "/textures_wood/rough.jpg"]);
+  const [colorMap, normalMap, roughnessMap] = useTexture(["/images/textures3d/plywood.jpg", "/images/textures3d/norm.jpg", "/images/textures3d/rough.jpg"]);
 
   colorMap.repeat.set(0.1, 0.05);
   normalMap.repeat.set(0.1, 0.05);

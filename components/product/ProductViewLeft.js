@@ -5,6 +5,7 @@ import { PerformanceCharts } from "./PerformanceCharts";
 import { PerformanceSpatial } from "./ParformanceSpatial";
 import { usePicture } from "../../hooks/usePicture";
 import { Loader } from "../Loader";
+import Image from "next/image";
 
 export const ProductViewLeft = ({ product, display, setDisplay }) => {
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed, isError: pictureError } = usePicture(product.nomenclature.simple, false); //true for miniature
@@ -30,14 +31,14 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
           <Carousel.Item>
             <Carousel indicators={false} activeIndex={index} controls={false}>
               <Carousel.Item>
-                <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${facePicture}`} alt="Front preview of the model" />
+                <Image style={{objectFit: "contain"}}  width={720} height={1080} className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${facePicture}`} alt="Front preview of the model" />
                 <Carousel.Caption>
                   <h3>{product.nomenclature.simple}</h3>
                   <p>{product.dimensions.fmin} Hz - {product.dimensions.fmax} Hz</p>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
-                <img className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${sidePicture}`} alt="Side Picture preview of the model" />
+                <Image style={{objectFit: "contain"}} width={720} height={1080}  className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${sidePicture}`} alt="Side Picture preview of the model" />
                 <Carousel.Caption>
                   <h3>Dimensions du modèle</h3>
                   <p>
@@ -53,8 +54,8 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
               </Carousel.Item>
             </Carousel>
             <div className="carousel-indicators">
-              <img onClick={() => setIndex(0)} className={`d-block product_thumbnail m-2 `} src={`data:image/png;base64,${facePicture}`} alt="Image miniature du modèle de face" />
-              <img onClick={() => setIndex(1)} className={`d-block product_thumbnail m-2 `} src={`data:image/png;base64,${sidePicture}`} alt="Image miniature du modèle de coté" />
+              <Image style={{objectFit: "contain"}} width={90} height={135} onClick={() => setIndex(0)} className={`d-block product_thumbnail m-2 `} src={`data:image/png;base64,${facePicture}`} alt="Image miniature du modèle de face" />
+              <Image style={{objectFit: "contain"}} width={90} height={135} onClick={() => setIndex(1)} className={`d-block product_thumbnail m-2 `} src={`data:image/png;base64,${sidePicture}`} alt="Image miniature du modèle de coté" />
               <div onClick={() => setIndex(2)} className={`d-block product_thumbnail m-2 `}>
                 <i className="fal fa-cube fa-3x mt-4"></i> 3D
               </div>

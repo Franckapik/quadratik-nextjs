@@ -1,7 +1,7 @@
 import { useTexture } from "@react-three/drei";
 
 const Cell = ({ position, rotation, args, index, motif, color, highlights, teinte }) => {
-  const [colorMap, wengeMap, teckMap, cheneMap, normalMap, roughnessMap] = useTexture(["/textures_wood/plywood.jpg", "/textures_wood/wenge.jpg","/textures_wood/teck.jpg","/textures_wood/chene.jpg", "/textures_wood/norm.jpg", "/textures_wood/rough.jpg"]);
+  const [colorMap, wengeMap, teckMap, cheneMap, normalMap, roughnessMap] = useTexture(["/images/textures3d/plywood.jpg", "/images/textures3d/wenge.jpg","/images/textures3d/teck.jpg","/images/textures3d/chene.jpg", "/images/textures3d/norm.jpg", "/images/textures3d/rough.jpg"]);
 
   const motif1 = [0, 3, 6, 8, 12, 17, 21, 23, 25, 27, 31, 36, 40, 42, 45, 48, 49, 52, 55, 57, 61, 66, 70, 72, 74, 76, 80, 86, 89, 91, 94, 97];
 

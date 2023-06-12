@@ -12,6 +12,9 @@ import { QuadralabView1D } from "../../components/quadralab/QuadralabView1D";
 import { useProductStore } from "../../hooks/store";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
+import Image from "next/image";
+import logoMarqueeImg from "../../public/images/logo/logo_marquee.svg"
+
 
 const Quadralab = () => {
   //Data
@@ -48,7 +51,7 @@ const Quadralab = () => {
         <Row className="section quadralab_main_row layout_space" ref={quadralabRef}>
           <FormProvider {...methods}>
             <Form onSubmit={methods.handleSubmit(onSubmit)}>
-              <img className="quadralab_bg" src="/logo/logo_marquee.svg" alt="" />
+              <Image  style={{objectFit: "contain"}}  className="quadralab_bg" src={logoMarqueeImg} alt="Logo de Quadratik.fr" />
               <Row className="justify-content-center mt-md-5">
                 <>
                   <Col md={3} className="order-md-1">

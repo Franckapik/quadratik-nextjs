@@ -1,7 +1,5 @@
 7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q
 
-    <img src="http://shop.quadratik.fr/document.php?hashp=3XNPgI9b924DXp0q65b9x7wIPdhOGKbt" />
-
 ==> TODO
 
 ==> react-anime : 

@@ -3,6 +3,7 @@ import { Row } from "react-bootstrap";
 
 import { documentByFilename } from "../dolibarrApi/fetch";
 import { useQuery } from "react-query";
+import Image from "next/image";
 
 export const PerformanceSpatial = ({ nom }) => {
   const [polarImg, setPolarImg] = useState(false);
@@ -17,7 +18,7 @@ export const PerformanceSpatial = ({ nom }) => {
 
   return (
       <Row className="">
-        {polarSucceed && polarImg? <img src={`data:image/jpeg;base64,${polarImg}`}></img> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact "}
+        {polarSucceed && polarImg? <Image style={{objectFit: "contain"}} src={`data:image/jpeg;base64,${polarImg}`} width={887} height={627} /> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact "}
       </Row>
   );
 };
