@@ -57,6 +57,7 @@ export const S0_Landing = () => {
             </div>
           </div>
         </div>
+        <div className="position-absolute h-100 w-100 d-md-none"><i className="fad fa-long-arrow-down s0_scroll_icon fa-2x"></i></div>
         <div className="d-none d-md-block p-0">{loaded ? <animated.div style={goLeft} className="border_creme s0_cadre_home_droit "></animated.div> : null}</div>
       </Row>
   );

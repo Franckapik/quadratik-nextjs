@@ -314,9 +314,8 @@ $creme: #eee3d6;
 .product_modele_desc {
   position: relative;
   width: 80%;
-  margin-top: 10%!important;
+  margin-top: 10% !important;
 }
-
 
 .form-check-input {
   border-color: $creme;
@@ -416,10 +415,9 @@ $creme: #eee3d6;
   margin: auto;
 }
 
-
 .product_right_bg {
   position: absolute;
-  top : 0px;
+  top: 0px;
   right: 0px;
   height: 100%;
   z-index: -2;
@@ -429,7 +427,6 @@ $creme: #eee3d6;
   height: 100vh;
   min-height: 600px;
 }
-
 
 .product_right {
   position: relative;
@@ -446,23 +443,20 @@ $creme: #eee3d6;
   bottom: 0;
 }
 
-
 .product_carousel_img {
   height: 70vh;
   width: auto;
 }
-
-
 
 .quadralab_title {
   z-index: 2;
 }
 
 .quadralab_view1d_main {
-  margin-top: 3rem!important ;
+  margin-top: 3rem !important ;
 }
 
-.quadralab_view1d_main .values{
+.quadralab_view1d_main .values {
   height: 2rem;
 }
 
@@ -484,8 +478,6 @@ $creme: #eee3d6;
   position: absolute;
 }
 
-
-
 .accordion-header {
   font-size: calc(8rem + 1vw) !important;
   letter-spacing: calc(0.1rem + 0.1vw) !important;
@@ -502,8 +494,6 @@ $creme: #eee3d6;
   --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='red' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
   --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem #9fb07c8d !important;
 }
-
-
 
 .quadralab_main_row {
   background: url(../images/home/indus.png);
@@ -562,16 +552,16 @@ $creme: #eee3d6;
   position: relative;
   top: -40px;
   right: 1rem;
-  font-size: 0.9rem!important;
+  font-size: 0.9rem !important;
 }
 
 .performance_widget {
   width: 100% !important;
-  padding: 0rem 1rem 0rem 1rem!important;
+  padding: 0rem 1rem 0rem 1rem !important;
 }
 
 .performance_widget i {
-font-size: 	0.625em;
+  font-size: 0.625em;
 }
 
 .performance_round {
@@ -592,7 +582,6 @@ font-size: 	0.625em;
   position: relative;
   top: -2.5rem;
 }
-
 
 .right_creme {
   border-right: solid thin $creme;
@@ -688,10 +677,10 @@ font-size: 	0.625em;
 }
 
 .product_left .carousel-indicators {
-  position: relative!important;
+  position: relative !important;
 }
 .product_left .carousel-indicators {
-  position: relative!important;
+  position: relative !important;
   bottom: 80px;
 }
 
@@ -836,7 +825,7 @@ font-size: 	0.625em;
 
 .s3_dif_diy {
   width: calc(40vh + 5vw);
-  max-height: 300px ;
+  max-height: 300px;
 }
 
 .s3_diy_bg {
@@ -850,7 +839,7 @@ font-size: 	0.625em;
 }
 
 .s3_diy_guide_text {
-  padding-right: 4vw!important;
+  padding-right: 4vw !important;
 }
 
 .s3_diy_bg h2 {
@@ -968,11 +957,11 @@ font-size: 	0.625em;
 
 .s4_list {
   min-height: 100px;
-  padding-top: 2vh!important;
+  padding-top: 2vh !important;
 }
 
 .s4_list .col {
-  padding-top: 2vh!important;
+  padding-top: 2vh !important;
 }
 
 .s4_list_icon {
@@ -980,6 +969,27 @@ font-size: 	0.625em;
   height: calc(5vh);
   position: relative;
   left: -1vw;
+}
+
+.s0_scroll_icon {
+  position: relative;
+  left: 48%;
+  top: 88%;
+  opacity: 0.8;
+  z-index: 1000;
+  animation: translateDown 1s 10 alternate-reverse;
+  animation-fill-mode: forwards;
+}
+
+@keyframes translateDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
 }
 
 .s4_marquee {
@@ -1003,7 +1013,7 @@ font-size: 	0.625em;
 .s4_row_business_values {
   rotate: -1.5deg;
   max-height: 80vh;
-  padding-top: 5vh!important;
+  padding-top: 5vh !important;
 }
 
 .s5_animatedcontact {
@@ -1267,7 +1277,7 @@ p {
   }
 
   .product_left .carousel-caption {
-    bottom: 5rem!important;
+    bottom: 5rem !important;
   }
 
   .product_carousel_img {
@@ -1275,7 +1285,7 @@ p {
   }
 
   .layout_home .text_dark a {
-    color: $creme!important;
+    color: $creme !important;
   }
 
   .row > * {
@@ -1284,7 +1294,7 @@ p {
   }
 
   .product_desc_modele {
-    text-align : justify
+    text-align: justify;
   }
 
   .s1_product_name {
