@@ -3,7 +3,7 @@ import { Button, Col, Modal, Row } from "react-bootstrap";
 import { Gallery } from "react-grid-gallery";
 import { useBearStore } from "../../hooks/store";
 import Image from "next/image";
-import studioImg from "../../public/images/home/Studios1.png"
+import studioImg from "../../public/images/home/Studios1.png";
 
 export const S2_Customers = ({ scroll, vh, mobile }) => {
   const height = useBearStore((state) => state.height);
@@ -12,50 +12,44 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
       src: "/images/customers/customer3.webp",
       width: 205,
       height: 357,
-      alt: "Diffuseur 1D avec finition huile"
+      alt: "Diffuseur 1D avec finition huile",
     },
     {
       src: "/images/customers/customer1.webp",
       width: 548,
       height: 478,
-      alt: "Modèles présentés depuis le studio d'enregistrement Disco Casino Rennes"
-
+      alt: "Modèles présentés depuis le studio d'enregistrement Disco Casino Rennes",
     },
     {
       src: "/images/customers/customer2.webp",
       width: 548,
       height: 478,
-      alt: "Salle de régie et d'enregistrement Auray"
-
+      alt: "Salle de régie et d'enregistrement Auray",
     },
 
     {
       src: "/images/customers/customer4.webp",
       width: 268,
       height: 400,
-      alt: "Diffuseur 1D et 2D en peuplier clair"
-
+      alt: "Diffuseur 1D et 2D en peuplier clair",
     },
     {
       src: "/images/customers/customer5.webp",
       width: 548,
       height: 478,
-      alt: "Diffuseurs 2D dans un salon HIFI Home cinéma"
-
+      alt: "Diffuseurs 2D dans un salon HIFI Home cinéma",
     },
     {
       src: "/images/customers/customer6.webp",
       width: 548,
       height: 478,
-      alt: "Diffuseur 2D en peuplier dans une salle d'essai de fabrication de bombardes"
-
+      alt: "Diffuseur 2D en peuplier dans une salle d'essai de fabrication de bombardes",
     },
     {
       src: "/images/customers/customer7.webp",
       width: 205,
       height: 357,
-      alt: "Diffuseur 2D présenté sur un piano Rhodes"
-
+      alt: "Diffuseur 2D présenté sur un piano Rhodes",
     },
   ];
 
@@ -74,7 +68,7 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
               <span className="ft2 p-4">quelles que soient les dimensions de votre espace</span>
             </Row>
             <Row className="flex-nowrap">
-              <Image src={studioImg} alt="Image d'un studio d'enregistrement équipé de modèles Quadratik" className="p-3" style={{ objectFit: 'contain' }} />
+              <Image src={studioImg} alt="Image d'un studio d'enregistrement équipé de modèles Quadratik" className="p-3 h-100" style={{ objectFit: "contain" }} />
             </Row>
 
             <Row className="d-flex">
@@ -82,13 +76,13 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
                 <Gallery id="s2_mobile_gallery" rowHeight={80} maxRows={1} images={images} />
               </Col>
               <Button variant="primary" className="mt-4" onClick={() => setLgShow(true)}>
-               - Les réalisations -
+                - Les réalisations -
               </Button>
             </Row>
           </Col>
           <Col></Col>
           <Col md={5} className="d-none d-md-block s2_customers_photo">
-            <Gallery rowHeight={400} maxRows={2} images={images} />
+            <Gallery rowHeight={300} maxRows={2} images={images} />
           </Col>
         </Row>
       </Col>

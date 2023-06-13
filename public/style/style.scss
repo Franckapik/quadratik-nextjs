@@ -836,6 +836,7 @@ font-size: 	0.625em;
 
 .s3_dif_diy {
   width: calc(40vh + 5vw);
+  max-height: 300px ;
 }
 
 .s3_diy_bg {
@@ -844,8 +845,8 @@ font-size: 	0.625em;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  height: 85vh;
-  width: auto;
+  height: 95vh;
+  max-width: 85vw;
 }
 
 .s3_diy_guide_text {
@@ -864,7 +865,7 @@ font-size: 	0.625em;
 .s3_diy_swipe {
   border-bottom: solid 1px #d0c3b426;
   border-top: solid 1px #d0c3b426;
-  height: 200px !important;
+  height: 130px !important;
 }
 
 .s3_diy_swipe img {
@@ -967,11 +968,18 @@ font-size: 	0.625em;
 
 .s4_list {
   min-height: 100px;
+  padding-top: 2vh!important;
+}
+
+.s4_list .col {
+  padding-top: 2vh!important;
 }
 
 .s4_list_icon {
   color: #8ea65f;
   height: calc(5vh);
+  position: relative;
+  left: -1vw;
 }
 
 .s4_marquee {
@@ -988,8 +996,14 @@ font-size: 	0.625em;
   width: calc(2rem + 1vw);
 }
 
+.s4_text {
+  max-height: 80vh;
+}
+
 .s4_row_business_values {
   rotate: -1.5deg;
+  max-height: 80vh;
+  padding-top: 5vh!important;
 }
 
 .s5_animatedcontact {
