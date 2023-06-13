@@ -1,15 +1,31 @@
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { LayoutHome } from "../components/LayoutHome";
-import { S0_Landing } from "../components/home/S0_Landing";
-import { S1_Product } from "../components/home/S1_Product";
-import { S2_Canvas } from "../components/home/S2_Canvas";
-import { S2_Customers } from "../components/home/S2_Customers";
-import { S3_DIY } from "../components/home/S3_DIY";
-import { S4_Business } from "../components/home/S4_Business";
-import { S5_Contact } from "../components/home/S5_Contact";
+
 import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
 import { useScroll } from "../hooks/useScroll";
+import dynamic from "next/dynamic";
+const S1_Product = dynamic(() => import("../components/home/S1_Product"), {
+  suspense: true,
+});
+const S0_Landing = dynamic(() => import("../components/home/S0_Landing"), {
+  suspense: true,
+});
+const S2_Canvas = dynamic(() => import("../components/home/S2_Canvas"), {
+  suspense: true,
+});
+const S2_Customers = dynamic(() => import("../components/home/S2_Customers"), {
+  suspense: true,
+});
+const S3_DIY = dynamic(() => import("../components/home/S3_DIY"), {
+  suspense: true,
+});
+const S4_Business = dynamic(() => import("../components/home/S4_Business"), {
+  suspense: true,
+});
+const S5_Contact = dynamic(() => import("../components/home/S5_Contact"), {
+  suspense: true,
+});
 
 const Home = () => {
   const parallax = useRef(null);
@@ -29,23 +45,35 @@ const Home = () => {
       <VerticalSideIndex></VerticalSideIndex>
       <Parallax pages={8} ref={parallax}>
         <ParallaxLayer offset={0}>
-          <S0_Landing />
+          <Suspense fallback={<div>...</div>}>
+            <S0_Landing />
+          </Suspense>
         </ParallaxLayer>
         <ParallaxLayer offset={1} sticky={{ start: 1, end: 2 }}>
-          <S1_Product />
+          <Suspense fallback={<div>...</div>}>
+            <S1_Product />
+          </Suspense>
         </ParallaxLayer>
         <ParallaxLayer offset={3}>
-          <S2_Customers />
+          <Suspense fallback={<div>...</div>}>
+            <S2_Customers />
+          </Suspense>
         </ParallaxLayer>
-        <ParallaxLayer offset={4}>{showCanvas ? <S2_Canvas /> : null}</ParallaxLayer>
+        <ParallaxLayer offset={4}>{showCanvas && <S2_Canvas />}</ParallaxLayer>
         <ParallaxLayer offset={5}>
-          <S3_DIY />
+          <Suspense fallback={<div>...</div>}>
+            <S3_DIY />
+          </Suspense>
         </ParallaxLayer>
         <ParallaxLayer offset={6}>
-          <S4_Business />
+          <Suspense fallback={<div>...</div>}>
+            <S4_Business />
+          </Suspense>
         </ParallaxLayer>
         <ParallaxLayer offset={7}>
-          <S5_Contact />
+          <Suspense fallback={<div>...</div>}>
+            <S5_Contact />
+          </Suspense>
         </ParallaxLayer>
       </Parallax>
     </>

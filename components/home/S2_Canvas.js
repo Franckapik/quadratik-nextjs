@@ -21,7 +21,7 @@ const RotateScroll = ({ children, target }) => {
   );
 };
 
-export const S2_Canvas = () => {
+export default function S2_Canvas () {
   const [target, setTarget] = useState(0);
   const [index, setIndex] = useState(0);
   const customers = ["Home Studio", "Enregistrement", "Salle de spectacle", "Home Cinéma"];

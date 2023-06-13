@@ -10,7 +10,7 @@ import absorbeurSideImg from "../../public/images/home/absorbeurrot30.jpg";
 import physicDifImg from "../../public/images/home/physic_dif.png";
 import physicAbsImg from "../../public/images/home/physic_abs.png";
 
-export const S1_Product = () => {
+export default function S1_Product () {
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {

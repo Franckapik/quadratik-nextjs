@@ -14,7 +14,7 @@ import ekleoImg from "../../public/images/logo/ekleo_logo.png"
 
 
 
-export const S5_Contact = () => {
+export default function S5_Contact () {
   const [legalshow, setLegalShow] = useState(false);
   const [cgvShow, setCgvShow] = useState(false);
   const [technoShow, setTechnoShow] = useState(false);

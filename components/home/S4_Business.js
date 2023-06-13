@@ -96,7 +96,7 @@ const Deck = ({ setVisibleCard }) => {
   );
 };
 
-export const S4_Business = () => {
+export default function S4_Business () {
   const [visibleCard, setVisibleCard] = useState(3);
   const [ref, inView] = useInView({ once: true });
   /* 

@@ -10,7 +10,8 @@ import guide3Img from "../../public/images/home/s3_guide_i3.png";
 import guide4Img from "../../public/images/home/s3_guide_i4.png";
 import diffusorDiyImg from "../../public/images/home/diy_diffuseur.png";
 
-export const S3_DIY = () => {
+export default function S3_DIY () {
+
   const switchExplanation = (explanation) => {
     switch (explanation) {
       case 0:

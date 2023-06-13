@@ -5,7 +5,7 @@ import { useBearStore } from "../../hooks/store";
 import Image from "next/image";
 import studioImg from "../../public/images/home/Studios1.png";
 
-export const S2_Customers = ({ scroll, vh, mobile }) => {
+export default function S2_Customers () {
   const height = useBearStore((state) => state.height);
   const images = [
     {
