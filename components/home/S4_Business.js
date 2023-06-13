@@ -244,11 +244,14 @@ export const S4_Business = () => {
                 </div>
               </Col>
             </Row>
-            <div className="d-flex d-md-none justify-content-center w-100 mt-4">
-              <Button variant="primary" className="">
-                <i className="fad fa-id-badge"></i> En savoir plus
-              </Button>
-            </div>
+            <Row className="d-md-none">
+              <p className="m-0 ft5 text-center text-uppercase"> une acoustique engagée </p>
+              <div className="p-4 text-center">
+                <Button variant="primary" className="button_home" href="/quadralab?childCat=6&vid=146&dpid=8">
+                  - Nos valeurs -
+                </Button>
+              </div>
+            </Row>
           </Col>
 
           <Col md={4} className="d-none d-md-flex flex-column ">

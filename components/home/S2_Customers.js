@@ -59,7 +59,7 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
     <Row id="s2_customers " className="section p-0 m-0 bg_darker justify-content-md-start justify-content-md-start">
       <Col md={1} className="text-end p-0 d-none d-md-flex "></Col>
 
-      <Col md={10} className="d-flex flex-column justify-content-start justify-content-md-evenly ">
+      <Col md={10} className="d-flex flex-column justify-content-center justify-content-md-start justify-content-md-evenly ">
         <Row>
           <Col md={6} className="d-flex flex-column justify-content-evenly align-items-center">
             <Row className="text-center p-2 mt-4">
@@ -75,9 +75,11 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
               <Col className="d-block d-md-none d-flex flex-column justify-content-center">
                 <Gallery id="s2_mobile_gallery" rowHeight={80} maxRows={1} images={images} />
               </Col>
+              <Row> <p className="m-0 mt-4 ft5 text-center text-uppercase"> Découvrir les projets </p>
               <Button variant="primary" className="mt-4" onClick={() => setLgShow(true)}>
                 - Les réalisations -
-              </Button>
+              </Button></Row>
+             
             </Row>
           </Col>
           <Col></Col>

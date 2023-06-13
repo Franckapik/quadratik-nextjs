@@ -1053,6 +1053,7 @@ $creme: #eee3d6;
 
 .section {
   min-height: 100vh;
+  border: red thin solid;
 }
 
 .layout_space {
@@ -1256,6 +1257,20 @@ p {
 }
 
 @media (max-width: 575.98px) {
+  .s3_diy_bg {
+    height: unset;
+    max-width: unset;
+  }
+
+  .btn {
+    font-size: 0.8rem !important;
+    width: 100%;
+  }
+
+  .s1_square img {
+    height: 360px !important;
+  }
+
   .header {
     background-color: #332d2a;
     border-bottom: solid thin $creme;
@@ -1357,12 +1372,8 @@ p {
     position: relative;
   }
 
-  .s3_diy_bg {
-    aspect-ratio: none;
-    background: 0 0;
-    height: auto;
-    padding-top: none;
-    width: 100vw;
+  .s3_dif_diy img {
+    width: 90vw!important;
   }
 
   .s3_diy_draw {
@@ -1387,10 +1398,6 @@ p {
 
   .s5_legal > * {
     border: 0 !important;
-  }
-
-  .section {
-    min-height: 0;
   }
 
   .sm_rotate_left {

@@ -41,7 +41,7 @@ export const S3_DIY = () => {
   return (
     <Row id="s3_diy" className="section bg_darker m-0 d-flex align-items-center justify-content-center h-100 w-100">
       <Col md={1} className="d-none d-md-flex"></Col>
-      <Col md={11} className="d-flex flex_column h-100 justify-content-center align-items-center">
+      <Col md={11} className="d-none d-md-flex flex_column h-100 justify-content-center align-items-center">
         <Row className="s3_diy_bg justify-content-center align-items-center p-2 p-md-5">
           <Col md={6} className="d-flex flex-column s3_diy_guide_text  order-md-last ">
             <Row className="pb-md-4 d-none d-md-flex">
@@ -72,8 +72,9 @@ export const S3_DIY = () => {
               </div>
             </div>
             <div className="s3_row_explanation p-md-4">{switchExplanation(explanation)}</div>
-            <div className="d-flex d-md-none justify-content-center w-100 mt-4">
-              <p className="m-0 pb-2 ft5 text-center"> Dessiner votre diffuseur </p>
+            <div className="d-flex flex-column d-md-none justify-content-center w-100 mt-4">
+              <p className="mt-4  ft5 text-center text-uppercase"> Dessiner votre diffuseur </p>
+
               <Button variant="primary" className="">
                 - Le Quadralab -
               </Button>
@@ -86,7 +87,6 @@ export const S3_DIY = () => {
             <Row>
               <p className="m-0 pb-2 ft5 text-center"> Dessiner votre diffuseur </p>
               <div className="p-4 text-center">
-                {" "}
                 <Button variant="primary" className="button_home" href="/quadralab?childCat=6&vid=146&dpid=8">
                   - Le Quadralab -
                 </Button>
@@ -104,6 +104,18 @@ export const S3_DIY = () => {
             </Row>
           </Col>
         </Row>
+      </Col>
+      <Col className="d-flex d-md-none flex-column h-100 justify-content-center align-items-center">
+        <Row className="s3_dif_diy justify-content-center">
+          <Image style={{ objectFit: "contain" }} src={diffusorDiyImg} alt="Image d'un diffuseur personnalisé" />
+        </Row>
+        <div className="d-flex flex-column justify-content-center w-100 mt-4">
+          <p className="mt-4  ft5 text-center text-uppercase"> Dessiner votre diffuseur </p>
+
+          <Button variant="primary" className="">
+            - Le Quadralab -
+          </Button>
+        </div>
       </Col>
     </Row>
   );

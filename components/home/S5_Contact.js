@@ -118,19 +118,19 @@ export const S5_Contact = () => {
         <LegalMentions show={legalshow} setShow={setLegalShow} />
         <CGV show={cgvShow} setShow={setCgvShow} />
         <Techno show={technoShow} setShow={setTechnoShow} />
-        <Col className="border_creme border-bottom-0 h-10 order-md-1 align-items-center d-flex justify-content-center bg_darker" md={2} xs={6} onClick={() => setLegalShow(!legalshow)}>
+        <Col className="border_creme border-bottom-0 h-10 order-md-1 align-items-center d-flex justify-content-center bg_darker mt-4 mt-md-0" md={2} xs={6} onClick={() => setLegalShow(!legalshow)}>
           Mentions légales
         </Col>
 
         {/* lien vers les techno/infos utilisées pour le site */}
-        <Col className="border_creme border-bottom-0 h-10 order-md-3 align-items-center d-flex justify-content-center bg_darker" md={2} xs={6} onClick={() => setCgvShow(!cgvShow)}>
+        <Col className="border_creme border-bottom-0 h-10 order-md-3 align-items-center d-flex justify-content-center bg_darker mt-4 mt-md-0" md={2} xs={6} onClick={() => setCgvShow(!cgvShow)}>
           CGV
         </Col>
-        <Col className="d-none d-md-flex border_creme border-bottom-0 h-20 order-md-2  align-items-center d-flex justify-content-center bg_darker" md={2} onClick={() => setTechnoShow(!technoShow)}>
+        <Col className="d-none d-md-flex border_creme border-bottom-0 h-20 order-md-2  align-items-center d-flex justify-content-center bg_darker " md={2} onClick={() => setTechnoShow(!technoShow)}>
           Quadratik.fr © <Moment format="YYYY"></Moment>
         </Col>
       </Row>
-      <Row className="justify-content-center align-items-center text-center ft5 order-md-1 p-2">
+      <Row className="d-none d-md-flex justify-content-center align-items-center text-center ft5 order-md-1 p-2">
         <p> Entreprise Quadratik.fr </p> SIRET 83529797900014 - 835 297 979 R.C.S RENNES - rue d’Aubigné 35440 Feins - France
       </Row>
     </Row>
