@@ -82,7 +82,7 @@ export const S2_Customers = ({ scroll, vh, mobile }) => {
                 <Gallery id="s2_mobile_gallery" rowHeight={80} maxRows={1} images={images} />
               </Col>
               <Button variant="primary" className="mt-4" onClick={() => setLgShow(true)}>
-                <i className="fad fa-projector"></i>Découvrir les réalisations
+               - Les réalisations -
               </Button>
             </Row>
           </Col>

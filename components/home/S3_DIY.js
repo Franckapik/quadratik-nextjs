@@ -74,8 +74,9 @@ export const S3_DIY = () => {
             </Row>
             <Row className="s3_row_explanation ft4 mt-4">{switchExplanation(explanation)}</Row>
             <div className="d-flex d-md-none justify-content-center w-100 mt-4">
+            <p className="m-0 pb-2 ft5 text-center"> Dessiner votre diffuseur </p>
             <Button variant="primary" className="">
-              <i className="fad fa-id-badge"></i> Dessiner votre diffuseur
+             - Le Quadralab -
             </Button>
           </div>
             <Row className="d-none d-md-flex">
@@ -84,12 +85,13 @@ export const S3_DIY = () => {
           </Col>
           <Col md={6} className="d-none d-md-flex flex-column justify-content-evenly align-items-center s3_diy_draw p-0 order-md-first ">
             <Row>
+            <p className="m-0 pb-2 ft5 text-center"> Dessiner votre diffuseur </p>
               <Button variant="primary" className="button_home m-auto" href="/quadralab?childCat=6&vid=146&dpid=8">
-                <i className="fad fa-draw-square"></i>Dessiner votre diffuseur
+               - Le Quadralab -
               </Button>
             </Row>
             <Row className=" s3_line_bg w-75 h-25 align-items-center">
-              <div className="d-flex justify-content-evenly">
+              <div className="d-flex justify-content-evenly  mt-4">
                 <span>Taille</span>
                 <span>Matière</span>
                 <span>Couleur</span>

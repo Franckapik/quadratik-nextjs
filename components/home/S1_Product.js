@@ -78,9 +78,9 @@ export const S1_Product = () => {
               </Carousel>
             </Row>
             <Row className="text-uppercase text-center justify-content-center">
-              <p className="m-0 pb-2 ft5">Commande en ligne </p>
+              <p className="m-0 pb-2 ft5"> Entrer dans l'atelier </p>
               <Button variant="primary" className="button_home" href="/shop">
-                <i className="fad fa-store"></i> Entrer dans l'atelier
+               - Boutique -
               </Button>
               <p className="m-0 pt-2 pb-2 ft4">
                 <span className="s1_product_sub_blue">Fabrication</span>
