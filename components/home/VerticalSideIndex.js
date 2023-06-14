@@ -21,13 +21,13 @@ export const VerticalSideIndex = () => {
     if (value >= 6.5*height) {
       return (
         <div className="s0_page_index">
-          005<div className="trait"></div>Entrer en contact
+          006<div className="trait"></div>Entrer en contact
         </div>
       );
     } else if (value >= 5.5*height) {
       return (
         <div className="s0_page_index">
-          004<div className="trait"></div>Construire sur des valeurs
+          005<div className="trait"></div>Construire sur des valeurs
         </div>
       );
     } else if (value >= 4.5*height) {
