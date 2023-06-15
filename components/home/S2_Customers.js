@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Col, Container, Modal, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
 import studioImg from "../../public/images/home/Studios1.png";
 import c3Img from "../../public/images/customers/customer3.webp";
@@ -9,6 +9,7 @@ import c4Img from "../../public/images/customers/customer4.webp";
 import c5Img from "../../public/images/customers/customer5.webp";
 import c6Img from "../../public/images/customers/customer6.webp";
 import c7Img from "../../public/images/customers/customer7.webp";
+import { Realisations } from "./realisations/Realisations";
 
 export default function S2_Customers() {
   const [lgShow, setLgShow] = useState(false);
@@ -30,8 +31,7 @@ export default function S2_Customers() {
             </Row>
 
             <Row className="d-flex">
-              <Col className="d-block d-md-none d-flex flex-column justify-content-center">
-              </Col>
+              <Col className="d-block d-md-none d-flex flex-column justify-content-center"></Col>
               <Row>
                 <p className="m-0 mt-4 ft5 text-center text-uppercase"> Découvrir les projets </p>
                 <Button variant="primary" className="mt-4" onClick={() => setLgShow(true)}>
@@ -62,18 +62,7 @@ export default function S2_Customers() {
           <Col className="d-none d-md-flex"></Col>
         </Row>
       </Col>
-
-      <Modal show={lgShow} onHide={() => setLgShow(false)} fullscreen={true} theme>
-        <Modal.Header closeButton>
-          <Modal.Title className="text-dark">Les réalisations Quadratik</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body className="s2_modal_gallery bg_dark">
-          <Col className="s2_customers_photo">
-Gallerie ici
-          </Col>
-        </Modal.Body>
-      </Modal>
+      <Realisations lgShow={lgShow} setLgShow={setLgShow} />
     </Row>
   );
 }
