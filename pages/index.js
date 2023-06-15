@@ -34,6 +34,8 @@ const S5_Contact = dynamic(() => import("../components/home/S5_Contact"), {
   ssr: false,
 });
 
+const Chargement = () => ( <div className="s2_chargement border_creme"> <i className="fas fa-spinner fa-spin p-2"></i>  Module 3D en cours de chargement</div>)
+
 const Home = () => {
   const parallax = useRef(null);
   const [showCanvas, setShowCanvas] = useState(false);
@@ -66,7 +68,7 @@ const Home = () => {
             <S2_Customers />
           </Suspense>
         </ParallaxLayer>
-        <ParallaxLayer offset={4}>{showCanvas && <S2_Canvas />}</ParallaxLayer>
+        <ParallaxLayer offset={4}>{showCanvas && <Suspense fallback={<Chargement />} ><S2_Canvas /></Suspense>}</ParallaxLayer>
         <ParallaxLayer offset={5}>
           <Suspense fallback={<div>...</div>}>
             <S3_DIY />
