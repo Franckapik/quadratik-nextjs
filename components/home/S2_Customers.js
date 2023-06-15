@@ -1,14 +1,11 @@
-import { useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
 import Image from "next/image";
-import studioImg from "../../public/images/home/Studios1.png";
-import c3Img from "../../public/images/customers/customer3.webp";
+import { useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
 import c1Img from "../../public/images/customers/customer1.webp";
 import c2Img from "../../public/images/customers/customer2.webp";
-import c4Img from "../../public/images/customers/customer4.webp";
+import c3Img from "../../public/images/customers/customer3.webp";
 import c5Img from "../../public/images/customers/customer5.webp";
-import c6Img from "../../public/images/customers/customer6.webp";
-import c7Img from "../../public/images/customers/customer7.webp";
+import studioImg from "../../public/images/home/Studios1.png";
 import { Realisations } from "./realisations/Realisations";
 
 export default function S2_Customers() {

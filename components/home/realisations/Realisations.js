@@ -20,7 +20,7 @@ export const Realisations = ({ lgShow, setLgShow }) => {
       <Modal.Body className="s2_modal_gallery d-flex bg_dark ">
         <Row>
           {images.map((a, i) => (
-            <Col>
+            <Col key={"gallery" + i}>
               <Card>
                 <Image src={a} alt="Image d'un studio d'enregistrement équipé de modèles Quadratik" style={{ objectFit: "contain" }} />
               </Card>
