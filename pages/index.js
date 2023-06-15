@@ -1,6 +1,7 @@
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { LayoutHome } from "../components/LayoutHome";
+
 import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
 import { useScroll } from "../hooks/useScroll";
 import dynamic from "next/dynamic";
@@ -35,7 +36,15 @@ const S5_Contact = dynamic(() => import("../components/home/S5_Contact"), {
 
 const Home = () => {
   const parallax = useRef(null);
+  const [showCanvas, setShowCanvas] = useState(false);
   const [scroll, height, width] = useScroll(parallax);
+  useEffect(() => {
+    if (scroll > height * 3 && scroll < height * 5) {
+      setShowCanvas(true);
+    } else {
+      setShowCanvas(false);
+    }
+  }, [height, scroll]);
 
   return (
     <>
@@ -57,9 +66,7 @@ const Home = () => {
             <S2_Customers />
           </Suspense>
         </ParallaxLayer>
-        <ParallaxLayer offset={4}>
-coucou
-        </ParallaxLayer>
+        <ParallaxLayer offset={4}>{showCanvas && <S2_Canvas />}</ParallaxLayer>
         <ParallaxLayer offset={5}>
           <Suspense fallback={<div>...</div>}>
             <S3_DIY />
