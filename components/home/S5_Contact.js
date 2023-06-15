@@ -1,16 +1,13 @@
-import { useSpring, animated, useInView } from "@react-spring/web";
-import { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import Marquee from "react-fast-marquee";
-import Moment from "react-moment";
-import Parser from "rss-parser";
-import { LegalMentions } from "./legal/LegalMentions";
-import { CGV } from "./legal/CGV";
-import { Techno } from "./legal/Techno";
+import { animated, useInView } from "@react-spring/web";
 import Image from "next/image";
-import logoMarqueeImg from "../../public/images/logo/logo_marquee.svg"
-import logoOrientationImg from "../../public/images/logo/logo_orientation.svg"
-import ekleoImg from "../../public/images/logo/ekleo_logo.png"
+import { useState } from "react";
+import { Col, Row } from "react-bootstrap";
+import Moment from "react-moment";
+import ekleoImg from "../../public/images/logo/ekleo_logo.png";
+import logoOrientationImg from "../../public/images/logo/logo_orientation.svg";
+import { CGV } from "./legal/CGV";
+import { LegalMentions } from "./legal/LegalMentions";
+import { Techno } from "./legal/Techno";
 
 
 
@@ -39,40 +36,10 @@ export default function S5_Contact () {
     }
   );
 
-  useEffect(() => {
-    let parser = new Parser();
-    const fetchRss = async () => {
-      let feed = await parser.parseURL("https://fr.audiofanzine.com/news/a.rss.xml");
-      let arr = [];
-
-      for (let i = 0; i < 5; i++) {
-        arr.push(feed.items[i]);
-      }
-      return arr;
-    };
-
-    fetchRss().then((res) => {
-      setRssFeed(res);
-    });
-
-  }, []);
 
   return (
     <Row id="s5_contact" className="section">
       <Row className="p-0 m-2">
-        <Marquee pauseOnHover gradient={false} speed={40} className="s4_marquee ft1">
-          {rssFeed.map((a, i) => (
-            <div key={"marquee_actu" + i}>
-              <span className="p-5">Actualites musicales</span>
-              <Image style={{ objectFit: 'contain' }} src={logoMarqueeImg} alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
-              <span className="p-5">
-                
-                <a href={a.link}>{a.title}</a>
-              </span>
-              <Image style={{ objectFit: 'contain' }} src={logoMarqueeImg} alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
-            </div>
-          ))}
-        </Marquee>
       </Row>
       <Row className="s5_contact_row m-0 mt-2 p-2 p-md-0 ft4 ">
         <Col sm={1} className=" d-none d-md-flex align-items-center justify-content-center"></Col>

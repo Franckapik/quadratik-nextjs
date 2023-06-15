@@ -1,7 +1,6 @@
 import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { LayoutHome } from "../components/LayoutHome";
-
 import { VerticalSideIndex } from "../components/home/VerticalSideIndex";
 import { useScroll } from "../hooks/useScroll";
 import dynamic from "next/dynamic";
@@ -59,8 +58,7 @@ const Home = () => {
           </Suspense>
         </ParallaxLayer>
         <ParallaxLayer offset={4}>
-          {" "}
-          <S2_Canvas />{" "}
+coucou
         </ParallaxLayer>
         <ParallaxLayer offset={5}>
           <Suspense fallback={<div>...</div>}>
