@@ -778,9 +778,14 @@ $creme: #eee3d6;
 }
 
 .s2_customers_photo img {
-  border-radius: 1%;
-  filter: brightness(0.9) contrast(100%) grayscale(20%) opacity(80%) saturate(100%) sepia(30%);
-  height: 90%;
+  max-width: 100%;
+  padding: 4px;
+  height: 100%;
+}
+
+
+.s2_customers_photo img {
+  filter: brightness(0.9) contrast(100%) grayscale(20%) opacity(100%) saturate(100%) sepia(30%);
 }
 
 .s2_customers_photo img:hover {
