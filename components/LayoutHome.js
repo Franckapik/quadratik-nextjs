@@ -75,9 +75,9 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title className="text-uppercase me-4">Quadratik</Offcanvas.Title>
+          <Offcanvas.Title className="me-4">Quadratik</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className="text-uppercase">
           <ListGroup variant="flush">
             <Link href="/">
               <ListGroup.Item className="ft2">Accueil</ListGroup.Item>
@@ -88,7 +88,7 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
             <Link href="/quadralab?childCat=6&vid=146&dpid=8">
               <ListGroup.Item className="ft2">Quadralab</ListGroup.Item>
             </Link>
-            <Link href="/">
+            <Link href="/realisations">
               <ListGroup.Item className="ft2">Les réalisations</ListGroup.Item>
             </Link>
             <Link href="/#s5_contact">

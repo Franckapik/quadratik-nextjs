@@ -6,7 +6,6 @@ import c2Img from "../../public/images/customers/customer2.webp";
 import c3Img from "../../public/images/customers/customer3.webp";
 import c5Img from "../../public/images/customers/customer5.webp";
 import studioImg from "../../public/images/home/Studios1.png";
-import { Realisations } from "./realisations/Realisations";
 
 export default function S2_Customers() {
   const [lgShow, setLgShow] = useState(false);
@@ -14,7 +13,6 @@ export default function S2_Customers() {
   return (
     <Row id="s2_customers " className="section p-0 m-0 bg_darker justify-content-md-start justify-content-md-start">
       <Col md={1} className="text-end p-0 d-none d-md-flex "></Col>
-
       <Col md={11} className="d-flex flex-column justify-content-center justify-content-md-start justify-content-md-evenly ">
         <Row>
           <Col md={5} className="d-flex flex-column justify-content-evenly align-items-center">
@@ -31,7 +29,7 @@ export default function S2_Customers() {
               <Col className="d-block d-md-none d-flex flex-column justify-content-center"></Col>
               <Row>
                 <p className="m-0 mt-4 ft5 text-center text-uppercase"> Découvrir les projets </p>
-                <Button variant="primary" className="mt-4" onClick={() => setLgShow(true)}>
+                <Button variant="primary" className="mt-4" onClick={() => setLgShow(true)} href="/realisations">
                   - Les réalisations -
                 </Button>
               </Row>
@@ -59,7 +57,6 @@ export default function S2_Customers() {
           <Col className="d-none d-md-flex"></Col>
         </Row>
       </Col>
-      <Realisations lgShow={lgShow} setLgShow={setLgShow} />
     </Row>
   );
 }

@@ -29,7 +29,7 @@ export const ProductDetailsRight = ({ product, display }) => {
         <Col className="d-flex flex-column justify-content-center text-center align-items-center ft05">{product.prices.price + " €"}</Col>
         <Col className="d-flex justify-content-center text-center align-items-center">
           <Button variant="primary" type="submit" id="product_submit">
-            Ajouter au panier
+           - Ajouter au panier -
           </Button>
         </Col>
       </Row>

@@ -13,8 +13,7 @@ import { useProductStore } from "../../hooks/store";
 import { useComputeProduct } from "../../hooks/useComputeProduct";
 import { useFetchProduct } from "../../hooks/useFetchProduct";
 import Image from "next/image";
-import logoMarqueeImg from "../../public/images/logo/logo_marquee.svg"
-
+import logoMarqueeImg from "../../public/images/logo/logo_marquee.svg";
 
 const Quadralab = () => {
   //Data
@@ -51,23 +50,20 @@ const Quadralab = () => {
         <Row className="section quadralab_main_row layout_space" ref={quadralabRef}>
           <FormProvider {...methods}>
             <Form onSubmit={methods.handleSubmit(onSubmit)}>
-              <Image  style={{objectFit: "contain"}}  className="quadralab_bg" src={logoMarqueeImg} alt="Logo de Quadratik.fr" />
               <Row className="justify-content-center mt-md-5">
-                <>
-                  <Col md={3} className="order-md-1">
-                    <QuadralabOptions height={height} product={product} changeAttributes={changeAttributes} />
-                  </Col>
-
-                  <Col md={3} className="order-md-3">
-                    <CardOptions title="performances" opened={height > 700 ? "1" : "0"}>
-                      <p className="text-center mb-4">
-                        <i className="fad fa-stream"></i> REF : {product.nomenclature?.structurel}
-                      </p>
-                      <PerformancesCard product={product} />
-                    </CardOptions>
-                  </Col>
-                </>
+                <Col md={3} className="order-md-1">
+                  <QuadralabOptions height={height} product={product} changeAttributes={changeAttributes} />
+                </Col>
+                <Col md={3} className="order-md-3">
+                  <CardOptions title="performances" opened={height > 700 ? "1" : "0"}>
+                    <p className="text-center mb-4">
+                      <i className="fad fa-stream"></i> REF : {product.nomenclature?.structurel}
+                    </p>
+                    <PerformancesCard product={product} />
+                  </CardOptions>
+                </Col>
                 <Col md={5} className="order-md-2 quadralab_title p-0">
+                  <Image style={{ objectFit: "contain" }} className="quadralab_bg" src={logoMarqueeImg} alt="Logo de Quadratik.fr" />
                   <CardOptions title="Visualisation 3D" opened={"1"} transparent>
                     <Row className="justify-content-center align-items-center mt-4 ">
                       <Col>
@@ -86,15 +82,17 @@ const Quadralab = () => {
                     <Row className="quadralab_canvas_container">{dimensionView ? <ProductCanvas product={product}></ProductCanvas> : <QuadralabView1D product={product} />}</Row>
                   </CardOptions>
 
-                  <Row className="quadralab_devis_button text-center w-100 justify-content-center">
-                    <Col className="justify-content-evenly mt-4" md={4}>
+                  <Row className="quadralab_button text-center w-100 justify-content-center">
+                    <Col className="justify-content-evenly" md={6}>
+                      <p className="m-0 ft5"> Fabriquer soi-même </p>
                       <Button variant="secondary m-1" onClick={handleShow}>
-                        Plans de fabrication
+                        - Les plans -
                       </Button>
                     </Col>
-                    <Col className="justify-content-evenly mt-4" md={4}>
+                    <Col className="justify-content-evenly " md={6}>
+                      <p className="m-0 ft5"> Commande en ligne </p>
                       <Button variant="primary" type="submit">
-                        Demander un devis
+                        - Le devis -
                       </Button>
                     </Col>
                   </Row>
