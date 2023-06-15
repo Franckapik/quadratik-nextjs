@@ -212,7 +212,7 @@ export default function S4_Business () {
     <Row id="s4_business" className="section p-0 h-100">
       <Col className="d-flex flex-column">
         <Row>
-          <Marquee pauseOnHover gradient={false} speed={70} className="s4_marquee ft1">
+          <Marquee pauseOnHover gradient={false} speed={40} className="s4_marquee ft1">
             <span className="p-5">NOUVEAUTE - Diffuseur en kit à assembler soi-meme - Ideal pour les petits budgets</span>
             <Image style={{ objectFit: "contain" }} src={logoMarqueeImg} alt="Miniature du logo de l'entreprise Quadratik" />
           </Marquee>

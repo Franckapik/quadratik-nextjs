@@ -66,7 +66,6 @@ export default function S5_Contact () {
               <span className="p-5">Actualites musicales</span>
               <Image style={{ objectFit: 'contain' }} src={logoMarqueeImg} alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
               <span className="p-5">
-                
                 <a href={a.link}>{a.title}</a>
               </span>
               <Image style={{ objectFit: 'contain' }} src={logoMarqueeImg} alt="Miniature du logo de l'entreprise Quadratik" className="logo_marquee" />
