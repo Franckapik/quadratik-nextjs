@@ -14,8 +14,8 @@ export const CardProduct = ({ variantId, defaultProductId, childCatId, childCatL
     <>
       {productSuccess ? (
         <CardWrap>
-          <Link href={{ pathname: "/shop/product", query: { display: 0, childCat: childCatId, vid: variantId, dpid: defaultProduct.id } }}>
-            {!isPictureError ? pictureSucceed ? <Image width={360} height={540} style={{objectFit: "contain"}}  src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik en boutique" /> : <i className="fas fa-spinner fa-spin"></i> : "Aperçu non disponible"}
+          <Link href={{ pathname: "/product/[product]", query: { display: 0, childCat: childCatId, vid: variantId, dpid: defaultProduct.id, product: product.nomenclature.simple } }}>
+            {!isPictureError ? pictureSucceed ? <Image width={360} height={540} style={{ objectFit: "contain" }} src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik en boutique" /> : <i className="fas fa-spinner fa-spin"></i> : "Aperçu non disponible"}
             <span className="shop_product_title ft2 text-nowrap ">{product.nomenclature.simple}</span>
             <span className="shop_product_collection ft6 text-uppercase text-nowrap ">{childCatLabel.replace(/[0-9]{1}\s-\s*/gm, "")}</span>
             <span className="shop_product_price ft4  text-nowrap ">{product.prices ? product.prices.price + " €" : "Prix non disponible"} </span>
