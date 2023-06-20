@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useQuery } from "react-query";
+import { CSVByFilename } from "../components/dolibarrApi/fetch";
 
 export const useDimensions = (values3D) => {
   if (values3D?.D === "D1") {
@@ -143,6 +144,9 @@ export const useDimensions = (values3D) => {
       weightPoplar: weightPoplar,
     };
   } else if (values3D?.D !== "D2" && values3D?.D !== "D1" && values3D?.F !== undefined) {
+
+    
+
     const { E, W, L, P, F } = values3D;
     const e = E / 10; //epaisseur
     const w = parseInt(W); //largeur

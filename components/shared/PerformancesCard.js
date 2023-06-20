@@ -27,7 +27,6 @@ export const PerformancesCard = ({ product }) => {
       ) : (
         "Les données techniques de ce modèle ne sont pas encore disponibles"
       )}
-      {product.dimensions.D !== "D2" && product.dimensions.D !== "D1" && product.dimensions.F !== undefined ? "ici" : null}
     </>
   );
 };

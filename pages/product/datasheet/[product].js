@@ -22,7 +22,7 @@ const Datasheet = () => {
   const dimensions = product.dimensions;
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed, isError: pictureError } = usePicture(product?.nomenclature?.simple, false); //true for miniature
   return (
-    <Row className="bg_white ft4 justify-content-center">
+    <Row className="bg_white ft4 justify-content-center"> 
       <LayoutHome home shop fixed dark />
       {productSuccess && (
         <Row className="layout_space datasheet w-90 border_dark_top">

@@ -65,7 +65,7 @@ const Quadralab = () => {
                 <Col md={5} className="order-md-2 quadralab_title p-0">
                   <Image style={{ objectFit: "contain" }} className="quadralab_bg" src={logoMarqueeImg} alt="Logo de Quadratik.fr" />
                   <CardOptions title="Visualisation 3D" opened={"1"} transparent>
-                    <Row className="justify-content-center align-items-center mt-4 ">
+                   {product.dimensions.F === undefined && <Row className="justify-content-center align-items-center mt-4 ">
                       <Col>
                         <Form.Check type={"switch"} id="dimension-switch" onChange={(e) => setDimensionView(!dimensionView)} />
                         <p>3D / 2D</p>
@@ -78,17 +78,18 @@ const Quadralab = () => {
                         <Form.Check type={"switch"} id="highlight-switch" onChange={(e) => useProductStore.setState({ highlights: e.target.checked })} />
                         <p>Surbrillance</p>
                       </Col>
-                    </Row>
+                    </Row>}
                     <Row className="quadralab_canvas_container">{dimensionView ? <ProductCanvas product={product}></ProductCanvas> : <QuadralabView1D product={product} />}</Row>
                   </CardOptions>
 
                   <Row className="quadralab_button text-center w-100 justify-content-center">
-                    <Col className="justify-content-evenly" md={6}>
+                    {product.dimensions.F !== undefined && <Col className="justify-content-evenly" md={6}>
                       <p className="m-0 ft5"> Fabriquer soi-même </p>
                       <Button variant="secondary m-1" onClick={handleShow}>
                         - Les plans -
                       </Button>
-                    </Col>
+                    </Col> }
+                    
                     <Col className="justify-content-evenly " md={6}>
                       <p className="m-0 ft5"> Commande en ligne </p>
                       <Button variant="primary" type="submit">
@@ -99,7 +100,7 @@ const Quadralab = () => {
                 </Col>
               </Row>
 
-              <ModalReport2D product={product} show={show} setShow={setShow} handleClose={handleClose} />
+              {product.dimensions.F === undefined && <ModalReport2D product={product} show={show} setShow={setShow} handleClose={handleClose} />}
             </Form>
           </FormProvider>
         </Row>

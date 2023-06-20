@@ -1,4 +1,6 @@
 import axios from "axios";
+import Papa from "papaparse";
+
 
 const attributesFetchById = (id) =>
   axios.create({
@@ -132,7 +134,7 @@ const performancesByProductId = (id) =>
       DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
     },
   });
-  
+
 const documentByFilename = (filename) =>
   axios
     .create({
@@ -146,4 +148,22 @@ const documentByFilename = (filename) =>
     .then((response) => response.data.content)
     .catch((error) => Promise.reject(error));
 
-export { attributesAllFetch, productFetchById, attributesFetchById, listCategories, objectsInCategory, documentByProductId, variantFetchByParentId, documentByFilename, performancesByProductId };
+const CSVByFilename = (filename) =>
+  axios
+    .create({
+      baseURL: `https://shop.quadratik.fr/api/index.php/documents/download?modulepart=ecm&&original_file=${filename}`,
+      headers: {
+        Accept: "application/json",
+        DOLAPIKEY: "7VsbrNpR2wLvcX5XUJ933qYsy33Vx64Q",
+      },
+    })
+    .get()
+    .then((response) => {
+      let buff = new Buffer(response.data.content, "base64");
+      let text = buff.toString("ascii");
+      let parsedCsv = Papa.parse(text).data;
+      return parsedCsv;
+    })
+    .catch((error) => Promise.reject(error));
+
+export { attributesAllFetch, productFetchById, attributesFetchById, listCategories, objectsInCategory, documentByProductId, variantFetchByParentId, documentByFilename, performancesByProductId, CSVByFilename };

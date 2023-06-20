@@ -42,14 +42,14 @@ const Product = () => {
 
   return (
     <>
-      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={router.query.dpid != 0 && (product?.dimensions?.D === "D1" || product?.dimensions?.D === "D2")  ? ["modele", "performances", "spacialisation"] : ["modele"]} text_dark shop cart fixed />
+      <LayoutHome viewedCategory={display} setDisplay={setDisplay} product={router.query.dpid != 0 && (product?.dimensions?.D === "D1" || product?.dimensions?.D === "D2")  ? ["modele", "performances", "spacialisation"] : ["modele", "performances"]} text_dark shop cart fixed />
       {productSuccess ? (
         <>
           <div className="s0_page_index  d-none d-md-flex">
             {product.description.parent_label || product.nomenclature.simple}
             <div className="trait"></div>Aperçu du modèle
           </div>
-          {router.query.dpid != 0 && router.query.dpid != 0 && (product?.dimensions?.D === "D1" || product?.dimensions?.D === "D2") ? (
+          {router.query.dpid != 0 && router.query.dpid != 0 && (product?.dimensions?.D === "D1" || product?.dimensions?.D === "D2" || product?.dimensions.F !== undefined ) ? (
             <Link href={{ pathname: "/quadralab", query: { vid: router.query.vid, dpid: router.query.dpid, childCat: router.query.childCat } }}>
               <div className="product_custom d-none d-md-flex p-2">
                 Modifier dans le quadralab <i className="fad fa-th pt-4 "></i>

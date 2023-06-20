@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 
 export const useNomenclature = (defaultProduct, labels, dimensions) => {
   const nomDiffuseur = (basename, dimensions) => {
@@ -17,7 +16,7 @@ export const useNomenclature = (defaultProduct, labels, dimensions) => {
       structurel: "A" + "W" + W + "L" + L + "P" + P + "E" + E + M,
       complet: "A" + "W" + W + "L" + L + "P" + P + "E" + E + M,
       simple: basename + F + "-" + P + (L == "2" ? "L" : ""),
-      performance: "W" + W + "P" + P,
+      performance: "A" + "P" + P,
     };
   };
 

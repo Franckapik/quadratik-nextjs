@@ -14,7 +14,7 @@ const ProductOptions = ({ product, changeAttributes }) => {
     });
     return () => subscription.unsubscribe();
   }, [methods.watch]);
-
+console.log(product);
   const options = product.description && JSON.parse(product.description?.attributes_options);
 
   return (

@@ -64,7 +64,7 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
         ) : null}
 
         <Carousel.Item>
-          <div className="m-4">  <PerformanceCharts nom={product.nomenclature.performance} /></div>
+          <div className="m-4">  <PerformanceCharts product={product} /></div>
         
         </Carousel.Item>
         <Carousel.Item>
