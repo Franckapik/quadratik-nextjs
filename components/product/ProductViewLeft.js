@@ -31,14 +31,14 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
           <Carousel.Item>
             <Carousel indicators={false} activeIndex={index} controls={false}>
               <Carousel.Item>
-                <Image style={{objectFit: "contain"}}  width={720} height={1080} className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un moèle Quadratik" />
+                <Image style={{objectFit: "contain"}}  width={720} height={1080} className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik" />
                 <Carousel.Caption>
                   <h3>{product.nomenclature.simple}</h3>
                  { product.dimensions.fmin &&  <p>{product.dimensions.fmin} Hz - {product.dimensions.fmax} Hz</p>}
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
-                <Image style={{objectFit: "contain"}} width={720} height={1080}  className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${sidePicture}`} alt="Aperçu de coté d'un moèle Quadratik" />
+                <Image style={{objectFit: "contain"}} width={720} height={1080}  className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${sidePicture}`} alt="Aperçu de coté d'un modèle Quadratik" />
                 <Carousel.Caption>
                   <h3>Dimensions du modèle</h3>
                   <p>

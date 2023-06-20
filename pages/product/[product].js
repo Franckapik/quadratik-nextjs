@@ -65,7 +65,7 @@ const Product = () => {
                   <ProductViewLeft product={product} display={display} setDisplay={setDisplay} />
                 </Col>
                 <Col md={6} className="product_right bg_creme d-flex flex-column align-items-center">
-                  <ProductDetailsRight product={product} display={display} changeAttributes={changeAttributes} />
+                  <ProductDetailsRight product={product} display={display} changeAttributes={changeAttributes} router={router} />
                 </Col>
               </Row>
             </Form>

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export const useDimensions = (values3D) => {
-
   if (values3D?.D === "D1") {
     const { E, N, W, L, P, I, H } = values3D;
 

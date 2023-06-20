@@ -60,11 +60,11 @@ export const PerformanceCharts = ({ nom }) => {
 
   return (
     <>
-      <Row className="d-none d-md-flex ft8"> {/*Mobile and desktop version*/}
-      {chartSucceed ? <Line options={options} data={data} /> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact " } 
+      <Row className="d-none d-md-flex ft8 graph_img"> {/*Mobile and desktop version*/}
+      {chartSucceed ? <Line options={options} data={data} /> : null } 
       </Row>
       <Row className="d-md-none ft8">
-       {chartSucceed ? <Line options={options} data={data} width={100} height={80} /> : "Ce modèle ne dispose pas encore de données techniques. Vous pouvez vous renseigner sur ce produit via la rubrique Contact " } 
+       {chartSucceed ? <Line options={options} data={data} width={100} height={80} /> : null } 
       </Row>
     </>
   );

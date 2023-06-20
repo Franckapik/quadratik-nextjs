@@ -38,6 +38,10 @@ $creme: #eee3d6;
   background-color: $creme;
 }
 
+.bg_grey {
+  background-color: dimgray;
+}
+
 .bg_backdrop {
   background: rgb(227, 227, 227);
   background: linear-gradient(0deg, rgba(227, 227, 227, 1) 0%, rgba(233, 233, 233, 1) 54%, rgba(232, 232, 232, 1) 83%, rgba(228, 228, 228, 1) 100%);
@@ -80,6 +84,11 @@ $creme: #eee3d6;
 }
 .border_dark {
   border: solid 1px #332d2a;
+}
+.border_dark_top {
+  border-left: solid 1px #332d2a;
+  border-right: solid 1px #332d2a;
+  border-bottom: solid 1px #332d2a;
 }
 
 .border_creme_light {
@@ -1200,6 +1209,31 @@ body {
 
 p {
   margin-bottom: 0 !important;
+}
+
+.datasheet .card {
+  min-height: 500px!important;
+}
+
+.w-80 {
+  width : 80%;
+  height: auto;
+}
+.w-90 {
+  width : 90%;
+  height: auto;
+}
+
+.datasheet .list-group-item {
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: unset;
+  color: #332d2a;
+
+}
+
+.datasheet .graph_img {
+  height: 300px;
 }
 
 @media (max-width: 575.98px) {

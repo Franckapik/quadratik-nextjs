@@ -52,10 +52,10 @@ export const ModalReport2D = ({product, show, setShow, handleClose }) => {
             </span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Aire du diffuseur : <span className="ft2">{dimensions.area} m2</span>
+            Aire du diffuseur : <span className="ft2">{dimensions.area /1000} m2</span>
           </ListGroup.Item>
           <ListGroup.Item>
-            Volume du diffuseur : <span className="ft2">{dimensions.volume} m3</span>
+            Volume du diffuseur : <span className="ft2">{dimensions.volume/100000} m3</span>
           </ListGroup.Item>
           <ListGroup.Item>
             Type de diffuseur :
