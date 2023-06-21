@@ -1,9 +1,7 @@
+import dynamic from "next/dynamic";
+import Link from "next/link";
 import { Button, Carousel, Col, Row } from "react-bootstrap";
 import { PerformancesCard } from "../shared/PerformancesCard";
-import dynamic from "next/dynamic";
-import { useRef } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
 
 const ReactToPdf = dynamic(() => import("react-to-pdf"), { ssr: false });
 
@@ -22,9 +20,21 @@ export const ProductDetailsRight = ({ product, display, router }) => {
                 <p className="product_desc_modele mt-4 mb-5 p-0">{product.description.category_desc.replace("$PRODUCT", product.nomenclature.simple)}</p>
               </Row>
               <p className="product_desc_parent mt-5 mb-4 p-0"> {product.description.parent_description}</p>
-              <Link href={{ pathname: "/product/datasheet/[product]", query: { childCat: router.query.childCat, vid: router.query.vid, dpid: router.query.dpid, product: product.nomenclature.simple } }}>
-             <Button variant="secondary" className="mt-4 btn-outline-dark">Fiche technique</Button>
-            </Link>
+              <Row>
+                <Col>
+    
+                  <Link href={{ pathname: "/product/datasheet/[product]", query: { childCat: router.query.childCat, vid: router.query.vid, dpid: router.query.dpid, product: product.nomenclature.simple } }}>
+                    <Button variant="secondary" className="mt-4 btn-outline-dark">
+                    <i className="fad fa-file-chart-line fa-2x"></i> <span className="text-nowrap">Fiche technique</span>
+                    </Button>
+                  </Link>
+                </Col>
+                <Col>
+                  <Button variant="secondary" className="mt-4 btn-outline-dark" href="http://shop.quadratik.fr/document.php?hashp=PZXa9Q88VJc2I56quyG62bzm8twPx0LI">
+                  <i class="fad fa-leaf-heart fa-2x"></i> Ecoresponsabilité
+                  </Button>
+                </Col>
+              </Row>
             </Carousel.Item>
             <Carousel.Item>
               <PerformancesCard product={product} />
@@ -37,7 +47,14 @@ export const ProductDetailsRight = ({ product, display, router }) => {
         <Col className="d-flex flex-column justify-content-center text-center align-items-center ft05">{product.prices.price + " €"}</Col>
         <Col className="d-flex justify-content-center text-center align-items-center">
           <Button variant="primary" type="submit" id="product_submit">
-            - Ajouter au panier -
+            <span className="d-none d-md-inline">
+              {" "}
+              - Ajouter <i className="fad fa-cart-arrow-down"></i> -
+            </span>
+            <span className="d-inline d-md-none">
+              {" "}
+              <i className="fad fa-cart-arrow-down fa-2x"></i>{" "}
+            </span>
           </Button>
         </Col>
       </Row>

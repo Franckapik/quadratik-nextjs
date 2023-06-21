@@ -261,7 +261,7 @@ $creme: #eee3d6;
 }
 
 .product_modele_desc .product_desc_parent {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .product_thumbnail {
@@ -362,7 +362,7 @@ $creme: #eee3d6;
 .product_right {
   position: relative;
   height: calc(100vh - $header_height);
-  min-height: 600px;
+  min-height: 900px;
 }
 
 .product_right_cart {
@@ -1392,5 +1392,18 @@ p {
 
   .sm_rotate_right {
     transform: rotate(-90deg);
+  }
+
+  .product_right_cart {
+    position: relative;
+    width: 100%;
+    height: 10vh;
+    background-color: $creme;
+    padding-top: unset;
+    bottom: -20px;
+  }
+
+  .product_modele_desc .product_desc_parent {
+    text-align: justify;
   }
 }

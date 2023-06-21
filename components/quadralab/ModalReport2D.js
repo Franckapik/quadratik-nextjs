@@ -187,7 +187,7 @@ export const ModalReport2D = ({product, show, setShow, handleClose }) => {
         </Row>
       </Modal.Body>
       <Modal.Footer className="flex-nowrap">
-        <Button variant="secondary" onClick={handleClose}>Close</Button>
+        <Button variant="secondary" onClick={handleClose}>Fermer</Button>
         <Button variant="secondary" type="submit">
           Demander un devis
         </Button>

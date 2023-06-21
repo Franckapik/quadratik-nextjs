@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Col, ListGroup, Offcanvas, Row } from "react-bootstrap";
 import { Burger } from "./Burger";
 
-export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark, categories, viewedCategory, text_dark, fixed, setDisplay }) => {
+export const LayoutHome = ({ noburger, datasheet, cart, contact, shop, home, product, dark, categories, viewedCategory, text_dark, fixed, setDisplay }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
@@ -42,6 +42,13 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
                   </div>
                 </Col>
               ))}
+            </Col>
+          ) : null}
+          {datasheet ? (
+            <Col md={5} className = "d-none d-md-flex flex-row ">
+              <Col md={5}>
+              {datasheet}
+            </Col>
             </Col>
           ) : null}
 

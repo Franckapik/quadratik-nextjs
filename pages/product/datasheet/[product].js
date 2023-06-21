@@ -23,7 +23,21 @@ const Datasheet = () => {
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed, isError: pictureError } = usePicture(product?.nomenclature?.simple, false); //true for miniature
   return (
     <Row className="bg_white ft4 justify-content-center">
-      <LayoutHome home shop fixed dark />
+      <LayoutHome
+        datasheet={
+          <ReactToPdf scale={0.54} targetRef={ref} filename={product.nomenclature.simple + "_fiche_technique.pdf"}>
+            {({ toPdf }) => (
+              <Button className="m-2" onClick={toPdf}>
+                Télécharger la fiche technique
+              </Button>
+            )}
+          </ReactToPdf>
+        }
+        home
+        shop
+        fixed
+        dark
+      />
       {productSuccess && (
         <Row className="layout_space datasheet w-90 border_dark_top">
           <div className="p-0 m-0" ref={ref}>
@@ -34,9 +48,7 @@ const Datasheet = () => {
               <p className="justify-content-center ft1 text-center p-3">Fiche Technique - {product.nomenclature.simple}</p>
             </Row>
             <Card className="d-flex flex-row m-4 align-items-center bg_creme_light">
-              <Col md={3}>
-              { pictureSucceed &&  <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik" />}
-              </Col>
+              <Col md={3}>{pictureSucceed && <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik" />}</Col>
               <Col>
                 <ListGroup>
                   <ListGroup.Item> {product.description.category_desc.replace("$PRODUCT", product.nomenclature.simple)} </ListGroup.Item>
@@ -52,9 +64,7 @@ const Datasheet = () => {
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
-              <Col md={3}>
-              { pictureSucceed &&  <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${sidePicture}`} alt="Aperçu de face d'un modèle Quadratik" />
-             } </Col>
+              <Col md={3}>{pictureSucceed && <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${sidePicture}`} alt="Aperçu de face d'un modèle Quadratik" />} </Col>
             </Card>
             <Card className="d-flex flex-row m-4 align-items-center bg_grey">
               <Col>
@@ -143,12 +153,13 @@ const Datasheet = () => {
                   </Row>
                 )}
               </Col>
-              {dimensions.F === undefined && <Col md={4} className="d-flex flex-column align-items-center">
-                <div className="h-100 w-100">
-                  <PerformanceSpatial nom={product.nomenclature.performance} />
-                </div>
-              </Col>}
-              
+              {dimensions.F === undefined && (
+                <Col md={4} className="d-flex flex-column align-items-center">
+                  <div className="h-100 w-100">
+                    <PerformanceSpatial nom={product.nomenclature.performance} />
+                  </div>
+                </Col>
+              )}
             </Card>
             <Card className="d-flex flex-row m-4 align-items-center bg_creme_light">
               <Col md={4} className="d-flex flex-column align-items-center">
@@ -184,17 +195,7 @@ const Datasheet = () => {
               </Col>
             </Card>
           </div>
-          <Row className="justify-content-center">
-            <Col md={5}>
-              <ReactToPdf scale={0.54} targetRef={ref} filename={product.nomenclature.simple + "_fiche_technique.pdf"}>
-                {({ toPdf }) => (
-                  <Button className="m-2" onClick={toPdf}>
-                    Télécharger la fiche technique
-                  </Button>
-                )}
-              </ReactToPdf>
-            </Col>
-          </Row>
+
         </Row>
       )}
     </Row>
