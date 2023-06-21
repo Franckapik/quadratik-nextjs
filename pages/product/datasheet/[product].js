@@ -35,7 +35,7 @@ const Datasheet = () => {
             </Row>
             <Card className="d-flex flex-row m-4 align-items-center bg_creme_light">
               <Col md={3}>
-                <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik" />
+              { pictureSucceed &&  <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik" />}
               </Col>
               <Col>
                 <ListGroup>
@@ -53,8 +53,8 @@ const Datasheet = () => {
                 </ListGroup>
               </Col>
               <Col md={3}>
-                <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${sidePicture}`} alt="Aperçu de face d'un modèle Quadratik" />
-              </Col>
+              { pictureSucceed &&  <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${sidePicture}`} alt="Aperçu de face d'un modèle Quadratik" />
+             } </Col>
             </Card>
             <Card className="d-flex flex-row m-4 align-items-center bg_grey">
               <Col>
@@ -143,11 +143,12 @@ const Datasheet = () => {
                   </Row>
                 )}
               </Col>
-              <Col md={4} className="d-flex flex-column align-items-center">
+              {dimensions.F === undefined && <Col md={4} className="d-flex flex-column align-items-center">
                 <div className="h-100 w-100">
                   <PerformanceSpatial nom={product.nomenclature.performance} />
                 </div>
-              </Col>
+              </Col>}
+              
             </Card>
             <Card className="d-flex flex-row m-4 align-items-center bg_creme_light">
               <Col md={4} className="d-flex flex-column align-items-center">

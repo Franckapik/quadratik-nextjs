@@ -34,15 +34,15 @@ export const LayoutHome = ({ noburger, cart, contact, shop, home, product, dark,
             </>
           ) : null}
           {product ? (
-            <>
+            <Col md={5} className = "d-none d-md-flex flex-row ">
               {product.map((a, i) => (
-                <Col key={"productNav" + i} className="p-2 d-none d-md-flex justify-content-center text_creme ms-5 me-5" xs={4} md={1} style={{ backgroundColor: i == viewedCategory ? "#9fb07ca9" : "inherit" }}>
+                <Col key={"productNav" + i} className=" d-none d-md-flex justify-content-center text_creme" style={{ backgroundColor: i == viewedCategory ? "#9fb07ca9" : "inherit" }}>
                   <div onClick={() => setDisplay(i)} className="cursor">
                     {a}
                   </div>
                 </Col>
               ))}
-            </>
+            </Col>
           ) : null}
 
           <Col></Col>

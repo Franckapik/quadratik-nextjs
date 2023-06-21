@@ -69,7 +69,7 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
         
         </Carousel.Item>
         <Carousel.Item>
-        <div className="m-4"><PerformanceSpatial nom={product.nomenclature.performance} /></div>
+       {product.dimensions.F === undefined &&  <div className="m-4"><PerformanceSpatial nom={product.nomenclature.performance} /></div>}
         </Carousel.Item>
       </Carousel>
 <Loader text={!pictureError ? <><i className="fas fa-spinner fa-spin"></i> Chargement du modèle</>  : "Modèle non disponible"} open={!pictureSucceed} />

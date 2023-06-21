@@ -11,7 +11,6 @@ export const PerformanceCharts = ({ product }) => {
   useEffect(() => {
     if (product.frequencies && product.dimensions.F === undefined) {
       //diffusors
-console.log(product.frequencies);
       const data = {
         labels: product.frequencies.labels,
         datasets: [
@@ -77,7 +76,7 @@ console.log(product.frequencies);
           <Row className="d-md-none ft8">
             <Line options={options} data={performances} width={100} height={80} />
           </Row>
-          <Row >
+          <Row>
             <Col className="d-flex justify-content-center">
               {" "}
               <Button variant="secondary" className="btn-outline m-4" size="sm" onClick={() => setShow()}>
@@ -97,7 +96,7 @@ console.log(product.frequencies);
                   {Object.values(performances?.datasets[0].data) //cellules
                     .map((a, i) => {
                       return (
-                        <tr>
+                        <tr key={"perf_labels" + i}>
                           <td> {performances.labels[i]} Hz</td>
                           <td> {a}</td>
                         </tr>
