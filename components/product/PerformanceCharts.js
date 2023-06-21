@@ -1,35 +1,32 @@
 import { CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from "chart.js";
 import React, { useEffect, useState } from "react";
-import { Row } from "react-bootstrap";
+import { Button, Col, Modal, Row, Table } from "react-bootstrap";
 import { Line } from "react-chartjs-2";
-import { useQuery } from "react-query";
-import { CSVByFilename } from "../dolibarrApi/fetch";
+import useToggle from "../../hooks/useToggle";
 
 export const PerformanceCharts = ({ product }) => {
   const [performances, setperformances] = useState({});
-  const { data: chart, isSuccess: chartSucceed } = useQuery(["chart", { name: product?.nomenclature?.performance }], () => CSVByFilename("Frequencies/" + product.nomenclature.performance + ".csv"), {
-    staleTime: Infinity,
-    enabled: !!product?.nomenclature?.performance && product?.nomenclature?.performance != undefined,
-  });
+  const [show, setShow] = useToggle();
 
   useEffect(() => {
-    if (chartSucceed && product.dimensions.F === undefined) { //diffusors
-
+    if (product.frequencies && product.dimensions.F === undefined) {
+      //diffusors
+console.log(product.frequencies);
       const data = {
-        labels: chart.map((a, i) => parseFloat(a[0]?.replace(/,/g, "."))),
+        labels: product.frequencies.labels,
         datasets: [
           {
             label: "Diffusion",
             backgroundColor: "#9fb07c",
             borderColor: "#9fb07c",
-            data: chart.map((a, i) => parseFloat(a[1]?.replace(/,/g, "."))),
+            data: product.frequencies.diffusion,
             tension: 0.2,
           },
           {
             label: "Scattering",
             backgroundColor: "#e07e7e",
             borderColor: "#e07e7e",
-            data: chart.map((a, i) => parseFloat(a[2]?.replace(/,/g, "."))),
+            data: product.frequencies.scattering,
             tension: 0.2,
           },
         ],
@@ -37,22 +34,23 @@ export const PerformanceCharts = ({ product }) => {
 
       setperformances(data);
     }
-    if (chartSucceed && product.dimensions.F !== undefined) { //absorbers
+    if (product.frequencies && product.dimensions.F !== undefined) {
+      //absorbers
       const data = {
-        labels: chart.map((a, i) => parseFloat(a[0]?.replace(/,/g, "."))),
+        labels: product.frequencies.labels,
         datasets: [
           {
             label: "Absorption",
-            backgroundColor: "#9fb07c",
-            borderColor: "#9fb07c",
-            data: chart.map((a, i) => parseFloat(a[1]?.replace(/,/g, "."))),
+            backgroundColor: "#e0e66e",
+            borderColor: "#e0e66e",
+            data: product.frequencies.absorption,
             tension: 0.2,
           },
         ],
       };
       setperformances(data);
     }
-  }, [chartSucceed]);
+  }, [product]);
 
   const options = {
     //no points on line
@@ -70,7 +68,7 @@ export const PerformanceCharts = ({ product }) => {
 
   return (
     <>
-      {chartSucceed && Object.entries(performances).length && (
+      {product.frequencies && Object.entries(performances).length && (
         <>
           <Row className="d-none d-md-flex ft8 graph_img">
             {/*Mobile and desktop version*/}
@@ -79,6 +77,36 @@ export const PerformanceCharts = ({ product }) => {
           <Row className="d-md-none ft8">
             <Line options={options} data={performances} width={100} height={80} />
           </Row>
+          <Row >
+            <Col className="d-flex justify-content-center">
+              {" "}
+              <Button variant="secondary" className="btn-outline m-4" size="sm" onClick={() => setShow()}>
+                Tableau des valeurs d'absorption
+              </Button>
+            </Col>
+          </Row>
+          <Modal size="lg" show={show} onHide={() => setShow()}>
+            <Modal.Header closeButton>Tableau des valeurs d'absorption du modèle {product.nomenclature.simple} </Modal.Header>
+            <Modal.Body>
+              <Table variant="light" striped bordered hover className="text-center">
+                <tbody>
+                  <tr>
+                    <td>Fréquences</td>
+                    <td>Absorption (Alpha sabine)</td>
+                  </tr>
+                  {Object.values(performances?.datasets[0].data) //cellules
+                    .map((a, i) => {
+                      return (
+                        <tr>
+                          <td> {performances.labels[i]} Hz</td>
+                          <td> {a}</td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </Table>
+            </Modal.Body>
+          </Modal>
         </>
       )}
     </>

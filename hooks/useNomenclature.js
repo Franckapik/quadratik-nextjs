@@ -10,13 +10,13 @@ export const useNomenclature = (defaultProduct, labels, dimensions) => {
     };
   };
   const nomAbsorbeur = (basename, dimensions, labels) => {
-    const { E, L, M, P, W } = dimensions;
+    const { E, L, M, P, W, A } = dimensions;
     const { F } = labels;
     return {
       structurel: "A" + "W" + W + "L" + L + "P" + P + "E" + E + M,
       complet: "A" + "W" + W + "L" + L + "P" + P + "E" + E + M,
       simple: basename + F + "-" + P + (L == "2" ? "L" : ""),
-      performance: "A" + "P" + P,
+      performance: "A" + "P" + P + A ,
     };
   };
 

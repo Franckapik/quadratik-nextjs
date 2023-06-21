@@ -137,18 +137,8 @@ const Datasheet = () => {
                       <ListGroup.Item>
                         <i className="fad fa-dot-circle" /> <strong>Couleur du tissu :</strong> <span> {dimensions.F}</span>
                       </ListGroup.Item>
-
-                      <ListGroup.Item>
-                        <i className="fad fa-dot-circle" /> <strong>Spectre d'absorption :</strong> <span>{dimensions.fmin} Hz</span>
-                      </ListGroup.Item>
                       <ListGroup.Item>
                         <i className="fad fa-dot-circle" /> <strong>Tissu acoustique :</strong> <span>tissu traditionnel tissé uni pour intérieurs commerciaux aux normes BS 476 section 7 classe 1. 100% Polyoléfine.</span>{" "}
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <i className="fad fa-dot-circle" /> <strong>Spectre d'absorption :</strong> <span>{dimensions.fmin} Hz</span>
-                      </ListGroup.Item>
-                      <ListGroup.Item>
-                        <i className="fad fa-dot-circle" /> <strong>Poids (pour le choix du bois Peuplier):</strong> <span>{dimensions.weightPoplar} kg</span>
                       </ListGroup.Item>
                     </ListGroup>
                   </Row>

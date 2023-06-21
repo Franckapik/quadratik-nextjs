@@ -4,6 +4,7 @@ import { useDimensions } from "./useDimensions";
 import { useNomenclature } from "./useNomenclature";
 import { usePrice } from "./usePrice";
 import { useValuesSelected } from "./useValuesSelected";
+import { useFrequencies } from "./useFrequencies";
 
 export const useComputeProduct = (allAttributes, productAttributes, allValues, category, defaultProduct, isAllSuccess, variantId, isVariant) => {
   const [product, setProduct] = useState(false);
@@ -30,22 +31,22 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
   }),
     [productAttributes];
 
-
   const valuesSelected = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_id"));
   const values3D = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_3d"));
   const valuesLabels = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_label"));
-  const valuesFactor =useMemo(() =>  useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_factor"));
+  const valuesFactor = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_factor"));
   const valuesOperator = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_operator"));
-  const features =useMemo(() =>  useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "id", "v_id"));
-  const description =useMemo(() =>  useDescription(category, defaultProduct || productAttributes));
+  const features = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "id", "v_id"));
+  const description = useMemo(() => useDescription(category, defaultProduct || productAttributes));
   const { price: price, basePrice: basePrice } = useMemo(() => usePrice(defaultProduct, valuesFactor, valuesOperator));
   const dimensions = useMemo(() => useDimensions(values3D));
   const nomenclature = useMemo(() => useNomenclature(defaultProduct, valuesLabels, dimensions));
-
+  const {frequencies : frequencies, isSuccess : freqSucceed} = useFrequencies(nomenclature, dimensions);
+console.log(freqSucceed);
   useEffect(() => {
     //calculate
-
     if (isAllSuccess && isVariant === true) {
+      //variant
       setProduct((previousProduct) => ({
         ...previousProduct,
         attributes: attributes ? attributes : productAttributes,
@@ -58,9 +59,11 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
         valuesSelected: valuesSelected,
         values: allValues,
         variantId: variantId,
+        frequencies: frequencies,
       }));
       setSuccess(true);
     } else if (isAllSuccess && isVariant === false) {
+      //non-variant
       setProduct((previousProduct) => ({
         ...previousProduct,
         attributes: {},
@@ -76,8 +79,7 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
       }));
       setSuccess(true);
     }
-  }, [attributes, isAllSuccess]);
+  }, [attributes, isAllSuccess, frequencies]);
 
-
-  return { product, isSuccess : isSuccess, changeAttributes };
+  return { product, isSuccess: isSuccess, changeAttributes };
 };

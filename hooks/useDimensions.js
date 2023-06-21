@@ -1,5 +1,3 @@
-import { useQuery } from "react-query";
-import { CSVByFilename } from "../components/dolibarrApi/fetch";
 
 export const useDimensions = (values3D) => {
   if (values3D?.D === "D1") {

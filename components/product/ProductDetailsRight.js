@@ -8,7 +8,6 @@ import Link from "next/link";
 const ReactToPdf = dynamic(() => import("react-to-pdf"), { ssr: false });
 
 export const ProductDetailsRight = ({ product, display, router }) => {
-  console.log(router);
   return (
     <>
       <Col className="text_dark product_modele_desc d-flex flex-column ">
