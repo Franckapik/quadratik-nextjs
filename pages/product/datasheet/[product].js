@@ -25,7 +25,7 @@ const Datasheet = () => {
     <Row className="bg_white ft4 justify-content-center">
       <LayoutHome
         datasheet={
-          <ReactToPdf scale={0.54} targetRef={ref} filename={product.nomenclature.simple + "_fiche_technique.pdf"}>
+          <ReactToPdf scale={0.54} targetRef={ref} filename={product?.nomenclature?.simple + "_fiche_technique.pdf"}>
             {({ toPdf }) => (
               <Button className="m-2" onClick={toPdf}>
                 Télécharger la fiche technique
@@ -45,13 +45,13 @@ const Datasheet = () => {
               <div className="text-center">
                 <Image width={100} height={100} src={logoMarqueeImg} alt="Miniature du logo de l'entreprise Quadratik" className="mb-4" />
               </div>
-              <p className="justify-content-center ft1 text-center p-3">Fiche Technique - {product.nomenclature.simple}</p>
+              <p className="justify-content-center ft1 text-center p-3">Fiche Technique - {product.nomenclature?.simple}</p>
             </Row>
             <Card className="d-flex flex-row m-4 align-items-center bg_creme_light">
               <Col md={3}>{pictureSucceed && <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik" />}</Col>
               <Col>
                 <ListGroup>
-                  <ListGroup.Item> {product.description.category_desc.replace("$PRODUCT", product.nomenclature.simple)} </ListGroup.Item>
+                  <ListGroup.Item> {product.description.category_desc.replace("$PRODUCT", product.nomenclature?.simple)} </ListGroup.Item>
                   <ListGroup.Item> {product.description.parent_description} </ListGroup.Item>
                   <ListGroup.Item>
                     <strong>
