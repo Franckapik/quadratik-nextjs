@@ -39,7 +39,7 @@ $creme: #eee3d6;
 }
 
 .bg_grey {
-  background-color: dimgray;
+  background-color: $gray-300;
 }
 
 .bg_backdrop {
@@ -1192,6 +1192,7 @@ height: 40vh;
 a {
   cursor: pointer;
   text-decoration: none !important;
+  color: unset;
 }
 
 body {

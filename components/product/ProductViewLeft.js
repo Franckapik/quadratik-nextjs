@@ -35,6 +35,7 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
                 <Carousel.Caption>
                   <h3>{product.nomenclature.simple}</h3>
                  { product.dimensions.fmin &&  <p>{product.dimensions.fmin} Hz - {product.dimensions.fmax} Hz</p>}
+                 { product.frequencies.fmin && <p>Absorption totale à {product.frequencies.fmax} Hz</p>}
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>

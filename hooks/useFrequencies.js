@@ -22,7 +22,9 @@ export const useFrequencies = (nomenclature, dimensions) => {
 
       const labels = chart.map((a, i) => parseFloat(a[0]?.replace(/,/g, "."))).filter(a => !Number.isNaN(a));
       const absorption =  chart.map((a, i) => parseFloat(a[1]?.replace(/,/g, "."))).filter(a => !Number.isNaN(a));
-      setFrequencies({labels, absorption});
+      const fmin = labels[absorption.findIndex(a => a > 0.5)];
+      const fmax = labels[absorption.findIndex(a => a > 0.90)];
+      setFrequencies({labels, absorption, fmin, fmax});
     }
   }, [chartSucceed]);
 

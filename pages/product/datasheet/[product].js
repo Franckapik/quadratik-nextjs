@@ -22,7 +22,7 @@ const Datasheet = () => {
   const dimensions = product.dimensions;
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed, isError: pictureError } = usePicture(product?.nomenclature?.simple, false); //true for miniature
   return (
-    <Row className="bg_white ft4 justify-content-center"> 
+    <Row className="bg_white ft4 justify-content-center">
       <LayoutHome home shop fixed dark />
       {productSuccess && (
         <Row className="layout_space datasheet w-90 border_dark_top">
@@ -33,7 +33,7 @@ const Datasheet = () => {
               </div>
               <p className="justify-content-center ft1 text-center p-3">Fiche Technique - {product.nomenclature.simple}</p>
             </Row>
-            <Card className="d-flex flex-row m-4 align-items-center bg_white">
+            <Card className="d-flex flex-row m-4 align-items-center bg_creme_light">
               <Col md={3}>
                 <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik" />
               </Col>
@@ -56,7 +56,7 @@ const Datasheet = () => {
                 <Image style={{ objectFit: "cover" }} width={720} height={1080} className="d-block m-auto w-90" src={`data:image/png;base64,${sidePicture}`} alt="Aperçu de face d'un modèle Quadratik" />
               </Col>
             </Card>
-            <Card className="d-flex flex-row m-4 align-items-center bg_white">
+            <Card className="d-flex flex-row m-4 align-items-center bg_grey">
               <Col>
                 {(product.dimensions.D === "D2" || product.dimensions.D === "D1") && (
                   <Row>
@@ -118,12 +118,11 @@ const Datasheet = () => {
                 {dimensions.D !== "D2" && dimensions.D !== "D1" && dimensions.F !== undefined && (
                   <Row>
                     <ListGroup>
-                      <ListGroup.Item>Absorbeur acoustique</ListGroup.Item>
                       <ListGroup.Item>
-                        <i className="fad fa-dot-circle" /> <strong></strong>Dimensions de l'absorbeur (l x L x P) :
-                        <span>
-                          {dimensions.w} cm x {dimensions.l} cm x {dimensions.P} cm
-                        </span>
+                        <i className="fad fa-dot-circle" /> <strong>Absorption à partir de </strong> <span>{product.frequencies.fmin} Hz</span>
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        <i className="fad fa-dot-circle" /> <strong>Absorption totale à partir de </strong> <span>{product.frequencies.fmax} Hz</span>
                       </ListGroup.Item>
                       <ListGroup.Item>
                         <i className="fad fa-dot-circle" /> <strong>Aire de l'absorbeur :</strong> <span>{dimensions.area / 10000} m2</span>
@@ -150,10 +149,10 @@ const Datasheet = () => {
                 </div>
               </Col>
             </Card>
-            <Card className="d-flex flex-row m-4 align-items-center bg_white">
+            <Card className="d-flex flex-row m-4 align-items-center bg_creme_light">
               <Col md={4} className="d-flex flex-column align-items-center">
                 <div className="h-100 w-100">
-                  <PerformanceCharts nom={product.nomenclature.performance} />
+                  <PerformanceCharts product={product} />
                 </div>
               </Col>
               <Col>
@@ -187,7 +186,11 @@ const Datasheet = () => {
           <Row className="justify-content-center">
             <Col md={5}>
               <ReactToPdf scale={0.54} targetRef={ref} filename={product.nomenclature.simple + "_fiche_technique.pdf"}>
-                {({ toPdf }) => <Button className="m-2" onClick={toPdf}>Télécharger la fiche technique</Button>}
+                {({ toPdf }) => (
+                  <Button className="m-2" onClick={toPdf}>
+                    Télécharger la fiche technique
+                  </Button>
+                )}
               </ReactToPdf>
             </Col>
           </Row>
