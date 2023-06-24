@@ -42,7 +42,6 @@ const Quadralab = () => {
   const methods = useForm();
 
   const [dimensionView, setDimensionView] = useState(true);
-
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -103,7 +102,7 @@ const Quadralab = () => {
                     <Col className="justify-content-evenly " md={6}>
                       <p className="m-0 ft5"> Commande en ligne </p>
                       <Button variant="primary" type="submit">
-                        - Le devis -
+                        {!router.query.admin ? "- Le devis -" : product.prices.price + "€"}
                       </Button>
                     </Col>
                   </Row>

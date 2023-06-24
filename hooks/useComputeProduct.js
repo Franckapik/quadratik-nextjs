@@ -42,7 +42,6 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
   const dimensions = useMemo(() => useDimensions(values3D));
   const nomenclature = useMemo(() => useNomenclature(defaultProduct, valuesLabels, dimensions));
   const {frequencies : frequencies, isSuccess : freqSucceed} = useFrequencies(nomenclature, dimensions);
-console.log(freqSucceed);
   useEffect(() => {
     //calculate
     if (isAllSuccess && isVariant === true) {
