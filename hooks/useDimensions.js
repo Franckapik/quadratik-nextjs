@@ -155,4 +155,18 @@ export const useDimensions = (values3D) => {
 
     return { ...values3D, e: e, w: w, l: l, start: start, area: area, volume: volume };
   }
+   else if (values3D?.O !== undefined) {
+
+    
+
+    const { E, W, L, P, F, O } = values3D;
+    const e = E / 10; //epaisseur
+    const w = parseInt(W); //largeur
+    const l = w * L; //longueur
+    const start = [-w / 2, -l / 2, P / 2];
+    const area = l * W;
+    const volume = area * P;
+
+    return { ...values3D, e: e, w: w, l: l, start: start, area: area, volume: volume };
+  }
 };

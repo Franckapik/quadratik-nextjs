@@ -19,6 +19,18 @@ export const useNomenclature = (defaultProduct, labels, dimensions) => {
       performance: "A" + "P" + P + A ,
     };
   };
+  const nomTuile = (basename, dimensions, labels) => {
+    const { E, L, M, P, W, A, O } = dimensions;
+    const { F } = labels;
+    return {
+      structurel: "A" + "W" + W + "L" + L + "P" + P + "E" + E ,
+      complet: "A" + "W" + W + "L" + L + "P" + P + "E" + E,
+      simple: basename + "-" + P + O + (L == "2" ? "L" : ""),
+      performance: "A" + "P" + P + A ,
+    };
+  };
+
+  console.log(dimensions);
 
   if (dimensions && defaultProduct?.label) {
     let basename;
@@ -30,8 +42,11 @@ export const useNomenclature = (defaultProduct, labels, dimensions) => {
       case defaultProduct.label.includes("Diffuseur") && dimensions.D === "D2":
         basename = "Woodik";
         break;
-      case defaultProduct.label.includes("Absorbeur"):
+      case defaultProduct.label.includes("Absorbeur") && dimensions.F !== undefined:
         basename = "Quadra";
+        break;
+      case defaultProduct.label.includes("Absorbeur") && dimensions.O !== undefined:
+        basename = "Tilik";
         break;
 
       default:
@@ -48,6 +63,9 @@ export const useNomenclature = (defaultProduct, labels, dimensions) => {
         break;
       case "Quadra":
         nomenclature = nomAbsorbeur(basename, dimensions, labels);
+        break;
+      case "Tilik":
+        nomenclature = nomTuile(basename, dimensions, labels);
         break;
 
       default:
