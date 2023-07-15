@@ -9,8 +9,8 @@ export const useDimensions = (values3D) => {
     const V = 0; //decalage vertical NO DECALAGE FOR D1
     const invert = I == "0"; //invert
     const c = (w - (p + 1) * e) / p; //largeur cellule
-    const l = Math.round(parseFloat(N * L * (c + e) + e)); //longueur
-    const n = N * L; // nb de cellules
+    const l =  Math.round(parseFloat(Math.round(N * L) * (c + e) + e)); //longueur
+    const n =  Math.round(1 * Math.round(N * L)); // nb de cellules
     const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
     const a = Array(n)
       .fill("")
@@ -76,10 +76,9 @@ export const useDimensions = (values3D) => {
     const p = parseInt(N); //type (type du diffuseur) Prime number (p)
     const w = parseInt(W); //largeur
     const c = (w - (p + 1) * e) / p; //largeur cellule
-    const l = Math.round(parseFloat(N * L * (c + e) + e)); //longueur
-
+    const l = Math.round(parseFloat(Math.round(N * L) * (c + e) + e)); //longueur
     const invert = I == "0"; //invert
-    const n = N * N * L; // nb de cellules
+    const n = Math.round(N * Math.round(N * L)); // nb de cellules
     const n2 = Math.ceil(l / (c + e)); //type (nombre de rangées)
     const a = Array(n)
       .fill("")

@@ -10,7 +10,7 @@ const ProductOptions = ({ product, changeAttributes }) => {
 
   useEffect(() => {
     const subscription = methods.watch((value, { name : id }) => {
-      console.log("New value pour l'id ",id, " : ", value[id]);
+/*       console.log("New value pour l'id ",id, " : ", value[id]); */
       changeAttributes(id, value[id]);
     });
     return () => subscription.unsubscribe();

@@ -58,7 +58,7 @@ export const Field = ({ label, id, type, values, defaultVal, changeAttributes })
               return <Form.Range onChange={(e) => setValue(id, values[e.target.value].v_id)} ref={ref} min={values[0].v_3d} max={values[Object.keys(values).length - 1].v_3d} />;
               break;
             case type.includes("number"):
-              return <Form.Control type="number" defaultValue={values[0].v_3d} onChange={(e) => setValue(id, e.target.value)}  ref={ref}  min={values[0].v_3d} max={values[Object.keys(values).length - 1].v_3d}  />;
+              return <Form.Control type="number" defaultValue={values[0].v_3d} onChange={(e) => setValue(id, `notId:${e.target.value}`)}  ref={ref}  min={values[0].v_3d} max={values[Object.keys(values).length - 1].v_3d}  />;
               break;
 
             default:
