@@ -4,14 +4,6 @@ import { Controller, useFormContext } from "react-hook-form";
 
 export const Field = ({ label, id, type, values, defaultVal, changeAttributes }) => {
   const { control, setValue } = useFormContext();
-  const [inverted, setInverted] = useState(0);
-
-  useEffect(() => {
-    // work around to avoid false issue submitting switch
-    if (type === "switch") {
-      setValue("I", inverted ? values[1].v_id : values[0].v_id);
-    }
-  }, [type, inverted]);
 
   return (
     <>
@@ -26,7 +18,7 @@ export const Field = ({ label, id, type, values, defaultVal, changeAttributes })
         render={({ field: { onChange, value, ref }, field }) => {
           switch (true) {
             case type === "switch":
-              return <Form.Check checked={false} onChange={(e) => setValue(id, e.target.checked ? values[0].v_id : values[1].v_id)} ref={ref} type={type} id={"switch" + label} label={label} />;
+              return <Form.Check onChange={(e) => setValue(id, e.target.checked ? values[0].v_id : values[1].v_id)} ref={ref} type={type} id={"switch" + label} label={label} />;
               break;
             case type === "radio":
               return (
