@@ -10,26 +10,40 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
   const [product, setProduct] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
   const [attributes, setAttributes] = useState(false);
-
+  /* 
   const changeAttributes = (value, name) => {
+    console.log(value);
     setAttributes((previousAttributes) => {
       let newAttributes = previousAttributes;
+      console.log(newAttributes);
       const i = newAttributes.findIndex((obj) => obj.id == name);
+      console.log(i);
       if (newAttributes[i] !== undefined) {
         newAttributes[i].fk_prod_attr_val = value[name];
+      } else {
+        console.log("attribut inexistant");
       }
+      console.log(newAttributes);
       return newAttributes;
     });
 
     setAttributes(false); //magical cmd to refresh component
+  }; */
+
+  const changeAttributes = (id, value) => {
+    console.log(value);
+    setAttributes((prev) => prev.map((item) => (item.id === id ? { ...item, fk_prod_attr_val: value } : item)));
   };
+
+  useEffect(() => {
+    console.log("hi!");
+  }, [attributes]);
 
   useEffect(() => {
     if (productAttributes !== undefined) {
       setAttributes(productAttributes);
     }
-  }),
-    [productAttributes];
+  }, [productAttributes]);
 
   const valuesSelected = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_id"));
   const values3D = useMemo(() => useValuesSelected(allAttributes, attributes ? attributes : productAttributes, allValues, "ref", "v_3d"));
@@ -41,7 +55,7 @@ export const useComputeProduct = (allAttributes, productAttributes, allValues, c
   const { price: price, basePrice: basePrice } = useMemo(() => usePrice(defaultProduct, valuesFactor, valuesOperator));
   const dimensions = useMemo(() => useDimensions(values3D));
   const nomenclature = useMemo(() => useNomenclature(defaultProduct, valuesLabels, dimensions));
-  const {frequencies : frequencies, isSuccess : freqSucceed} = useFrequencies(nomenclature, dimensions);
+  const { frequencies: frequencies, isSuccess: freqSucceed } = useFrequencies(nomenclature, dimensions);
   useEffect(() => {
     //calculate
     if (isAllSuccess && isVariant === true) {

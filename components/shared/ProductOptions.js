@@ -2,18 +2,20 @@ import { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useFormContext } from "react-hook-form";
 import useToggle from "../../hooks/useToggle";
-import { Field } from "../product/Field";
+import { Field } from "./Field";
 
 const ProductOptions = ({ product, changeAttributes }) => {
   const [mode, setMode] = useToggle(true);
   const methods = useFormContext();
 
   useEffect(() => {
-    const subscription = methods.watch((value, {name}) => {
-      changeAttributes(value, name);
+    const subscription = methods.watch((value, { name : id }) => {
+      console.log("New value pour l'id ",id, " : ", value[id]);
+      changeAttributes(id, value[id]);
     });
     return () => subscription.unsubscribe();
   }, [methods.watch]);
+
   const options = product.description && JSON.parse(product.description?.attributes_options);
 
   return (
@@ -37,7 +39,7 @@ const ProductOptions = ({ product, changeAttributes }) => {
             const type = a[1];
             const att = Object.values(product.allAttributes).filter((x) => x.ref === a[0])[0];
             const values = product.values.filter((a) => a.a_id == att.id);
-            return <Field id={att.id} type={mode ? "hidden" : type} key={"Field" + i} values={values} label={att.label} defaultVal={product.valuesSelected[a[0]]}></Field>;
+            return <Field changeAttributes={changeAttributes} id={att.id} type={mode ? "hidden" : type} key={"Field" + i} values={values} label={att.label} defaultVal={product.valuesSelected[a[0]]}></Field>;
           })}
         </Form.Group>
       </Form.Group>

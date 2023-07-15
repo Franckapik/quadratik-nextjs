@@ -30,8 +30,6 @@ export const useNomenclature = (defaultProduct, labels, dimensions) => {
     };
   };
 
-  console.log(dimensions);
-
   if (dimensions && defaultProduct?.label) {
     let basename;
     let nomenclature;

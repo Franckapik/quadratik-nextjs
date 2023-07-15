@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { Controller, useFormContext } from "react-hook-form";
 
-export const Field = ({ label, id, type, values, defaultVal }) => {
+export const Field = ({ label, id, type, values, defaultVal, changeAttributes }) => {
   const { control, setValue } = useFormContext();
   const [inverted, setInverted] = useState(0);
 
@@ -56,6 +56,9 @@ export const Field = ({ label, id, type, values, defaultVal }) => {
               break;
             case type.includes("range"):
               return <Form.Range onChange={(e) => setValue(id, values[e.target.value].v_id)} ref={ref} min={values[0].v_3d} max={values[Object.keys(values).length - 1].v_3d} />;
+              break;
+            case type.includes("number"):
+              return <Form.Control type="number" defaultValue={values[0].v_3d} onChange={(e) => setValue(id, e.target.value)}  ref={ref}  min={values[0].v_3d} max={values[Object.keys(values).length - 1].v_3d}  />;
               break;
 
             default:
