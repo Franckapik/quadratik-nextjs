@@ -24,14 +24,14 @@ export const ProductDetailsRight = ({ product, display, router }) => {
                 <Col>
     
                   <Link href={{ pathname: "/product/datasheet/[product]", query: { childCat: router.query.childCat, vid: router.query.vid, dpid: router.query.dpid, product: product.nomenclature.simple } }}>
-                    <Button variant="secondary" className="mt-4 btn-outline-dark">
+                    <Button variant="secondary" className="mt-4 btn-outline-dark ft6 text-nowrap">
                     <i className="fad fa-file-chart-line fa-2x"></i> <span className="text-nowrap">Fiche technique</span>
                     </Button>
                   </Link>
                 </Col>
                 <Col>
-                  <Button variant="secondary" className="mt-4 btn-outline-dark" href="http://shop.quadratik.fr/document.php?hashp=PZXa9Q88VJc2I56quyG62bzm8twPx0LI">
-                  <i class="fad fa-leaf-heart fa-2x"></i> Ecoresponsabilité
+                  <Button variant="secondary" className="mt-4 btn-outline-dark text-nowrap " href="http://shop.quadratik.fr/document.php?hashp=PZXa9Q88VJc2I56quyG62bzm8twPx0LI">
+                  <i class="fad fa-leaf-heart fa-2x"></i> Eco-charte
                   </Button>
                 </Col>
               </Row>

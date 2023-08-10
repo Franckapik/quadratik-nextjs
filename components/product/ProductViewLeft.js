@@ -34,8 +34,8 @@ export const ProductViewLeft = ({ product, display, setDisplay }) => {
                 <Image style={{objectFit: "contain"}}  width={720} height={1080} className="d-block product_carousel_img m-auto" src={`data:image/png;base64,${facePicture}`} alt="Aperçu de face d'un modèle Quadratik" />
                 <Carousel.Caption>
                   <h3>{product.nomenclature.simple}</h3>
-                 { product.dimensions.fmin &&  <p>{product.dimensions.fmin} Hz - {product.dimensions.fmax} Hz</p>}
-                 { product.frequencies.fmin && <p>Absorption totale à {product.frequencies.fmax} Hz</p>}
+                 {  product.dimensions.fmin &&  <p>{product.dimensions.fmin} Hz - {product.dimensions.fmax} Hz</p>}
+                 { product && product.frequencies?.fmin && <p>Absorption totale à {product.frequencies.fmax} Hz</p>}
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
