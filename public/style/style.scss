@@ -4,6 +4,8 @@
   font-display: swap;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
+
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @import "./custom.scss";
@@ -32,6 +34,25 @@ $creme: #eee3d6;
 
 #s2_mobile_gallery > div {
   justify-content: space-evenly;
+}
+
+.blog {
+  background-color: white !important;
+ font-family: 'Lora', serif;
+ letter-spacing: initial;
+
+}
+
+.blog .col-md-6 {
+  display: flex;
+  align-items: stretch;
+}
+
+.title_blog {
+  line-height: 1.5em;
+  letter-spacing: initial;
+  font-size: 2.5em;
+  font-weight: 400;
 }
 
 .bg_creme {
@@ -227,7 +248,15 @@ $creme: #eee3d6;
 }
 
 .quadralab_button .btn {
-  font-size: 0.8rem!important;
+  font-size: 0.8rem !important;
+}
+
+.bandeau {
+  height: 180px !important;
+  background-size: cover;
+  background-image: url(../images/accroches/motif.png);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .btn {
@@ -696,9 +725,9 @@ $creme: #eee3d6;
 }
 
 .s2_chargement {
-  position : absolute;
+  position: absolute;
   left: 50%;
-  top : 50%;
+  top: 50%;
   z-index: 2;
   padding: 10px;
   transform: translate(-50%, -50%);
@@ -747,20 +776,20 @@ $creme: #eee3d6;
 }
 
 .realisations {
-  padding-left: 10vw!important;
-  padding-right: 10vw!important;
+  padding-left: 10vw !important;
+  padding-right: 10vw !important;
 }
 
 .realisations img {
-padding: 10px;
-margin: auto;
-min-width: 300px;
-width: 100%;
-height: 100%;
+  padding: 10px;
+  margin: auto;
+  min-width: 300px;
+  width: 100%;
+  height: 100%;
 }
 .realisations .card {
-margin: 10px;
-height: 40vh;
+  margin: 10px;
+  height: 40vh;
 }
 
 .s2_photo_studio {
@@ -1213,15 +1242,15 @@ p {
 }
 
 .datasheet .card {
-  min-height: 500px!important;
+  min-height: 500px !important;
 }
 
 .w-80 {
-  width : 80%;
+  width: 80%;
   height: auto;
 }
 .w-90 {
-  width : 90%;
+  width: 90%;
   height: auto;
 }
 
@@ -1230,7 +1259,6 @@ p {
   padding-right: 20px;
   background-color: unset;
   color: #332d2a;
-
 }
 
 .datasheet .graph_img {
@@ -1294,8 +1322,8 @@ p {
   }
 
   .realisations {
-    padding-left: unset!important;
-    padding-right: unset!important;
+    padding-left: unset !important;
+    padding-right: unset !important;
   }
 
   .s1_product_name {
