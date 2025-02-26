@@ -1,18 +1,50 @@
-import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { useFetchProduct } from "../../../hooks/useFetchProduct";
 import { useComputeProduct } from "../../../hooks/useComputeProduct";
 import { useRouter } from "next/router";
-import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
 import { usePicture } from "../../../hooks/usePicture";
 import Image from "next/image";
 import { LayoutHome } from "../../../components/LayoutHome";
 import { PerformanceSpatial } from "../../../components/product/ParformanceSpatial";
 import { PerformanceCharts } from "../../../components/product/PerformanceCharts";
-import logoMarqueeImg from "../../../public/images/logo/logo_marquee.svg";
+import logoMarqueeImg from "../../../public/images/logo/logo_blanc.png";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import { Page, Text, View, Document, StyleSheet, Image as PDFImage } from "@react-pdf/renderer";
 
-const ReactToPdf = dynamic(() => import("react-to-pdf"), { ssr: false });
+const PDFDownloadLink = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink), { ssr: false });
+const PDFViewer = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFViewer), { ssr: false });
+
+const styles = StyleSheet.create({
+  page: { backgroundColor: "#332d2a", color: "#f5f5f5", display: "flex" },
+  section: { margin: 10, padding: 10, flexGrow: 1, display: "flex", flexDirection: "column", alignItems: "center", fontSize: 12 },
+  images: { width: 100, height: 100, marginBottom: 15 },
+  row: { display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" },
+  col: { display: "flex", flexDirection: "column", justifyContent: "space-between", width: "50%" },
+  title: { fontSize: 20, marginBottom: 10, fontWeight: "bold" },
+});
+
+const MyDocument = ({ product, sidePicture }) => (
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.section}>
+        <PDFImage style={styles.images} src={logoMarqueeImg.src} alt="Miniature du logo de l'entreprise Quadratik" />
+        <Text style={styles.title}>Fiche Technique - {product.nomenclature?.simple}</Text>
+        <Row style={styles.row}>
+          <Col style={styles.col}>
+            <PDFImage src={`data:image/png;base64,${sidePicture}`} alt="Miniature du logo de l'entreprise Quadratik" />
+          </Col>
+          <Col style={styles.col}>
+          {product && (<>
+            <Text>{product.description.category_desc.replace("$PRODUCT", product.nomenclature?.simple)}</Text>
+            <Text>{product.description.parent_description}</Text></> )}
+          </Col>
+        </Row>
+      </View>
+    </Page>
+  </Document>
+);
 
 const Datasheet = () => {
   const ref = useRef();
@@ -25,13 +57,11 @@ const Datasheet = () => {
     <Row className="bg_white ft4 justify-content-center">
       <LayoutHome
         datasheet={
-          <ReactToPdf scale={0.54} targetRef={ref} filename={product?.nomenclature?.simple + "_fiche_technique.pdf"}>
-            {({ toPdf }) => (
-              <Button className="m-2" onClick={toPdf}>
-                Télécharger la fiche technique
-              </Button>
-            )}
-          </ReactToPdf>
+          <>
+            <PDFDownloadLink document={<MyDocument product={product} />} fileName={product?.nomenclature?.simple + "_fiche_technique.pdf"}>
+              {({ loading }) => (loading ? "Loading document..." : <Button className="m-2">Télécharger la fiche technique</Button>)}
+            </PDFDownloadLink>
+          </>
         }
         home
         shop
@@ -40,6 +70,9 @@ const Datasheet = () => {
       />
       {productSuccess && (
         <Row className="layout_space datasheet w-90 border_dark_top">
+          <PDFViewer width="100%" height="600">
+            <MyDocument product={product} sidePicture={sidePicture} />
+          </PDFViewer>
           <div className="p-0 m-0" ref={ref}>
             <Row className="bg_dark">
               <div className="text-center">
@@ -195,7 +228,6 @@ const Datasheet = () => {
               </Col>
             </Card>
           </div>
-
         </Row>
       )}
     </Row>
