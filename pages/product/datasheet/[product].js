@@ -17,29 +17,92 @@ const PDFDownloadLink = dynamic(() => import("@react-pdf/renderer").then((mod) =
 const PDFViewer = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFViewer), { ssr: false });
 
 const styles = StyleSheet.create({
-  page: { backgroundColor: "#332d2a", color: "#f5f5f5", display: "flex" },
-  section: { margin: 10, padding: 10, flexGrow: 1, display: "flex", flexDirection: "column", alignItems: "center", fontSize: 12 },
-  images: { width: 100, height: 100, marginBottom: 15 },
-  row: { display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%" },
-  col: { display: "flex", flexDirection: "column", justifyContent: "space-between", width: "50%" },
+  page: { backgroundColor: "#332d2a", color: "#f5f5f5", display: "flex", lineHeight: 1.1 },
+  section: { margin: 10, padding: 10, flexGrow: 1, display: "flex", flexDirection: "column", alignItems: "center", fontSize: 11 },
+  logo: { width: 60, height: 60, marginBottom: 15 },
+  row: { display: "flex", flexDirection: "row", width: "100%", height: "calc(38% - 20px)", border: "1px solid #f5f5f5", padding: 10 },
+  col: { display: "flex", flexDirection: "column", width: "50%", border: "1px solid #f5f5f5", padding: 10, margin: 5 },
   title: { fontSize: 20, marginBottom: 10, fontWeight: "bold" },
+  cropped: { objectFit: "cover", transform: "scale(1.3), translate(0,35%)", height: "100%", width: "100%" },
+  fullRow: { display: "flex", flexDirection: "row", width: "100%", height: "calc(33.33% - 20px)", border: "1px solid #f5f5f5", padding: 10, margin: 5 },
+  paragraph: { marginBottom: 10 },
+  subtitle: { marginBottom: 25 },
 });
 
-const MyDocument = ({ product, sidePicture }) => (
+const MyDocument = ({ product, sidePicture, facePicture, dimensions, router }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
-        <PDFImage style={styles.images} src={logoMarqueeImg.src} alt="Miniature du logo de l'entreprise Quadratik" />
+        <PDFImage style={styles.logo} src={logoMarqueeImg.src} alt="Miniature du logo de l'entreprise Quadratik" />
         <Text style={styles.title}>Fiche Technique - {product.nomenclature?.simple}</Text>
         <Row style={styles.row}>
           <Col style={styles.col}>
-            <PDFImage src={`data:image/png;base64,${sidePicture}`} alt="Miniature du logo de l'entreprise Quadratik" />
+            <PDFImage style={styles.cropped} src={`data:image/png;base64,${facePicture}`} alt="Miniature du logo de l'entreprise Quadratik" />
           </Col>
           <Col style={styles.col}>
-          {product && (<>
-            <Text>{product.description.category_desc.replace("$PRODUCT", product.nomenclature?.simple)}</Text>
-            <Text>{product.description.parent_description}</Text></> )}
+            {product && (
+              <>
+                <Text style={styles.paragraph}>{product.description.category_desc.replace("$PRODUCT", product.nomenclature?.simple)}</Text>
+                <Text style={styles.paragraph}>{product.description.parent_description}</Text>
+                <Text style={styles.paragraph}>
+              {dimensions.w} cm x {dimensions.l} cm x {dimensions.P} cm
+            </Text>
+              </>
+            )}
           </Col>
+        </Row>
+        <Row style={styles.row}>
+          <Col style={styles.col}>
+
+            {dimensions.D === "D2" || dimensions.D === "D1" ? (
+              <>
+                <Text style={styles.subtitle}>
+                  Diffuseur QRD {dimensions.D === "D1" ? "1D" : "2D"} basé sur le nombre premier {dimensions.N} avec diffusion sonore hémisphérique
+                </Text>
+                <Text style={styles.paragraph}>Aire du diffuseur : {dimensions.area / 10000} m2</Text>
+                <Text style={styles.paragraph}>Volume du diffuseur : {dimensions.volume / 1000000} m3</Text>
+                <Text style={styles.paragraph}>Fréquence de conception : {dimensions.fmin} Hz</Text>
+                <Text style={styles.paragraph}>Fréquence de coupure supérieure : {dimensions.fmax} Hz</Text>
+                <Text style={styles.paragraph}>Diffusion des basses fréquences jusqu'à {dimensions.fmin / 2} Hz</Text>
+                <Text style={styles.paragraph}>Nombre de puits/cellules : {dimensions.report.length}</Text>
+                <Text style={styles.paragraph}>Epaisseur des parois : {dimensions.E} mm</Text>
+                <Text style={styles.paragraph}>Largeur d'une cellule : {dimensions.c.toFixed(2)} cm</Text>
+                <Text style={styles.paragraph}>Nombre de hauteur de cellules différentes : {dimensions.amax}</Text>
+                <Text style={styles.paragraph}>Poids (peuplier) : {dimensions.weightPoplar} kg</Text>
+              </>
+            ) : (
+              <>
+                <Text style={styles.paragraph}>Absorption à partir de {product.frequencies.fmin} Hz</Text>
+                <Text style={styles.paragraph}>Absorption totale à partir de {product.frequencies.fmax} Hz</Text>
+                <Text style={styles.paragraph}>Aire de l'absorbeur : {dimensions.area / 10000} m2</Text>
+                <Text style={styles.paragraph}>Volume de l'absorbeur : {dimensions.volume / 1000000} m3</Text>
+                <Text style={styles.paragraph}>Cadre en bois : Bois contreplaque peuplier epaisseur 4mm (Populus spp) de couleur claire.</Text>
+                <Text style={styles.paragraph}>Couleur du tissu : {dimensions.F}</Text>
+                <Text style={styles.paragraph}>Tissu acoustique : tissu traditionnel tissé uni pour intérieurs commerciaux aux normes BS 476 section 7 classe 1. 100% Polyoléfine.</Text>
+              </>
+            )}
+          </Col>
+          <Col style={styles.col}>
+            {" "}
+            <PDFImage style={styles.cropped} src={`data:image/png;base64,${sidePicture}`} alt="Miniature du logo de l'entreprise Quadratik" />
+          </Col>
+        </Row>
+      </View>
+    </Page>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.section}>
+        <Row style={styles.fullRow}>
+          <Text style={styles.paragraph}>Catégorie du modèle : {product.description.parent_label}</Text>
+          <Text style={styles.paragraph}>Url : https://www.quadratik.fr{router.asPath.replace("datasheet/", "")}</Text>
+          <Text style={styles.paragraph}>Inflammabilité: Conception inflammable d’après DIN 4102 B1, difficilement inflammable, classement M1 , FMVSS 302, UL 94 V0 + HF1</Text>
+          <Text style={styles.paragraph}>Installation : Système d'accrochage sur les quatres côtés</Text>
+          <Text style={styles.paragraph}>Origine des matériaux: 100% France</Text>
+        </Row>
+        <Row style={styles.fullRow}>
+          <Text>PerformanceCharts</Text>
+        </Row>
+        <Row style={styles.fullRow}>
+          <Text>Area</Text>
         </Row>
       </View>
     </Page>
@@ -55,7 +118,7 @@ const Datasheet = () => {
   const { facePicture: facePicture, sidePicture: sidePicture, isSuccess: pictureSucceed, isError: pictureError } = usePicture(product?.nomenclature?.simple, false); //true for miniature
   return (
     <Row className="bg_white ft4 justify-content-center">
-      <LayoutHome
+      {/* <LayoutHome
         datasheet={
           <>
             <PDFDownloadLink document={<MyDocument product={product} />} fileName={product?.nomenclature?.simple + "_fiche_technique.pdf"}>
@@ -67,11 +130,11 @@ const Datasheet = () => {
         shop
         fixed
         dark
-      />
+      /> */}
       {productSuccess && (
         <Row className="layout_space datasheet w-90 border_dark_top">
           <PDFViewer width="100%" height="600">
-            <MyDocument product={product} sidePicture={sidePicture} />
+            <MyDocument product={product} facePicture={facePicture} sidePicture={sidePicture} dimensions={dimensions} router={router} />
           </PDFViewer>
           <div className="p-0 m-0" ref={ref}>
             <Row className="bg_dark">
