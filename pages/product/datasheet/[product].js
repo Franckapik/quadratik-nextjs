@@ -1,21 +1,16 @@
-import { useRef } from "react";
-import { useFetchProduct } from "../../../hooks/useFetchProduct";
-import { useComputeProduct } from "../../../hooks/useComputeProduct";
-import { useRouter } from "next/router";
-import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
-import { usePicture } from "../../../hooks/usePicture";
-import Image from "next/image";
-import { LayoutHome } from "../../../components/LayoutHome";
-import { PerformanceSpatial } from "../../../components/product/PerformanceSpatial";
-import { PerformanceCharts } from "../../../components/product/PerformanceCharts";
-import logoMarqueeImg from "../../../public/images/logo/logo_blanc.png";
-import Link from "next/link";
+import { Document, Page, Image as PDFImage, StyleSheet, Text, View } from "@react-pdf/renderer";
 import dynamic from "next/dynamic";
-import { Page, Text, View, Document, StyleSheet, Image as PDFImage } from "@react-pdf/renderer";
-import { usePerformanceSpatial } from "../../../hooks/usePerformanceSpatial";
+import { useRouter } from "next/router";
+import { useRef } from "react";
+import { Col, Row } from "react-bootstrap";
+import { LayoutHome } from "../../../components/LayoutHome";
+import { useComputeProduct } from "../../../hooks/useComputeProduct";
+import { useFetchProduct } from "../../../hooks/useFetchProduct";
 import { usePerformanceCharts } from "../../../hooks/usePerformanceCharts";
+import { usePerformanceSpatial } from "../../../hooks/usePerformanceSpatial";
+import { usePicture } from "../../../hooks/usePicture";
+import logoMarqueeImg from "../../../public/images/logo/logo_blanc.png";
 
-const PDFDownloadLink = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink), { ssr: false });
 const PDFViewer = dynamic(() => import("@react-pdf/renderer").then((mod) => mod.PDFViewer), { ssr: false });
 
 const styles = StyleSheet.create({
