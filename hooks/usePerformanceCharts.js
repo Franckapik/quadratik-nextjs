@@ -58,8 +58,6 @@ export const usePerformanceCharts = (product) => {
     if (chartRef.current) {
       const chart = chartRef.current;
       const base64Image = chart.toBase64Image();
-      console.log(base64Image);
-
       setChartsImg(base64Image);
     }
   }, [performances]);
@@ -80,32 +78,31 @@ export const usePerformanceCharts = (product) => {
               
               ticks: {
                 font: {
-                  size: 5,
-                  color : "red"
+                  size: 50,
               }},
-              grid: {
-                display: false,
-              },
             },
             y: {
-              display: false,
+              display: true,
               grid: {
                 display: false,
               },
+              ticks: {
+                font: {
+                  size: 50,
+              }},
             },
           },
           legend: { display : false  },
           animation: false,
           datasets: {
             line: {
-              borderWidth: 1,
+              borderWidth: 5,
             },
           },
           elements: {
             point: {
               borderWidth: 0,
               radius: 0,
-              backgroundColor: "rgba(130, 56, 56, 0)",
             },
             maintainAspectRatio: false,
           },
