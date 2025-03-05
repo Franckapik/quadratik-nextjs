@@ -1265,6 +1265,12 @@ p {
   height: 300px;
 }
 
+.chart_invisible {
+  opacity: 100;
+  background-color: #8ea65f;
+  height: 1px;
+}
+
 @media (max-width: 575.98px) {
   .s3_diy_bg {
     height: unset;
