@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Carousel, Col, Row } from "react-bootstrap";
 import ProductCanvas from "./ProductCanvas";
 import { PerformanceCharts } from "./PerformanceCharts";
-import { PerformanceSpatial } from "./ParformanceSpatial";
+import { PerformanceSpatial } from "./PerformanceSpatial";
 import { usePicture } from "../../hooks/usePicture";
 import { Loader } from "../Loader";
 import Image from "next/image";
