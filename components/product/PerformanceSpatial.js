@@ -1,0 +1,24 @@
+import React, { useEffect, useState } from "react";
+import { Row } from "react-bootstrap";
+
+import { documentByFilename } from "../dolibarrApi/fetch";
+import { useQuery } from "react-query";
+import Image from "next/image";
+
+export const PerformanceSpatial = ({ nom }) => {
+  const [polarImg, setPolarImg] = useState(false);
+
+  const { data: polar, isSuccess: polarSucceed } = useQuery(["polar", { name: nom }], () => documentByFilename("Polar/" + nom + ".png"), { staleTime: Infinity, enabled: !!nom && nom != undefined });
+
+  useEffect(() => {
+    if (polarSucceed) {
+      setPolarImg(polar);
+    }
+  }, [polarSucceed]);
+
+  return (
+      <Row>
+        {polarSucceed && polarImg? <Image style={{objectFit: "contain"}} src={`data:image/jpeg;base64,${polarImg}`} width={887} height={627} className="graph_img" alt='Graphique de répartition spatiale du son diffusé au contact d un diffuseur acoustique Quadratik' /> : null}
+      </Row>
+  );
+};
